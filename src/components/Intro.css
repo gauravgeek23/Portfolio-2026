@@ -61,8 +61,8 @@
 }
 
 .book__cover img {
-  width: 46px;
-  height: 52px;
+  width: 34px;
+  height: 38px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
@@ -80,8 +80,8 @@
   position: relative;
   isolation: isolate;
   align-self: flex-start;
-  width: 80px;
-  height: 92px;
+  width: 68px;
+  height: 97px;
 }
 
 /* Prism glow: a soft spectrum behind the photo that slowly turns and breathes. */

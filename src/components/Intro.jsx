@@ -29,7 +29,7 @@ export default function Intro() {
           <span className="book__page" style={{ '--i': 2 }} />
           <span className="book__page" style={{ '--i': 1 }} />
           <span className="book__cover">
-            <img src={avatar} alt={`Portrait of ${site.name}`} width="46" height="52" />
+            <img src={avatar} alt={`Portrait of ${site.name}`} width="34" height="38" />
           </span>
         </button>
       </div>
