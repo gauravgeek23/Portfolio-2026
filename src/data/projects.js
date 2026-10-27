@@ -10,8 +10,10 @@ import camera370 from '../assets/side/camera-app-wear-os-370.webp';
 import camera740 from '../assets/side/camera-app-wear-os-740.webp';
 import iphone370 from '../assets/side/iphone-kit-370.webp';
 import iphone740 from '../assets/side/iphone-kit-740.webp';
+import { academicCalendarCaseStudy } from './case-studies/academic-calendar';
 
-// Placeholder case-study outline, replaced per project as the write-ups arrive.
+// Placeholder case-study outline for projects whose write-up isn't in yet.
+// Projects with a `caseStudy` (see data/case-studies/) use that instead.
 const outline = [
   { heading: 'Overview', body: 'Case study coming soon. This section will cover the problem, my role, the process and the outcome.' },
   { heading: 'The problem', body: '' },
@@ -29,7 +31,7 @@ export const projects = [
       'Designed a scalable, unified academic calendar connecting students, teachers, and mentors across business verticals.',
     cover: { src: academicCalendar800, src2x: academicCalendar1600 },
     coverAlt: 'Newton School of Technology academic calendar showing a weekly schedule of lectures and labs',
-    sections: outline,
+    caseStudy: academicCalendarCaseStudy,
   },
   {
     slug: 'lottiefiles-vision-pro',
