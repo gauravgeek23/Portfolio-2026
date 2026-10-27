@@ -74,7 +74,7 @@ export const topprAnswrCaseStudy = {
       type: 'media-grid',
       tall: { ratio: 1000 / 1402, video: chatVideo, poster: chatPoster, alt: 'Physics chat: a student asks how to find the maximum acceleration from a v-t graph' },
       stack: [
-        { ratio: half, src: rateExpert, inset: 0.6, alt: 'Rating the expert with emoji and compliments such as Awesome explanation and Lightning fast' },
+        { ratio: half, src: rateExpert, inset: 0.6, align: 'end', alt: 'Rating the expert with emoji and compliments such as Awesome explanation and Lightning fast' },
         { ratio: half, src: sessionRated, inset: 0.72, alt: 'Session rated Excellent with the compliments Awesome Explanation and Lightning Fast' },
       ],
     },

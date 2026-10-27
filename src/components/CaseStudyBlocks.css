@@ -153,14 +153,14 @@
   aspect-ratio: auto !important;
 }
 
-.cs-media-grid .cs-media:not(.cs-media--empty) {
+.cs-media-grid .cs-media:not(.cs-media--empty, .cs-media--inset) {
   background: #111;
 }
 
 .cs-media.cs-media--inset {
   display: grid;
   place-items: center;
-  background: #111;
+  background: #f5f5f5;
 }
 
 .cs-media--inset-end {
