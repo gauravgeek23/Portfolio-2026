@@ -182,6 +182,19 @@ export default function CaseStudyBlocks({ blocks, hero }) {
             />
           </div>
         );
+      case 'vimeo':
+        return (
+          <div key={i} className="cs-media cs-media--embed">
+            <iframe
+              src={`https://player.vimeo.com/video/${block.id}?badge=0&autopause=0&dnt=1`}
+              title={block.title}
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+        );
       case 'media':
         return <ResponsiveMedia key={i} block={block} />;
       case 'media-row':

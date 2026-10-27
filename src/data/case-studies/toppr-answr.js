@@ -17,7 +17,7 @@ import sessionRated from '../../assets/case-studies/toppr-answr/session-rated.we
 // other case studies (see components/CaseStudyBlocks.jsx); the hero is the card cover.
 //
 // Each `media-grid` is a tall phone recording beside two stacked tiles of cut-out UI
-// (791 x 512 each in the original); the product video is still to come.
+// (791 x 512 each in the original).
 const half = 791 / 512;
 
 export const topprAnswrCaseStudy = {
@@ -83,7 +83,7 @@ export const topprAnswrCaseStudy = {
       title: 'Product Video',
       body: [],
     },
-    { type: 'media', ratio: 16 / 9, alt: 'Toppr Answr product video' },
+    { type: 'vimeo', id: '952692161', title: 'Toppr Answr product video' },
     {
       type: 'text',
       title: 'Business Impact',
