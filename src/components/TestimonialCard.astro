@@ -7,24 +7,11 @@ interface Props {
 }
 
 const { name, role, url, quote, photo, flag } = Astro.props.testimonial;
-const initials = name
-  .split(' ')
-  .map((part) => part[0])
-  .join('')
-  .slice(0, 2);
 ---
 
 <figure class="card">
   <figcaption class="person">
-    {
-      photo ? (
-        <Image src={photo} alt="" width={56} height={56} class="photo" />
-      ) : (
-        <span class="photo placeholder" aria-hidden="true">
-          {initials}
-        </span>
-      )
-    }
+    <Image src={photo} alt="" width={56} height={56} densities={[1, 2]} class="photo" />
     <div class="who">
       <div class="name-row">
         <a href={url} target="_blank" rel="noopener" class="text-small">{name}</a>
@@ -57,13 +44,6 @@ const initials = name
     width: 56px;
     height: 56px;
     border-radius: 50%;
-  }
-  .placeholder {
-    display: grid;
-    place-items: center;
-    background: var(--color-grey-2);
-    color: var(--color-black);
-    font-weight: var(--weight-medium);
   }
   .who {
     flex: 1;

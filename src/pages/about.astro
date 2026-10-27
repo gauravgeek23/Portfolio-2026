@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TabPlaceholder from '../components/TabPlaceholder.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout active="about" title={`About — ${site.name}`}>
+  <TabPlaceholder title="About" subtitle="More about me — coming soon." />
+</BaseLayout>

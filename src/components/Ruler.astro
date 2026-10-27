@@ -1,5 +1,5 @@
 ---
-// Decorative ruler (0–800) that closes the page, echoing the 800px content grid.
+// Decorative ruler (0–800) hanging from the footer rule, echoing the 800px content grid.
 const majors = Array.from({ length: 9 }, (_, i) => i * 100);
 const minorsPerSegment = 6;
 ---
@@ -9,8 +9,8 @@ const minorsPerSegment = 6;
     majors.map((value, i) => (
       <>
         <div class:list={['major', { odd: i % 2 === 1 }]}>
-          <span class="label">{value}</span>
           <span class="tick tall" />
+          <span class="label">{value}</span>
         </div>
         {i < majors.length - 1 && (
           <div class="segment">
@@ -27,13 +27,10 @@ const minorsPerSegment = 6;
 <style>
   .ruler {
     display: flex;
-    align-items: flex-end;
-    color: var(--color-grey-2);
-    padding-bottom: 0;
+    align-items: flex-start;
     user-select: none;
   }
   .major {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,23 +38,26 @@ const minorsPerSegment = 6;
     flex: none;
   }
   .label {
+    font-size: 12px;
     line-height: var(--leading);
+    color: var(--color-grey-2);
     white-space: nowrap;
   }
-  .major:first-child .label {
-    align-self: flex-start;
+  .major:first-child {
+    align-items: flex-start;
   }
-  .major:last-child .label {
-    align-self: flex-end;
+  .major:last-child {
+    align-items: flex-end;
   }
   .tick {
     display: block;
     width: 1px;
     height: 16px;
-    background: var(--color-grey-2);
+    background: var(--color-grey-3);
   }
   .tick.tall {
     height: 32px;
+    background: var(--color-grey-2);
   }
   .segment {
     flex: 1;

@@ -13,7 +13,7 @@ const Wrapper = url ? 'a' : 'div';
 
 <article class="side">
   <Wrapper class="cover" href={url} target={url ? '_blank' : undefined} rel={url ? 'noopener' : undefined}>
-    <Image src={cover} alt={coverAlt} sizes="(max-width: 640px) 100vw, 370px" />
+    <Image src={cover} alt={coverAlt} widths={[370, 740]} sizes="(max-width: 640px) calc(100vw - 32px), 370px" quality={90} />
   </Wrapper>
   <div class="meta">
     <div>

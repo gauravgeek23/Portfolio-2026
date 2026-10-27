@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<main class="container page">
+  <header>
+    <h1 class="text-medium">{title}</h1>
+    <p class="text-small text-muted">{subtitle}</p>
+  </header>
+  <slot />
+</main>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding-block: 120px 60px;
+    min-height: 60vh;
+  }
+  h1 {
+    font-size: var(--text-body);
+  }
+  @media (max-width: 640px) {
+    .page {
+      padding-block: 100px 40px;
+      gap: 40px;
+    }
+  }
+</style>

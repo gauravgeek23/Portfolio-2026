@@ -1,16 +1,18 @@
 import type { ImageMetadata } from 'astro';
 import pizzaYap from '../assets/testimonials/pizza-yap.png';
 import gauravKapatia from '../assets/testimonials/gaurav-kapatia.png';
-import singapore from '../assets/flags/singapore.png';
-import india from '../assets/flags/india.png';
+import dionChooi from '../assets/testimonials/dion-chooi.png';
+import jenYenKhor from '../assets/testimonials/jen-yen-khor.png';
+import singapore from '../assets/flags/singapore.svg';
+import india from '../assets/flags/india.svg';
+import malaysia from '../assets/flags/malaysia.svg';
 
 export interface Testimonial {
   name: string;
   role: string;
   url: string;
   quote: string;
-  // Missing photos/flags fall back to initials / no flag until the assets are added.
-  photo?: ImageMetadata;
+  photo: ImageMetadata;
   flag?: { src: ImageMetadata; country: string };
 }
 
@@ -39,7 +41,7 @@ export const testimonials: Testimonial[] = [
     url: 'https://www.linkedin.com/in/dion-chooi-818ba8142/',
     quote:
       'He brings strong user empathy, design ownership, and UX expertise. He balances business goals, user needs, and innovation while leading initiatives. A true learner and a valuable asset to any team.',
-    // TODO: add photo export from Figma node 1:9515.
+    photo: dionChooi,
     flag: { src: singapore, country: 'Singapore' },
   },
   {
@@ -48,6 +50,7 @@ export const testimonials: Testimonial[] = [
     url: 'https://www.linkedin.com/in/jykhor/',
     quote:
       "Gaurav's passion for design, quick iterations, and constant learning make him a valuable asset. He pushes boundaries, represents the company at events, and embraces challenges with enthusiasm.",
-    // TODO: add photo (Figma node 1:9488) and Malaysia flag (node 1:9492).
+    photo: jenYenKhor,
+    flag: { src: malaysia, country: 'Malaysia' },
   },
 ];
