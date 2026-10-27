@@ -69,7 +69,7 @@ export const features = [
       { label: 'Razorpay', year: '2023', href: 'https://x.com/prototyper_23/status/1749142329896644651' },
       { label: 'Zeta', year: '2023', href: 'https://x.com/prototyper_23/status/1748758823962124408' },
       { label: 'Cars 24', year: '2023' },
-      { label: 'CRED', year: '2022' },
+      { label: 'CRED', year: '2022', href: 'https://www.instagram.com/p/CulrUcxMBbU/' },
       { label: 'After Office Hours', year: '2022', href: 'https://x.com/AfterOfficeHQ/status/1748674603504030002' },
     ],
   },
