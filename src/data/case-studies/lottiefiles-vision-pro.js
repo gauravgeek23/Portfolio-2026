@@ -94,11 +94,11 @@ export const lottieVisionProCaseStudy = {
       type: 'links',
       items: [
         { label: 'Apple Developer Guidelines for - vision OS', href: 'https://developer.apple.com/design/human-interface-guidelines/designing-for-visionos' },
-        { label: 'Apple Design Resources - visionOS (Figma)', href: 'https://developer.apple.com/design/resources/#visionos-apps' },
-        { label: 'Research Paper : XRgonomics', href: 'https://dl.acm.org/doi/10.1145/3411764.3445349' },
-        { label: 'Meta Research on AR/VR', href: 'https://research.facebook.com/blog/research-area/augmented-reality-virtual-reality' },
-        { label: 'Designers Guide Blog - Anish Alok', href: 'https://anishalokjena.gumroad.com/l/gettingstartedwithspatialdesignbyanish' },
-        { label: 'Spatial Interfaces - John Palmer', href: 'https://darkblueheaven.com/spatialinterfaces/' },
+        { label: 'Apple Design Resources - visionOS (Figma)', href: 'https://www.figma.com/community/file/1253443272911187215/apple-design-resources-visionos' },
+        { label: 'Research Paper : XRgonomics', href: 'https://dl.acm.org/doi/fullHtml/10.1145/3411764.3445349' },
+        { label: 'Meta Research on AR/VR', href: 'https://www.facebook.com/business/news/insights/future-ar-vr' },
+        { label: 'Designers Guide Blog - Anish Alok', href: 'https://medium.muz.li/beyond-screens-redefining-user-interfaces-and-experience-for-apple-visionpro-wwdc23-387ea95e580c' },
+        { label: 'Spatial Interfaces - John Palmer', href: 'https://darkblueheaven.com/spatialinterfaces/?s=09' },
       ],
     },
     {
