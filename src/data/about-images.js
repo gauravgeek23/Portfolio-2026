@@ -6,6 +6,12 @@ import heroText1x from '../assets/about/hero-text@1x.webp';
 import heroText2x from '../assets/about/hero-text@2x.webp';
 import heroFront1x from '../assets/about/hero-front@1x.webp';
 import heroFront2x from '../assets/about/hero-front@2x.webp';
+import altitude11x from '../assets/about/altitude-1@1x.webp';
+import altitude12x from '../assets/about/altitude-1@2x.webp';
+import altitude21x from '../assets/about/altitude-2@1x.webp';
+import altitude22x from '../assets/about/altitude-2@2x.webp';
+import altitude31x from '../assets/about/altitude-3@1x.webp';
+import altitude32x from '../assets/about/altitude-3@2x.webp';
 import kang11x from '../assets/about/kang-1@1x.webp';
 import kang12x from '../assets/about/kang-1@2x.webp';
 import kang21x from '../assets/about/kang-2@1x.webp';
@@ -59,6 +65,9 @@ export const images = {
     text: img(heroText1x, heroText2x),
     front: img(heroFront1x, heroFront2x),
   },
+  altitude1: img(altitude11x, altitude12x),
+  altitude2: img(altitude21x, altitude22x),
+  altitude3: img(altitude31x, altitude32x),
   kang1: img(kang11x, kang12x),
   kang2: img(kang21x, kang22x),
   kang3: img(kang31x, kang32x),
