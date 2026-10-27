@@ -9,7 +9,7 @@ import nike2x from '../assets/play/nike-swipe@2x.webp';
 import movie1x from '../assets/play/movie-booking@1x.webp';
 import movie2x from '../assets/play/movie-booking@2x.webp';
 import visionVideo from '../assets/play/vision-navigation.mp4';
-import cameraVideo from '../assets/play/camera-wear-os.mp4';
+import cameraVideo from '../assets/play/camera-wear-os-remote.mp4';
 import topprVideo from '../assets/play/toppr-scanning.mp4';
 import nikeVideo from '../assets/play/nike-swipe.mp4';
 import movieVideo from '../assets/play/movie-booking.mp4';

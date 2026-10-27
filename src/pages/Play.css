@@ -52,6 +52,15 @@
   transform: translate(2px, -2px);
 }
 
+/* Videos overscan their rounded frame by 1px per side so sub-pixel rounding
+   never lets the frame's background show as a hairline along an edge. */
+.play-item__media video {
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  margin: -1px;
+  max-width: none;
+}
+
 @media (max-width: 640px) {
   .play-item__heading {
     flex-direction: column;

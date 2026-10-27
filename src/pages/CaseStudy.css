@@ -75,6 +75,15 @@
 }
 
 /* On wide screens, case study photos and videos break out of the 800px text column to 1000px. */
+/* Videos overscan their rounded frame by 1px per side so sub-pixel rounding
+   never lets the frame's background show as a hairline along an edge. */
+.case-study__cover--video video {
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  margin: -1px;
+  max-width: none;
+}
+
 @media (min-width: 1100px) {
   .case-study--wide-media > .case-study__hero,
   .case-study--wide-media > .cs-media,
