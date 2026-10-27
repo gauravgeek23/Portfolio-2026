@@ -157,10 +157,20 @@
   background: #111;
 }
 
+/* Tile behind cut-out graphics: light grey in light mode; in dark and the colour themes it
+   matches the near-black phone-recording tiles (#111) so a grid reads as one set. */
+:root {
+  --cs-tile: #fafafa;
+}
+
+:root:not([data-theme='light']) {
+  --cs-tile: #111;
+}
+
 .cs-media.cs-media--inset {
   display: grid;
   place-items: center;
-  background: #fafafa;
+  background: var(--cs-tile);
 }
 
 .cs-media.cs-media--inset-end {

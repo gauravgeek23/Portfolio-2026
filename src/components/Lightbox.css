@@ -56,7 +56,7 @@
   width: min(1000px, calc(100vw - 32px), calc((100dvh - 140px) * var(--ratio)));
   overflow: hidden;
   border-radius: var(--radius-md);
-  background: #fafafa;
+  background: var(--cs-tile);
   cursor: default;
   animation: lightbox-zoom 240ms ease-out;
 }
