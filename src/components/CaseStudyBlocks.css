@@ -84,7 +84,13 @@
   background: #121212;
 }
 
+/* Overscan 2px per side so the frame's dark background never shows as a stroke
+   around the player's edge. */
 .cs-media--embed iframe {
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  margin: -2px;
+  max-width: none;
   border: 0;
 }
 
