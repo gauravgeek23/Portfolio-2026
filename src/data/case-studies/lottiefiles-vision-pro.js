@@ -4,10 +4,10 @@ import browsingVideo from '../../assets/case-studies/lottiefiles-vision-pro/brow
 import browsingPoster from '../../assets/case-studies/lottiefiles-vision-pro/browsing-poster.webp';
 import dragDropVideo from '../../assets/case-studies/lottiefiles-vision-pro/drag-drop.mp4';
 import dragDropPoster from '../../assets/case-studies/lottiefiles-vision-pro/drag-drop-poster.webp';
-import filtersVideo from '../../assets/case-studies/lottiefiles-vision-pro/filters.mp4';
-import filtersPoster from '../../assets/case-studies/lottiefiles-vision-pro/filters-poster.webp';
-import productPageVideo from '../../assets/play/vision-navigation.mp4';
-import productPagePoster from '../../assets/play/vision-navigation@2x.webp';
+import filtersVideo from '../../assets/play/vision-navigation.mp4';
+import filtersPoster from '../../assets/play/vision-navigation@2x.webp';
+import productPageVideo from '../../assets/case-studies/lottiefiles-vision-pro/product-page.mp4';
+import productPagePoster from '../../assets/case-studies/lottiefiles-vision-pro/product-page-poster.webp';
 import maldives from '../../assets/case-studies/lottiefiles-vision-pro/maldives@1x.webp';
 import maldives2x from '../../assets/case-studies/lottiefiles-vision-pro/maldives@2x.webp';
 
