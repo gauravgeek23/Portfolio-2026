@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Work from './pages/Work';
 import CaseStudy from './pages/CaseStudy';
 import Play from './pages/Play';
+import About from './pages/About';
+import Notes from './pages/Notes';
 import ComingSoon from './pages/ComingSoon';
 
 export default function App() {
@@ -14,8 +16,8 @@ export default function App() {
         <Route path="work" element={<Work />} />
         <Route path="work/:slug" element={<CaseStudy />} />
         <Route path="play" element={<Play />} />
-        <Route path="notes" element={<ComingSoon title="Notes" subtitle="Writing on design, product and craft — coming soon." />} />
-        <Route path="about" element={<ComingSoon title="About" subtitle="More about me — coming soon." />} />
+        <Route path="notes" element={<Notes />} />
+        <Route path="about" element={<About />} />
         <Route path="resume" element={<ComingSoon title="Resume" subtitle="Resume — coming soon." />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

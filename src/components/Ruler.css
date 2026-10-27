@@ -31,11 +31,17 @@
   display: block;
   width: 1px;
   height: 16px;
-  background: var(--color-grey-3);
+  background: #eeeeee;
+}
+
+/* The first and last minor ticks of each segment sit on the major ticks, so they're hidden. */
+.ruler__segment .ruler__tick:first-child,
+.ruler__segment .ruler__tick:last-child {
+  visibility: hidden;
 }
 
 .ruler__tick--tall {
-  height: 32px;
+  height: 22px;
   background: var(--color-grey-2);
 }
 

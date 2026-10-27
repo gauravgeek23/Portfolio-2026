@@ -1,0 +1,32 @@
+.photo {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #121212;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo__caption {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  max-width: calc(100% - 12px);
+  padding: 1px 8px;
+  border-radius: 6px;
+  background: rgba(8, 8, 8, 0.3);
+  -webkit-backdrop-filter: blur(60px);
+  backdrop-filter: blur(60px);
+  color: #fefffc;
+  font-size: 11px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

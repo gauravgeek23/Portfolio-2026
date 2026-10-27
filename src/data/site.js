@@ -9,6 +9,7 @@ export const site = {
     timeZone: 'Asia/Kolkata',
   },
   // TODO: replace the placeholder URLs with real profile links.
+  instagram: '#',
   socials: [
     { label: 'Linkedin', href: '#' },
     { label: 'Twitter', href: '#' },

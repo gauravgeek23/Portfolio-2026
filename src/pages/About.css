@@ -1,0 +1,89 @@
+.about__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about__tagline {
+  white-space: pre;
+}
+
+.about__hero {
+  aspect-ratio: 800 / 300;
+}
+
+.about__highlight {
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+}
+
+/* Story: 500px photo beside two stacked photos, with 12px gutters (Figma). */
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.story__collage {
+  display: grid;
+  grid-template-columns: 500fr 288fr;
+  gap: 12px;
+  aspect-ratio: 800 / 400;
+}
+
+.story__side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.story__side .photo {
+  flex-basis: 0;
+  min-height: 0;
+}
+
+.about__photos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.about__photos .photo {
+  aspect-ratio: 394 / 400;
+}
+
+.about__more {
+  margin-top: var(--leading);
+}
+
+.about__instagram {
+  font-size: var(--text-body);
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.about__instagram:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .story__collage {
+    grid-template-columns: 1fr 1fr;
+    aspect-ratio: auto;
+  }
+  .story__main {
+    grid-column: 1 / -1;
+    aspect-ratio: 5 / 4;
+  }
+  /* The two side photos sit next to each other under the main one. */
+  .story__side {
+    display: contents;
+  }
+  .story__side .photo {
+    aspect-ratio: 1 / 1;
+  }
+  .about__photos {
+    gap: 8px;
+  }
+}
