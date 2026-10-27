@@ -30,9 +30,9 @@
   color-scheme: light;
 }
 
-/* Dark theme: the same tokens, re-pointed. The site is light by default; <html
-   data-theme="dark"> is set by the toggle in the nav (and restored before first
-   paint by index.html). */
+/* Dark theme: the same tokens, re-pointed. The site always opens light; <html
+   data-theme="dark"> is set by the toggle in the nav for the current visit (and
+   restored on reload before first paint by index.html). */
 :root[data-theme='dark'] {
   --color-white: #121212;
   --color-black: #ececec;
