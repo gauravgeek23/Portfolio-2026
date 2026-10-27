@@ -1,0 +1,52 @@
+.ruler {
+  display: flex;
+  align-items: flex-start;
+  user-select: none;
+}
+
+.ruler__major {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1px;
+  flex: none;
+}
+
+.ruler__major:first-child {
+  align-items: flex-start;
+}
+
+.ruler__major:last-child {
+  align-items: flex-end;
+}
+
+.ruler__label {
+  font-size: 12px;
+  line-height: var(--leading);
+  color: var(--color-grey-2);
+  white-space: nowrap;
+}
+
+.ruler__tick {
+  display: block;
+  width: 1px;
+  height: 16px;
+  background: var(--color-grey-3);
+}
+
+.ruler__tick--tall {
+  height: 32px;
+  background: var(--color-grey-2);
+}
+
+.ruler__segment {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 640px) {
+  .ruler__major--odd .ruler__label {
+    visibility: hidden;
+  }
+}

@@ -1,4 +1,4 @@
-/* Design tokens — mirrored from the Figma variables (White, Black, Grey/1, Grey/2). */
+/* Design tokens — mirrored from the Figma variables. */
 :root {
   --color-white: #ffffff;
   --color-black: #2d2d2d;
@@ -75,6 +75,8 @@ h1,
 h2,
 h3 {
   margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .container {
@@ -116,4 +118,28 @@ h3 {
   outline: 2px solid var(--color-black);
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+/* Shared page shell: every tab starts 120px from the top, under the fixed nav. */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  padding-block: 120px 60px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-block: 100px 40px;
+    gap: 48px;
+  }
+  .stack {
+    gap: 40px;
+  }
 }

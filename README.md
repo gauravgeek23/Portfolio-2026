@@ -1,46 +1,43 @@
 # Portfolio 2026
 
-Personal portfolio for Gaurav Kumar, built with [Astro](https://astro.build) and plain CSS.
+Personal portfolio for Gaurav Kumar — plain **React + HTML + CSS**, bundled with [Vite](https://vite.dev) and routed with React Router.
 
-## Develop
+## Run it locally
+
+Requires [Node.js](https://nodejs.org) 18 or newer (the LTS installer is easiest).
 
 ```sh
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # type-check + static build into dist/
-npm run preview  # serve the production build
+npm run dev      # opens http://localhost:3000
+npm run build    # production build into dist/
+npm run preview  # serve the production build on http://localhost:3000
 ```
 
 ## Structure
 
 ```
+index.html                 HTML shell (title, meta, favicon)
 src/
-  content/work/*.md   Selected work — each file is a home-page card and a /work/<slug>/ case study
-  content/side/*.md   Side projects
-  data/site.ts        Name, bio, email, location and social links
-  data/testimonials.ts
-  components/         Intro, SectionHeader, ProjectCard, SideProjectCard, TestimonialCard, Contact, Ruler
-  pages/              index, work/index, work/[slug]
-  styles/global.css   Design tokens from Figma (colours, type, radii)
+  main.jsx                 React entry + router
+  App.jsx                  Routes: /, /work, /work/:slug, /play, /notes, /about, /resume
+  styles/global.css        Design tokens from Figma (colours, type, spacing) + shared classes
+  data/site.js             Name, email, location, social links, nav tabs
+  data/projects.js         Selected work + side projects (cards and case-study content)
+  data/testimonials.js
+  components/              One .jsx + .css per component (Nav, Footer, ProjectCard, …)
+  pages/                   One component per route
+  assets/                  Images (WebP at 1x/2x) and SVG icons/flags
 ```
 
 ### Add a project
 
-Drop a cover image in `src/assets/work/` and add `src/content/work/<slug>.md`:
+1. Export the cover from Figma at 800px and 1600px wide as WebP into `src/assets/work/`.
+2. Import both in `src/data/projects.js` and add an entry to `projects`. It shows up on the home page and gets its own page at `/work/<slug>`.
 
-```md
----
-title: "Project name"
-period: "Jan 2026 - Mar 2026"
-summary: "One or two lines for the card."
-cover: ../../assets/work/<slug>.png
-coverAlt: "Describe the image"
-order: 5
----
+### Add a tab
 
-Case study content in Markdown…
-```
+Add a route in `src/App.jsx`, a page in `src/pages/`, and the link in `navItems` in `src/data/site.js`.
 
 ## Deploy
 
-Static output — deploy `dist/` to Vercel, Netlify or Cloudflare Pages (framework preset: Astro).
+Static output — import the repo into Vercel or Netlify (framework preset: Vite). `vercel.json` and `public/_redirects` make deep links such as `/work/toppr-answr` work on refresh.

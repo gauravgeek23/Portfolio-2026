@@ -1,0 +1,43 @@
+.home__work-list {
+  gap: 80px;
+}
+
+/* Shared with the play tab. */
+.side-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+}
+
+/* Testimonials scroll horizontally past the 800px column, as in the design. */
+.home__carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(370px, 85%);
+  align-items: start;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+}
+
+.home__carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.home__carousel > * {
+  scroll-snap-align: start;
+}
+
+@media (max-width: 640px) {
+  .home__work-list {
+    gap: 56px;
+  }
+  .side-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
