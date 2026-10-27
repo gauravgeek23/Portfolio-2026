@@ -51,6 +51,14 @@ export function LightboxProvider({ children }) {
             <figure className="lightbox__figure" onClick={(e) => e.target === e.currentTarget && close()}>
               {media.video ? (
                 <video src={media.video} poster={media.src2x || media.src} controls autoPlay muted loop playsInline />
+              ) : media.inset ? (
+                // A cut-out graphic: shown on its light tile, as on the page.
+                <div
+                  className={`lightbox__tile${media.align === 'end' ? ' lightbox__tile--end' : ''}`}
+                  style={{ aspectRatio: media.ratio, '--ratio': media.ratio, '--inset': `${media.inset * 100}%` }}
+                >
+                  <img src={media.src2x || media.src} alt={media.alt} />
+                </div>
               ) : (
                 <img src={media.src2x || media.src} alt={media.alt} />
               )}
@@ -63,7 +71,8 @@ export function LightboxProvider({ children }) {
   );
 }
 
-// Makes static media clickable to view it enlarged. `media` = { src, src2x?, video?, alt, caption? }.
+// Makes static media clickable to view it enlarged. `media` = { src, src2x?, video?, alt, caption? },
+// plus { inset, align?, ratio } for a cut-out graphic drawn on a light tile.
 export function Zoomable({ media, className = '', style, children }) {
   const open = useContext(LightboxContext);
   return (

@@ -22,7 +22,14 @@ function Media({ block }) {
   }
   return (
     <Zoomable
-      media={{ src: block.src || block.poster, src2x: block.src2x, video: block.video, alt: block.alt, caption: block.caption }}
+      media={{
+        src: block.src || block.poster,
+        src2x: block.src2x,
+        video: block.video,
+        alt: block.alt,
+        caption: block.caption,
+        ...(block.inset && { inset: block.inset, align: block.align, ratio: block.ratio }),
+      }}
       className={className}
       style={style}
     >

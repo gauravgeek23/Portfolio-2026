@@ -50,6 +50,29 @@
   animation: lightbox-zoom 240ms ease-out;
 }
 
+.lightbox__tile {
+  display: grid;
+  place-items: center;
+  width: min(1000px, calc(100vw - 32px), calc((100dvh - 140px) * var(--ratio)));
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #fafafa;
+  cursor: default;
+  animation: lightbox-zoom 240ms ease-out;
+}
+
+.lightbox__tile--end {
+  align-items: end;
+}
+
+.lightbox__figure .lightbox__tile img {
+  width: var(--inset);
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  animation: none;
+}
+
 .lightbox__figure figcaption {
   max-width: 640px;
   color: #d8d8d8;
