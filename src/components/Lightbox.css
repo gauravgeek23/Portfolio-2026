@@ -21,7 +21,7 @@
   z-index: 100;
   display: grid;
   place-items: center;
-  padding: 56px 16px 24px;
+  padding: 56px 76px 24px;
   background: rgba(18, 18, 18, 0.92);
   cursor: zoom-out;
   animation: lightbox-in 200ms ease-out;
@@ -53,7 +53,7 @@
 .lightbox__tile {
   display: grid;
   place-items: center;
-  width: min(1000px, calc(100vw - 32px), calc((100dvh - 140px) * var(--ratio)));
+  width: min(1000px, calc(100vw - 152px), calc((100dvh - 140px) * var(--ratio)));
   overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--cs-tile);
@@ -100,8 +100,67 @@
   background: rgba(255, 255, 255, 0.22);
 }
 
-.lightbox__close:focus-visible {
+.lightbox__close:focus-visible,
+.lightbox__step:focus-visible {
   outline-color: #ffffff;
+}
+
+/* Previous / next in a gallery: round buttons on either side, centred vertically. */
+.lightbox__step {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.lightbox__step:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.lightbox__step--prev {
+  left: 16px;
+}
+
+.lightbox__step--next {
+  right: 16px;
+}
+
+.lightbox__count {
+  display: block;
+  margin-top: 4px;
+  color: #9a9a9a;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Phones: the arrows sit lower, over the page edge rather than the picture's middle. */
+@media (max-width: 640px) {
+  .lightbox {
+    padding: 56px 16px 84px;
+  }
+
+  .lightbox__tile {
+    width: min(1000px, calc(100vw - 32px), calc((100dvh - 200px) * var(--ratio)));
+  }
+
+  .lightbox__figure img,
+  .lightbox__figure video {
+    max-height: calc(100dvh - 200px);
+  }
+
+  .lightbox__step {
+    top: auto;
+    bottom: 20px;
+    margin-top: 0;
+  }
 }
 
 @keyframes lightbox-in {

@@ -44,7 +44,7 @@ export default function CaseStudy() {
   );
 
   return (
-    <main className={`container page case-study${caseStudy ? ' case-study--wide-media' : ''}`}>
+    <main className={`container page case-study${caseStudy ? ' case-study--wide-media' : ''}`} data-gallery>
       <Link className="case-study__back text-small text-muted" to="/#work">
         <Icon src={arrowLeft} />
         <span>All Work</span>

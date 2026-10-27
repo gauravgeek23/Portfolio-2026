@@ -26,7 +26,7 @@ function PlayLink({ link }) {
 
 export default function Play() {
   return (
-    <main className="container page">
+    <main className="container page" data-gallery>
       <header>
         <h1 className="text-medium">Play</h1>
         <p className="text-small text-muted">A playground of small wins and features.</p>

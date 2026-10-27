@@ -1,4 +1,16 @@
-// Resume content. Each entry renders as a row: details on the left, bullet points on the right.
+import academicCalendar from '../assets/work/academic-calendar-800.webp';
+import academicCalendar2x from '../assets/work/academic-calendar-1600.webp';
+import examInterface from '../assets/resume/exam-interface.webp';
+import iconscout from '../assets/work/iconscout-plugin-800.webp';
+import iconscout2x from '../assets/work/iconscout-plugin-1600.webp';
+import visionPro from '../assets/work/lottiefiles-vision-pro-800.webp';
+import visionPro2x from '../assets/work/lottiefiles-vision-pro-1600.webp';
+import topprAnswr from '../assets/work/toppr-answr-800.webp';
+import topprAnswr2x from '../assets/work/toppr-answr-1600.webp';
+import uranium from '../assets/resume/uranium.webp';
+
+// Resume content. Each entry renders as a row: details on the left, bullet points on the right,
+// with optional `gallery` thumbnails under the points (they open in the overlay as a set).
 export const experience = [
   {
     title: 'Newton School of Technology',
@@ -8,6 +20,10 @@ export const experience = [
       '9 lakh+ students acquired, 20,000+ entrance exam registrations in one season.',
       '1.1 lakh students on Study Buddy, with 14% converting to paid.',
       'Website, referral, and exam redesigns that lifted conversions by up to 30%.',
+    ],
+    gallery: [
+      { src: academicCalendar, src2x: academicCalendar2x, alt: 'Academic calendar for Newton School of Technology' },
+      { src: examInterface, alt: 'Exam interface on desktop and mobile' },
     ],
   },
   {
@@ -19,6 +35,10 @@ export const experience = [
       'Designed LottieFiles for Vision Pro 0→1, opening a new product vertical.',
       'Spoke at 8 events across India with CRED, Razorpay, Zeta, 10K Designers, Cars24.',
     ],
+    gallery: [
+      { src: iconscout, src2x: iconscout2x, alt: 'IconScout plugin for Figma: millions of high-quality design assets' },
+      { src: visionPro, src2x: visionPro2x, alt: 'LottieFiles for Apple Vision Pro' },
+    ],
   },
   {
     title: 'Toppr',
@@ -27,6 +47,10 @@ export const experience = [
       'Worked on the Toppr Answr platform chat module and image search interaction.',
       'Designed the user flow of the subscription module.',
       'Build the basic component library and tokens for seamless flow in design team.',
+    ],
+    gallery: [
+      { src: topprAnswr, src2x: topprAnswr2x, alt: 'Toppr Answr screens for scanning, solving and chatting about questions' },
+      { src: uranium, alt: 'Uranium, the Toppr design system: colours, type and components' },
     ],
   },
   {

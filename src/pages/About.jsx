@@ -7,7 +7,7 @@ import './About.css';
 function Story({ story }) {
   const [main, ...side] = story.photos;
   return (
-    <article className="story">
+    <article className="story" data-gallery>
       <div className="story__collage">
         <Photo className="story__main" photo={main} />
         <div className="story__side">
@@ -59,7 +59,7 @@ export default function About() {
           <p className="text-small text-muted">Visual notes from places and pauses</p>
         </header>
 
-        <div className="about__photos">
+        <div className="about__photos" data-gallery>
           {photos.map((photo) => (
             <Photo key={photo.alt} photo={photo} />
           ))}
