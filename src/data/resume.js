@@ -64,7 +64,7 @@ export const education = [
 // (`href`) to the post about it.
 export const features = [
   {
-    title: 'Guest Speaker',
+    title: 'Speaker Session',
     items: [
       { label: 'Razorpay', year: '2023', href: 'https://x.com/prototyper_23/status/1749142329896644651' },
       { label: 'Zeta', year: '2023', href: 'https://x.com/prototyper_23/status/1748758823962124408' },
