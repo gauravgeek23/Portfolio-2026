@@ -54,6 +54,8 @@ import photo81x from '../assets/about/photo-8@1x.webp';
 import photo82x from '../assets/about/photo-8@2x.webp';
 import photo91x from '../assets/about/photo-9@1x.webp';
 import photo92x from '../assets/about/photo-9@2x.webp';
+import photo101x from '../assets/about/photo-10@1x.webp';
+import photo102x from '../assets/about/photo-10@2x.webp';
 
 const img = (src1x, src2x) => ({ src: src1x, src2x });
 
@@ -89,4 +91,5 @@ export const images = {
   photo7: img(photo71x, photo72x),
   photo8: img(photo81x, photo82x),
   photo9: img(photo91x, photo92x),
+  photo10: img(photo101x, photo102x),
 };

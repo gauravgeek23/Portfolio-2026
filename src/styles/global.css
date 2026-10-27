@@ -30,9 +30,9 @@
   color-scheme: light;
 }
 
-/* Dark theme: the same tokens, re-pointed. <html data-theme> is set before first
-   paint (see index.html) and switched by the toggle in the nav. Without JS the
-   system setting applies. */
+/* Dark theme: the same tokens, re-pointed. The site is light by default; <html
+   data-theme="dark"> is set by the toggle in the nav (and restored before first
+   paint by index.html). */
 :root[data-theme='dark'] {
   --color-white: #121212;
   --color-black: #ececec;
@@ -46,23 +46,6 @@
   --color-media: #1a1d22;
   --shadow-lift: 0 16px 40px rgba(0, 0, 0, 0.55);
   color-scheme: dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --color-white: #121212;
-    --color-black: #ececec;
-    --color-grey-1: #9aa2ac;
-    --color-grey-2: #3a3d42;
-    --color-grey-3: #1d1e21;
-    --color-surface: #17181a;
-    --color-link: #5aa2ff;
-    --color-tick: #26282b;
-    --color-wordmark: #26282b;
-    --color-media: #1a1d22;
-    --shadow-lift: 0 16px 40px rgba(0, 0, 0, 0.55);
-    color-scheme: dark;
-  }
 }
 
 *,

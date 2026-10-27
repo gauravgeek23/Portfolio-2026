@@ -1,34 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'theme';
-const query = '(prefers-color-scheme: dark)';
 
-function readStored() {
-  try {
-    return localStorage.getItem(STORAGE_KEY);
-  } catch {
-    return null;
-  }
-}
-
-// Light/dark theme on <html data-theme>. index.html sets it before first paint
-// (saved choice, else the system setting); this keeps React in sync and follows
-// system changes until the visitor picks a theme themselves.
+// Light/dark theme on <html data-theme>. The site is light by default; index.html
+// applies a saved "dark" choice before first paint, and this keeps React in sync.
 export function useTheme() {
-  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light');
+  const [theme, setTheme] = useState(() => (document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'));
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const onChange = (e) => {
-      if (!readStored()) setTheme(e.matches ? 'dark' : 'light');
-    };
-    media.addEventListener('change', onChange);
-    return () => media.removeEventListener('change', onChange);
-  }, []);
 
   const toggle = useCallback(() => {
     setTheme((current) => {

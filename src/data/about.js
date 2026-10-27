@@ -59,13 +59,14 @@ export const stories = [
 ];
 
 export const photos = [
-  { ...images.photo1, alt: 'Crow taking off between palm trees and a blue-and-white beach house' },
-  { ...images.photo2, alt: 'Bay with islands and boats seen over a tropical forest' },
-  { ...images.photo3, alt: 'Boat passing Kilim Geoforest Park on turquoise water' },
-  { ...images.photo4, alt: 'Heron walking along a wooden jetty' },
-  { ...images.photo5, alt: 'Three palm trees in a green paddy field under storm clouds' },
-  { ...images.photo6, alt: 'Small tiled hut on a green hillside' },
-  { ...images.photo7, alt: 'Snow-streaked mountains under a deep blue sky' },
-  { ...images.photo8, alt: 'Yak grazing in front of mountains in Ladakh' },
-  { ...images.photo9, alt: 'Thiksey Monastery rising over a hillside in Ladakh' },
+  { ...images.photo1, alt: 'Crow taking off between palm trees and a blue-and-white beach house', caption: 'Pondicherry' },
+  { ...images.photo2, alt: 'Bay with islands and boats seen over a tropical forest', caption: 'Strait of Malacca' },
+  { ...images.photo3, alt: 'Boat passing Kilim Geoforest Park on turquoise water', caption: 'Langkawi' },
+  { ...images.photo4, alt: 'Heron walking along a wooden jetty', caption: 'Langkawi' },
+  { ...images.photo5, alt: 'Three palm trees in a green paddy field under storm clouds', caption: 'Mysuru' },
+  { ...images.photo6, alt: 'Small tiled hut on a green hillside', caption: 'Ooty' },
+  { ...images.photo7, alt: 'Snow-streaked mountains under a deep blue sky', caption: 'KY2 expedition' },
+  { ...images.photo8, alt: 'Yak grazing in front of mountains in Ladakh', caption: 'KY2 expedition' },
+  { ...images.photo9, alt: 'Chemrey Monastery rising over a hillside in Ladakh', caption: 'Chemrey Monastery' },
+  { ...images.photo10, alt: 'The Milky Way over a dark ridge above Turtuk', caption: 'Milky way from Turtuk' },
 ];
