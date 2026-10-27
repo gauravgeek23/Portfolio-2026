@@ -1,0 +1,432 @@
+/* Magazine pages for the profile book. Each page is 460 x 654; type mixes a book serif for
+   headlines and body with the site's sans for labels and captions. */
+.mag-page {
+  --mag-ink: #1f1f1f;
+  --mag-muted: #7a7a76;
+  --mag-serif: 'EB Garamond', Garamond, 'Times New Roman', serif;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  padding: 44px 44px 48px;
+  color: var(--mag-ink);
+  font-family: var(--mag-serif);
+  line-height: 1.3;
+}
+
+.mag-label {
+  margin: 0 0 10px;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mag-muted);
+}
+
+.mag-label--light {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mag-h {
+  margin: 0 0 14px;
+  font-family: var(--mag-serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.mag-h--xl {
+  font-size: 40px;
+  margin-bottom: 22px;
+}
+
+.mag-h--light,
+.mag-p--light {
+  color: #ffffff;
+}
+
+.mag-p {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.mag-dropcap::first-letter {
+  float: left;
+  margin: 4px 6px 0 0;
+  font-size: 44px;
+  line-height: 0.8;
+}
+
+.mag-caption {
+  margin: 6px 0 0;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  color: var(--mag-muted);
+}
+
+.mag-caption--center {
+  text-align: center;
+}
+
+.mag-year {
+  margin: 0 0 6px;
+  font-family: var(--mag-serif);
+  font-size: 84px;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.mag-year--light {
+  color: #ffffff;
+}
+
+.mag-folio {
+  position: absolute;
+  left: 44px;
+  right: 44px;
+  bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mag-muted);
+}
+
+/* Photos */
+.mag-photo {
+  margin: 0 0 12px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #eceae6;
+}
+
+.mag-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mag-photo--wide {
+  aspect-ratio: 16 / 9;
+}
+
+.mag-photo--full {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+.mag-photo--pending {
+  display: grid;
+  place-items: center;
+  border: 1px dashed #c9c6bf;
+  background: #f1efea;
+}
+
+.mag-photo--pending span {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mag-muted);
+}
+
+/* Scrapbook bits: a taped polaroid. */
+.mag-polaroid {
+  position: absolute;
+  margin: 0;
+  padding: 6px 6px 18px;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.mag-polaroid::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 44px;
+  height: 14px;
+  margin-left: -22px;
+  background: rgba(240, 225, 170, 0.75);
+  transform: rotate(-3deg);
+}
+
+.mag-polaroid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.mag-polaroid figcaption {
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  font-family: var(--font-sans);
+  font-size: 7.5px;
+  text-align: center;
+  color: #6b6b67;
+}
+
+.mag-polaroid--corner {
+  right: 30px;
+  bottom: 34px;
+  width: 88px;
+  transform: rotate(5deg);
+}
+
+.mag-polaroid--small {
+  right: 36px;
+  bottom: 74px;
+  width: 92px;
+  transform: rotate(-4deg);
+}
+
+/* Key numbers */
+.mag-stats {
+  display: flex;
+  gap: 18px;
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #dedcd6;
+}
+
+.mag-stats dt {
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+.mag-stats dd {
+  margin: 2px 0 0;
+  font-family: var(--font-sans);
+  font-size: 8.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mag-muted);
+}
+
+.mag-quote {
+  margin: 14px 0 0;
+  padding-left: 12px;
+  border-left: 2px solid #1f1f1f;
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+/* Preface and letter */
+.mag-preface {
+  padding-top: 56px;
+}
+
+.mag-contents-title {
+  margin-top: 26px;
+}
+
+.mag-contents {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #dedcd6;
+}
+
+.mag-contents li {
+  display: flex;
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid #dedcd6;
+  font-size: 13.5px;
+}
+
+.mag-contents span {
+  width: 36px;
+  flex: none;
+  font-variant-numeric: oldstyle-nums;
+  color: var(--mag-muted);
+}
+
+.mag-letter {
+  padding-top: 64px;
+}
+
+.mag-letter__stamp {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 58px;
+  height: 66px;
+  padding: 4px;
+  border-radius: 50%;
+  background: #ffffff;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transform: rotate(6deg);
+}
+
+.mag-letter__salutation {
+  margin: 22px 0 14px;
+  font-size: 22px;
+  font-style: italic;
+}
+
+.mag-letter__sign {
+  margin: 26px 0 2px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.mag-letter__name {
+  margin: 0;
+  font-size: 26px;
+  font-style: italic;
+}
+
+/* Full-bleed photo pages */
+.mag-bleed {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 40px;
+}
+
+.mag-bleed__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.65));
+}
+
+.mag-bleed > *:not(.mag-photo--full):not(.mag-bleed__shade):not(.mag-folio) {
+  position: relative;
+}
+
+.mag-bleed__text {
+  margin-bottom: 22px;
+}
+
+.mag-bleed .mag-folio {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.mag-split {
+  padding: 0;
+}
+
+.mag-split__top {
+  position: relative;
+  height: 300px;
+}
+
+.mag-year--overlay {
+  position: absolute;
+  left: 40px;
+  bottom: 14px;
+  margin: 0;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.mag-split__body {
+  padding: 26px 44px 48px;
+}
+
+/* Collage and grids */
+.mag-collage {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: 130px 130px;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mag-collage .mag-photo {
+  margin: 0;
+}
+
+.mag-collage__a {
+  grid-row: span 2;
+}
+
+.mag-grid3 {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 8px;
+  height: 150px;
+  margin-bottom: 14px;
+}
+
+.mag-grid3 .mag-photo {
+  margin: 0;
+}
+
+.mag-ticket {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 270px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mag-ticket li {
+  padding: 3px 9px;
+  border: 1px solid #cfccc5;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.mag-scrap {
+  position: relative;
+  height: 250px;
+  margin: 6px 0 16px;
+}
+
+.mag-scrap .mag-photo {
+  position: absolute;
+  margin: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.mag-scrap__a {
+  left: 0;
+  top: 0;
+  width: 230px;
+  height: 190px;
+  transform: rotate(-3deg);
+}
+
+.mag-scrap__b {
+  right: 0;
+  top: 60px;
+  width: 170px;
+  height: 180px;
+  transform: rotate(4deg);
+}
+
+.mag-fin {
+  margin: 18px 0 0;
+  font-size: 30px;
+  font-style: italic;
+  text-align: center;
+}
+
+.mag-endpaper {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 0, 0, 0.03), transparent 40%),
+    #f2f1ed;
+}

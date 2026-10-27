@@ -1,6 +1,7 @@
-/* Profile book popup (Figma: Desktop - 10). Opening: the book grows out of the small one on the
-   home page while its cover swings open, then the dim and the white panel fade in behind it.
-   Closing runs the other way (each step's delay is set on the state it leads to). */
+/* Profile book popup (Figma: Desktop - 10): a magazine, one spread per year. Opening: the book
+   grows out of the small one on the home page while its cover swings open, then the dim and the
+   white panel fade in behind it. Closing runs the other way (each step's delay is set on the
+   state it leads to). Page content styles live in BookPages.css. */
 .pbook-modal {
   position: fixed;
   inset: 0;
@@ -101,28 +102,19 @@
   transition-delay: 150ms;
 }
 
-.pbook__page {
+/* The page blocks under each side: stepped edges read as a firm stack of pages, plus the
+   book's lift off the panel. The left block only appears once the book is open. */
+.pbook__block {
   position: absolute;
   top: 0;
   width: 460px;
   height: 654px;
-  padding: 92px 56px 56px;
   background: #f9f9f8;
-  color: #1f1f1f;
-  font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
-  font-size: 13.5px;
-  line-height: 1.32;
-  text-align: justify;
-  hyphens: auto;
 }
 
-.pbook__page--right {
+.pbook__block--right {
   left: 460px;
-  padding-left: 60px;
   border-radius: 0 28px 28px 0;
-  /* Gutter shadow along the spine; the stepped edges below read as the firm block of pages
-     under this one, then the book's lift off the panel. */
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 9%), #f9f9f8;
   box-shadow:
     1.5px 1px 0 #ececea,
     3px 2px 0 #f6f6f4,
@@ -132,11 +124,9 @@
     24px 30px 60px rgba(0, 0, 0, 0.14);
 }
 
-.pbook__page--left {
-  padding-left: 40px;
-  padding-right: 44px;
+.pbook__block--left {
+  left: 0;
   border-radius: 28px 0 0 28px;
-  background: linear-gradient(270deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 9%), #f9f9f8;
   box-shadow:
     -1.5px 1px 0 #ececea,
     -3px 2px 0 #f6f6f4,
@@ -144,63 +134,17 @@
     -6px 4px 0 #f3f3f1,
     -7.5px 5px 0 #e2e2e0,
     -24px 30px 60px rgba(0, 0, 0, 0.14);
+  opacity: 0;
+  transition: opacity 400ms ease 300ms;
 }
 
-.pbook__page p {
-  margin: 0;
-  text-indent: 1.5em;
+.pbook-modal.is-open .pbook__block--left {
+  opacity: 1;
+  transition-delay: 350ms;
 }
 
-.pbook__title {
-  margin: 0 0 44px;
-  font-size: 19px;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-align: center;
-}
-
-.pbook__lede {
-  font-style: italic;
-  text-indent: 0 !important;
-}
-
-.pbook__source {
-  margin: 4px 0 18px !important;
-  font-size: 12.5px;
-  text-align: right;
-}
-
-.pbook__folio {
-  position: absolute;
-  bottom: 22px;
-  left: 0;
-  right: 0;
-  font-size: 11px;
-  text-align: center;
-}
-
-.pbook__contents {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 14.5px;
-  text-align: left;
-}
-
-.pbook__contents li {
-  display: grid;
-  grid-template-columns: 66px 1fr auto;
-  gap: 8px;
-  white-space: nowrap;
-  margin-bottom: 18px;
-}
-
-.pbook__contents li span:last-child {
-  font-variant-numeric: oldstyle-nums;
-}
-
-/* The cover, hinged on the spine; it swings from over the right page to the left. */
-.pbook__cover {
+/* A leaf: hinged on the spine, it flips from the right stack to the left. */
+.pbook__leaf {
   position: absolute;
   top: 0;
   left: 460px;
@@ -208,49 +152,94 @@
   height: 654px;
   transform-style: preserve-3d;
   transform-origin: left center;
-  transition: transform 1000ms cubic-bezier(0.65, 0, 0.35, 1) 300ms;
+  transition: transform 900ms cubic-bezier(0.645, 0.045, 0.355, 1) 300ms;
 }
 
-.pbook-modal.is-open .pbook__cover {
+.pbook-modal.is-open .pbook__leaf {
+  transition-delay: 0ms;
+}
+
+.pbook__leaf.is-turned {
   transform: rotateY(-180deg);
+}
+
+/* The cover opens with the book as it grows. */
+.pbook__leaf--cover {
+  transition-duration: 1000ms;
+}
+
+.pbook-modal.is-open .pbook__leaf--cover {
   transition-delay: 150ms;
 }
 
 .pbook__face {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   backface-visibility: hidden;
+  background: #f9f9f8;
+  cursor: pointer;
+}
+
+.pbook__face--front {
+  border-radius: 0 28px 28px 0;
+}
+
+.pbook__face--back {
+  border-radius: 28px 0 0 28px;
+  transform: rotateY(180deg);
+}
+
+/* Gutter shading along the spine, over the page content. */
+.pbook__face::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 42px;
+  pointer-events: none;
+}
+
+.pbook__face--front::after {
+  left: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+}
+
+.pbook__face--back::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
 }
 
 /* The front cover is the small home-page book drawn large: same proportions (68 x 97 there),
    photo and spine crease in the same places. Its corners start as the small book's (scaled up)
    and ease to the large book's as it grows, so the shape never jumps. */
-.pbook__face--front {
-  display: grid;
-  place-items: center;
+.pbook__leaf--cover > .pbook__face--front {
   border-radius: calc(3px / var(--from-s)) calc(12px / var(--from-s)) calc(12px / var(--from-s))
     calc(3px / var(--from-s));
   background: #fbfbfc;
   box-shadow: 24px 30px 60px rgba(0, 0, 0, 0.16);
+  cursor: default;
   transition: border-radius 1000ms cubic-bezier(0.65, 0, 0.35, 1) 300ms;
 }
 
-.pbook-modal.is-open .pbook__face--front {
+.pbook-modal.is-open .pbook__leaf--cover > .pbook__face--front {
   border-radius: 10px 40px 40px 10px;
   transition-delay: 150ms;
 }
 
-.pbook__face--front::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
+.pbook__leaf--cover > .pbook__face--front::after {
   left: 34px;
   width: 10px;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.02));
 }
 
-.pbook__face--front img {
+.pbook__cover-face {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.pbook__cover-face img {
   width: 230px;
   height: 257px;
   border-radius: 50%;
@@ -266,9 +255,56 @@
   color: #2d2d2d;
 }
 
-.pbook__face--back {
-  left: 0;
-  transform: rotateY(180deg);
+/* Page navigation under the book. */
+.pbook-nav {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.pbook-modal.is-open .pbook-nav {
+  opacity: 1;
+  transition-delay: 950ms;
+}
+
+.pbook-nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  color: #2d2d2d;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pbook-nav button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.pbook-nav button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pbook-nav ol {
+  display: flex;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: #9a9a96;
+}
+
+.pbook-nav li[aria-current='page'] {
+  color: #1f1f1f;
 }
 
 /* Phones: a narrower margin around the panel. */
@@ -276,12 +312,18 @@
   .pbook-modal {
     padding: 12px;
   }
+
+  .pbook-nav ol {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pbook,
-  .pbook__cover,
+  .pbook__leaf,
+  .pbook__block--left,
   .pbook-stage,
+  .pbook,
+  .pbook-nav,
   .pbook-modal,
   .pbook-modal__close,
   .pbook-modal__panel::before {
