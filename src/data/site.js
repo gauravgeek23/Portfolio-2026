@@ -18,8 +18,9 @@ export const site = {
 };
 
 // Top-level tabs. Each tab is a route; sub-pages live under its path (e.g. /work/<slug>).
+// "work" is the Selected work section of the home page (#work).
 export const navItems = [
-  { label: 'work', to: '/' },
+  { label: 'work', to: '/', section: 'work' },
   { label: 'play', to: '/play' },
   { label: 'notes', to: '/notes' },
   { label: 'about', to: '/about' },

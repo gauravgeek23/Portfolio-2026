@@ -23,9 +23,9 @@
   border-top: 1px dashed var(--color-grey-2);
 }
 
-.nav__logo {
+/* The logo shares the tab styles (height, underline) but stays bold and black. */
+.nav__link.nav__logo {
   font-weight: 700;
-  text-decoration: none;
   color: var(--color-black);
 }
 
