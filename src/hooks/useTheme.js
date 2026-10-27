@@ -51,18 +51,20 @@ export function useTheme() {
 
       root.classList.add(expand ? 'theme-expand' : 'theme-contract');
       const transition = document.startViewTransition(apply);
+      // fill: 'forwards' holds the last frame until the transition ends; without it
+      // the old (dark) snapshot pops back to full screen for a frame going light.
       transition.ready.then(() => {
         const full = `circle(${radius}px at ${x}px ${y}px)`;
         const none = `circle(0px at ${x}px ${y}px)`;
         if (expand) {
           root.animate(
             { clipPath: [none, full] },
-            { duration: DURATION, easing: EASE, pseudoElement: '::view-transition-new(root)' },
+            { duration: DURATION, easing: EASE, fill: 'forwards', pseudoElement: '::view-transition-new(root)' },
           );
         } else {
           root.animate(
             { clipPath: [full, none] },
-            { duration: DURATION, easing: EASE, pseudoElement: '::view-transition-old(root)' },
+            { duration: DURATION, easing: EASE, fill: 'forwards', pseudoElement: '::view-transition-old(root)' },
           );
         }
       });
