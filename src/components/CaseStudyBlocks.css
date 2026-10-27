@@ -45,6 +45,17 @@
   object-fit: cover;
 }
 
+/* Images bring their own rounded panels (often with transparent corners). */
+.cs-media--image {
+  background: none;
+}
+
+.cs-media-switch__mobile {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .cs-media--empty {
   display: grid;
   place-items: center;
@@ -53,6 +64,14 @@
 }
 
 @media (max-width: 640px) {
+  .cs-media-switch__desktop {
+    display: none;
+  }
+
+  .cs-media-switch__mobile {
+    display: flex;
+  }
+
   .cs-grid {
     grid-template-columns: 1fr;
     gap: 12px;

@@ -1,7 +1,24 @@
+import problemVideo from '../../assets/case-studies/academic-calendar/problem.mp4';
+import problemPoster from '../../assets/case-studies/academic-calendar/problem-poster.webp';
+import patternsVideo from '../../assets/case-studies/academic-calendar/patterns.mp4';
+import patternsPoster from '../../assets/case-studies/academic-calendar/patterns-poster.webp';
+import weeklyVideo from '../../assets/case-studies/academic-calendar/weekly.mp4';
+import weeklyPoster from '../../assets/case-studies/academic-calendar/weekly-poster.webp';
+import workspace from '../../assets/case-studies/academic-calendar/workspace@1x.webp';
+import workspace2x from '../../assets/case-studies/academic-calendar/workspace@2x.webp';
+import workspaceEvent from '../../assets/case-studies/academic-calendar/workspace-event@1x.webp';
+import workspaceEvent2x from '../../assets/case-studies/academic-calendar/workspace-event@2x.webp';
+import workspaceNotes from '../../assets/case-studies/academic-calendar/workspace-notes@1x.webp';
+import workspaceNotes2x from '../../assets/case-studies/academic-calendar/workspace-notes@2x.webp';
+import workspaceAssignments from '../../assets/case-studies/academic-calendar/workspace-assignments@1x.webp';
+import workspaceAssignments2x from '../../assets/case-studies/academic-calendar/workspace-assignments@2x.webp';
+import lifecycle from '../../assets/case-studies/academic-calendar/lifecycle@1x.webp';
+import lifecycle2x from '../../assets/case-studies/academic-calendar/lifecycle@2x.webp';
+
 // Academic Calendar case study (Figma: Desktop - 8).
 // Block types: text, callout, cards, stats, media — rendered by components/CaseStudyBlocks.jsx.
-// Media without `src`/`video` shows a sized placeholder; add the files later, e.g.
-//   { type: 'media', ratio: 800 / 500, video: calendarVideo, poster: calendarPoster, alt: '…' }
+// Media without `src`/`video` shows a sized placeholder. `mobile` swaps a wide composite
+// for its pieces stacked top to bottom on small screens.
 export const academicCalendarCaseStudy = {
   heading: 'Academic Calendar | Newton School of Technology | Jan - Feb 2025',
   blocks: [
@@ -27,7 +44,7 @@ export const academicCalendarCaseStudy = {
         'How might we bring academic schedules and learning resources into one reliable experience across different roles and learning environments?',
       ],
     },
-    { type: 'media', ratio: 800 / 500, alt: 'Academic information scattered across Slack, WhatsApp, assignments, class links and timetables, brought into one calendar' },
+    { type: 'media', ratio: 2, video: problemVideo, poster: problemPoster, alt: 'Academic information scattered across Slack, WhatsApp, assignments, class links and timetables, brought into one calendar' },
     {
       type: 'text',
       title: 'Learning from Existing Patterns',
@@ -35,7 +52,7 @@ export const academicCalendarCaseStudy = {
         'I studied established calendar products to identify familiar patterns in navigation, weekly and monthly views, event cards, and event details. Rather than reinventing common interactions, I used these patterns as a foundation for a calendar that felt intuitive while addressing Newton School’s specific academic workflows.',
       ],
     },
-    { type: 'media', ratio: 800 / 500, alt: 'Screens from established calendar products studied for familiar patterns' },
+    { type: 'media', ratio: 2, video: patternsVideo, poster: patternsPoster, alt: 'Screens from established calendar products studied for familiar patterns' },
     {
       type: 'text',
       title: 'Weekly and Monthly views',
@@ -43,7 +60,7 @@ export const academicCalendarCaseStudy = {
         'Students needed a clear weekly schedule, while teachers and administrators needed a broader planning view. Weekly and monthly layouts supported both needs, with the flexibility to switch between them.',
       ],
     },
-    { type: 'media', ratio: 800 / 500, alt: 'Weekly view of the Newton School academic calendar' },
+    { type: 'media', ratio: 2, video: weeklyVideo, poster: weeklyPoster, alt: 'Weekly view of the Newton School academic calendar' },
     {
       type: 'text',
       title: 'One system, multiple roles',
@@ -66,7 +83,18 @@ export const academicCalendarCaseStudy = {
         'Each calendar event connected the schedule to the actual learning experience. Students could access class links, lecture notes, questions, assignments, and quizzes directly from the event.',
       ],
     },
-    { type: 'media', ratio: 800 / 700, alt: 'Event details with join link, class notes, topics, assignments and quizzes' },
+    {
+      type: 'media',
+      ratio: 1000 / 700,
+      src: workspace,
+      src2x: workspace2x,
+      alt: 'Event details with join link, class notes, topics, assignments and quizzes',
+      mobile: [
+        { src: workspaceEvent, src2x: workspaceEvent2x, ratio: 988 / 1400, alt: 'Event details with join link, class notes, topics and tasks' },
+        { src: workspaceNotes, src2x: workspaceNotes2x, ratio: 988 / 688, alt: 'Topics marked covered or pending, each with a link to notes' },
+        { src: workspaceAssignments, src2x: workspaceAssignments2x, ratio: 988 / 688, alt: 'Assignments tagged in class or post class' },
+      ],
+    },
     {
       type: 'text',
       title: 'Class Lifecycle',
@@ -74,7 +102,7 @@ export const academicCalendarCaseStudy = {
         'The experience adapted as a session progressed—from upcoming to live and completed. The join button activated 15 minutes before class, while post-class resources remained accessible through the event.',
       ],
     },
-    { type: 'media', ratio: 800 / 500, alt: 'A 3–4 PM class moving through before, joining, during and post-class states' },
+    { type: 'media', ratio: 2, src: lifecycle, src2x: lifecycle2x, alt: 'A 3–4 PM class moving through before, joining, during and post-class states' },
     {
       type: 'text',
       title: 'Conclusion',

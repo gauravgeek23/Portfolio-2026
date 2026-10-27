@@ -10,14 +10,32 @@ function Media({ block }) {
       </div>
     );
   }
+  const className = `cs-media${block.video ? '' : ' cs-media--image'}`;
   return (
-    <Zoomable media={{ src: block.src || block.poster, src2x: block.src2x, video: block.video, alt: block.alt }} className="cs-media" style={style}>
+    <Zoomable media={{ src: block.src || block.poster, src2x: block.src2x, video: block.video, alt: block.alt }} className={className} style={style}>
       {block.video ? (
         <video src={block.video} poster={block.poster} autoPlay muted loop playsInline aria-label={block.alt} />
       ) : (
         <img src={block.src} srcSet={block.src2x ? `${block.src} 1x, ${block.src2x} 2x` : undefined} alt={block.alt} loading="lazy" />
       )}
     </Zoomable>
+  );
+}
+
+// A wide composite on desktop; its `mobile` pieces stacked top to bottom on small screens.
+function ResponsiveMedia({ block }) {
+  if (!block.mobile) return <Media block={block} />;
+  return (
+    <div className="cs-media-switch">
+      <div className="cs-media-switch__desktop">
+        <Media block={block} />
+      </div>
+      <div className="cs-media-switch__mobile">
+        {block.mobile.map((piece) => (
+          <Media key={piece.src} block={piece} />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -82,7 +100,7 @@ export default function CaseStudyBlocks({ blocks, hero }) {
           </dl>
         );
       case 'media':
-        return <Media key={i} block={block} />;
+        return <ResponsiveMedia key={i} block={block} />;
       default:
         return null;
     }
