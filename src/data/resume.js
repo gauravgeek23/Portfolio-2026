@@ -60,18 +60,28 @@ export const education = [
   },
 ];
 
-// Features & awards: each item has a year aligned to the right.
+// Features & awards: each item has a year aligned to the right, and an optional link
+// (`href`) to the post about it.
 export const features = [
   {
     title: 'Guest Speaker',
     items: [
-      { label: 'Razorpay', year: '2023' },
-      { label: 'Zeta', year: '2023' },
+      { label: 'Razorpay', year: '2023', href: 'https://x.com/prototyper_23/status/1749142329896644651' },
+      { label: 'Zeta', year: '2023', href: 'https://x.com/prototyper_23/status/1748758823962124408' },
       { label: 'Cars 24', year: '2023' },
       { label: 'CRED', year: '2022' },
-      { label: 'After Office Hours', year: '2022' },
+      { label: 'After Office Hours', year: '2022', href: 'https://x.com/AfterOfficeHQ/status/1748674603504030002' },
     ],
   },
   { title: 'Award', items: [{ label: 'Smart India Hackathon', year: '2020' }] },
-  { title: 'Judge', items: [{ label: 'Delhi Designation (Speaker + Judge)', year: '2023' }] },
+  {
+    title: 'Judge',
+    items: [
+      {
+        label: 'Delhi Designathon (Speaker + Judge)',
+        year: '2023',
+        href: 'https://x.com/prototyper_23/status/1771634040090554589',
+      },
+    ],
+  },
 ];

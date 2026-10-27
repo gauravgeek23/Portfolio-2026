@@ -1,8 +1,23 @@
 import Icon from '../components/Icon';
 import downloadIcon from '../assets/icons/download.svg';
+import arrowUpRight from '../assets/icons/arrow-up-right.svg';
 import { experience, education, features } from '../data/resume';
 import { site } from '../data/site';
 import './Resume.css';
+
+// Keeps the arrow on the same line as the label's last word when it wraps.
+function LinkLabel({ text }) {
+  const split = text.lastIndexOf(' ') + 1;
+  return (
+    <>
+      {text.slice(0, split)}
+      <span className="resume-link__end">
+        {text.slice(split)}
+        <Icon src={arrowUpRight} />
+      </span>
+    </>
+  );
+}
 
 function Entry({ entry }) {
   return (
@@ -21,7 +36,13 @@ function Entry({ entry }) {
         ))}
         {entry.items?.map((item) => (
           <li key={item.label} className="resume-row__dated">
-            <span>{item.label}</span>
+            {item.href ? (
+              <a className="resume-link" href={item.href} target="_blank" rel="noopener noreferrer">
+                <LinkLabel text={item.label} />
+              </a>
+            ) : (
+              <span>{item.label}</span>
+            )}
             <span>{item.year}</span>
           </li>
         ))}

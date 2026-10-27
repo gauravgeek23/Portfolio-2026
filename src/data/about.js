@@ -59,7 +59,7 @@ export const stories = [
 ];
 
 export const photos = [
-  { ...images.photo1, alt: 'Crow taking off between palm trees and a blue-and-white beach house', caption: 'Pondicherry' },
+  { ...images.photo1, alt: 'Crow taking off between palm trees and a blue-and-white beach house', caption: 'Puducherry' },
   { ...images.photo2, alt: 'Bay with islands and boats seen over a tropical forest', caption: 'Strait of Malacca' },
   { ...images.photo3, alt: 'Boat passing Kilim Geoforest Park on turquoise water', caption: 'Langkawi' },
   { ...images.photo4, alt: 'Heron walking along a wooden jetty', caption: 'Langkawi' },

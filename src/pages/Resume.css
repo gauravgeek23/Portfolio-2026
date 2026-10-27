@@ -62,10 +62,46 @@
   font-size: 12px;
 }
 
-.resume-row__dated span:last-child {
-  float: right;
-  margin-left: 20px;
+/* The year sits on the right edge of the first line; space is reserved for it so
+   long labels wrap instead of pushing it onto its own line. */
+.resume-row__dated {
+  position: relative;
+  padding-right: 56px;
+}
+
+.resume-row__dated > span:last-child {
+  position: absolute;
+  top: 0;
+  right: 0;
   font-variant-numeric: tabular-nums;
+}
+
+/* Features & awards that link to the post about them. */
+.resume-link {
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.resume-link__end {
+  white-space: nowrap;
+}
+
+/* Inline so a long label wraps like text and the arrow stays after its last word. */
+.resume-link .icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 2px;
+  vertical-align: -2px;
+  transition: transform 200ms ease;
+}
+
+.resume-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resume-link:hover .icon {
+  transform: translate(2px, -2px);
 }
 
 @media (max-width: 640px) {
