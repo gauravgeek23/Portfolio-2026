@@ -20,7 +20,7 @@ export const iconscoutPluginCaseStudy = {
       body: [
         'Sometimes, one project reminds you why you became a designer in the first place. This wasn’t built to impress or sit nicely in a portfolio—it started as an attempt to solve a real problem I personally faced. It carries forward an existing legacy, but also marks a shift toward taking ownership and building the next version of the product with intent.',
         'Over six months, the work evolved from a rough idea into a fully shipped Figma plugin. Through continuous iteration, we shipped 17 meaningful feature updates and saw the product grow from 300 daily users to 1,400+ organically.',
-        'If you work daily in Figma, this isn’t meant to be read like a traditional case study—it’s an experience designed to be explored hands-on.',
+        [{ text: 'If you work daily in Figma, this isn’t meant to be read like a traditional case study—it’s an experience designed to be explored hands-on.', highlight: true }],
       ],
     },
     {

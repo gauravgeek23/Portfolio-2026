@@ -61,7 +61,8 @@ function ResponsiveMedia({ block }) {
 }
 
 // Body items: a string, { text, strong }, an array of inline parts (strings,
-// { text, href } links, { text, label } darker lead-in labels), or { list } for
+// { text, href } links, { text, label } lead-in labels, { text, highlight } text in the
+// darker text colour), or { list } for
 // a bulleted list whose items take the same inline forms.
 function Inline({ parts }) {
   if (!Array.isArray(parts)) return parts;
@@ -75,7 +76,7 @@ function Inline({ parts }) {
       );
     }
     return (
-      <span key={i} className="cs-label">
+      <span key={i} className={part.highlight ? 'cs-highlight' : 'cs-label'}>
         {part.text}
       </span>
     );

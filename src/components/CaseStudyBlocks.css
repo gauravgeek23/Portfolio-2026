@@ -50,6 +50,11 @@
   color: inherit;
 }
 
+/* A sentence picked out by colour only (same size and regular weight). */
+.cs-highlight {
+  color: var(--color-black);
+}
+
 /* Sections whose paragraphs read as separate points get space between them. */
 .cs-text--spaced p + p {
   margin-top: 12px;
