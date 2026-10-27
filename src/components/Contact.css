@@ -103,10 +103,14 @@
   }
   .contact__title {
     grid-column: 1 / -1;
+    grid-row: 1;
   }
+  /* Phones: top-right, level with the title. */
   .contact__easter-egg {
-    grid-column: 1 / -1;
+    grid-column: 2;
+    grid-row: 1;
     justify-self: end;
+    align-self: center;
     width: 34px;
   }
   .contact__socials {
