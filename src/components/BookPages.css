@@ -188,6 +188,59 @@
   transform: rotate(5deg);
 }
 
+.mag-polaroid--corner2 {
+  right: 120px;
+  bottom: 40px;
+  width: 84px;
+  transform: rotate(-6deg);
+}
+
+.mag-polaroid__pending {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px dashed #c9c6bf;
+  background: #f1efea;
+  font-family: var(--font-sans);
+  font-size: 6.5px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--mag-muted);
+}
+
+/* A small "also this year" feature: thumbnail beside a few lines. */
+.mag-also {
+  display: flex;
+  gap: 14px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #dedcd6;
+}
+
+.mag-also img {
+  flex: none;
+  width: 116px;
+  height: 92px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.mag-also .mag-label {
+  margin-bottom: 4px;
+}
+
+.mag-also__title {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.mag-also .mag-p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 .mag-polaroid--small {
   right: 36px;
   bottom: 74px;

@@ -55,16 +55,16 @@ export function Preface() {
       <p className="mag-contents-title mag-label">In this issue</p>
       <ol className="mag-contents">
         <li>
-          <span>2026</span> Ladakh, and a growth season at Newton
+          <span>2026</span> Ladakh, Hampta Pass, a growth season at Newton
         </li>
         <li>
           <span>2025</span> One calendar for a campus, a week in Langkawi
         </li>
         <li>
-          <span>2024</span> Vision Pro, the Maldives, and many stages
+          <span>2024</span> Vision Pro, Kang Yatse II, and many stages
         </li>
         <li>
-          <span>2023</span> IconScout on Figma, Bali with the team
+          <span>2023</span> IconScout, Everest Base Camp, Bali
         </li>
       </ol>
       <Folio n="1" />
@@ -112,7 +112,8 @@ export function Y2026Left() {
         <h2 className="mag-h mag-h--light">Six thousand kilometres of Ladakh</h2>
         <p className="mag-p mag-p--light">
           Two months on a motorcycle across Zanskar, Nubra and Changthang, over 20+ high passes and up to Umling
-          La at 19,024 ft. Thin air, long silences, and the clearest head I have had in years.
+          La at 19,024 ft. Then, on foot, across Hampta Pass. Thin air, long silences, and the clearest head I
+          have had in years.
         </p>
       </div>
       <Folio n="3" label="Nubra Valley" />
@@ -147,6 +148,10 @@ export function Y2026Right() {
       <figure className="mag-polaroid mag-polaroid--corner">
         <img src={images.altitude1.src} alt="At the Umling La sign with the motorcycle" />
         <figcaption>Umling La</figcaption>
+      </figure>
+      <figure className="mag-polaroid mag-polaroid--corner2">
+        <span className="mag-polaroid__pending">Photo coming soon</span>
+        <figcaption>Hampta Pass trek</figcaption>
       </figure>
       <Folio n="4" label="2026" />
     </div>
@@ -213,6 +218,17 @@ export function Y2024Left() {
           limitation in spatial design. Then I finally wore one myself, in the Maldives, and it felt like magic.
         </p>
         <p className="mag-caption">Oaga Art Resort, Maldives</p>
+        <div className="mag-also">
+          <img src={images.kang1.src} alt="Trekking crew below the snow-capped Kang Yatse peak" />
+          <div>
+            <p className="mag-label">Also this year · Ladakh</p>
+            <p className="mag-also__title">Kang Yatse II</p>
+            <p className="mag-p">
+              Nine days through Markha Valley for a 6,250 m summit. We turned back at 5,791 m, and I would do it
+              all again.
+            </p>
+          </div>
+        </div>
       </div>
       <Folio n="7" label="2024" />
     </div>
@@ -285,19 +301,20 @@ export function Y2023Left() {
 export function Y2023Right() {
   return (
     <div className="mag-page mag-bali">
-      <p className="mag-label">Travel · Indonesia</p>
-      <h2 className="mag-h">Bali, with the team</h2>
+      <p className="mag-label">Travel · Nepal and Indonesia</p>
+      <h2 className="mag-h">Everest Base Camp, then Bali with the team</h2>
       <div className="mag-scrap">
-        <Pending className="mag-scrap__a" label="Bali photo" />
-        <Pending className="mag-scrap__b" label="Team photo" />
+        <Photo src={images.ebc1.src} alt="Holding the Indian flag at the Everest Base Camp rock" className="mag-scrap__a" />
+        <Pending className="mag-scrap__b" label="Bali photo" />
       </div>
       <p className="mag-p">
-        The people you build with become the people you travel with. Temples at sunrise, rice terraces, too much
-        nasi goreng and the kind of team stories that never make it into a retro.
+        A dream come true at 5,364 m, among five of the world’s highest peaks. Months later, the team flew to Bali:
+        temples at sunrise, rice terraces, and the kind of stories that never make it into a retro.
       </p>
+      <p className="mag-caption">Everest Base Camp · Bali</p>
       <p className="mag-fin">Fin.</p>
       <p className="mag-caption mag-caption--center">Press next to close the book</p>
-      <Folio n="10" label="Bali" />
+      <Folio n="10" label="2023" />
     </div>
   );
 }
