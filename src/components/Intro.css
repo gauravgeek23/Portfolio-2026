@@ -42,6 +42,20 @@
   transform: scale(1) rotate(40deg);
 }
 
+/* Light mode: the glow is always on, wider, softer and lighter; hover gives it a
+   slow turn. */
+:root[data-theme='light'] .intro__avatar::before {
+  inset: -30px;
+  filter: blur(26px);
+  opacity: 0.62;
+  transform: scale(1) rotate(0deg);
+}
+
+:root[data-theme='light'] .intro__avatar:hover::before {
+  opacity: 0.75;
+  transform: scale(1.05) rotate(40deg);
+}
+
 .intro__avatar img {
   display: block;
   width: 100%;
