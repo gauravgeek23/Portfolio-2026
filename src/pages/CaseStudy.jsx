@@ -1,5 +1,6 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { Zoomable } from '../components/Lightbox';
+import { InViewVideo } from '../components/PlayMedia';
 import CaseStudyBlocks from '../components/CaseStudyBlocks';
 import arrowLeft from '../assets/icons/arrow-left.svg';
 import arrowRight from '../assets/icons/arrow-right.svg';
@@ -20,15 +21,21 @@ export default function CaseStudy() {
 
   const hero = (
     <Zoomable key="hero" className="case-study__hero" media={{ ...project.cover, alt: project.coverAlt }}>
-      <img
-        className="case-study__cover"
-        src={project.cover.src}
-        srcSet={`${project.cover.src} ${coverWidth}w, ${project.cover.src2x} ${coverWidth * 2}w`}
-        sizes="(max-width: 832px) calc(100vw - 32px), (min-width: 1100px) 1000px, 800px"
-        alt={project.coverAlt}
-        width="800"
-        height="400"
-      />
+      {project.cover.video ? (
+        <div className="case-study__cover case-study__cover--video">
+          <InViewVideo media={{ video: project.cover.video, poster2x: project.cover.poster, alt: project.coverAlt }} />
+        </div>
+      ) : (
+        <img
+          className="case-study__cover"
+          src={project.cover.src}
+          srcSet={`${project.cover.src} ${coverWidth}w, ${project.cover.src2x} ${coverWidth * 2}w`}
+          sizes="(max-width: 832px) calc(100vw - 32px), (min-width: 1100px) 1000px, 800px"
+          alt={project.coverAlt}
+          width="800"
+          height="400"
+        />
+      )}
     </Zoomable>
   );
 

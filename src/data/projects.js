@@ -8,6 +8,8 @@ import iconscout800 from '../assets/work/iconscout-plugin-800.webp';
 import iconscout1600 from '../assets/work/iconscout-plugin-1600.webp';
 import camera370 from '../assets/side/camera-app-wear-os-370.webp';
 import camera740 from '../assets/side/camera-app-wear-os-740.webp';
+import cameraVideo from '../assets/play/camera-wear-os.mp4';
+import cameraPoster from '../assets/play/camera-wear-os@2x.webp';
 import iphone370 from '../assets/side/iphone-kit-370.webp';
 import iphone740 from '../assets/side/iphone-kit-740.webp';
 import { academicCalendarCaseStudy } from './case-studies/academic-calendar';
@@ -73,7 +75,7 @@ export const sideProjects = [
     period: 'Oct 2022',
     summary:
       'Effortless capture and seamless control—tap to shoot, swipe to switch, all on your wrist. A fast, simple camera experience designed for Wear OS.',
-    cover: { src: camera370, src2x: camera740 },
+    cover: { src: camera370, src2x: camera740, video: cameraVideo, poster: cameraPoster },
     coverAlt: 'Three Wear OS watch faces showing the camera app controls',
     sections: outline,
   },

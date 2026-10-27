@@ -3,7 +3,7 @@ import { Zoomable } from './Lightbox';
 
 // Muted looping video that only plays while it's on screen (saves data and battery),
 // and never autoplays for people who prefer reduced motion — they see the poster.
-function InViewVideo({ media }) {
+export function InViewVideo({ media }) {
   const ref = useRef(null);
 
   useEffect(() => {
