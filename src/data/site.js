@@ -9,6 +9,8 @@ export const site = {
     timeZone: 'Asia/Kolkata',
   },
   instagram: 'https://www.instagram.com/gaurav_kumaarrrr/',
+  // Google Drive direct-download link for the resume PDF (file id from the share link).
+  resumePdf: 'https://drive.google.com/uc?export=download&id=1p3w_uvUmLf8jYLH7cypiMeoiqFKgnqcm',
   socials: [
     { label: 'Linkedin', href: 'https://www.linkedin.com/in/gauravgeek23/' },
     { label: 'Twitter', href: 'https://x.com/prototyper_23' },

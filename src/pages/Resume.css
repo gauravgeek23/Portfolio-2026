@@ -1,3 +1,45 @@
+.resume-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.resume-download {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  border: 1px solid var(--color-grey-2);
+  border-radius: 999px;
+  color: var(--color-black);
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.resume-download:hover {
+  border-color: var(--color-grey-1);
+  background: var(--color-grey-3);
+}
+
+.resume-download .icon {
+  transition: transform 200ms ease;
+}
+
+.resume-download:hover .icon {
+  transform: translateY(2px);
+}
+
+@media (max-width: 480px) {
+  .resume-download__extra {
+    display: none;
+  }
+}
+
 .resume-section {
   display: flex;
   flex-direction: column;
