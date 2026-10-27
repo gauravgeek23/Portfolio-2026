@@ -1,0 +1,66 @@
+.experience {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 56px logo tile, 24px gaps, name/role, then dates/location right-aligned (Figma). */
+.experience__item {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.experience__logo {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  background: var(--color-grey-3);
+}
+
+.experience__logo img {
+  width: auto;
+  max-width: 44px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.experience__meta {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  text-align: right;
+}
+
+/* Phones: dates and location drop under the role on one line. */
+@media (max-width: 640px) {
+  .experience {
+    gap: 28px;
+  }
+
+  .experience__item {
+    grid-template-columns: 56px 1fr;
+    align-items: start;
+    column-gap: 16px;
+    row-gap: 0;
+  }
+
+  .experience__meta {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 6px;
+    text-align: left;
+  }
+
+  .experience__meta span + span::before {
+    content: '·';
+    margin-right: 6px;
+  }
+}

@@ -2,8 +2,10 @@ import Intro from '../components/Intro';
 import SectionHeader from '../components/SectionHeader';
 import ProjectCard from '../components/ProjectCard';
 import SideProjectCard from '../components/SideProjectCard';
+import ExperienceList from '../components/ExperienceList';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { projects, sideProjects } from '../data/projects';
+import { experience } from '../data/experience';
 import { testimonials } from '../data/testimonials';
 import './Home.css';
 
@@ -32,6 +34,13 @@ export default function Home() {
             <SideProjectCard key={project.slug} project={project} />
           ))}
         </div>
+      </section>
+
+      <hr className="divider" />
+
+      <section className="stack" aria-labelledby="experience">
+        <SectionHeader id="experience" title="Work Experience" subtitle="Chapters of My Journey" />
+        <ExperienceList items={experience} />
       </section>
 
       <hr className="divider" />
