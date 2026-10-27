@@ -14,11 +14,11 @@ function PlayLink({ link }) {
     </>
   );
   return link.to ? (
-    <Link className="play-item__link text-medium" to={link.to}>
+    <Link className="play-item__link" to={link.to}>
       {content}
     </Link>
   ) : (
-    <a className="play-item__link text-medium" href={link.href} target="_blank" rel="noopener noreferrer">
+    <a className="play-item__link" href={link.href} target="_blank" rel="noopener noreferrer">
       {content}
     </a>
   );

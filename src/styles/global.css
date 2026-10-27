@@ -48,6 +48,23 @@
   color-scheme: dark;
 }
 
+/* Theme switch circle reveal (see hooks/useTheme.js): the JS animates the clip-path,
+   so turn off the default cross-fade. Going dark the new (dark) page sits on top and
+   grows; going light the old (dark) page sits on top and shrinks away. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.theme-contract::view-transition-old(root) {
+  z-index: 2;
+}
+
+.theme-contract::view-transition-new(root) {
+  z-index: 1;
+}
+
 *,
 *::before,
 *::after {
