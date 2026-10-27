@@ -1,0 +1,230 @@
+/* Profile book popup (Figma: Desktop - 10). A light panel over the dimmed page holds a book
+   that opens from its cover. */
+.pbook-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0);
+  transition: background 500ms ease;
+}
+
+.pbook-modal.is-open {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.pbook-modal__panel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fafafa;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition:
+    opacity 400ms ease,
+    transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.pbook-modal.is-open .pbook-modal__panel {
+  opacity: 1;
+  transform: none;
+}
+
+.pbook-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  color: #2d2d2d;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pbook-modal__close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* The stage keeps the 920 x 654 book at its design size and scales it to fit. */
+.pbook-stage {
+  width: calc(920px * var(--scale));
+  height: calc(654px * var(--scale));
+  perspective: 2200px;
+}
+
+.pbook {
+  position: relative;
+  width: 920px;
+  height: 654px;
+  transform-style: preserve-3d;
+  transform-origin: 0 0;
+  /* Closed: only the right half (the cover) shows, so shift it to the centre. */
+  transform: scale(var(--scale)) translateX(-230px);
+  transition: transform 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.pbook-modal.is-open .pbook {
+  transform: scale(var(--scale));
+}
+
+.pbook__page {
+  position: absolute;
+  top: 0;
+  width: 460px;
+  height: 654px;
+  padding: 92px 56px 56px;
+  background: #f9f9f8;
+  color: #1f1f1f;
+  font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
+  font-size: 13.5px;
+  line-height: 1.32;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.pbook__page--right {
+  left: 460px;
+  padding-left: 60px;
+  border-radius: 0 3px 3px 0;
+  /* Gutter shadow along the spine and the book's lift off the panel. */
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 9%), #f9f9f8;
+  box-shadow: 24px 30px 60px rgba(0, 0, 0, 0.14);
+}
+
+.pbook__page--left {
+  padding-left: 40px;
+  padding-right: 44px;
+  border-radius: 3px 0 0 3px;
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 9%), #f9f9f8;
+  box-shadow: -24px 30px 60px rgba(0, 0, 0, 0.14);
+}
+
+.pbook__page p {
+  margin: 0;
+  text-indent: 1.5em;
+}
+
+.pbook__title {
+  margin: 0 0 44px;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.pbook__lede {
+  font-style: italic;
+  text-indent: 0 !important;
+}
+
+.pbook__source {
+  margin: 4px 0 18px !important;
+  font-size: 12.5px;
+  text-align: right;
+}
+
+.pbook__folio {
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  font-size: 11px;
+  text-align: center;
+}
+
+.pbook__contents {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14.5px;
+  text-align: left;
+}
+
+.pbook__contents li {
+  display: grid;
+  grid-template-columns: 66px 1fr auto;
+  gap: 8px;
+  white-space: nowrap;
+  margin-bottom: 18px;
+}
+
+.pbook__contents li span:last-child {
+  font-variant-numeric: oldstyle-nums;
+}
+
+/* The cover, hinged on the spine; it swings from over the right page to the left. */
+.pbook__cover {
+  position: absolute;
+  top: 0;
+  left: 460px;
+  width: 460px;
+  height: 654px;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.pbook-modal.is-open .pbook__cover {
+  transform: rotateY(-180deg);
+}
+
+.pbook__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.pbook__face--front {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 28px;
+  border-radius: 4px 18px 18px 4px;
+  background: #fbfbfc;
+  box-shadow:
+    inset 10px 0 0 -8px rgba(0, 0, 0, 0.1),
+    24px 30px 60px rgba(0, 0, 0, 0.16);
+}
+
+.pbook__face--front img {
+  width: 230px;
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pbook__name {
+  font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: #2d2d2d;
+}
+
+.pbook__face--back {
+  left: 0;
+  transform: rotateY(180deg);
+}
+
+/* Phones: a narrower margin around the panel. */
+@media (max-width: 640px) {
+  .pbook-modal {
+    padding: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pbook,
+  .pbook__cover,
+  .pbook-modal,
+  .pbook-modal__panel {
+    transition-duration: 1ms;
+  }
+}

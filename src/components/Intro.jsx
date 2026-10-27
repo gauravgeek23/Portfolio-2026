@@ -1,16 +1,22 @@
+import { useState } from 'react';
 import avatar from '../assets/avatar-156.webp';
-import avatarLarge from '../assets/avatar-1200.webp';
-import { Zoomable } from './Lightbox';
+import ProfileBook from './ProfileBook';
 import { site } from '../data/site';
 import './Intro.css';
 
 export default function Intro() {
+  const [bookOpen, setBookOpen] = useState(false);
   return (
     <section className="intro">
-      {/* Profile photo on a little passport-style book (after Airbnb's host profile) that opens on
-          hover; click to view the full photo in the overlay. */}
+      {/* Profile photo on a little passport-style book (after Airbnb's host profile) that opens a
+          little on hover; clicking it opens the full book in a popup. */}
       <div className="intro__avatar">
-        <Zoomable media={{ src: avatarLarge, alt: `Portrait of ${site.name}` }} className="intro__book">
+        <button
+          type="button"
+          className="intro__book"
+          onClick={() => setBookOpen(true)}
+          aria-label={`Open ${site.name}'s book`}
+        >
           {/* Three pages under the cover; they fan out as it opens. */}
           <span className="book__page" style={{ '--i': 3 }} />
           <span className="book__page" style={{ '--i': 2 }} />
@@ -18,8 +24,9 @@ export default function Intro() {
           <span className="book__cover">
             <img src={avatar} alt={`Portrait of ${site.name}`} width="46" height="52" />
           </span>
-        </Zoomable>
+        </button>
       </div>
+      <ProfileBook open={bookOpen} onClose={() => setBookOpen(false)} />
       <div>
         <h1 className="text-medium">{site.name}</h1>
         <p className="text-muted">{site.role}</p>
