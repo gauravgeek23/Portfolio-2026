@@ -2,8 +2,24 @@ import { useCallback, useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 
 const STORAGE_KEY = 'theme';
-// The toggle cycles through these in order.
-export const THEMES = ['light', 'dark', 'red'];
+const COLOUR_KEY = 'theme-colour';
+// The toggle goes light -> dark -> a colour theme -> light ..., and the colour theme
+// rotates each time round: red, then blue, green, yellow.
+export const COLOURS = ['red', 'blue', 'green', 'yellow'];
+export const THEMES = ['light', 'dark', ...COLOURS];
+
+// Bright swatch of each colour theme for the toggle icon (it only shows on the dark
+// theme, where the deep theme colours would barely read).
+export const COLOUR_SWATCH = { red: '#e5383b', blue: '#4c7dff', green: '#2fbf71', yellow: '#f6c333' };
+
+function readColourIndex() {
+  try {
+    const i = Number(sessionStorage.getItem(COLOUR_KEY));
+    return Number.isInteger(i) && i >= 0 && i < COLOURS.length ? i : 0;
+  } catch {
+    return 0;
+  }
+}
 
 // Slow, fluid ease-in-out for the circle reveal (no overshoot).
 const EASE = 'cubic-bezier(0.65, 0, 0.35, 1)';
@@ -11,11 +27,11 @@ const DURATION = 1400;
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Light / dark / red theme on <html data-theme>. Every visit opens light; the choice is
+// Light / dark / colour theme on <html data-theme>. Every visit opens light; the choice is
 // kept for the current visit only (sessionStorage), restored before first paint by
 // index.html. This keeps React in sync.
 //
-// Switching animates as a circle from the toggle: into dark or red, the new page grows
+// Switching animates as a circle from the toggle: into dark or a colour, the new page grows
 // out of the icon to fill the screen; back to light, the coloured page shrinks into it.
 // Uses the View Transitions API where available.
 export function useTheme() {
@@ -23,19 +39,31 @@ export function useTheme() {
     THEMES.includes(document.documentElement.dataset.theme) ? document.documentElement.dataset.theme : 'light',
   );
 
+  // Which colour theme comes after dark this time round.
+  const [colourIndex, setColourIndex] = useState(readColourIndex);
+
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
   const toggle = useCallback(
     (event) => {
-      const next = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+      let next = 'light';
+      let nextColourIndex = colourIndex;
+      if (theme === 'light') next = 'dark';
+      else if (theme === 'dark') next = COLOURS[colourIndex];
+      else nextColourIndex = (colourIndex + 1) % COLOURS.length; // leaving a colour: line up the next one
+
       const apply = () => {
         document.documentElement.dataset.theme = next;
-        flushSync(() => setTheme(next));
+        flushSync(() => {
+          setTheme(next);
+          setColourIndex(nextColourIndex);
+        });
       };
       try {
         sessionStorage.setItem(STORAGE_KEY, next);
+        sessionStorage.setItem(COLOUR_KEY, String(nextColourIndex));
       } catch {
         // Storage unavailable: the choice lasts until the page is reloaded.
       }
@@ -51,7 +79,7 @@ export function useTheme() {
       const y = rect ? rect.top + rect.height / 2 : 30;
       const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
       const root = document.documentElement;
-      // Into dark or red the new page grows out of the icon; back to light the
+      // Into dark or a colour the new page grows out of the icon; back to light the
       // coloured page shrinks into it.
       const expand = next !== 'light';
 
@@ -80,8 +108,8 @@ export function useTheme() {
         root.classList.remove('theme-expand', 'theme-contract');
       });
     },
-    [theme],
+    [theme, colourIndex],
   );
 
-  return [theme, toggle];
+  return [theme, toggle, COLOURS[colourIndex]];
 }

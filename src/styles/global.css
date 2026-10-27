@@ -48,6 +48,9 @@
   color-scheme: dark;
 }
 
+/* Colour themes (red, blue, green, yellow): the toggle's third step, rotating each
+   time round. Same tokens, re-pointed. */
+
 /* Red theme: deep crimson with warm off-white type (7:1), a pale pink for secondary
    text (5.1:1), darker red cards, and a cream accent so the gk. dot doesn't clash. */
 :root[data-theme='red'] {
@@ -64,6 +67,59 @@
   --color-media: #8c0d14;
   --shadow-lift: 0 16px 40px rgba(40, 0, 0, 0.45);
   color-scheme: dark;
+}
+
+/* Blue theme: deep cobalt with cool off-white type (9:1); the orange accent stays, as
+   its complement. */
+:root[data-theme='blue'] {
+  --color-white: #1739a6;
+  --color-black: #f4f6ff;
+  --color-grey-1: #c3cef7;
+  --color-grey-2: #4a66c4;
+  --color-grey-3: #102b85;
+  --color-surface: #13329a;
+  --color-accent: #ff9a3d;
+  --color-link: #ffe2a8;
+  --color-tick: #3553b8;
+  --color-wordmark: #2e4cb3;
+  --color-media: #102b85;
+  --shadow-lift: 0 16px 40px rgba(0, 8, 40, 0.45);
+  color-scheme: dark;
+}
+
+/* Green theme: deep forest green with soft white type (7.7:1) and a cream accent. */
+:root[data-theme='green'] {
+  --color-white: #0f5b3d;
+  --color-black: #f2faf5;
+  --color-grey-1: #b9e2cc;
+  --color-grey-2: #3f8264;
+  --color-grey-3: #0a4630;
+  --color-surface: #0d5236;
+  --color-accent: #ffd08a;
+  --color-link: #ffe2a8;
+  --color-tick: #2b7253;
+  --color-wordmark: #236b4c;
+  --color-media: #0a4630;
+  --shadow-lift: 0 16px 40px rgba(0, 25, 15, 0.45);
+  color-scheme: dark;
+}
+
+/* Yellow theme: warm sunflower with near-black type (10.5:1); light background, so
+   dark text and a burnt-orange accent instead of the white-on-colour of the others. */
+:root[data-theme='yellow'] {
+  --color-white: #f6c333;
+  --color-black: #1e1a10;
+  --color-grey-1: #5c4714;
+  --color-grey-2: #c99a1c;
+  --color-grey-3: #e9b11e;
+  --color-surface: #f2bb26;
+  --color-accent: #b3380a;
+  --color-link: #8f2d06;
+  --color-tick: #dcaa22;
+  --color-wordmark: #ebb620;
+  --color-media: #e9b11e;
+  --shadow-lift: 0 16px 40px rgba(80, 55, 0, 0.25);
+  color-scheme: light;
 }
 
 /* Theme switch circle reveal (see hooks/useTheme.js): the JS animates the clip-path,

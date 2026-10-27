@@ -11,7 +11,7 @@
     <meta property="og:title" content="Gaurav Kumar — Senior Product Designer" />
     <meta property="og:type" content="website" />
     <script>
-      // Every visit opens in light mode. A dark or red choice from the toggle lasts for the
+      // Every visit opens in light mode. A dark or colour choice from the toggle lasts for the
       // current visit (reloads included) and is applied before first paint.
       (function () {
         var theme;
@@ -19,7 +19,8 @@
           localStorage.removeItem('theme'); // drop choices saved by older versions
           theme = sessionStorage.getItem('theme');
         } catch (e) {}
-        document.documentElement.dataset.theme = theme === 'dark' || theme === 'red' ? theme : 'light';
+        document.documentElement.dataset.theme =
+          ['dark', 'red', 'blue', 'green', 'yellow'].indexOf(theme) > -1 ? theme : 'light';
       })();
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
