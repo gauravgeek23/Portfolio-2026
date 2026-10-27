@@ -12,7 +12,7 @@
   height: 52px;
 }
 
-/* Prism glow: a soft spectrum that blooms out from behind the photo on hover. */
+/* Prism glow: a soft spectrum behind the photo that slowly turns and breathes. */
 .intro__avatar::before {
   content: '';
   position: absolute;
@@ -32,20 +32,35 @@
   filter: blur(26px);
   /* Only shown in light mode (below); hidden in dark and the colour themes. */
   display: none;
-  opacity: 0.62;
-  transition:
-    opacity 500ms ease,
-    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  opacity: 0.36;
+  transition: opacity 500ms ease;
+  animation:
+    intro-glow-spin 9s linear infinite,
+    intro-glow-breathe 4.5s ease-in-out infinite alternate;
 }
 
-/* Light mode: the glow is always on; hover gives it a slow turn. */
+@keyframes intro-glow-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes intro-glow-breathe {
+  from {
+    scale: 0.92;
+  }
+  to {
+    scale: 1.1;
+  }
+}
+
+/* Light mode only: the glow is always on and a touch brighter on hover. */
 :root[data-theme='light'] .intro__avatar::before {
   display: block;
 }
 
 :root[data-theme='light'] .intro__avatar:hover::before {
-  opacity: 0.75;
-  transform: scale(1.05) rotate(40deg);
+  opacity: 0.5;
 }
 
 .intro__avatar .zoomable {
@@ -63,7 +78,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .intro__avatar::before {
-    transform: none;
-    transition: opacity 300ms ease;
+    animation: none;
   }
 }
