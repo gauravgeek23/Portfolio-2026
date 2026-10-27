@@ -14,6 +14,7 @@ import iphone370 from '../assets/side/iphone-kit-370.webp';
 import iphone740 from '../assets/side/iphone-kit-740.webp';
 import { academicCalendarCaseStudy } from './case-studies/academic-calendar';
 import { lottieVisionProCaseStudy } from './case-studies/lottiefiles-vision-pro';
+import { cameraWearOsCaseStudy } from './case-studies/camera-app-wear-os';
 
 // Placeholder case-study outline for projects whose write-up isn't in yet.
 // Projects with a `caseStudy` (see data/case-studies/) use that instead.
@@ -77,7 +78,7 @@ export const sideProjects = [
       'Effortless capture and seamless control—tap to shoot, swipe to switch, all on your wrist. A fast, simple camera experience designed for Wear OS.',
     cover: { src: camera370, src2x: camera740, video: cameraVideo, poster: cameraPoster },
     coverAlt: 'Three Wear OS watch faces showing the camera app controls',
-    sections: outline,
+    caseStudy: cameraWearOsCaseStudy,
   },
   {
     slug: 'iphone-kit',
