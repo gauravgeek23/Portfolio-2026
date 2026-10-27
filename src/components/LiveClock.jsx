@@ -13,7 +13,7 @@ export default function LiveClock({ timeZone, label }) {
   }, []);
 
   return (
-    <div className="text-muted">
+    <div className="contact__clock text-muted">
       <p>
         <time style={{ fontVariantNumeric: 'tabular-nums' }}>
           {now.toLocaleTimeString('en-US', { ...timeFormat, timeZone })}

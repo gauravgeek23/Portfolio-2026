@@ -6,12 +6,31 @@
 
 .contact__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr) 34px;
+  align-items: center;
   gap: 60px;
+}
+
+/* 4px note tucked at the end of the row: only readable when zoomed in. */
+.contact__easter-egg {
+  margin: 0;
+  font-size: 4px;
+  font-weight: var(--weight-medium);
+  line-height: normal;
+  letter-spacing: 0.01em;
+  text-align: right;
+  color: var(--color-black);
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 .contact__address {
   font-style: normal;
+}
+
+/* Keep the time and full date on one line each (longest: "Wednesday, Sep 30, 2026"). */
+.contact__clock p {
+  white-space: nowrap;
 }
 
 .contact__links {
@@ -76,10 +95,19 @@
   }
   .contact__grid {
     grid-template-columns: 1fr 1fr;
+    align-items: start;
     gap: 24px;
+  }
+  .contact__clock p {
+    white-space: normal;
   }
   .contact__title {
     grid-column: 1 / -1;
+  }
+  .contact__easter-egg {
+    grid-column: 1 / -1;
+    justify-self: end;
+    width: 34px;
   }
   .contact__socials {
     display: grid;

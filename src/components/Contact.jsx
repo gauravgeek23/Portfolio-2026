@@ -18,6 +18,8 @@ export default function Contact() {
           <p>{site.location.city}</p>
           <p>{site.location.region}</p>
         </address>
+        {/* Easter egg for anyone who zooms in (Figma: 80:16370). */}
+        <p className="contact__easter-egg">The detail is tiny. The commitment is concerning.</p>
       </div>
 
       <div className="contact__links">
