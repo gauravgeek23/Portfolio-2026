@@ -1,0 +1,72 @@
+---
+// Decorative ruler (0–800) that closes the page, echoing the 800px content grid.
+const majors = Array.from({ length: 9 }, (_, i) => i * 100);
+const minorsPerSegment = 6;
+---
+
+<div class="ruler" aria-hidden="true">
+  {
+    majors.map((value, i) => (
+      <>
+        <div class:list={['major', { odd: i % 2 === 1 }]}>
+          <span class="label">{value}</span>
+          <span class="tick tall" />
+        </div>
+        {i < majors.length - 1 && (
+          <div class="segment">
+            {Array.from({ length: minorsPerSegment }, () => (
+              <span class="tick" />
+            ))}
+          </div>
+        )}
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .ruler {
+    display: flex;
+    align-items: flex-end;
+    color: var(--color-grey-2);
+    padding-bottom: 0;
+    user-select: none;
+  }
+  .major {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1px;
+    flex: none;
+  }
+  .label {
+    line-height: var(--leading);
+    white-space: nowrap;
+  }
+  .major:first-child .label {
+    align-self: flex-start;
+  }
+  .major:last-child .label {
+    align-self: flex-end;
+  }
+  .tick {
+    display: block;
+    width: 1px;
+    height: 16px;
+    background: var(--color-grey-2);
+  }
+  .tick.tall {
+    height: 32px;
+  }
+  .segment {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+  }
+  @media (max-width: 640px) {
+    .major.odd .label {
+      visibility: hidden;
+    }
+  }
+</style>

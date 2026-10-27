@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'side'>;
+}
+
+const { project } = Astro.props;
+const { title, period, summary, cover, coverAlt, url } = project.data;
+const Wrapper = url ? 'a' : 'div';
+---
+
+<article class="side">
+  <Wrapper class="cover" href={url} target={url ? '_blank' : undefined} rel={url ? 'noopener' : undefined}>
+    <Image src={cover} alt={coverAlt} sizes="(max-width: 640px) 100vw, 370px" />
+  </Wrapper>
+  <div class="meta">
+    <div>
+      <h3 class="text-medium">{title}</h3>
+      <p class="text-small text-muted">{period}</p>
+    </div>
+    <p class="text-small text-muted">{summary}</p>
+  </div>
+</article>
+
+<style>
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .cover {
+    display: block;
+    aspect-ratio: 2 / 1;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #0a1225;
+  }
+  .cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  h3 {
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+  }
+  @media (max-width: 640px) {
+    .meta {
+      gap: 8px;
+    }
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import type { Testimonial } from '../data/testimonials';
+
+interface Props {
+  testimonial: Testimonial;
+}
+
+const { name, role, url, quote, photo, flag } = Astro.props.testimonial;
+const initials = name
+  .split(' ')
+  .map((part) => part[0])
+  .join('')
+  .slice(0, 2);
+---
+
+<figure class="card">
+  <figcaption class="person">
+    {
+      photo ? (
+        <Image src={photo} alt="" width={56} height={56} class="photo" />
+      ) : (
+        <span class="photo placeholder" aria-hidden="true">
+          {initials}
+        </span>
+      )
+    }
+    <div class="who">
+      <div class="name-row">
+        <a href={url} target="_blank" rel="noopener" class="text-small">{name}</a>
+        {flag && <Image src={flag.src} alt={flag.country} width={24} height={24} class="flag" />}
+      </div>
+      <p class="text-small text-muted">{role}</p>
+    </div>
+  </figcaption>
+  <hr class="divider" />
+  <blockquote class="text-small">{quote}</blockquote>
+</figure>
+
+<style>
+  .card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  .person {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .photo {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+  }
+  .placeholder {
+    display: grid;
+    place-items: center;
+    background: var(--color-grey-2);
+    color: var(--color-black);
+    font-weight: var(--weight-medium);
+  }
+  .who {
+    flex: 1;
+    min-width: 0;
+  }
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .name-row a {
+    text-decoration: underline;
+    white-space: nowrap;
+  }
+  .flag {
+    width: 24px;
+    height: 24px;
+  }
+  blockquote {
+    margin: 0;
+  }
+</style>

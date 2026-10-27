@@ -1,0 +1,111 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+    (a, b) => a.data.order - b.data.order,
+  );
+  return work.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: work[(i + 1) % work.length] },
+  }));
+}
+
+const { project, next } = Astro.props;
+const { title, period, summary, cover, coverAlt } = project.data;
+const { Content } = await render(project);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`${title} — ${site.name}`} description={summary}>
+  <main class="container page">
+    <a class="back text-small text-muted" href={`${base}#work`}>← All work</a>
+
+    <header class="header">
+      <h1 class="text-medium">{title}</h1>
+      <p class="text-small text-muted">{period}</p>
+      <p class="text-small text-muted summary">{summary}</p>
+    </header>
+
+    <Image
+      class="cover"
+      src={cover}
+      alt={coverAlt}
+      widths={[400, 800]}
+      sizes="(max-width: 832px) 100vw, 800px"
+      loading="eager"
+    />
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    <hr class="divider" />
+
+    <a class="next" href={`${base}work/${next.id}/`}>
+      <span class="text-small text-muted">Next project</span>
+      <span class="text-medium">{next.data.title} →</span>
+    </a>
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-block: 120px;
+  }
+  .back,
+  .next {
+    text-decoration: none;
+  }
+  .back:hover,
+  .next:hover .text-medium {
+    text-decoration: underline;
+  }
+  h1 {
+    font-size: var(--text-body);
+  }
+  .summary {
+    margin-top: 12px;
+    max-width: 540px;
+  }
+  .cover {
+    width: 100%;
+    border-radius: var(--radius-md);
+  }
+  .prose {
+    font-size: var(--text-small);
+    color: var(--color-grey-1);
+  }
+  .prose :global(h2) {
+    margin-top: 40px;
+    margin-bottom: 8px;
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    color: var(--color-black);
+  }
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .prose :global(p + p) {
+    margin-top: 16px;
+  }
+  .prose :global(img) {
+    border-radius: var(--radius-md);
+    margin-block: 24px;
+  }
+  .next {
+    display: flex;
+    flex-direction: column;
+  }
+  @media (max-width: 640px) {
+    .page {
+      padding-block: 64px;
+    }
+  }
+</style>
