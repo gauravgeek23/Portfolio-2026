@@ -8,6 +8,13 @@ import './Intro.css';
 export default function Intro() {
   return (
     <section className="intro">
+      {/* A little passport-style book (after Airbnb's host profile) that opens on hover. */}
+      <div className="intro__book" aria-hidden="true">
+        <div className="book__page" />
+        <div className="book__cover">
+          <img src={avatar3x} alt="" width="64" height="72" />
+        </div>
+      </div>
       <div className="intro__avatar">
         {/* Click to view the full photo in the overlay. */}
         <Zoomable media={{ src: avatarLarge, alt: `Portrait of ${site.name}` }}>
