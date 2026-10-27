@@ -1,4 +1,6 @@
 import { Zoomable } from './Lightbox';
+import arrowUpRight from '../assets/icons/arrow-up-right.svg';
+import './Photo.css';
 import './CaseStudyBlocks.css';
 
 function Media({ block }) {
@@ -12,12 +14,17 @@ function Media({ block }) {
   }
   const className = `cs-media${block.video ? '' : ' cs-media--image'}`;
   return (
-    <Zoomable media={{ src: block.src || block.poster, src2x: block.src2x, video: block.video, alt: block.alt }} className={className} style={style}>
+    <Zoomable
+      media={{ src: block.src || block.poster, src2x: block.src2x, video: block.video, alt: block.alt, caption: block.caption }}
+      className={className}
+      style={style}
+    >
       {block.video ? (
         <video src={block.video} poster={block.poster} autoPlay muted loop playsInline aria-label={block.alt} />
       ) : (
         <img src={block.src} srcSet={block.src2x ? `${block.src} 1x, ${block.src2x} 2x` : undefined} alt={block.alt} loading="lazy" />
       )}
+      {block.caption && <span className="photo__caption">{block.caption}</span>}
     </Zoomable>
   );
 }
@@ -62,7 +69,7 @@ export default function CaseStudyBlocks({ blocks, hero }) {
       case 'text':
         return (
           <section key={i}>
-            <h2 className="text-medium">{block.title}</h2>
+            {block.title && <h2 className="text-medium">{block.title}</h2>}
             <Paragraphs body={block.body} />
           </section>
         );
@@ -98,6 +105,32 @@ export default function CaseStudyBlocks({ blocks, hero }) {
               </div>
             ))}
           </dl>
+        );
+      case 'links':
+        return (
+          <ul key={i} className="cs-links">
+            {block.items.map((link) => (
+              <li key={link.href}>
+                <a className="cs-box cs-link text-medium" href={link.href} target="_blank" rel="noreferrer">
+                  <span>{link.label}</span>
+                  <img src={arrowUpRight} alt="" width="20" height="20" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        );
+      case 'youtube':
+        return (
+          <div key={i} className="cs-media cs-media--embed">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${block.id}?rel=0`}
+              title={block.title}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
         );
       case 'media':
         return <ResponsiveMedia key={i} block={block} />;

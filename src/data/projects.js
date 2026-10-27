@@ -11,6 +11,7 @@ import camera740 from '../assets/side/camera-app-wear-os-740.webp';
 import iphone370 from '../assets/side/iphone-kit-370.webp';
 import iphone740 from '../assets/side/iphone-kit-740.webp';
 import { academicCalendarCaseStudy } from './case-studies/academic-calendar';
+import { lottieVisionProCaseStudy } from './case-studies/lottiefiles-vision-pro';
 
 // Placeholder case-study outline for projects whose write-up isn't in yet.
 // Projects with a `caseStudy` (see data/case-studies/) use that instead.
@@ -41,7 +42,7 @@ export const projects = [
       'Ideating & Designing platform to empower seamless motion for products in spatial spaces, ensuring motion is accessible and never a limitation.',
     cover: { src: lottie800, src2x: lottie1600 },
     coverAlt: 'LottieFiles logo above an Apple Vision Pro headset',
-    sections: outline,
+    caseStudy: lottieVisionProCaseStudy,
   },
   {
     slug: 'toppr-answr',
