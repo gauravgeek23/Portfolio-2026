@@ -36,6 +36,11 @@
   text-decoration: underline;
 }
 
+.cs-highlight {
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+}
+
 .cs-strong {
   color: var(--color-black);
 }

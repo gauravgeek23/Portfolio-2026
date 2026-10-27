@@ -47,17 +47,26 @@ function ResponsiveMedia({ block }) {
   );
 }
 
-// A paragraph is a string, { text, strong }, or an array of strings and { text, href } links.
+// Body items: a string, { text, strong }, an array of strings and inline parts
+// ({ text, href } links, { text, strong } highlights), or { list, ordered } for a
+// bulleted/numbered list whose items take the same inline forms.
 function Inline({ parts }) {
-  return parts.map((part, i) =>
-    typeof part === 'string' ? (
-      part
-    ) : (
-      <a key={i} className="cs-inline-link" href={part.href} target="_blank" rel="noreferrer">
+  if (!Array.isArray(parts)) return parts;
+  return parts.map((part, i) => {
+    if (typeof part === 'string') return part;
+    if (part.href) {
+      return (
+        <a key={i} className="cs-inline-link" href={part.href} target="_blank" rel="noreferrer">
+          {part.text}
+        </a>
+      );
+    }
+    return (
+      <strong key={i} className="cs-highlight">
         {part.text}
-      </a>
-    ),
-  );
+      </strong>
+    );
+  });
 }
 
 function Paragraphs({ body }) {
@@ -65,8 +74,20 @@ function Paragraphs({ body }) {
     if (typeof p === 'string' || Array.isArray(p)) {
       return (
         <p key={i} className="text-small text-muted">
-          {Array.isArray(p) ? <Inline parts={p} /> : p}
+          <Inline parts={p} />
         </p>
+      );
+    }
+    if (p.list) {
+      const List = p.ordered ? 'ol' : 'ul';
+      return (
+        <List key={i} className="cs-list text-small text-muted">
+          {p.list.map((item, j) => (
+            <li key={j}>
+              <Inline parts={item} />
+            </li>
+          ))}
+        </List>
       );
     }
     return (
