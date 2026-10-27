@@ -93,7 +93,16 @@ export const topprAnswrCaseStudy = {
     },
     {
       type: 'text',
-      body: ['Special mention to the contributors in Toppr Answr.', 'Gaurav Rukhana | Sagar Bhardwaj | Atmiya Jadvani'],
+      body: [
+        'Special mention to the contributors in Toppr Answr.',
+        [
+          { text: 'Gaurav Rukhana', href: 'https://www.linkedin.com/in/gaurav-rukhana-2688474b/' },
+          ' | ',
+          { text: 'Sagar Bhardwaj', href: 'https://x.com/sagar_ux' },
+          ' | ',
+          { text: 'Atmiya Jadvani', href: 'https://www.linkedin.com/in/atmiyajadvani/' },
+        ],
+      ],
     },
   ],
 };
