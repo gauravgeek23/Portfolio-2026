@@ -1,7 +1,15 @@
+/* The card is a single link wrapping cover, title and text. */
 .project-card {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-card:focus-visible {
+  outline-offset: 8px;
+  border-radius: var(--radius-md);
 }
 
 /* On hover the whole cover grows (rather than zooming the image inside a fixed frame). */
@@ -16,7 +24,7 @@
 }
 
 .project-card:hover .project-card__cover,
-.project-card__cover:focus-visible {
+.project-card:focus-visible .project-card__cover {
   transform: scale(1.025);
   box-shadow: 0 16px 40px rgba(45, 45, 45, 0.12);
 }
@@ -36,11 +44,8 @@
   flex: 0 0 240px;
 }
 
-.project-card__heading a {
-  text-decoration: none;
-}
-
-.project-card:hover .project-card__heading a {
+.project-card:hover .project-card__title,
+.project-card:focus-visible .project-card__title {
   text-decoration: underline;
 }
 
