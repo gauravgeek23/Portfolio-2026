@@ -1,4 +1,7 @@
 import avatar from '../assets/avatar-104.webp';
+import avatar3x from '../assets/avatar-156.webp';
+import avatarLarge from '../assets/avatar-1200.webp';
+import { Zoomable } from './Lightbox';
 import { site } from '../data/site';
 import './Intro.css';
 
@@ -6,7 +9,16 @@ export default function Intro() {
   return (
     <section className="intro">
       <div className="intro__avatar">
-        <img src={avatar} alt={`Portrait of ${site.name}`} width="52" height="52" />
+        {/* Click to view the full photo in the overlay. */}
+        <Zoomable media={{ src: avatarLarge, alt: `Portrait of ${site.name}` }}>
+          <img
+            src={avatar}
+            srcSet={`${avatar} 2x, ${avatar3x} 3x`}
+            alt={`Portrait of ${site.name}`}
+            width="52"
+            height="52"
+          />
+        </Zoomable>
       </div>
       <div>
         <h1 className="text-medium">{site.name}</h1>

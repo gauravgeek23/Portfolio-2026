@@ -48,6 +48,11 @@
   transform: scale(1.05) rotate(40deg);
 }
 
+.intro__avatar .zoomable {
+  height: 100%;
+  border-radius: var(--radius-sm);
+}
+
 .intro__avatar img {
   display: block;
   width: 100%;
