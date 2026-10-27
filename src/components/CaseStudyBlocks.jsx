@@ -5,7 +5,7 @@ import './Photo.css';
 import './CaseStudyBlocks.css';
 
 function Media({ block }) {
-  const style = { aspectRatio: block.ratio };
+  const style = { aspectRatio: block.ratio, '--ratio': block.ratio };
   if (!block.src && !block.video) {
     return (
       <div className="cs-media cs-media--empty" style={style} role="img" aria-label={`${block.alt} (coming soon)`}>
@@ -176,6 +176,17 @@ export default function CaseStudyBlocks({ blocks, hero }) {
           <div key={i} className="cs-media-row">
             {block.items.map((item) => (
               <Media key={item.video || item.src} block={item} />
+            ))}
+          </div>
+        );
+      // One tall tile beside two stacked ones (`reverse` puts the tall tile on the right);
+      // all three stack top to bottom on phones.
+      case 'media-grid':
+        return (
+          <div key={i} className={block.reverse ? 'cs-media-grid cs-media-grid--reverse' : 'cs-media-grid'}>
+            <Media block={block.tall} />
+            {block.stack.map((item, j) => (
+              <Media key={j} block={item} />
             ))}
           </div>
         );

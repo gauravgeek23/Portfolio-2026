@@ -16,6 +16,7 @@ import { academicCalendarCaseStudy } from './case-studies/academic-calendar';
 import { lottieVisionProCaseStudy } from './case-studies/lottiefiles-vision-pro';
 import { cameraWearOsCaseStudy } from './case-studies/camera-app-wear-os';
 import { iphoneKitCaseStudy } from './case-studies/iphone-kit';
+import { topprAnswrCaseStudy } from './case-studies/toppr-answr';
 
 // Placeholder case-study outline for projects whose write-up isn't in yet.
 // Projects with a `caseStudy` (see data/case-studies/) use that instead.
@@ -55,7 +56,7 @@ export const projects = [
     summary: 'Building a seamless platform for instant doubt resolution and learning.\nSimply     Click → Scan → Solve.',
     cover: { src: toppr800, src2x: toppr1600 },
     coverAlt: 'Collage of Toppr Answr mobile screens for scanning, solving and chatting about questions',
-    sections: outline,
+    caseStudy: topprAnswrCaseStudy,
   },
   {
     slug: 'iconscout-plugin',

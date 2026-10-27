@@ -132,6 +132,31 @@
   background: #121212;
 }
 
+.cs-media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
+
+.cs-media-grid > :first-child {
+  grid-row: span 2;
+}
+
+.cs-media-grid--reverse > :first-child {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+/* The stacked tiles split the tall tile's height between them. */
+.cs-media-grid > :not(:first-child) {
+  aspect-ratio: auto !important;
+}
+
+.cs-media-grid .cs-media:not(.cs-media--empty) {
+  background: #121212;
+}
+
 .cs-media-switch__mobile {
   display: none;
   flex-direction: column;
@@ -161,6 +186,21 @@
 
   .cs-media-switch__mobile {
     display: flex;
+  }
+
+  .cs-media-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 12px;
+  }
+
+  .cs-media-grid > :first-child {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .cs-media-grid > :not(:first-child) {
+    aspect-ratio: var(--ratio) !important;
   }
 
   .cs-grid,
