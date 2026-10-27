@@ -10,6 +10,19 @@
     />
     <meta property="og:title" content="Gaurav Kumar — Senior Product Designer" />
     <meta property="og:type" content="website" />
+    <script>
+      // Apply the saved or system theme before first paint (no light flash).
+      (function () {
+        var theme;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>

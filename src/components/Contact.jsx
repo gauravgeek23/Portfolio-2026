@@ -1,4 +1,5 @@
 import arrowUpRight from '../assets/icons/arrow-up-right.svg';
+import Icon from './Icon';
 import { site } from '../data/site';
 import LiveClock from './LiveClock';
 import './Contact.css';
@@ -31,7 +32,7 @@ export default function Contact() {
             <li key={social.label}>
               <a className="text-medium" href={social.href} target="_blank" rel="noopener noreferrer">
                 {social.label}
-                <img src={arrowUpRight} alt="" width="20" height="20" />
+                <Icon src={arrowUpRight} />
               </a>
             </li>
           ))}

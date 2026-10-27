@@ -1,5 +1,6 @@
 import { Zoomable } from './Lightbox';
 import arrowUpRight from '../assets/icons/arrow-up-right.svg';
+import Icon from './Icon';
 import './Photo.css';
 import './CaseStudyBlocks.css';
 
@@ -129,7 +130,7 @@ export default function CaseStudyBlocks({ blocks, hero }) {
               <li key={link.href}>
                 <a className="cs-box cs-link text-medium" href={link.href} target="_blank" rel="noreferrer">
                   <span>{link.label}</span>
-                  <img src={arrowUpRight} alt="" width="20" height="20" />
+                  <Icon src={arrowUpRight} />
                 </a>
               </li>
             ))}

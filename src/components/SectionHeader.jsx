@@ -1,4 +1,5 @@
 import arrowDown from '../assets/icons/arrow-down.svg';
+import Icon from './Icon';
 import './SectionHeader.css';
 
 export default function SectionHeader({ id, title, subtitle }) {
@@ -6,7 +7,7 @@ export default function SectionHeader({ id, title, subtitle }) {
     <header>
       <h2 className="section-header__title text-medium" id={id}>
         {title}
-        <img src={arrowDown} alt="" width="20" height="20" />
+        <Icon src={arrowDown} />
       </h2>
       <p className="text-small text-muted">{subtitle}</p>
     </header>

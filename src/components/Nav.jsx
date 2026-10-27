@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { navItems } from '../data/site';
+import { useTheme } from '../hooks/useTheme';
 import './Nav.css';
 
 // On the home page the underline sits on "gk." until the Selected work heading
@@ -34,6 +35,43 @@ function useHomeSection(enabled) {
   return section;
 }
 
+function ThemeToggle() {
+  const [theme, toggle] = useTheme();
+  const dark = theme === 'dark';
+  return (
+    <button
+      type="button"
+      className="nav__theme"
+      onClick={toggle}
+      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={dark ? 'Light mode' : 'Dark mode'}
+    >
+      {dark ? (
+        // Sun: shown in dark mode, switches to light.
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="3.25" stroke="currentColor" strokeWidth="1.5" />
+          <path
+            d="M10 2.5v1.75M10 15.75v1.75M2.5 10h1.75M15.75 10h1.75M4.7 4.7l1.24 1.24M14.06 14.06l1.24 1.24M4.7 15.3l1.24-1.24M14.06 5.94l1.24-1.24"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      ) : (
+        // Moon: shown in light mode, switches to dark.
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path
+            d="M16.25 11.9A6.5 6.5 0 0 1 8.1 3.75a6.5 6.5 0 1 0 8.15 8.15Z"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 export default function Nav() {
   const { pathname, hash } = useLocation();
   const navigate = useNavigate();
@@ -46,18 +84,23 @@ export default function Nav() {
   else if (pathname.startsWith('/work')) active = 'work';
   else active = navItems.find((item) => item.to !== '/' && pathname.startsWith(item.to))?.label;
 
-  // Already on home: scroll there smoothly instead of re-navigating.
+  // Already on home: glide there instead of re-navigating. The URL is updated with
+  // `inPage` so Layout doesn't jump to the target instantly.
+  const behavior = () =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
   const goToTop = (e) => {
     if (!onHome) return;
     e.preventDefault();
-    window.scrollTo({ top: 0 });
-    if (hash) navigate('/', { replace: true });
+    window.scrollTo({ top: 0, behavior: behavior() });
+    if (hash) navigate('/', { replace: true, state: { inPage: true } });
   };
   const goToSection = (section) => (e) => {
     if (!onHome) return;
     e.preventDefault();
-    document.getElementById(section)?.scrollIntoView();
-    if (hash !== `#${section}`) navigate({ pathname: '/', hash: `#${section}` }, { replace: true });
+    document.getElementById(section)?.scrollIntoView({ behavior: behavior() });
+    if (hash !== `#${section}`) {
+      navigate({ pathname: '/', hash: `#${section}` }, { replace: true, state: { inPage: true } });
+    }
   };
 
   const linkProps = (isActive) => ({
@@ -90,6 +133,7 @@ export default function Nav() {
             </li>
           ))}
         </ul>
+        <ThemeToggle />
       </nav>
     </header>
   );

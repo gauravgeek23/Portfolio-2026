@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PlayMedia from '../components/PlayMedia';
 import arrowUpRight from '../assets/icons/arrow-up-right.svg';
+import Icon from '../components/Icon';
 import { playItems } from '../data/play';
 import './Play.css';
 
@@ -9,7 +10,7 @@ function PlayLink({ link }) {
   const content = (
     <>
       <span>{link.label}</span>
-      <img src={arrowUpRight} alt="" width="20" height="20" />
+      <Icon src={arrowUpRight} />
     </>
   );
   return link.to ? (

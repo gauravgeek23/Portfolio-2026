@@ -31,7 +31,7 @@
   display: block;
   width: 1px;
   height: 16px;
-  background: #eeeeee;
+  background: var(--color-tick);
 }
 
 /* The first and last minor ticks of each segment sit on the major ticks, so they're hidden. */

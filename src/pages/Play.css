@@ -44,11 +44,11 @@
   text-underline-offset: 3px;
 }
 
-.play-item__link img {
+.play-item__link .icon {
   transition: transform 200ms ease;
 }
 
-.play-item__link:hover img {
+.play-item__link:hover .icon {
   transform: translate(2px, -2px);
 }
 

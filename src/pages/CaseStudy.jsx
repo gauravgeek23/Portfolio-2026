@@ -4,6 +4,7 @@ import { InViewVideo } from '../components/PlayMedia';
 import CaseStudyBlocks from '../components/CaseStudyBlocks';
 import arrowLeft from '../assets/icons/arrow-left.svg';
 import arrowRight from '../assets/icons/arrow-right.svg';
+import Icon from '../components/Icon';
 import { projects, sideProjects } from '../data/projects';
 import './CaseStudy.css';
 
@@ -42,7 +43,7 @@ export default function CaseStudy() {
   return (
     <main className={`container page case-study${caseStudy ? ' case-study--wide-media' : ''}`}>
       <Link className="case-study__back text-small text-muted" to="/#work">
-        <img src={arrowLeft} alt="" width="20" height="20" />
+        <Icon src={arrowLeft} />
         <span>All Work</span>
       </Link>
 
@@ -75,7 +76,7 @@ export default function CaseStudy() {
       <Link className="case-study__next" to={`/work/${next.slug}`}>
         <span className="case-study__next-title text-medium">
           <span>{next.title}</span>
-          <img src={arrowRight} alt="" width="20" height="20" />
+          <Icon src={arrowRight} />
         </span>
         <span className="text-small text-muted">Next Project</span>
       </Link>

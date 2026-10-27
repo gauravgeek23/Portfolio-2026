@@ -52,11 +52,11 @@
   white-space: nowrap;
 }
 
-.contact__socials img {
+.contact__socials .icon {
   transition: transform 200ms ease;
 }
 
-.contact__socials a:hover img {
+.contact__socials a:hover .icon {
   transform: translate(2px, -2px);
 }
 

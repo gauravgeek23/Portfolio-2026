@@ -26,7 +26,7 @@
 .project-card:hover .project-card__cover,
 .project-card:focus-visible .project-card__cover {
   transform: scale(1.025);
-  box-shadow: 0 16px 40px rgba(45, 45, 45, 0.12);
+  box-shadow: var(--shadow-lift);
 }
 
 .project-card__cover img,

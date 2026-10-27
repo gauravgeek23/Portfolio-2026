@@ -15,8 +15,8 @@
   align-self: flex-start;
 }
 
-.case-study__back img,
-.case-study__next-title img {
+.case-study__back .icon,
+.case-study__next-title .icon {
   transition: transform 200ms ease;
 }
 
@@ -25,11 +25,11 @@
   text-decoration: underline;
 }
 
-.case-study__back:hover img {
+.case-study__back:hover .icon {
   transform: translateX(-3px);
 }
 
-.case-study__next:hover .case-study__next-title img {
+.case-study__next:hover .case-study__next-title .icon {
   transform: translateX(3px);
 }
 
