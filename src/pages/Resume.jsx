@@ -1,14 +1,14 @@
-import Icon from "../components/Icon";
-import { Zoomable } from "../components/Lightbox";
-import downloadIcon from "../assets/icons/download.svg";
-import arrowUpRight from "../assets/icons/arrow-up-right.svg";
-import { experience, education, features } from "../data/resume";
-import { site } from "../data/site";
-import "./Resume.css";
+import Icon from '../components/Icon';
+import { Zoomable } from '../components/Lightbox';
+import downloadIcon from '../assets/icons/download.svg';
+import arrowUpRight from '../assets/icons/arrow-up-right.svg';
+import { experience, education, features } from '../data/resume';
+import { site } from '../data/site';
+import './Resume.css';
 
 // Keeps the arrow on the same line as the label's last word when it wraps.
 function LinkLabel({ text }) {
-  const split = text.lastIndexOf(" ") + 1;
+  const split = text.lastIndexOf(' ') + 1;
   return (
     <>
       {text.slice(0, split)}
@@ -39,12 +39,7 @@ function Entry({ entry }) {
           {entry.items?.map((item) => (
             <li key={item.label} className="resume-row__dated">
               {item.href ? (
-                <a
-                  className="resume-link"
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a className="resume-link" href={item.href} target="_blank" rel="noopener noreferrer">
                   <LinkLabel text={item.label} />
                 </a>
               ) : (
@@ -58,17 +53,7 @@ function Entry({ entry }) {
           <div className="resume-row__gallery" data-gallery>
             {entry.gallery.map((image) => (
               <Zoomable key={image.src} media={image} className="resume-thumb">
-                <img
-                  src={image.src}
-                  srcSet={
-                    image.src2x
-                      ? `${image.src} 1x, ${image.src2x} 2x`
-                      : undefined
-                  }
-                  alt={image.alt}
-                  loading="lazy"
-                  decoding="async"
-                />
+                <img src={image.thumb} alt={image.alt} loading="lazy" decoding="async" />
               </Zoomable>
             ))}
           </div>

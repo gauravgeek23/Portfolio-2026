@@ -1,16 +1,23 @@
 import academicCalendar from '../assets/work/academic-calendar-800.webp';
 import academicCalendar2x from '../assets/work/academic-calendar-1600.webp';
 import examInterface from '../assets/resume/exam-interface.webp';
+import examInterfaceThumb from '../assets/resume/exam-interface-thumb.webp';
 import iconscout from '../assets/work/iconscout-plugin-800.webp';
 import iconscout2x from '../assets/work/iconscout-plugin-1600.webp';
 import visionPro from '../assets/work/lottiefiles-vision-pro-800.webp';
 import visionPro2x from '../assets/work/lottiefiles-vision-pro-1600.webp';
-import topprAnswr from '../assets/work/toppr-answr-800.webp';
-import topprAnswr2x from '../assets/work/toppr-answr-1600.webp';
+import topprAnswr from '../assets/resume/toppr-answr.webp';
+import topprAnswrThumb from '../assets/resume/toppr-answr-thumb.webp';
 import uranium from '../assets/resume/uranium.webp';
+import uraniumThumb from '../assets/resume/uranium-thumb.webp';
+import friction from '../assets/resume/friction.webp';
+import frictionThumb from '../assets/resume/friction-thumb.webp';
+import igloo from '../assets/resume/igloo.webp';
+import iglooThumb from '../assets/resume/igloo-thumb.webp';
 
 // Resume content. Each entry renders as a row: details on the left, bullet points on the right,
 // with optional `gallery` thumbnails under the points (they open in the overlay as a set).
+// Each image: `thumb` for the small card, `src` (and `src2x`) for the enlarged view.
 export const experience = [
   {
     title: 'Newton School of Technology',
@@ -22,8 +29,8 @@ export const experience = [
       'Website, referral, and exam redesigns that lifted conversions by up to 30%.',
     ],
     gallery: [
-      { src: academicCalendar, src2x: academicCalendar2x, alt: 'Academic calendar for Newton School of Technology' },
-      { src: examInterface, alt: 'Exam interface on desktop and mobile' },
+      { thumb: academicCalendar, src: academicCalendar, src2x: academicCalendar2x, alt: 'Academic calendar for Newton School of Technology' },
+      { thumb: examInterfaceThumb, src: examInterface, alt: 'NSAT entrance exam interface on desktop and mobile' },
     ],
   },
   {
@@ -36,8 +43,8 @@ export const experience = [
       'Spoke at 8 events across India with CRED, Razorpay, Zeta, 10K Designers, Cars24.',
     ],
     gallery: [
-      { src: iconscout, src2x: iconscout2x, alt: 'IconScout plugin for Figma: millions of high-quality design assets' },
-      { src: visionPro, src2x: visionPro2x, alt: 'LottieFiles for Apple Vision Pro' },
+      { thumb: iconscout, src: iconscout, src2x: iconscout2x, alt: 'IconScout plugin for Figma: millions of high-quality design assets' },
+      { thumb: visionPro, src: visionPro, src2x: visionPro2x, alt: 'LottieFiles for Apple Vision Pro' },
     ],
   },
   {
@@ -49,8 +56,8 @@ export const experience = [
       'Build the basic component library and tokens for seamless flow in design team.',
     ],
     gallery: [
-      { src: topprAnswr, src2x: topprAnswr2x, alt: 'Toppr Answr screens for scanning, solving and chatting about questions' },
-      { src: uranium, alt: 'Uranium, the Toppr design system: colours, type and components' },
+      { thumb: topprAnswrThumb, src: topprAnswr, alt: 'Toppr Answr: student assistant app with a live mentor chat system' },
+      { thumb: uraniumThumb, src: uranium, alt: 'Uranium, an education centered design system for Toppr' },
     ],
   },
   {
@@ -80,6 +87,10 @@ export const education = [
     points: [
       'Computer Science Engineering graduate with 8.2 SGPA.',
       'Dedicated four years to unique projects like department design, participated in 8 hackathons including Smart India Hackathon, and discovered a passion for user experience over just coding.',
+    ],
+    gallery: [
+      { thumb: frictionThumb, src: friction, alt: 'Friction: an in-team coding platform for events, workshops and hiring, with a live leaderboard' },
+      { thumb: iglooThumb, src: igloo, alt: 'Igloo: a chatbot form for community event registrations, with custom themes and fonts' },
     ],
   },
 ];
