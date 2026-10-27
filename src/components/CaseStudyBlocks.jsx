@@ -47,17 +47,26 @@ function ResponsiveMedia({ block }) {
   );
 }
 
-// A paragraph is a string, { text, strong }, or an array of strings and { text, href } links.
+// Body items: a string, { text, strong }, an array of inline parts (strings,
+// { text, href } links, { text, label } darker lead-in labels), or { list } for
+// a bulleted list whose items take the same inline forms.
 function Inline({ parts }) {
-  return parts.map((part, i) =>
-    typeof part === 'string' ? (
-      part
-    ) : (
-      <a key={i} className="cs-inline-link" href={part.href} target="_blank" rel="noreferrer">
+  if (!Array.isArray(parts)) return parts;
+  return parts.map((part, i) => {
+    if (typeof part === 'string') return part;
+    if (part.href) {
+      return (
+        <a key={i} className="cs-inline-link" href={part.href} target="_blank" rel="noreferrer">
+          {part.text}
+        </a>
+      );
+    }
+    return (
+      <span key={i} className="cs-label">
         {part.text}
-      </a>
-    ),
-  );
+      </span>
+    );
+  });
 }
 
 function Paragraphs({ body }) {
@@ -65,8 +74,19 @@ function Paragraphs({ body }) {
     if (typeof p === 'string' || Array.isArray(p)) {
       return (
         <p key={i} className="text-small text-muted">
-          {Array.isArray(p) ? <Inline parts={p} /> : p}
+          <Inline parts={p} />
         </p>
+      );
+    }
+    if (p.list) {
+      return (
+        <ul key={i} className="cs-list cs-bullets text-small text-muted">
+          {p.list.map((item, j) => (
+            <li key={j}>
+              <Inline parts={item} />
+            </li>
+          ))}
+        </ul>
       );
     }
     return (
@@ -85,7 +105,7 @@ export default function CaseStudyBlocks({ blocks, hero }) {
         return hero;
       case 'text':
         return (
-          <section key={i}>
+          <section key={i} className={block.spaced ? 'cs-text cs-text--spaced' : 'cs-text'}>
             {block.title && <h2 className="text-medium">{block.title}</h2>}
             <Paragraphs body={block.body} />
           </section>

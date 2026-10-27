@@ -35,6 +35,25 @@
   text-underline-offset: 3px;
 }
 
+/* Bulleted lists inside text sections get a little air above and below. */
+.cs-bullets {
+  margin-block: 12px;
+}
+
+.cs-bullets:last-child {
+  margin-bottom: 0;
+}
+
+/* Darker lead-in label at the start of a paragraph or bullet ("Deliverables -"). */
+.cs-label {
+  color: var(--color-black);
+}
+
+/* Sections whose paragraphs read as separate points get space between them. */
+.cs-text--spaced p + p {
+  margin-top: 12px;
+}
+
 .cs-strong {
   color: var(--color-black);
 }
