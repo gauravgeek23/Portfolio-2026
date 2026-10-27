@@ -67,6 +67,7 @@
   z-index: 1;
   display: grid;
   place-items: center;
+  flex: none;
   width: 32px;
   height: 32px;
   margin: 0 -6px 0 auto;
@@ -94,23 +95,30 @@
   transform: rotate(20deg);
 }
 
-@media (max-width: 400px) {
+/* Phones: tighter gaps so every tab and the theme toggle fit on one row. */
+@media (max-width: 480px) {
   .nav__inner,
   .nav__list {
-    gap: 16px;
-  }
-}
-
-/* Narrow phones: tighten so the theme toggle still fits on the row. */
-@media (max-width: 374px) {
-  .nav__inner,
-  .nav__list {
-    gap: 12px;
+    gap: 14px;
   }
 
   .nav__theme {
     width: 28px;
     height: 28px;
     margin-right: -4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav__inner,
+  .nav__list {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 374px) {
+  .nav__inner,
+  .nav__list {
+    gap: 9px;
   }
 }
