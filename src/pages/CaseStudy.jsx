@@ -10,13 +10,14 @@ import './CaseStudy.css';
 
 export default function CaseStudy() {
   const { slug } = useParams();
-  // "Next project" cycles within the list the project belongs to (selected work or side projects).
   const list = projects.some((p) => p.slug === slug) ? projects : sideProjects;
   const index = list.findIndex((p) => p.slug === slug);
   if (index === -1) return <Navigate to="/" replace />;
 
   const project = list[index];
-  const next = list[(index + 1) % list.length];
+  // "Next project" runs through selected work, then the side projects, then back to the start.
+  const all = [...projects, ...sideProjects];
+  const next = all[(all.indexOf(project) + 1) % all.length];
   const { caseStudy } = project;
   // A case study can bring its own larger hero image; otherwise the card cover is used.
   const cover = caseStudy?.hero ?? project.cover;
