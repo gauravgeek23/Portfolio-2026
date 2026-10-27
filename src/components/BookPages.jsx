@@ -3,70 +3,132 @@ import avatar from '../assets/avatar-156.webp';
 import examInterface from '../assets/resume/exam-interface.webp';
 import academicCalendar from '../assets/case-studies/academic-calendar/workspace@1x.webp';
 import maldives from '../assets/case-studies/lottiefiles-vision-pro/maldives@1x.webp';
-import spatialHome from '../assets/case-studies/lottiefiles-vision-pro/spatial-home@1x.webp';
 import iconscout from '../assets/case-studies/iconscout-plugin/hero@1x.webp';
+import changLa from '../assets/book/chang-la.webp';
+import hamptaPass from '../assets/book/hampta-pass.webp';
+import baliKecak from '../assets/book/bali-kecak.webp';
+import desk from '../assets/book/desk.webp';
+import kualaLumpur from '../assets/book/kuala-lumpur.webp';
+import workation2023 from '../assets/book/workation-2023.webp';
+import maldivesTeam from '../assets/book/maldives-team.webp';
+import kangYatseTeam from '../assets/book/kang-yatse-team.webp';
+import ootyWorkation from '../assets/book/ooty-workation.webp';
+import bikeCare from '../assets/book/bike-care.webp';
 import './BookPages.css';
 
-// The pages of the profile book: a magazine of the last few years, one spread per year, opened
-// by a preface and a letter. Each page is 460 x 654. Layouts mix work and life on purpose.
+// The pages of the profile book: a scrapbook of the last few years, one spread per year, opened
+// by a hello and a letter. Each page is 460 x 654 and laid out freely (x / y in px), like things
+// stuck into a notebook. Items drop in one after another (`d` = order) when their spread opens;
+// photos straighten and lift on hover, notes wiggle, doodles draw themselves.
 
-function Folio({ n, label }) {
-  return (
-    <footer className="mag-folio">
-      <span>{n}</span>
-      {label && <span>{label}</span>}
-    </footer>
-  );
-}
+const at = ({ x, y, w, r = 0, d = 0, z }) => ({ left: x, top: y, width: w, '--r': `${r}deg`, '--d': d, zIndex: z });
 
-function Photo({ src, alt, className = '', caption }) {
+// A taped photo: a polaroid with a handwritten caption, or `plain` with a thin white border.
+function Snap({ src, alt, h, caption, tape = 'yellow', plain, ...pos }) {
   return (
-    <figure className={`mag-photo ${className}`}>
-      <img src={src} alt={alt} loading="lazy" decoding="async" />
+    <figure className={`sb-snap sb-in${plain ? ' sb-snap--plain' : ''}`} style={at(pos)}>
+      <span className={`sb-tape sb-tape--${tape}`} />
+      <img src={src} alt={alt} style={{ height: h }} loading="lazy" decoding="async" />
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
   );
 }
 
-// A placeholder frame for photos still to come.
-function Pending({ className = '', label }) {
+function Note({ color = 'yellow', children, ...pos }) {
   return (
-    <figure className={`mag-photo mag-photo--pending ${className}`}>
-      <span>{label}</span>
-    </figure>
+    <div className={`sb-note sb-note--${color} sb-in`} style={at(pos)}>
+      {children}
+    </div>
   );
 }
 
-/* ---------- Pages 1-2: preface and letter ---------- */
+function Text({ hand, size, children, ...pos }) {
+  return (
+    <p className={`sb-text${hand ? ' sb-text--hand' : ''} sb-in`} style={{ ...at(pos), fontSize: size }}>
+      {children}
+    </p>
+  );
+}
+
+// A big handwritten year with a scribbled ring that draws itself.
+function Year({ children, ...pos }) {
+  return (
+    <div className="sb-year sb-in" style={at(pos)}>
+      <svg className="sb-draw" viewBox="0 0 200 90" aria-hidden="true">
+        <path d="M18 52 C 14 18, 120 6, 176 26 C 206 38, 186 78, 104 82 C 40 86, 6 70, 22 40 C 30 26, 70 14, 120 14" />
+      </svg>
+      <span>{children}</span>
+    </div>
+  );
+}
+
+const DOODLES = {
+  arrow: { box: '0 0 120 90', d: 'M8 10 C 30 70, 70 80, 106 62 M92 52 L 108 62 L 96 76' },
+  underline: { box: '0 0 300 20', d: 'M4 12 C 60 4, 120 18, 180 10 S 270 6, 296 12' },
+  heart: { box: '0 0 60 54', d: 'M30 50 C 6 34, 2 18, 12 10 C 22 2, 30 10, 30 18 C 30 10, 38 2, 48 10 C 58 18, 54 34, 30 50 Z' },
+  star: { box: '0 0 50 50', d: 'M25 4 L 30 19 L 46 19 L 33 29 L 38 45 L 25 35 L 12 45 L 17 29 L 4 19 L 20 19 Z' },
+  sun: { box: '0 0 60 60', d: 'M30 18 a12 12 0 1 0 0.1 0 M30 4 v8 M30 48 v8 M4 30 h8 M48 30 h8 M11 11 l6 6 M43 43 l6 6 M49 11 l-6 6 M17 43 l-6 6' },
+  squiggle: { box: '0 0 120 30', d: 'M4 16 q 10 -14 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0' },
+};
+
+function Doodle({ kind, color, ...pos }) {
+  const { box, d } = DOODLES[kind];
+  return (
+    <svg
+      className={`sb-doodle sb-doodle--${kind} sb-draw sb-in`}
+      style={{ ...at(pos), color }}
+      viewBox={box}
+      aria-hidden="true"
+    >
+      <path d={d} />
+    </svg>
+  );
+}
+
+function Folio({ n }) {
+  return <span className="sb-folio">{n}</span>;
+}
+
+/* ---------- Pages 1-2: hello and a letter ---------- */
 
 export function Preface() {
   return (
-    <div className="mag-page mag-preface">
-      <p className="mag-label">Preface</p>
-      <h2 className="mag-h mag-h--xl">A few years, folded into pages.</h2>
-      <p className="mag-p mag-dropcap">
-        This is not a résumé. It is the scrapbook I would hand you over coffee: the work I am proud of, the roads
-        that changed me, and the people I met in between.
-      </p>
-      <p className="mag-p">
-        Each spread is one year, newest first. Some pages are about pixels, some about mountains, and most are a
-        little of both, because that is how the years actually felt.
-      </p>
-      <p className="mag-contents-title mag-label">In this issue</p>
-      <ol className="mag-contents">
-        <li>
-          <span>2026</span> Ladakh, Hampta Pass, a growth season at Newton
-        </li>
-        <li>
-          <span>2025</span> One calendar for a campus, a week in Langkawi
-        </li>
-        <li>
-          <span>2024</span> Vision Pro, Kang Yatse II, and many stages
-        </li>
-        <li>
-          <span>2023</span> IconScout, Everest Base Camp, Bali
-        </li>
-      </ol>
+    <div className="sb-page">
+      <Text hand size={56} x={36} y={30} w={390} d={0}>
+        hello there!
+      </Text>
+      <Doodle kind="underline" x={40} y={98} w={230} d={1} color="#f2a541" />
+      <Text x={38} y={132} w={380} d={2}>
+        This isn’t a résumé. It’s the scrapbook I’d hand you over coffee: the work I’m proud of, the roads that
+        changed me, and the people in between. One spread per year, newest first.
+      </Text>
+      <Note x={52} y={268} w={236} r={-3} d={3}>
+        <p className="sb-note__title">inside this book</p>
+        <ul className="sb-checklist">
+          <li>2026 · Ladakh, Hampta, Newton</li>
+          <li>2025 · a calendar, Langkawi</li>
+          <li>2024 · Vision Pro, Kang Yatse</li>
+          <li>2023 · IconScout, Everest, Bali</li>
+        </ul>
+      </Note>
+      <Doodle kind="star" x={330} y={262} w={40} r={12} d={4} color="#e8b72f" />
+      <Doodle kind="star" x={372} y={312} w={24} r={-10} d={5} color="#ef8aa8" />
+      <Snap
+        src={images.photo10.src}
+        alt="The Milky Way over a dark ridge above Turtuk"
+        caption="Turtuk, at night"
+        h={110}
+        x={52}
+        y={448}
+        w={150}
+        r={-6}
+        d={5}
+        tape="blue"
+      />
+      <Doodle kind="arrow" x={270} y={462} w={120} r={4} d={6} color="#3a352d" />
+      <Text hand size={30} x={250} y={560} w={190} r={-5} d={7}>
+        turn the page!
+      </Text>
       <Folio n="1" />
     </div>
   );
@@ -74,22 +136,34 @@ export function Preface() {
 
 export function Letter() {
   return (
-    <div className="mag-page mag-letter">
-      <img className="mag-letter__stamp" src={avatar} alt="" />
-      <p className="mag-label">A note</p>
-      <p className="mag-letter__salutation">Dear reader,</p>
-      <p className="mag-p">
-        Thank you for opening this. Somewhere between your tabs and your next meeting, you chose to spend a few
-        minutes here, and that means more than you might think.
-      </p>
-      <p className="mag-p">
-        I have always believed good design is a kind of hospitality. So consider this my way of pulling up a chair
-        for you. Turn the pages slowly, linger where you like, and if something sparks a thought, write to me. I
-        read every note.
-      </p>
-      <p className="mag-letter__sign">With gratitude,</p>
-      <p className="mag-letter__name">Gaurav Kumar</p>
-      <p className="mag-caption">Bangalore</p>
+    <div className="sb-page">
+      <div className="sb-lined sb-in" style={at({ x: 30, y: 56, w: 318, r: -1.5, d: 0 })}>
+        <p className="sb-lined__hi">Dear reader,</p>
+        <p>
+          Thank you for opening this. Somewhere between your tabs and your next meeting, you chose to spend a few
+          minutes here, and that means a lot.
+        </p>
+        <p>
+          Design, to me, is a kind of hospitality, so think of this as me pulling up a chair for you. Linger where
+          you like, and if something sparks a thought, write to me. I read every note.
+        </p>
+        <p className="sb-lined__sign">With gratitude,</p>
+        <p className="sb-lined__name">Gaurav</p>
+      </div>
+      <img className="sb-stamp sb-in" src={avatar} alt="" style={at({ x: 350, y: 34, w: 80, r: 7, d: 1 })} />
+      <Snap
+        src={desk}
+        alt="Home desk with a monitor, laptop, prayer flags and warm lights"
+        caption="where this book was made"
+        h={168}
+        x={250}
+        y={418}
+        w={170}
+        r={5}
+        d={2}
+        tape="pink"
+      />
+      <Doodle kind="heart" x={70} y={520} w={46} r={-12} d={3} color="#e8576f" />
       <Folio n="2" />
     </div>
   );
@@ -99,61 +173,93 @@ export function Letter() {
 
 export function Y2026Left() {
   return (
-    <div className="mag-page mag-bleed">
-      <Photo
-        src={images.altitude2.src2x}
-        alt="Motorcycle on an empty road through the Nubra Valley under storm clouds"
-        className="mag-photo--full"
+    <div className="sb-page">
+      <Year x={30} y={18} w={190} r={-4} d={0}>
+        2026
+      </Year>
+      <Snap
+        src={changLa}
+        alt="Holding the Indian flag behind the motorcycle at the yellow Chang La milestone"
+        caption="Chang La, 17,688 ft"
+        h={300}
+        x={28}
+        y={112}
+        w={236}
+        r={-3}
+        d={1}
       />
-      <div className="mag-bleed__shade" />
-      <p className="mag-year mag-year--light">2026</p>
-      <div className="mag-bleed__text">
-        <p className="mag-label mag-label--light">Travel</p>
-        <h2 className="mag-h mag-h--light">Six thousand kilometres of Ladakh</h2>
-        <p className="mag-p mag-p--light">
-          Two months on a motorcycle across Zanskar, Nubra and Changthang, over 20+ high passes and up to Umling
-          La at 19,024 ft. Then, on foot, across Hampta Pass. Thin air, long silences, and the clearest head I
-          have had in years.
-        </p>
-      </div>
-      <Folio n="3" label="Nubra Valley" />
+      <Text x={286} y={126} w={150} d={2}>
+        Two months on the bike across Ladakh: 6,000 km, 20+ high passes, all the way up to Umling La.
+      </Text>
+      <Doodle kind="arrow" x={300} y={262} w={90} r={150} d={3} color="#3a352d" />
+      <Snap
+        src={hamptaPass}
+        alt="Standing on a rock above the river valley on the Hampta Pass trek"
+        caption="then Hampta Pass, on foot!"
+        h={170}
+        x={238}
+        y={330}
+        w={192}
+        r={6}
+        d={4}
+        tape="mint"
+      />
+      <Text hand size={30} x={40} y={560} w={260} r={-2} d={5}>
+        thin air, clear head
+      </Text>
+      <Folio n="3" />
     </div>
   );
 }
 
 export function Y2026Right() {
   return (
-    <div className="mag-page">
-      <p className="mag-label">Work · Newton School of Technology</p>
-      <h2 className="mag-h">A growth season, designed end to end</h2>
-      <p className="mag-p">
-        I led design for the admissions season, from the website and referrals to the exam itself. The NSAT exam
-        interface had to stay calm under pressure for thousands of students at once, on any screen.
-      </p>
-      <Photo src={examInterface} alt="NSAT entrance exam interface on desktop and mobile" className="mag-photo--wide" />
-      <dl className="mag-stats">
-        <div>
-          <dt>₹375+ Cr</dt>
-          <dd>revenue impact</dd>
-        </div>
-        <div>
-          <dt>9 lakh+</dt>
-          <dd>students acquired</dd>
-        </div>
-        <div>
-          <dt>20,000+</dt>
-          <dd>exam registrations</dd>
-        </div>
-      </dl>
-      <figure className="mag-polaroid mag-polaroid--corner">
-        <img src={images.altitude1.src} alt="At the Umling La sign with the motorcycle" />
-        <figcaption>Umling La</figcaption>
-      </figure>
-      <figure className="mag-polaroid mag-polaroid--corner2">
-        <span className="mag-polaroid__pending">Photo coming soon</span>
-        <figcaption>Hampta Pass trek</figcaption>
-      </figure>
-      <Folio n="4" label="2026" />
+    <div className="sb-page">
+      <span className="sb-label sb-in" style={at({ x: 36, y: 34, r: -3, d: 0 })}>
+        work
+      </span>
+      <Text hand size={38} x={36} y={58} w={400} d={1}>
+        growth season @ Newton
+      </Text>
+      <Doodle kind="squiggle" x={40} y={108} w={160} d={2} color="#4c7dff" />
+      <Snap
+        src={examInterface}
+        alt="NSAT entrance exam interface on desktop and mobile"
+        h={210}
+        x={34}
+        y={140}
+        w={390}
+        r={-1.5}
+        d={3}
+        tape="blue"
+        plain
+      />
+      <Note x={30} y={378} w={136} r={-5} d={4}>
+        <b>₹375+ Cr</b>revenue impact
+      </Note>
+      <Note x={174} y={386} w={116} r={3} d={5} color="pink">
+        <b>9 lakh+</b>students acquired
+      </Note>
+      <Note x={298} y={374} w={130} r={-2} d={6} color="mint">
+        <b>20,000+</b>exam registrations
+      </Note>
+      <Text x={36} y={508} w={250} d={7}>
+        Led design for the admissions season, from the website and referrals to an exam built to stay calm under
+        pressure.
+      </Text>
+      <Snap
+        src={images.altitude1.src}
+        alt="At the Umling La sign with the motorcycle"
+        caption="Umling La!"
+        h={96}
+        x={316}
+        y={494}
+        w={112}
+        r={7}
+        d={8}
+        tape="pink"
+      />
+      <Folio n="4" />
     </div>
   );
 }
@@ -162,41 +268,105 @@ export function Y2026Right() {
 
 export function Y2025Left() {
   return (
-    <div className="mag-page">
-      <p className="mag-year">2025</p>
-      <p className="mag-label">Work · Academic Calendar</p>
-      <h2 className="mag-h">One calendar for a whole campus</h2>
-      <p className="mag-p mag-dropcap">
-        Classes, labs, exams and mentor sessions lived in a dozen places. I designed a single academic calendar
-        that students, teachers and mentors could all trust, across every business vertical.
-      </p>
-      <Photo
+    <div className="sb-page">
+      <Year x={30} y={18} w={190} r={3} d={0}>
+        2025
+      </Year>
+      <Text hand size={34} x={36} y={108} w={400} d={1}>
+        one calendar for a whole campus
+      </Text>
+      <Snap
         src={academicCalendar}
-        alt="Academic calendar workspace with weekly classes, assignments and notes"
-        className="mag-photo--wide"
+        alt="Academic calendar workspace with classes, assignments and notes"
+        h={180}
+        x={34}
+        y={160}
+        w={310}
+        r={2}
+        d={2}
+        tape="blue"
+        plain
       />
-      <blockquote className="mag-quote">“If it is on the calendar, it is real.”</blockquote>
-      <Folio n="5" label="2025" />
+      <Text x={36} y={376} w={226} d={3}>
+        Classes, labs, exams and mentor sessions lived in a dozen places. I pulled them into one calendar that
+        students, teachers and mentors could trust.
+      </Text>
+      <Snap
+        src={bikeCare}
+        alt="The Triumph motorcycle, freshly washed, on a stand at home"
+        caption="i take care of my bike"
+        h={150}
+        x={272}
+        y={362}
+        w={164}
+        r={-5}
+        d={4}
+        tape="mint"
+      />
+      <Doodle kind="heart" x={400} y={536} w={26} r={10} d={5} color="#e8576f" />
+      <Text hand size={26} x={36} y={574} w={300} r={-1.5} d={6}>
+        “if it’s on the calendar, it’s real”
+      </Text>
+      <Folio n="5" />
     </div>
   );
 }
 
 export function Y2025Right() {
   return (
-    <div className="mag-page mag-langkawi">
-      <p className="mag-label">Travel · Malaysia</p>
-      <h2 className="mag-h">A week in Langkawi</h2>
-      <div className="mag-collage">
-        <Photo src={images.photo3.src} alt="Boat passing Kilim Geoforest Park" className="mag-collage__a" />
-        <Photo src={images.photo4.src} alt="Heron on a wooden jetty" className="mag-collage__b" />
-        <Photo src={images.nomad3.src} alt="Islands on a calm sea" className="mag-collage__c" />
+    <div className="sb-page">
+      <Text hand size={42} x={36} y={30} w={330} d={0}>
+        a week in Langkawi
+      </Text>
+      <Doodle kind="sun" x={370} y={26} w={52} d={1} color="#f2a541" />
+      <Snap
+        src={images.photo3.src}
+        alt="Boat passing Kilim Geoforest Park on turquoise water"
+        h={170}
+        x={30}
+        y={100}
+        w={230}
+        r={-3}
+        d={2}
+        plain
+      />
+      <Snap
+        src={images.photo4.src}
+        alt="Heron walking along a wooden jetty"
+        h={136}
+        x={248}
+        y={136}
+        w={180}
+        r={4}
+        d={3}
+        tape="pink"
+        plain
+      />
+      <Snap
+        src={images.nomad3.src}
+        alt="Islands on a calm sea under a cloudy sky"
+        h={130}
+        x={84}
+        y={292}
+        w={220}
+        r={2}
+        d={4}
+        tape="mint"
+        plain
+      />
+      <div className="sb-ticket sb-in" style={at({ x: 300, y: 318, w: 132, r: -6, d: 5 })}>
+        <span>boarding</span>
+        <b>KUL → LGK</b>
+        <span>7 days · seat: window</span>
       </div>
-      <p className="mag-p">
+      <Text x={36} y={456} w={390} d={6}>
         Seven slow days of mangroves, island hops and long ferry rides. No roadmap, no standups, just turquoise
-        water and a camera that never left my hand.
-      </p>
-      <p className="mag-caption">Kilim Geoforest Park · the jetty at dusk · Strait of Malacca</p>
-      <Folio n="6" label="Langkawi" />
+        water.
+      </Text>
+      <Text hand size={28} x={40} y={556} w={300} r={-2} d={7}>
+        would go back tomorrow
+      </Text>
+      <Folio n="6" />
     </div>
   );
 }
@@ -205,51 +375,86 @@ export function Y2025Right() {
 
 export function Y2024Left() {
   return (
-    <div className="mag-page mag-split">
-      <div className="mag-split__top">
-        <Photo src={maldives} alt="Wearing Apple Vision Pro at Oaga Art Resort, Maldives" className="mag-photo--full" />
-        <p className="mag-year mag-year--light mag-year--overlay">2024</p>
-      </div>
-      <div className="mag-split__body">
-        <p className="mag-label">Work · LottieFiles for Vision Pro</p>
-        <h2 className="mag-h">Motion, in three dimensions</h2>
-        <p className="mag-p">
-          I took a rough prototype and shaped it into LottieFiles for Apple Vision Pro, proving motion is not a
-          limitation in spatial design. Then I finally wore one myself, in the Maldives, and it felt like magic.
-        </p>
-        <p className="mag-caption">Oaga Art Resort, Maldives</p>
-        <div className="mag-also">
-          <img src={images.kang1.src} alt="Trekking crew below the snow-capped Kang Yatse peak" />
-          <div>
-            <p className="mag-label">Also this year · Ladakh</p>
-            <p className="mag-also__title">Kang Yatse II</p>
-            <p className="mag-p">
-              Nine days through Markha Valley for a 6,250 m summit. We turned back at 5,791 m, and I would do it
-              all again.
-            </p>
-          </div>
-        </div>
-      </div>
-      <Folio n="7" label="2024" />
+    <div className="sb-page">
+      <Year x={30} y={18} w={190} r={-3} d={0}>
+        2024
+      </Year>
+      <Snap
+        src={maldives}
+        alt="Wearing Apple Vision Pro at Oaga Art Resort, Maldives"
+        caption="wearing my own work, Maldives"
+        h={150}
+        x={30}
+        y={110}
+        w={250}
+        r={-2}
+        d={1}
+      />
+      <Text hand size={30} x={296} y={118} w={146} d={2}>
+        LottieFiles × Vision Pro
+      </Text>
+      <Text x={298} y={196} w={140} d={3}>
+        Motion, in three dimensions, built from a rough prototype.
+      </Text>
+      <Snap
+        src={maldivesTeam}
+        alt="The LottieFiles team on a beach in the Maldives at night"
+        caption="the LottieFiles fam"
+        h={160}
+        x={30}
+        y={350}
+        w={262}
+        r={2}
+        d={4}
+        tape="pink"
+      />
+      <Snap
+        src={ootyWorkation}
+        alt="Laptop, coffee and sandals on the grass in Ooty"
+        caption="workation, Ooty"
+        h={176}
+        x={306}
+        y={318}
+        w={124}
+        r={6}
+        d={5}
+        tape="mint"
+      />
+      <Folio n="7" />
     </div>
   );
 }
 
 export function Y2024Right() {
   return (
-    <div className="mag-page">
-      <p className="mag-label">On stage</p>
-      <h2 className="mag-h">A year of speaking</h2>
-      <div className="mag-grid3">
-        <Photo src={images.talks3.src} alt="Presenting a talk on motion and engagement" />
-        <Photo src={images.talks2.src} alt="Answering questions at a design meetup" />
-        <Photo src={images.talks1.src} alt="Group photo at Delhi Designathon" />
-      </div>
-      <p className="mag-p">
-        From community meetups to company stages, I shared what I had learnt about motion, craft and building in
-        public. The questions afterwards were always the best part.
-      </p>
-      <ul className="mag-ticket">
+    <div className="sb-page">
+      <span className="sb-label sb-in" style={at({ x: 36, y: 30, r: -3, d: 0 })}>
+        on stage
+      </span>
+      <Snap
+        src={images.talks3.src}
+        alt="Presenting a talk on motion and engagement"
+        h={92}
+        x={30}
+        y={64}
+        w={132}
+        r={-4}
+        d={1}
+        plain
+      />
+      <Snap
+        src={images.talks2.src}
+        alt="Answering questions at a design meetup"
+        h={92}
+        x={166}
+        y={74}
+        w={124}
+        r={3}
+        d={2}
+        tape="blue"
+        plain
+      />
+      <ul className="sb-list sb-in" style={at({ x: 304, y: 54, w: 140, d: 3 })}>
         <li>Razorpay</li>
         <li>Zeta</li>
         <li>CRED</li>
@@ -257,11 +462,33 @@ export function Y2024Right() {
         <li>After Office Hours</li>
         <li>Delhi Designathon</li>
       </ul>
-      <figure className="mag-polaroid mag-polaroid--small">
-        <img src={spatialHome} alt="LottieFiles on the Vision Pro home view" />
-        <figcaption>visionOS</figcaption>
-      </figure>
-      <Folio n="8" label="Speaking" />
+      <Snap
+        src={kangYatseTeam}
+        alt="The Kang Yatse II crew below the snow-capped peak"
+        caption="Kang Yatse II crew"
+        h={190}
+        x={30}
+        y={234}
+        w={276}
+        r={-2}
+        d={4}
+      />
+      <Snap
+        src={kualaLumpur}
+        alt="The Petronas Towers lit up at night"
+        caption="first time in Malaysia"
+        h={150}
+        x={318}
+        y={272}
+        w={114}
+        r={6}
+        d={5}
+        tape="pink"
+      />
+      <Text x={36} y={520} w={390} d={6}>
+        Nine days through Markha Valley for a 6,250 m summit. We turned back at 5,791 m, and I’d do it all again.
+      </Text>
+      <Folio n="8" />
     </div>
   );
 }
@@ -270,56 +497,103 @@ export function Y2024Right() {
 
 export function Y2023Left() {
   return (
-    <div className="mag-page">
-      <p className="mag-year">2023</p>
-      <p className="mag-label">Work · IconScout plugin</p>
-      <h2 className="mag-h">Rank #14 among Figma plugins</h2>
-      <Photo src={iconscout} alt="IconScout plugin for Figma: millions of design assets" className="mag-photo--wide" />
-      <p className="mag-p">
-        It started as a fix for a problem I had myself. Over six months we shipped 17 meaningful updates and grew
-        organically to a plugin trusted by more than a million designers.
-      </p>
-      <dl className="mag-stats">
-        <div>
-          <dt>300 → 1,400+</dt>
-          <dd>daily users</dd>
-        </div>
-        <div>
-          <dt>17</dt>
-          <dd>feature updates</dd>
-        </div>
-        <div>
-          <dt>1M+</dt>
-          <dd>designers</dd>
-        </div>
-      </dl>
-      <Folio n="9" label="2023" />
+    <div className="sb-page">
+      <Year x={30} y={18} w={190} r={2} d={0}>
+        2023
+      </Year>
+      <Snap
+        src={iconscout}
+        alt="IconScout plugin for Figma: millions of design assets"
+        h={174}
+        x={30}
+        y={110}
+        w={300}
+        r={-2}
+        d={1}
+        tape="blue"
+        plain
+      />
+      <div className="sb-badge sb-in" style={at({ x: 330, y: 84, w: 104, r: 8, d: 2 })}>
+        <span>
+          #14
+          <small>on Figma!</small>
+        </span>
+      </div>
+      <Text hand size={30} x={36} y={316} w={236} d={3}>
+        300 → 1,400+
+        <br />
+        daily users
+      </Text>
+      <Text x={38} y={392} w={226} d={4}>
+        It started as a fix for a problem I had myself. 17 updates later, it’s trusted by 1M+ designers.
+      </Text>
+      <Snap
+        src={workation2023}
+        alt="Working on a laptop in a café strung with flags from around the world"
+        caption="workation mode"
+        h={150}
+        x={276}
+        y={330}
+        w={162}
+        r={5}
+        d={5}
+        tape="pink"
+      />
+      <Doodle kind="star" x={60} y={520} w={34} r={-8} d={6} color="#e8b72f" />
+      <Text hand size={24} x={100} y={530} w={280} r={-3} d={7}>
+        built for designers, by one
+      </Text>
+      <Folio n="9" />
     </div>
   );
 }
 
 export function Y2023Right() {
   return (
-    <div className="mag-page mag-bali">
-      <p className="mag-label">Travel · Nepal and Indonesia</p>
-      <h2 className="mag-h">Everest Base Camp, then Bali with the team</h2>
-      <div className="mag-scrap">
-        <Photo src={images.ebc1.src} alt="Holding the Indian flag at the Everest Base Camp rock" className="mag-scrap__a" />
-        <Pending className="mag-scrap__b" label="Bali photo" />
-      </div>
-      <p className="mag-p">
-        A dream come true at 5,364 m, among five of the world’s highest peaks. Months later, the team flew to Bali:
-        temples at sunrise, rice terraces, and the kind of stories that never make it into a retro.
-      </p>
-      <p className="mag-caption">Everest Base Camp · Bali</p>
-      <p className="mag-fin">Fin.</p>
-      <p className="mag-caption mag-caption--center">Press next to close the book</p>
-      <Folio n="10" label="2023" />
+    <div className="sb-page">
+      <Text hand size={38} x={36} y={30} w={400} d={0}>
+        Everest Base Camp, then Bali
+      </Text>
+      <Snap
+        src={images.ebc1.src}
+        alt="Holding the Indian flag at the Everest Base Camp rock"
+        caption="5,364 m!"
+        h={150}
+        x={30}
+        y={96}
+        w={226}
+        r={-4}
+        d={1}
+      />
+      <Snap
+        src={baliKecak}
+        alt="Kecak fire dance at Uluwatu, on a clifftop above the sea at sunset"
+        caption="Kecak at Uluwatu, Bali"
+        h={150}
+        x={206}
+        y={242}
+        w={226}
+        r={4}
+        d={2}
+        tape="mint"
+      />
+      <Text x={36} y={460} w={390} d={3}>
+        A dream come true among five of the world’s highest peaks. Months later, the team flew to Bali for sunsets
+        and stories that never make it into a retro.
+      </Text>
+      <Text hand size={48} x={140} y={540} w={200} r={-4} d={4}>
+        the end
+      </Text>
+      <Doodle kind="heart" x={290} y={552} w={34} r={12} d={5} color="#e8576f" />
+      <Text hand size={18} x={128} y={604} w={240} d={6}>
+        press next to close the book
+      </Text>
+      <Folio n="10" />
     </div>
   );
 }
 
 // The back of the last leaf is never turned to; it stays a plain endpaper.
 export function Endpaper() {
-  return <div className="mag-page mag-endpaper" />;
+  return <div className="sb-page" />;
 }

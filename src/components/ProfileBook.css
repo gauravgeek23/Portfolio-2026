@@ -109,7 +109,7 @@
   top: 0;
   width: 460px;
   height: 654px;
-  background: #f9f9f8;
+  background: #fbf7ef;
 }
 
 .pbook__block--right {
@@ -177,8 +177,31 @@
   inset: 0;
   overflow: hidden;
   backface-visibility: hidden;
-  background: #f9f9f8;
+  background: #fbf7ef;
   cursor: pointer;
+}
+
+/* Hovering a right-hand page curls its bottom corner, hinting that it turns. */
+.pbook__leaf:not(.pbook__leaf--cover) > .pbook__face--front::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  width: 0;
+  height: 0;
+  border-top-left-radius: 6px;
+  background: linear-gradient(135deg, #efe7d6 0%, #fffaf0 48%, rgba(0, 0, 0, 0.18) 50%, transparent 56%);
+  box-shadow: -3px -3px 8px rgba(40, 30, 10, 0.12);
+  transition:
+    width 350ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.pbook__leaf:not(.pbook__leaf--cover) > .pbook__face--front:hover::before {
+  width: 46px;
+  height: 46px;
 }
 
 .pbook__face--front {
@@ -248,11 +271,11 @@
 
 .pbook__name {
   position: absolute;
-  bottom: 120px;
-  font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
-  font-size: 26px;
-  letter-spacing: 0.04em;
-  color: #2d2d2d;
+  bottom: 112px;
+  font-family: 'Caveat', cursive;
+  font-size: 40px;
+  font-weight: 700;
+  color: #3a352d;
 }
 
 /* Page navigation under the book. */

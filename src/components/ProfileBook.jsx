@@ -47,7 +47,7 @@ const LEAVES = [
 const SPREADS = ['Preface', '2026', '2025', '2024', '2023'];
 const LAST = SPREADS.length; // spreads are 1..LAST (turned leaves); 0 is closed
 
-// A popup with a magazine about Gaurav, one spread per year. It grows out of the small book on
+// A popup with a scrapbook about Gaurav, one spread per year. It grows out of the small book on
 // the home page (`origin`, that book's bounding box), its cover swinging open as it enlarges; then
 // the white panel fades in. Pages turn with the buttons, the arrow keys or a click on a page;
 // "next" on the last spread closes the book back into the small one.
@@ -147,7 +147,7 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
       className={`pbook-modal${isOpen ? ' is-open' : ''}`}
       role="dialog"
       aria-modal="true"
-      aria-label={`${site.name}: a magazine of the last few years`}
+      aria-label={`${site.name}: a scrapbook of the last few years`}
       onClick={(e) => e.target === e.currentTarget && close()}
     >
       <div className="pbook-modal__panel" onClick={(e) => e.target === e.currentTarget && close()}>
@@ -172,10 +172,17 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
                   style={{ zIndex: z }}
                   aria-hidden={!(i === turned || i === turned - 1)}
                 >
-                  <div className="pbook__face pbook__face--front" onClick={i > 0 ? () => go(1) : undefined}>
+                  {/* `is-shown` marks the two pages on view, so their items can animate in. */}
+                  <div
+                    className={`pbook__face pbook__face--front${i === turned && i > 0 ? ' is-shown' : ''}`}
+                    onClick={i > 0 ? () => go(1) : undefined}
+                  >
                     {leaf.front}
                   </div>
-                  <div className="pbook__face pbook__face--back" onClick={() => go(-1)}>
+                  <div
+                    className={`pbook__face pbook__face--back${i === turned - 1 ? ' is-shown' : ''}`}
+                    onClick={() => go(-1)}
+                  >
                     {leaf.back}
                   </div>
                 </div>
