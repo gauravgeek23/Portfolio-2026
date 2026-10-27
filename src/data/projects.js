@@ -17,6 +17,7 @@ import { lottieVisionProCaseStudy } from './case-studies/lottiefiles-vision-pro'
 import { cameraWearOsCaseStudy } from './case-studies/camera-app-wear-os';
 import { iphoneKitCaseStudy } from './case-studies/iphone-kit';
 import { topprAnswrCaseStudy } from './case-studies/toppr-answr';
+import { iconscoutPluginCaseStudy } from './case-studies/iconscout-plugin';
 
 // Placeholder case-study outline for projects whose write-up isn't in yet.
 // Projects with a `caseStudy` (see data/case-studies/) use that instead.
@@ -66,7 +67,7 @@ export const projects = [
       'Revamped an existing plugin, boosting MAU by 228% and securing the Rank #14 on the Figma Marketplace, driving increased user engagement.',
     cover: { src: iconscout800, src2x: iconscout1600 },
     coverAlt: 'IconScout Figma plugin interface with asset categories such as icons, illustrations and Lottie animations',
-    sections: outline,
+    caseStudy: iconscoutPluginCaseStudy,
   },
 ];
 

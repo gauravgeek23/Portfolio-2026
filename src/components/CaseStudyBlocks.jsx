@@ -159,14 +159,32 @@ export default function CaseStudyBlocks({ blocks, hero }) {
       case 'links':
         return (
           <ul key={i} className="cs-links">
-            {block.items.map((link) => (
-              <li key={link.href}>
-                <a className="cs-box cs-link text-medium" href={link.href} target="_blank" rel="noreferrer">
-                  <span>{link.label}</span>
-                  <Icon src={arrowUpRight} />
-                </a>
-              </li>
-            ))}
+            {block.items.map((link) => {
+              // Optional brand logo before the label (`logoMono` draws it in the text colour).
+              const label = (
+                <span className="cs-link__label">
+                  {link.logo &&
+                    (link.logoMono ? (
+                      <Icon src={link.logo} className="cs-link__logo" />
+                    ) : (
+                      <img className="cs-link__logo" src={link.logo} alt="" />
+                    ))}
+                  <span className="cs-link__text">{link.label}</span>
+                </span>
+              );
+              return (
+                <li key={link.label}>
+                  {link.href ? (
+                    <a className="cs-box cs-link text-medium" href={link.href} target="_blank" rel="noreferrer">
+                      {label}
+                      <Icon src={arrowUpRight} />
+                    </a>
+                  ) : (
+                    <div className="cs-box cs-link text-medium">{label}</div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         );
       case 'youtube':

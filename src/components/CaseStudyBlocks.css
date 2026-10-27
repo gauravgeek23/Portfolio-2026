@@ -119,11 +119,24 @@
   transition: transform 200ms ease;
 }
 
-.cs-link:hover span {
+.cs-link__label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cs-link__logo {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+a.cs-link:hover .cs-link__text {
   text-decoration: underline;
 }
 
-.cs-link:hover .icon {
+a.cs-link:hover > .icon {
   transform: translate(2px, -2px);
 }
 
