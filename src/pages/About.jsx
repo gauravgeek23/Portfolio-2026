@@ -28,8 +28,8 @@ export default function About() {
     <main className="container page about">
       <section className="about__intro">
         <header>
-          <h1 className="text-medium">{site.name}</h1>
-          <p className="about__tagline text-muted">{about.tagline}</p>
+          <h1 className="text-medium">About</h1>
+          <p className="text-small text-muted">{site.name}</p>
         </header>
         <Photo className="about__hero" photo={about.hero} loading="eager" />
         <h2 className="visually-hidden">Expeditions</h2>

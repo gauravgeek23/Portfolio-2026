@@ -16,7 +16,7 @@ export default function Notes() {
             {i > 0 && <li className="divider" aria-hidden="true" />}
             <li className="notes__item">
               {note.href ? (
-                <a className="notes__title text-medium" href={note.href}>
+                <a className="notes__title text-medium" href={note.href} target="_blank" rel="noopener noreferrer">
                   {note.title}
                 </a>
               ) : (

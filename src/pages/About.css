@@ -4,10 +4,6 @@
   gap: 20px;
 }
 
-.about__tagline {
-  white-space: pre;
-}
-
 .about__hero {
   aspect-ratio: 800 / 300;
 }

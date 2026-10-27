@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { Zoomable } from '../components/Lightbox';
 import { projects, sideProjects } from '../data/projects';
 import './CaseStudy.css';
 
@@ -25,15 +26,17 @@ export default function CaseStudy() {
         <p className="case-study__summary text-small text-muted">{project.summary}</p>
       </header>
 
-      <img
-        className="case-study__cover"
-        src={project.cover.src}
-        srcSet={`${project.cover.src} ${coverWidth}w, ${project.cover.src2x} ${coverWidth * 2}w`}
-        sizes="(max-width: 832px) calc(100vw - 32px), 800px"
-        alt={project.coverAlt}
-        width="800"
-        height="400"
-      />
+      <Zoomable media={{ ...project.cover, alt: project.coverAlt }}>
+        <img
+          className="case-study__cover"
+          src={project.cover.src}
+          srcSet={`${project.cover.src} ${coverWidth}w, ${project.cover.src2x} ${coverWidth * 2}w`}
+          sizes="(max-width: 832px) calc(100vw - 32px), 800px"
+          alt={project.coverAlt}
+          width="800"
+          height="400"
+        />
+      </Zoomable>
 
       <article className="case-study__body text-small">
         {project.sections.map((section) => (

@@ -2,7 +2,7 @@ import Intro from '../components/Intro';
 import SectionHeader from '../components/SectionHeader';
 import ProjectCard from '../components/ProjectCard';
 import SideProjectCard from '../components/SideProjectCard';
-import TestimonialCard from '../components/TestimonialCard';
+import TestimonialCarousel from '../components/TestimonialCarousel';
 import { projects, sideProjects } from '../data/projects';
 import { testimonials } from '../data/testimonials';
 import './Home.css';
@@ -38,11 +38,7 @@ export default function Home() {
 
       <section className="stack" aria-labelledby="testimonials">
         <SectionHeader id="testimonials" title="Testimonials" subtitle="Covers the boss and the crew" />
-        <div className="home__carousel" tabIndex={0} aria-label="Testimonials, scroll horizontally for more">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard key={testimonial.name} testimonial={testimonial} />
-          ))}
-        </div>
+        <TestimonialCarousel testimonials={testimonials} />
       </section>
     </main>
   );

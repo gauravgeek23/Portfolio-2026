@@ -1,7 +1,6 @@
 import { images } from './about-images';
 
 export const about = {
-  tagline: 'Designer  |  Backpacker  |  Trekker',
   hero: {
     ...images.hero,
     alt: 'Gaurav with a backpack beside Pangong Lake in Ladakh, under the word "Expeditions"',

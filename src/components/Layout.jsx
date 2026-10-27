@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
+import { LightboxProvider } from './Lightbox';
 
 // Shared shell for every tab: fixed nav on top, footer at the bottom.
 export default function Layout() {
@@ -17,10 +18,10 @@ export default function Layout() {
   }, [pathname, hash]);
 
   return (
-    <>
+    <LightboxProvider>
       <Nav />
       <Outlet />
       <Footer />
-    </>
+    </LightboxProvider>
   );
 }

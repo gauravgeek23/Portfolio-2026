@@ -23,7 +23,6 @@ export const playItems = [
       { label: 'Discover Product', href: 'https://apps.apple.com/us/app/lottiefiles/id6477488574' },
       { label: 'Read Case study', to: '/work/lottiefiles-vision-pro' },
     ],
-    divider: true,
   },
   {
     title: 'Camera App Wear OS',

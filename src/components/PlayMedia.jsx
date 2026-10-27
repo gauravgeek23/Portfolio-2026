@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Zoomable } from './Lightbox';
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -9,10 +10,11 @@ export default function PlayMedia({ media }) {
   useEffect(() => setAutoPlay(!prefersReducedMotion()), []);
 
   const style = { aspectRatio: media.ratio };
+  const zoomMedia = { src: media.poster, src2x: media.poster2x, video: media.video, alt: media.alt };
 
   if (media.video) {
     return (
-      <div className="play-item__media" style={style}>
+      <Zoomable media={zoomMedia} className="play-item__media" style={style}>
         <video
           src={media.video}
           poster={media.poster2x}
@@ -20,15 +22,14 @@ export default function PlayMedia({ media }) {
           muted
           loop
           playsInline
-          controls={!autoPlay}
           aria-label={media.alt}
         />
-      </div>
+      </Zoomable>
     );
   }
 
   return (
-    <div className="play-item__media" style={style}>
+    <Zoomable media={zoomMedia} className="play-item__media" style={style}>
       <img
         src={media.poster}
         srcSet={`${media.poster} 1x, ${media.poster2x} 2x`}
@@ -36,6 +37,6 @@ export default function PlayMedia({ media }) {
         loading="lazy"
         decoding="async"
       />
-    </div>
+    </Zoomable>
   );
 }

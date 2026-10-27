@@ -1,20 +1,5 @@
-.side-card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
 .side-card__cover {
-  aspect-ratio: 2 / 1;
-  border-radius: var(--radius-md);
-  overflow: hidden;
   background: #0a1225;
-}
-
-.side-card__cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .side-card__meta {
@@ -27,4 +12,8 @@
   .side-card__meta {
     gap: 8px;
   }
+}
+
+.side-card__meta .project-card__heading {
+  flex: none;
 }
