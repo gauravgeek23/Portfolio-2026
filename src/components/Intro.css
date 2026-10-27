@@ -23,20 +23,26 @@
 .book__cover {
   position: absolute;
   inset: 0;
-  border-radius: 3px 12px 12px 3px;
+  border-radius: 5px 18px 18px 5px;
   background: #fbfbfc;
   transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .book__page {
-  /* Each page sits a little further in and to the right (--i: 1 is the top page). */
-  inset: calc(2px + var(--i) * 1.5px) calc(var(--i) * -2px) calc(2px + var(--i) * 1.5px) 5px;
-  border-radius: 3px 11px 11px 3px;
-  background: hsl(220 14% calc(99% - var(--i) * 1.5%));
-  box-shadow:
-    0 1px 1px rgba(0, 0, 0, 0.05),
-    0 2px 8px rgba(0, 0, 0, 0.05);
+  /* A firm block of pages: the sheets sit tight together, each a hair further out to the
+     right (--i: 1 is the top page), and they move as one. */
+  inset: 3px calc(var(--i) * -1.2px) 3px 5px;
+  border-radius: 4px 17px 17px 4px;
+  background: hsl(220 14% calc(99% - var(--i) * 2%));
+  box-shadow: 0.5px 0 0 rgba(0, 0, 0, 0.06);
   transform-origin: left center;
+}
+
+/* The bottom sheet carries the block's shadow. */
+.book__page:first-child {
+  box-shadow:
+    0.5px 0 0 rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .book__cover {
@@ -73,7 +79,7 @@
 }
 
 .intro__avatar:hover .book__page {
-  transform: rotateY(calc(var(--i) * -6deg - 4deg)) translateX(calc(var(--i) * 3px));
+  transform: rotateY(-6deg) translateX(3px);
 }
 
 .intro__avatar {

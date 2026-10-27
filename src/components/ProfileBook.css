@@ -119,18 +119,31 @@
 .pbook__page--right {
   left: 460px;
   padding-left: 60px;
-  border-radius: 0 3px 3px 0;
-  /* Gutter shadow along the spine and the book's lift off the panel. */
+  border-radius: 0 28px 28px 0;
+  /* Gutter shadow along the spine; the stepped edges below read as the firm block of pages
+     under this one, then the book's lift off the panel. */
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 9%), #f9f9f8;
-  box-shadow: 24px 30px 60px rgba(0, 0, 0, 0.14);
+  box-shadow:
+    1.5px 1px 0 #ececea,
+    3px 2px 0 #f6f6f4,
+    4.5px 3px 0 #e8e8e6,
+    6px 4px 0 #f3f3f1,
+    7.5px 5px 0 #e2e2e0,
+    24px 30px 60px rgba(0, 0, 0, 0.14);
 }
 
 .pbook__page--left {
   padding-left: 40px;
   padding-right: 44px;
-  border-radius: 3px 0 0 3px;
+  border-radius: 28px 0 0 28px;
   background: linear-gradient(270deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 9%), #f9f9f8;
-  box-shadow: -24px 30px 60px rgba(0, 0, 0, 0.14);
+  box-shadow:
+    -1.5px 1px 0 #ececea,
+    -3px 2px 0 #f6f6f4,
+    -4.5px 3px 0 #e8e8e6,
+    -6px 4px 0 #f3f3f1,
+    -7.5px 5px 0 #e2e2e0,
+    -24px 30px 60px rgba(0, 0, 0, 0.14);
 }
 
 .pbook__page p {
@@ -215,15 +228,15 @@
 .pbook__face--front {
   display: grid;
   place-items: center;
-  border-radius: calc(3px / var(--from-s)) calc(12px / var(--from-s)) calc(12px / var(--from-s))
-    calc(3px / var(--from-s));
+  border-radius: calc(5px / var(--from-s)) calc(18px / var(--from-s)) calc(18px / var(--from-s))
+    calc(5px / var(--from-s));
   background: #fbfbfc;
   box-shadow: 24px 30px 60px rgba(0, 0, 0, 0.16);
   transition: border-radius 1000ms cubic-bezier(0.65, 0, 0.35, 1) 300ms;
 }
 
 .pbook-modal.is-open .pbook__face--front {
-  border-radius: 4px 18px 18px 4px;
+  border-radius: 10px 40px 40px 10px;
   transition-delay: 150ms;
 }
 
