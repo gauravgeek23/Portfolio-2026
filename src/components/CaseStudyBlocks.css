@@ -44,9 +44,10 @@
   margin-bottom: 0;
 }
 
-/* Darker lead-in label at the start of a paragraph or bullet ("Deliverables -"). */
+/* Lead-in label at the start of a paragraph or bullet ("Deliverables -"). Paragraph text
+   stays one regular grey throughout, so labels match the text around them. */
 .cs-label {
-  color: var(--color-black);
+  color: inherit;
 }
 
 /* Sections whose paragraphs read as separate points get space between them. */
@@ -55,7 +56,7 @@
 }
 
 .cs-strong {
-  color: var(--color-black);
+  color: var(--color-grey-1);
 }
 
 .cs-media {
