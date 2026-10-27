@@ -6,7 +6,7 @@ Personal portfolio for Gaurav Kumar, built with [Astro](https://astro.build) and
 
 ```sh
 npm install
-npm run dev      # http://localhost:4321
+npm run dev      # http://localhost:3000
 npm run build    # type-check + static build into dist/
 npm run preview  # serve the production build
 ```
