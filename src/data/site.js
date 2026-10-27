@@ -8,13 +8,11 @@ export const site = {
     region: 'Karnataka, 560076',
     timeZone: 'Asia/Kolkata',
   },
-  // TODO: add the Instagram profile URL.
-  instagram: '#',
-  substack: 'https://substack.com/@gauravkumar23',
+  instagram: 'https://www.instagram.com/gaurav_kumaarrrr/',
   socials: [
     { label: 'Linkedin', href: 'https://www.linkedin.com/in/gauravgeek23/' },
     { label: 'Twitter', href: 'https://x.com/prototyper_23' },
-    { label: 'Substack', href: 'https://substack.com/@gauravkumar23' },
+    { label: 'Substack', href: 'https://substack.com/@gauravkumar23/posts' },
     { label: 'Book a call', href: 'https://calendar.app.google/Ma77Ymk9VpaYQiJM6' },
   ],
 };
