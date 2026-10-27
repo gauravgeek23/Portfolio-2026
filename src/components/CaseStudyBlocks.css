@@ -154,7 +154,23 @@
 }
 
 .cs-media-grid .cs-media:not(.cs-media--empty) {
-  background: #121212;
+  background: #111;
+}
+
+.cs-media.cs-media--inset {
+  display: grid;
+  place-items: center;
+  background: #111;
+}
+
+.cs-media--inset-end {
+  align-items: end;
+}
+
+.cs-media.cs-media--inset img {
+  width: var(--inset);
+  height: auto;
+  object-fit: contain;
 }
 
 .cs-media-switch__mobile {

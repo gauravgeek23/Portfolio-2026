@@ -1,13 +1,28 @@
+import hero from '../../assets/case-studies/toppr-answr/hero@1x.webp';
+import hero2x from '../../assets/case-studies/toppr-answr/hero@2x.webp';
+import scanningVideo from '../../assets/case-studies/toppr-answr/scanning.mp4';
+import scanningPoster from '../../assets/case-studies/toppr-answr/scanning-poster.webp';
+import cropGuide from '../../assets/case-studies/toppr-answr/crop-guide.webp';
+import continueStudying from '../../assets/case-studies/toppr-answr/continue-studying.webp';
+import searchVideo from '../../assets/case-studies/toppr-answr/search-results.mp4';
+import searchPoster from '../../assets/case-studies/toppr-answr/search-results-poster.webp';
+import moreFromChapter from '../../assets/case-studies/toppr-answr/more-from-chapter.webp';
+import mentorChat from '../../assets/case-studies/toppr-answr/mentor-chat.webp';
+import chatVideo from '../../assets/case-studies/toppr-answr/mentor-chat-video.mp4';
+import chatPoster from '../../assets/case-studies/toppr-answr/mentor-chat-video-poster.webp';
+import rateExpert from '../../assets/case-studies/toppr-answr/rate-expert.webp';
+import sessionRated from '../../assets/case-studies/toppr-answr/session-rated.webp';
+
 // Toppr Answr case study (from the earlier site's case study). Same block layout as the
 // other case studies (see components/CaseStudyBlocks.jsx); the hero is the card cover.
 //
-// Media still to come is left as placeholders at its final size. Each `media-grid` is one
-// tall tile beside two stacked tiles (791 x 1040 and 791 x 512 each in the original).
-const tall = 791 / 1040;
+// Each `media-grid` is a tall phone recording beside two stacked tiles of cut-out UI
+// (791 x 512 each in the original); the product video is still to come.
 const half = 791 / 512;
 
 export const topprAnswrCaseStudy = {
   heading: 'Toppr Answr App | Toppr (Acq. by Byjus) | Apr - Jul 2021',
+  hero: { src: hero, src2x: hero2x },
   blocks: [
     { type: 'hero' },
     {
@@ -26,10 +41,10 @@ export const topprAnswrCaseStudy = {
     },
     {
       type: 'media-grid',
-      tall: { ratio: tall, alt: 'Click, Scan, Solve: scanning a physics question with the camera' },
+      tall: { ratio: 1000 / 1436, video: scanningVideo, poster: scanningPoster, alt: 'Click, Scan, Solve: scanning a physics question with the camera' },
       stack: [
-        { ratio: half, alt: 'Crop guide: fit only one question in the box' },
-        { ratio: half, alt: 'Continue studying list: Motion in one dimension, Alkane vs Alkyne, Linear Algebra' },
+        { ratio: half, src: cropGuide, inset: 0.6, alt: 'Crop guide: fit only one question in the box' },
+        { ratio: half, src: continueStudying, inset: 0.67, alt: 'Continue studying list: Motion in one dimension, Alkane vs Alkyne, Linear Algebra' },
       ],
     },
     {
@@ -42,10 +57,10 @@ export const topprAnswrCaseStudy = {
     {
       type: 'media-grid',
       reverse: true,
-      tall: { ratio: tall, alt: 'Search results with matching questions and a button to chat with a mentor' },
+      tall: { ratio: 1000 / 1436, video: searchVideo, poster: searchPoster, alt: 'Search results with matching questions and a button to chat with a mentor' },
       stack: [
-        { ratio: half, alt: 'More from chapter: question sets for Systems of Particles and Rotational Motion' },
-        { ratio: half, alt: 'Chat with a mentor about a velocity-time graph' },
+        { ratio: half, src: moreFromChapter, inset: 0.69, align: 'end', alt: 'More from chapter: question sets for Systems of Particles and Rotational Motion' },
+        { ratio: half, src: mentorChat, inset: 0.64, alt: 'Chat with a mentor about a velocity-time graph' },
       ],
     },
     {
@@ -57,10 +72,10 @@ export const topprAnswrCaseStudy = {
     },
     {
       type: 'media-grid',
-      tall: { ratio: tall, alt: 'Physics chat: a student asks how to find the maximum acceleration from a v-t graph' },
+      tall: { ratio: 1000 / 1402, video: chatVideo, poster: chatPoster, alt: 'Physics chat: a student asks how to find the maximum acceleration from a v-t graph' },
       stack: [
-        { ratio: half, alt: 'Rating the expert with emoji and compliments such as Awesome explanation and Lightning fast' },
-        { ratio: half, alt: 'Session rated Excellent with the compliments Awesome Explanation and Lightning Fast' },
+        { ratio: half, src: rateExpert, inset: 0.6, alt: 'Rating the expert with emoji and compliments such as Awesome explanation and Lightning fast' },
+        { ratio: half, src: sessionRated, inset: 0.72, alt: 'Session rated Excellent with the compliments Awesome Explanation and Lightning Fast' },
       ],
     },
     {

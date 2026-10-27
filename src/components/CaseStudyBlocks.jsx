@@ -13,7 +13,13 @@ function Media({ block }) {
       </div>
     );
   }
-  const className = `cs-media${block.video ? '' : ' cs-media--image'}`;
+  // `inset`: a cut-out graphic drawn at that fraction of the tile's width on the dark
+  // tile (centred, or on the bottom edge with `align: 'end'`).
+  let className = `cs-media${block.video ? '' : ' cs-media--image'}`;
+  if (block.inset) {
+    className += ` cs-media--inset${block.align === 'end' ? ' cs-media--inset-end' : ''}`;
+    style['--inset'] = `${block.inset * 100}%`;
+  }
   return (
     <Zoomable
       media={{ src: block.src || block.poster, src2x: block.src2x, video: block.video, alt: block.alt, caption: block.caption }}
