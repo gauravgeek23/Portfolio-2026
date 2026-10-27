@@ -56,7 +56,7 @@ export const cameraWearOsCaseStudy = {
       type: 'text',
       title: 'Video Capture',
       body: [
-        'Users can quickly switch to the recording tab from the bottom navigation. Start, pause, resume, or stop recording with a tap. Snapshots can be taken anytime, and the recording time is displayed at the top for easy tracking—just like your phone camera.',
+        'Users can quickly switch to the recording tab from the bottom navigation. Start, pause, resume, or stop recording with a tap. Snapshots can be taken anytime, and the recording time is displayed at the top for easy tracking, just like your phone camera.',
       ],
     },
     {

@@ -37,7 +37,7 @@ export const academicCalendarCaseStudy = {
     },
     {
       type: 'text',
-      title: 'The Problem — Academic information was everywhere',
+      title: 'The Problem: Academic information was everywhere',
       body: [
         'Timetables, class links, notes, learning resources like quiz assignments spread across different places like whatsapp, slack and on ground operations like notice boards. Students had to piece together their academic day, while staff managed scheduling across disconnected workflows.',
         { text: 'Problem statement:', strong: true },
@@ -99,7 +99,7 @@ export const academicCalendarCaseStudy = {
       type: 'text',
       title: 'Class Lifecycle',
       body: [
-        'The experience adapted as a session progressed—from upcoming to live and completed. The join button activated 15 minutes before class, while post-class resources remained accessible through the event.',
+        'The experience adapted as a session progressed, from upcoming to live and completed. The join button activated 15 minutes before class, while post-class resources remained accessible through the event.',
       ],
     },
     { type: 'media', ratio: 2, src: lifecycle, src2x: lifecycle2x, alt: 'A 3–4 PM class moving through before, joining, during and post-class states' },

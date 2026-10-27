@@ -78,7 +78,7 @@ export const sideProjects = [
     title: 'Camera App Wear OS',
     period: 'Oct 2022',
     summary:
-      'Effortless capture and seamless control—tap to shoot, swipe to switch, all on your wrist. A fast, simple camera experience designed for Wear OS.',
+      'Effortless capture and seamless control: tap to shoot, swipe to switch, all on your wrist. A fast, simple camera experience designed for Wear OS.',
     cover: { src: camera370, src2x: camera740, video: cameraVideo, poster: cameraPoster },
     coverAlt: 'Three Wear OS watch faces showing the camera app controls',
     caseStudy: cameraWearOsCaseStudy,

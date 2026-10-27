@@ -67,7 +67,7 @@ export default function About() {
 
         <div className="text-small text-muted">
           <p>
-            Since I started traveling, I found a deep love for capturing moments. Each photo tells a story — quiet, honest,
+            Since I started traveling, I found a deep love for capturing moments. Each photo tells a story: quiet, honest,
             and often personal. These are a few shots that made it to my portfolio.
           </p>
           <p className="about__more">Check more on</p>

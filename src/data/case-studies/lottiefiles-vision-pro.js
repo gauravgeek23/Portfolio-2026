@@ -86,7 +86,7 @@ export const lottieVisionProCaseStudy = {
         ['Creative direction by ', kelly, '. Animation by ', sanjib],
       ],
     },
-    { type: 'youtube', id: 'jg2b2mtd1xY', title: 'LottieFiles for Apple Vision Pro — product video' },
+    { type: 'youtube', id: 'jg2b2mtd1xY', title: 'LottieFiles for Apple Vision Pro product video' },
     {
       type: 'text',
       title: 'Learnings and Resources',
