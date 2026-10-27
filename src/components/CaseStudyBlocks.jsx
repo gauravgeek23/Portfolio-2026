@@ -151,6 +151,14 @@ export default function CaseStudyBlocks({ blocks, hero }) {
         );
       case 'media':
         return <ResponsiveMedia key={i} block={block} />;
+      case 'media-row':
+        return (
+          <div key={i} className="cs-media-row">
+            {block.items.map((item) => (
+              <Media key={item.video || item.src} block={item} />
+            ))}
+          </div>
+        );
       default:
         return null;
     }

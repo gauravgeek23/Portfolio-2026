@@ -30,11 +30,9 @@
 
 .cs-inline-link {
   color: var(--color-link);
-  text-decoration: none;
-}
-
-.cs-inline-link:hover {
   text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 3px;
 }
 
 .cs-strong {
@@ -104,6 +102,17 @@
   transform: translate(2px, -2px);
 }
 
+/* Several media side by side (e.g. three prototype videos), stacked on phones. */
+.cs-media-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cs-media-row .cs-media {
+  background: #121212;
+}
+
 .cs-media-switch__mobile {
   display: none;
   flex-direction: column;
@@ -136,7 +145,8 @@
   }
 
   .cs-grid,
-  .cs-links {
+  .cs-links,
+  .cs-media-row {
     grid-template-columns: 1fr;
     gap: 12px;
   }

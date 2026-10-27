@@ -87,7 +87,8 @@
 @media (min-width: 1100px) {
   .case-study--wide-media > .case-study__hero,
   .case-study--wide-media > .cs-media,
-  .case-study--wide-media > .cs-media-switch {
+  .case-study--wide-media > .cs-media-switch,
+  .case-study--wide-media > .cs-media-row {
     width: 1000px;
     max-width: none;
     margin-inline: -100px;

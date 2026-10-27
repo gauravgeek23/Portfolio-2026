@@ -4,6 +4,12 @@ import videoCapture from '../../assets/case-studies/camera-app-wear-os/video-cap
 import videoCapture2x from '../../assets/case-studies/camera-app-wear-os/video-capture@2x.webp';
 import switches from '../../assets/case-studies/camera-app-wear-os/switches@1x.webp';
 import switches2x from '../../assets/case-studies/camera-app-wear-os/switches@2x.webp';
+import controlsVideo from '../../assets/case-studies/camera-app-wear-os/interaction-controls.mp4';
+import controlsPoster from '../../assets/case-studies/camera-app-wear-os/interaction-controls-poster.webp';
+import countdownVideo from '../../assets/case-studies/camera-app-wear-os/interaction-countdown.mp4';
+import countdownPoster from '../../assets/case-studies/camera-app-wear-os/interaction-countdown-poster.webp';
+import modesVideo from '../../assets/case-studies/camera-app-wear-os/interaction-modes.mp4';
+import modesPoster from '../../assets/case-studies/camera-app-wear-os/interaction-modes-poster.webp';
 
 // Camera App Wear OS case study (Figma: Portfolio Fall 2024, "About page" 200:292).
 // Same block layout as Academic Calendar and LottieFiles for Vision Pro (see
@@ -78,6 +84,15 @@ export const cameraWearOsCaseStudy = {
         'Controls for zooming and adjusting camera settings.',
         'A shutter button that includes a countdown timer for taking photos.',
         'A tab to switch between photo and video modes.',
+      ],
+    },
+    // Three prototype videos side by side (Figma: 251x300 panels).
+    {
+      type: 'media-row',
+      items: [
+        { ratio: 251 / 300, video: controlsVideo, poster: controlsPoster, alt: 'Prototype: switching lens and megapixel settings on the watch' },
+        { ratio: 251 / 300, video: countdownVideo, poster: countdownPoster, alt: 'Prototype: shutter with a 3-second countdown timer' },
+        { ratio: 251 / 300, video: modesVideo, poster: modesPoster, alt: 'Prototype: swiping from photo to video mode and recording' },
       ],
     },
     {

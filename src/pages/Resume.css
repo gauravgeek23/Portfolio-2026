@@ -79,7 +79,9 @@
 /* Features & awards that link to the post about them. */
 .resume-link {
   color: var(--color-black);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 3px;
 }
 
 .resume-link__end {
@@ -93,11 +95,6 @@
   margin-left: 2px;
   vertical-align: -2px;
   transition: transform 200ms ease;
-}
-
-.resume-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .resume-link:hover .icon {
