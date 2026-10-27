@@ -54,7 +54,10 @@ export default function Resume() {
         <a
           className="resume-download text-small"
           href={site.resumePdf}
-          aria-label="Download resume (PDF)" target="_blank" rel="noopener noreferrer">
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Download resume (PDF)"
+        >
           <Icon src={downloadIcon} />
           <span>
             Download<span className="resume-download__extra"> resume</span>
