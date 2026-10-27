@@ -6,6 +6,9 @@ import './Intro.css';
 
 export default function Intro() {
   const [bookOpen, setBookOpen] = useState(false);
+  // Where the small book sits, so the big one can grow out of it; while the big one is up the
+  // small one is hidden (it "is" the big one).
+  const [origin, setOrigin] = useState(null);
   return (
     <section className="intro">
       {/* Profile photo on a little passport-style book (after Airbnb's host profile) that opens a
@@ -14,7 +17,11 @@ export default function Intro() {
         <button
           type="button"
           className="intro__book"
-          onClick={() => setBookOpen(true)}
+          style={{ visibility: origin ? 'hidden' : undefined }}
+          onClick={(e) => {
+            setOrigin(e.currentTarget.getBoundingClientRect());
+            setBookOpen(true);
+          }}
           aria-label={`Open ${site.name}'s book`}
         >
           {/* Three pages under the cover; they fan out as it opens. */}
@@ -26,7 +33,12 @@ export default function Intro() {
           </span>
         </button>
       </div>
-      <ProfileBook open={bookOpen} onClose={() => setBookOpen(false)} />
+      <ProfileBook
+        open={bookOpen}
+        origin={origin}
+        onClose={() => setBookOpen(false)}
+        onClosed={() => setOrigin(null)}
+      />
       <div>
         <h1 className="text-medium">{site.name}</h1>
         <p className="text-muted">{site.role}</p>

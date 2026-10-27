@@ -7,7 +7,8 @@ import './ProfileBook.css';
 // The open book is 920 x 654 (Figma: Desktop - 10); it scales down to fit smaller screens.
 const BOOK_W = 920;
 const BOOK_H = 654;
-const OPEN_MS = 1100;
+// Closing plays in reverse: the panel fades, then the book closes back into the small one.
+const CLOSE_MS = 1400;
 
 const contents = [
   ['Part I', 'Programming Pathshala', '2020'],
@@ -17,13 +18,17 @@ const contents = [
   ['Part V', 'Beyond Pixels', '∞'],
 ];
 
-// A popup with a book about Gaurav: it appears closed, with his photo on the cover, then the
-// cover swings open in 3D onto a contents page and a first page. Closing plays it in reverse.
-export default function ProfileBook({ open, onClose }) {
+// A popup with a book about Gaurav. It grows out of the small book on the home page (`origin`,
+// that book's bounding box), swinging its cover open in 3D onto a contents page and a first page
+// as it enlarges; then the white panel fades in behind it. Closing plays it in reverse.
+export default function ProfileBook({ open, onClose, origin, onClosed }) {
   const [mounted, setMounted] = useState(open);
   const [isOpen, setIsOpen] = useState(false);
   const [scale, setScale] = useState(1);
+  const [from, setFrom] = useState({ x: 0, y: 0, s: 0.2 });
   const closeButton = useRef(null);
+  const onClosedRef = useRef(onClosed);
+  onClosedRef.current = onClosed;
 
   // Mount, then open on the next frame so the cover animates from closed.
   useEffect(() => {
@@ -33,18 +38,32 @@ export default function ProfileBook({ open, onClose }) {
       return () => cancelAnimationFrame(id);
     }
     setIsOpen(false);
-    const t = setTimeout(() => setMounted(false), OPEN_MS);
+    const t = setTimeout(() => {
+      setMounted(false);
+      onClosedRef.current?.();
+    }, CLOSE_MS);
     return () => clearTimeout(t);
   }, [open]);
 
   useLayoutEffect(() => {
     if (!mounted) return undefined;
-    const fit = () =>
-      setScale(Math.min(1, (window.innerWidth - 48) / BOOK_W, (window.innerHeight - 160) / BOOK_H));
+    const fit = () => {
+      const s = Math.min(1, (window.innerWidth - 48) / BOOK_W, (window.innerHeight - 160) / BOOK_H);
+      setScale(s);
+      // Where the closed book starts: over the small book, at its size. The closed book (one
+      // page wide) sits at the centre of the screen once enlarged.
+      if (origin) {
+        setFrom({
+          x: origin.left + origin.width / 2 - window.innerWidth / 2,
+          y: origin.top + origin.height / 2 - window.innerHeight / 2,
+          s: origin.width / ((BOOK_W / 2) * s),
+        });
+      }
+    };
     fit();
     window.addEventListener('resize', fit);
     return () => window.removeEventListener('resize', fit);
-  }, [mounted]);
+  }, [mounted, origin]);
 
   const close = useCallback(() => onClose(), [onClose]);
 
@@ -75,7 +94,10 @@ export default function ProfileBook({ open, onClose }) {
         <button ref={closeButton} className="pbook-modal__close" type="button" onClick={close} aria-label="Close">
           ×
         </button>
-        <div className="pbook-stage" style={{ '--scale': scale }}>
+        <div
+          className="pbook-stage"
+          style={{ '--scale': scale, '--from-x': `${from.x}px`, '--from-y': `${from.y}px`, '--from-s': from.s }}
+        >
           <div className="pbook">
             <section className="pbook__page pbook__page--right">
               <h2 className="pbook__title">I</h2>
