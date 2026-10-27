@@ -160,10 +160,10 @@
 .cs-media.cs-media--inset {
   display: grid;
   place-items: center;
-  background: #f5f5f5;
+  background: #fafafa;
 }
 
-.cs-media--inset-end {
+.cs-media.cs-media--inset-end {
   align-items: end;
 }
 
