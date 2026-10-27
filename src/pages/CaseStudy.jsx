@@ -19,12 +19,12 @@ export default function CaseStudy() {
   const { caseStudy } = project;
 
   const hero = (
-    <Zoomable key="hero" media={{ ...project.cover, alt: project.coverAlt }}>
+    <Zoomable key="hero" className="case-study__hero" media={{ ...project.cover, alt: project.coverAlt }}>
       <img
         className="case-study__cover"
         src={project.cover.src}
         srcSet={`${project.cover.src} ${coverWidth}w, ${project.cover.src2x} ${coverWidth * 2}w`}
-        sizes="(max-width: 832px) calc(100vw - 32px), 800px"
+        sizes="(max-width: 832px) calc(100vw - 32px), (min-width: 1100px) 1000px, 800px"
         alt={project.coverAlt}
         width="800"
         height="400"
@@ -33,7 +33,7 @@ export default function CaseStudy() {
   );
 
   return (
-    <main className="container page case-study">
+    <main className={`container page case-study${caseStudy ? ' case-study--wide-media' : ''}`}>
       <Link className="case-study__back text-small text-muted" to="/#work">
         <img src={arrowLeft} alt="" width="20" height="20" />
         <span>All Work</span>
