@@ -15,6 +15,7 @@ import iphone740 from '../assets/side/iphone-kit-740.webp';
 import { academicCalendarCaseStudy } from './case-studies/academic-calendar';
 import { lottieVisionProCaseStudy } from './case-studies/lottiefiles-vision-pro';
 import { cameraWearOsCaseStudy } from './case-studies/camera-app-wear-os';
+import { iphoneKitCaseStudy } from './case-studies/iphone-kit';
 
 // Placeholder case-study outline for projects whose write-up isn't in yet.
 // Projects with a `caseStudy` (see data/case-studies/) use that instead.
@@ -88,6 +89,6 @@ export const sideProjects = [
       'Solving iPhone asset needs for 100K+ designers & developers including status bar mockups wallpapers, Dynamic Island, and shutter capture.',
     cover: { src: iphone370, src2x: iphone740 },
     coverAlt: 'iPhone 17 Pro design asset kit cover in orange',
-    sections: outline,
+    caseStudy: iphoneKitCaseStudy,
   },
 ];

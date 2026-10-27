@@ -17,20 +17,22 @@ export default function CaseStudy() {
 
   const project = list[index];
   const next = list[(index + 1) % list.length];
-  const coverWidth = list === projects ? 800 : 370;
   const { caseStudy } = project;
+  // A case study can bring its own larger hero image; otherwise the card cover is used.
+  const cover = caseStudy?.hero ?? project.cover;
+  const coverWidth = caseStudy?.hero ? 1000 : list === projects ? 800 : 370;
 
   const hero = (
-    <Zoomable key="hero" className="case-study__hero" media={{ ...project.cover, alt: project.coverAlt }}>
-      {project.cover.video ? (
+    <Zoomable key="hero" className="case-study__hero" media={{ ...cover, alt: project.coverAlt }}>
+      {cover.video ? (
         <div className="case-study__cover case-study__cover--video">
-          <InViewVideo media={{ video: project.cover.video, poster2x: project.cover.poster, alt: project.coverAlt }} />
+          <InViewVideo media={{ video: cover.video, poster2x: cover.poster, alt: project.coverAlt }} />
         </div>
       ) : (
         <img
           className="case-study__cover"
-          src={project.cover.src}
-          srcSet={`${project.cover.src} ${coverWidth}w, ${project.cover.src2x} ${coverWidth * 2}w`}
+          src={cover.src}
+          srcSet={`${cover.src} ${coverWidth}w, ${cover.src2x} ${coverWidth * 2}w`}
           sizes="(max-width: 832px) calc(100vw - 32px), (min-width: 1100px) 1000px, 800px"
           alt={project.coverAlt}
           width="800"
