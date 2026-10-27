@@ -1,5 +1,11 @@
 import hero1x from '../assets/about/hero@1x.webp';
 import hero2x from '../assets/about/hero@2x.webp';
+import heroBack1x from '../assets/about/hero-back@1x.webp';
+import heroBack2x from '../assets/about/hero-back@2x.webp';
+import heroText1x from '../assets/about/hero-text@1x.webp';
+import heroText2x from '../assets/about/hero-text@2x.webp';
+import heroFront1x from '../assets/about/hero-front@1x.webp';
+import heroFront2x from '../assets/about/hero-front@2x.webp';
 import kang11x from '../assets/about/kang-1@1x.webp';
 import kang12x from '../assets/about/kang-1@2x.webp';
 import kang21x from '../assets/about/kang-2@1x.webp';
@@ -47,6 +53,12 @@ const img = (src1x, src2x) => ({ src: src1x, src2x });
 
 export const images = {
   hero: img(hero1x, hero2x),
+  // The hero split into its Figma layers (sky, title, mountains + me) for the hover effect.
+  heroLayers: {
+    back: img(heroBack1x, heroBack2x),
+    text: img(heroText1x, heroText2x),
+    front: img(heroFront1x, heroFront2x),
+  },
   kang1: img(kang11x, kang12x),
   kang2: img(kang21x, kang22x),
   kang3: img(kang31x, kang32x),

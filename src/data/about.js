@@ -4,6 +4,7 @@ export const about = {
   hero: {
     ...images.hero,
     alt: 'Gaurav with a backpack beside Pangong Lake in Ladakh, under the word "Expeditions"',
+    layers: images.heroLayers,
   },
 };
 

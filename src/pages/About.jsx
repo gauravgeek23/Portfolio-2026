@@ -1,4 +1,5 @@
 import Photo from '../components/Photo';
+import LayeredHero from '../components/LayeredHero';
 import { about, stories, photos } from '../data/about';
 import { site } from '../data/site';
 import './About.css';
@@ -31,7 +32,7 @@ export default function About() {
           <h1 className="text-medium">About</h1>
           <p className="text-small text-muted">{site.name}</p>
         </header>
-        <Photo className="about__hero" photo={about.hero} loading="eager" />
+        <LayeredHero className="about__hero" photo={about.hero} />
         <h2 className="visually-hidden">Expeditions</h2>
         <p className="text-small text-muted">
           Beyond pixels, I’m an avid traveler and motorcyclist with a curious mind for{' '}
