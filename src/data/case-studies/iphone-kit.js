@@ -121,10 +121,6 @@ export const iphoneKitCaseStudy = {
       title: 'Community Love',
       body: [
         "I'm truly delighted to witness the community's appreciation for my contributions.",
-        '82k+ Community downloads',
-        'Top 100 Community file',
-        '2 times on top trending charts',
-        'Most relevant file for "iPhone" and "Status Bar"',
         [
           'Access community file ',
           {
@@ -132,6 +128,24 @@ export const iphoneKitCaseStudy = {
             href: 'https://www.figma.com/community/file/837799145528214755/status-bar-dynamic-island-mockup-for-iphone15-iphone14',
           },
         ],
+      ],
+    },
+    // Three cards: title on top, description below (Figma: 77:16357).
+    {
+      type: 'stats',
+      items: [
+        {
+          value: '100k+ Community Downloads',
+          label: 'In last 4 year community support motivated to keep updating the file for them.',
+        },
+        {
+          value: '2 times on top trending file',
+          label: '2 times for a total of 26 days it became the top trending figma file recommendation.',
+        },
+        {
+          value: 'Most relevant file for "iPhone" keyword',
+          label: 'Whenever you search for iPhone or Dynamic Island in the community, I got you covered.',
+        },
       ],
     },
     {

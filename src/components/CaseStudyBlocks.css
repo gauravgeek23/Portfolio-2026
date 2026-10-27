@@ -17,10 +17,11 @@
   padding-left: 20px;
 }
 
-/* Stats show the value above its label. */
+/* Stats show the value above its label, aligned to the top of the card. */
 .cs-stats .cs-box {
   display: flex;
   flex-direction: column-reverse;
+  justify-content: flex-end;
 }
 
 .cs-stats dd {

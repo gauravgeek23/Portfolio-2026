@@ -1,3 +1,10 @@
+import imageCapture from '../../assets/case-studies/camera-app-wear-os/image-capture@1x.webp';
+import imageCapture2x from '../../assets/case-studies/camera-app-wear-os/image-capture@2x.webp';
+import videoCapture from '../../assets/case-studies/camera-app-wear-os/video-capture@1x.webp';
+import videoCapture2x from '../../assets/case-studies/camera-app-wear-os/video-capture@2x.webp';
+import switches from '../../assets/case-studies/camera-app-wear-os/switches@1x.webp';
+import switches2x from '../../assets/case-studies/camera-app-wear-os/switches@2x.webp';
+
 // Camera App Wear OS case study (Figma: Portfolio Fall 2024, "About page" 200:292).
 // Same block layout as Academic Calendar and LottieFiles for Vision Pro (see
 // components/CaseStudyBlocks.jsx); the hero is the project's cover video.
@@ -29,6 +36,13 @@ export const cameraWearOsCaseStudy = {
       ],
     },
     {
+      type: 'media',
+      ratio: 2,
+      src: imageCapture,
+      src2x: imageCapture2x,
+      alt: 'Annotated photo mode on a round Wear OS watch: camera icon, lens and megapixel switches, capture button, flip camera, countdown timer and mode selector',
+    },
+    {
       type: 'text',
       title: 'Video Capture',
       body: [
@@ -36,11 +50,25 @@ export const cameraWearOsCaseStudy = {
       ],
     },
     {
+      type: 'media',
+      ratio: 2,
+      src: videoCapture,
+      src2x: videoCapture2x,
+      alt: 'Annotated video mode before and during recording: quality options, record, stop, snapshot, pause and recording time',
+    },
+    {
       type: 'text',
       title: 'Switches Compatibility',
       body: [
         "The mobile device connected to the watch may not support all features, such as zooming in and out or switching the camera's megapixel setting. Therefore, controls will only appear if the connected device supports those functions. If a specific feature isn't available, the corresponding control will be hidden, and the remaining options will be centered for better visibility and access.",
       ],
+    },
+    {
+      type: 'media',
+      ratio: 2,
+      src: switches,
+      src2x: switches2x,
+      alt: 'Three watch layouts for phones that support camera switch only, both zoom and camera switch, or zoom only',
     },
     {
       type: 'text',
