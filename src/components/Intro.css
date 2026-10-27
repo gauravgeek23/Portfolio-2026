@@ -5,33 +5,34 @@
   gap: 20px;
 }
 
-/* Book in the top-right corner: a cover hinged on its spine over one page. On hover
-   the cover swings open a little and the page slides out from behind it. */
+/* The book: a cover hinged on its spine over one page. On hover the cover swings open a
+   little and the page slides out from behind it. */
 .intro__book {
-  position: absolute;
-  top: 0;
-  right: 6px;
-  width: 112px;
-  height: 128px;
-  perspective: 700px;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  perspective: 600px;
 }
 
 .book__page,
 .book__cover {
   position: absolute;
   inset: 0;
-  border-radius: 4px 16px 16px 4px;
+  border-radius: 3px 12px 12px 3px;
   background: #fbfbfc;
   transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .book__page {
-  inset: 7px -6px 7px 8px;
-  border-radius: 4px 14px 14px 4px;
-  background: #f4f5f7;
+  /* Each page sits a little further in and to the right (--i: 1 is the top page). */
+  inset: calc(2px + var(--i) * 1.5px) calc(var(--i) * -2px) calc(2px + var(--i) * 1.5px) 5px;
+  border-radius: 3px 11px 11px 3px;
+  background: hsl(220 14% calc(99% - var(--i) * 1.5%));
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.06),
-    0 4px 12px rgba(0, 0, 0, 0.06);
+    0 1px 1px rgba(0, 0, 0, 0.05),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+  transform-origin: left center;
 }
 
 .book__cover {
@@ -50,33 +51,33 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 7px;
-  width: 2px;
+  left: 5px;
+  width: 1.5px;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.02));
 }
 
 .book__cover img {
-  width: 64px;
-  height: 72px;
+  width: 46px;
+  height: 52px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
 }
 
-.intro__book:hover .book__cover {
+.intro__avatar:hover .book__cover {
   transform: rotateY(-34deg);
 }
 
-.intro__book:hover .book__page {
-  transform: translateX(12px);
+.intro__avatar:hover .book__page {
+  transform: rotateY(calc(var(--i) * -6deg - 4deg)) translateX(calc(var(--i) * 3px));
 }
 
 .intro__avatar {
   position: relative;
   isolation: isolate;
   align-self: flex-start;
-  width: 52px;
-  height: 52px;
+  width: 80px;
+  height: 92px;
 }
 
 /* Prism glow: a soft spectrum behind the photo that slowly turns and breathes. */
@@ -128,26 +129,6 @@
 
 :root[data-theme='light'] .intro__avatar:hover::before {
   opacity: 0.75;
-}
-
-.intro__avatar .zoomable {
-  height: 100%;
-  border-radius: var(--radius-sm);
-}
-
-.intro__avatar img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--radius-sm);
-  object-fit: cover;
-}
-
-@media (max-width: 640px) {
-  .intro__book {
-    transform: scale(0.75);
-    transform-origin: top right;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

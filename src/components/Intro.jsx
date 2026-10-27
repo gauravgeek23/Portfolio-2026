@@ -1,5 +1,4 @@
-import avatar from '../assets/avatar-104.webp';
-import avatar3x from '../assets/avatar-156.webp';
+import avatar from '../assets/avatar-156.webp';
 import avatarLarge from '../assets/avatar-1200.webp';
 import { Zoomable } from './Lightbox';
 import { site } from '../data/site';
@@ -8,23 +7,17 @@ import './Intro.css';
 export default function Intro() {
   return (
     <section className="intro">
-      {/* A little passport-style book (after Airbnb's host profile) that opens on hover. */}
-      <div className="intro__book" aria-hidden="true">
-        <div className="book__page" />
-        <div className="book__cover">
-          <img src={avatar3x} alt="" width="64" height="72" />
-        </div>
-      </div>
+      {/* Profile photo on a little passport-style book (after Airbnb's host profile) that opens on
+          hover; click to view the full photo in the overlay. */}
       <div className="intro__avatar">
-        {/* Click to view the full photo in the overlay. */}
-        <Zoomable media={{ src: avatarLarge, alt: `Portrait of ${site.name}` }}>
-          <img
-            src={avatar}
-            srcSet={`${avatar} 2x, ${avatar3x} 3x`}
-            alt={`Portrait of ${site.name}`}
-            width="52"
-            height="52"
-          />
+        <Zoomable media={{ src: avatarLarge, alt: `Portrait of ${site.name}` }} className="intro__book">
+          {/* Three pages under the cover; they fan out as it opens. */}
+          <span className="book__page" style={{ '--i': 3 }} />
+          <span className="book__page" style={{ '--i': 2 }} />
+          <span className="book__page" style={{ '--i': 1 }} />
+          <span className="book__cover">
+            <img src={avatar} alt={`Portrait of ${site.name}`} width="46" height="52" />
+          </span>
         </Zoomable>
       </div>
       <div>
