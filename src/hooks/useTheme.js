@@ -3,17 +3,9 @@ import { flushSync } from 'react-dom';
 
 const STORAGE_KEY = 'theme';
 
-// Spring curve (sampled into CSS linear()) for the circle reveal: fast start,
-// a slight overshoot, then settle, so the circle feels elastic.
-const SPRING = (() => {
-  const points = [];
-  for (let i = 0; i <= 40; i += 1) {
-    const t = i / 40;
-    const y = 1 - Math.exp(-4.5 * t) * Math.cos(6.5 * t);
-    points.push(Number(y.toFixed(4)));
-  }
-  return `linear(${points.join(', ')})`;
-})();
+// Slow, fluid ease-in-out for the circle reveal (no overshoot).
+const EASE = 'cubic-bezier(0.65, 0, 0.35, 1)';
+const DURATION = 1400;
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -23,7 +15,7 @@ const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: r
 //
 // Switching animates as a circle from the toggle: going dark, the dark page grows
 // out of the icon to fill the screen; going light, the dark page shrinks back into
-// it (with a small rebound). Uses the View Transitions API where available.
+// it. Uses the View Transitions API where available.
 export function useTheme() {
   const [theme, setTheme] = useState(() => (document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'));
 
@@ -65,18 +57,12 @@ export function useTheme() {
         if (expand) {
           root.animate(
             { clipPath: [none, full] },
-            { duration: 1000, easing: SPRING, pseudoElement: '::view-transition-new(root)' },
+            { duration: DURATION, easing: EASE, pseudoElement: '::view-transition-new(root)' },
           );
         } else {
-          // Shrinks into the icon, pops back out a little, then closes.
           root.animate(
-            [
-              { clipPath: full, easing: 'cubic-bezier(0.55, 0, 0.75, 0.1)' },
-              { clipPath: none, offset: 0.7, easing: 'cubic-bezier(0.2, 0.7, 0.3, 1)' },
-              { clipPath: `circle(26px at ${x}px ${y}px)`, offset: 0.84, easing: 'cubic-bezier(0.6, 0, 0.8, 0.4)' },
-              { clipPath: none },
-            ],
-            { duration: 850, pseudoElement: '::view-transition-old(root)' },
+            { clipPath: [full, none] },
+            { duration: DURATION, easing: EASE, pseudoElement: '::view-transition-old(root)' },
           );
         }
       });
