@@ -30,7 +30,7 @@ export const testimonials = [
     role: 'Senior Designer @Coffee Meets Bagel',
     url: 'https://www.linkedin.com/in/dion-chooi-818ba8142/',
     quote:
-      'He brings strong user empathy, design ownership, and UX expertise. He balances business goals, user needs, and innovation while leading initiatives. A true learner and a valuable asset to any team.',
+      'Gaurav brings strong user empathy, design ownership, and UX expertise. He balances business goals, user needs, and innovation while leading initiatives. A true learner and a valuable asset to any team.',
     photo: dionChooi,
     flag: { src: singapore, country: 'Singapore' },
   },
