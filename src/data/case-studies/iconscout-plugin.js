@@ -23,14 +23,13 @@ export const iconscoutPluginCaseStudy = {
         'If you work daily in Figma, this isn’t meant to be read like a traditional case study—it’s an experience designed to be explored hands-on.',
       ],
     },
-    // Links still without a URL render as cards without a link until one is added.
     {
       type: 'links',
       items: [
-        { label: 'Plugin Link', logo: figma, href: 'https://iconscout.com/figma' },
-        { label: 'Product Video', logo: youtube },
-        { label: '1 Million users', logo: x, logoMono: true },
-        { label: 'Rank #15 Plugin on Figma', logo: figstats },
+        { label: 'Plugin Link', logo: figma, href: 'https://www.figma.com/community/plugin/744098704933821409' },
+        { label: 'Product Video', logo: youtube, href: 'https://www.youtube.com/watch?v=VlH-Cf79X1c' },
+        { label: '1 Million users', logo: x, logoMono: true, href: 'https://x.com/reallynattu/status/1971477965428154863' },
+        { label: 'Rank #15 Plugin on Figma', logo: figstats, href: 'https://fig-stats.com/plugins/744098704933821409' },
       ],
     },
     {
@@ -44,7 +43,14 @@ export const iconscoutPluginCaseStudy = {
       type: 'text',
       body: [
         'Special mention to the contributors',
-        'Akshaj Balaji (Frontend Dev) | Zaid Kureshi (Backend Dev) | Celcea Taffini (Animator)',
+        [
+          { text: 'Akshaj Balaji', href: 'https://www.linkedin.com/in/%F0%9F%92%BBakshaj-balaji-274135112/' },
+          ' (Frontend Dev) | ',
+          { text: 'Zaid Kureshi', href: 'https://www.linkedin.com/in/imzedi/' },
+          ' (Backend Dev) | ',
+          { text: 'Celcea Taffini', href: 'https://www.linkedin.com/in/celcea-tifani-9a0bb137/' },
+          ' (Animator)',
+        ],
       ],
     },
   ],
