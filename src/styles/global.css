@@ -48,6 +48,24 @@
   color-scheme: dark;
 }
 
+/* Red theme: deep crimson with warm off-white type (7:1), a pale pink for secondary
+   text (5.1:1), darker red cards, and a cream accent so the gk. dot doesn't clash. */
+:root[data-theme='red'] {
+  --color-white: #a8111a;
+  --color-black: #fff4ef;
+  --color-grey-1: #f6c9c3;
+  --color-grey-2: #cf4a4f;
+  --color-grey-3: #8c0d14;
+  --color-surface: #9a0f17;
+  --color-accent: #ffd08a;
+  --color-link: #ffe2a8;
+  --color-tick: #c2333a;
+  --color-wordmark: #bf2a31;
+  --color-media: #8c0d14;
+  --shadow-lift: 0 16px 40px rgba(40, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
 /* Theme switch circle reveal (see hooks/useTheme.js): the JS animates the clip-path,
    so turn off the default cross-fade. Going dark the new (dark) page sits on top and
    grows; going light the old (dark) page sits on top and shrinks away. */

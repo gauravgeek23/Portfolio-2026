@@ -105,13 +105,14 @@
     grid-column: 1 / -1;
     grid-row: 1;
   }
-  /* Phones: top-right, level with the title. */
+  /* Phones: level with the title, left edge lined up with "Bangalore" below. */
   .contact__easter-egg {
     grid-column: 2;
     grid-row: 1;
-    justify-self: end;
+    justify-self: start;
     align-self: center;
     width: 34px;
+    text-align: left;
   }
   .contact__socials {
     display: grid;

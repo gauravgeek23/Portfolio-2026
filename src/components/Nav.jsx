@@ -35,39 +35,63 @@ function useHomeSection(enabled) {
   return section;
 }
 
+// The toggle cycles light → dark → red → light; its icon shows the mode you'll go to next.
+const NEXT_MODE = {
+  light: {
+    label: 'Switch to dark mode',
+    title: 'Dark mode',
+    // Moon
+    icon: (
+      <path
+        d="M16.25 11.9A6.5 6.5 0 0 1 8.1 3.75a6.5 6.5 0 1 0 8.15 8.15Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    ),
+  },
+  dark: {
+    label: 'Switch to red mode',
+    title: 'Red mode',
+    // Ink drop, half filled
+    icon: (
+      <>
+        <path
+          d="M10 2.75c2.6 3.05 5 5.9 5 8.85a5 5 0 0 1-10 0c0-2.95 2.4-5.8 5-8.85Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        <path d="M5.75 12.25h8.5a4.25 4.25 0 0 1-8.5 0Z" fill="currentColor" />
+      </>
+    ),
+  },
+  red: {
+    label: 'Switch to light mode',
+    title: 'Light mode',
+    // Sun
+    icon: (
+      <>
+        <circle cx="10" cy="10" r="3.25" stroke="currentColor" strokeWidth="1.5" />
+        <path
+          d="M10 2.5v1.75M10 15.75v1.75M2.5 10h1.75M15.75 10h1.75M4.7 4.7l1.24 1.24M14.06 14.06l1.24 1.24M4.7 15.3l1.24-1.24M14.06 5.94l1.24-1.24"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </>
+    ),
+  },
+};
+
 function ThemeToggle() {
   const [theme, toggle] = useTheme();
-  const dark = theme === 'dark';
+  const next = NEXT_MODE[theme];
   return (
-    <button
-      type="button"
-      className="nav__theme"
-      onClick={toggle}
-      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      title={dark ? 'Light mode' : 'Dark mode'}
-    >
-      {dark ? (
-        // Sun: shown in dark mode, switches to light.
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <circle cx="10" cy="10" r="3.25" stroke="currentColor" strokeWidth="1.5" />
-          <path
-            d="M10 2.5v1.75M10 15.75v1.75M2.5 10h1.75M15.75 10h1.75M4.7 4.7l1.24 1.24M14.06 14.06l1.24 1.24M4.7 15.3l1.24-1.24M14.06 5.94l1.24-1.24"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </svg>
-      ) : (
-        // Moon: shown in light mode, switches to dark.
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <path
-            d="M16.25 11.9A6.5 6.5 0 0 1 8.1 3.75a6.5 6.5 0 1 0 8.15 8.15Z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-          />
-        </svg>
-      )}
+    <button type="button" className="nav__theme" onClick={toggle} aria-label={next.label} title={next.title}>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        {next.icon}
+      </svg>
     </button>
   );
 }
