@@ -62,7 +62,7 @@
   font-size: 12px;
 }
 
-/* Thumbnails under a role's points (192 x 108 each). */
+/* Thumbnails under a role's points: all 16:9 at 216 x 121.5. */
 .resume-row__gallery {
   display: flex;
   flex-wrap: wrap;
@@ -71,7 +71,7 @@
 }
 
 .resume-thumb {
-  width: 192px;
+  width: 216px;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 8px;

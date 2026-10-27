@@ -1,11 +1,11 @@
-import academicCalendar from '../assets/work/academic-calendar-800.webp';
-import academicCalendar2x from '../assets/work/academic-calendar-1600.webp';
+import academicCalendar from '../assets/work/academic-calendar-1600.webp';
+import academicCalendarThumb from '../assets/resume/academic-calendar-thumb.webp';
 import examInterface from '../assets/resume/exam-interface.webp';
 import examInterfaceThumb from '../assets/resume/exam-interface-thumb.webp';
-import iconscout from '../assets/work/iconscout-plugin-800.webp';
-import iconscout2x from '../assets/work/iconscout-plugin-1600.webp';
-import visionPro from '../assets/work/lottiefiles-vision-pro-800.webp';
-import visionPro2x from '../assets/work/lottiefiles-vision-pro-1600.webp';
+import iconscout from '../assets/case-studies/iconscout-plugin/hero@2x.webp';
+import iconscoutThumb from '../assets/resume/iconscout-thumb.webp';
+import visionPro from '../assets/work/lottiefiles-vision-pro-1600.webp';
+import visionProThumb from '../assets/resume/vision-pro-thumb.webp';
 import topprAnswr from '../assets/resume/toppr-answr.webp';
 import topprAnswrThumb from '../assets/resume/toppr-answr-thumb.webp';
 import uranium from '../assets/resume/uranium.webp';
@@ -17,7 +17,7 @@ import iglooThumb from '../assets/resume/igloo-thumb.webp';
 
 // Resume content. Each entry renders as a row: details on the left, bullet points on the right,
 // with optional `gallery` thumbnails under the points (they open in the overlay as a set).
-// Each image: `thumb` for the small card, `src` (and `src2x`) for the enlarged view.
+// Each image: a 16:9 `thumb` for the small card and the full-size `src` for the enlarged view.
 export const experience = [
   {
     title: 'Newton School of Technology',
@@ -29,7 +29,7 @@ export const experience = [
       'Website, referral, and exam redesigns that lifted conversions by up to 30%.',
     ],
     gallery: [
-      { thumb: academicCalendar, src: academicCalendar, src2x: academicCalendar2x, alt: 'Academic calendar for Newton School of Technology' },
+      { thumb: academicCalendarThumb, src: academicCalendar, alt: 'Academic calendar for Newton School of Technology' },
       { thumb: examInterfaceThumb, src: examInterface, alt: 'NSAT entrance exam interface on desktop and mobile' },
     ],
   },
@@ -43,8 +43,8 @@ export const experience = [
       'Spoke at 8 events across India with CRED, Razorpay, Zeta, 10K Designers, Cars24.',
     ],
     gallery: [
-      { thumb: iconscout, src: iconscout, src2x: iconscout2x, alt: 'IconScout plugin for Figma: millions of high-quality design assets' },
-      { thumb: visionPro, src: visionPro, src2x: visionPro2x, alt: 'LottieFiles for Apple Vision Pro' },
+      { thumb: iconscoutThumb, src: iconscout, alt: 'IconScout plugin for Figma: millions of high-quality design assets' },
+      { thumb: visionProThumb, src: visionPro, alt: 'LottieFiles for Apple Vision Pro' },
     ],
   },
   {
