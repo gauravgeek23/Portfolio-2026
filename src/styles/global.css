@@ -101,6 +101,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Sticky footer: on pages shorter than the screen (e.g. Notes) the page content
+   grows to fill the gap, so the footer always sits at the bottom. */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+#root > main {
+  flex: 1 0 auto;
+}
+
 img {
   display: block;
   max-width: 100%;
