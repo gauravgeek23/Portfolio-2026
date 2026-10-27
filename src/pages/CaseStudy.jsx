@@ -1,5 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { Zoomable } from '../components/Lightbox';
+import arrowLeft from '../assets/icons/arrow-left.svg';
+import arrowRight from '../assets/icons/arrow-right.svg';
 import { projects, sideProjects } from '../data/projects';
 import './CaseStudy.css';
 
@@ -17,7 +19,8 @@ export default function CaseStudy() {
   return (
     <main className="container page case-study">
       <Link className="case-study__back text-small text-muted" to="/#work">
-        ← All work
+        <img src={arrowLeft} alt="" width="20" height="20" />
+        <span>All work</span>
       </Link>
 
       <header>
@@ -51,7 +54,10 @@ export default function CaseStudy() {
 
       <Link className="case-study__next" to={`/work/${next.slug}`}>
         <span className="text-small text-muted">Next project</span>
-        <span className="text-medium">{next.title} →</span>
+        <span className="case-study__next-title text-medium">
+          <span>{next.title}</span>
+          <img src={arrowRight} alt="" width="20" height="20" />
+        </span>
       </Link>
     </main>
   );

@@ -7,9 +7,34 @@
   text-decoration: none;
 }
 
-.case-study__back:hover,
-.case-study__next:hover .text-medium {
+/* Arrow icons from Figma (arrow_back / arrow_right), nudged on hover. */
+.case-study__back,
+.case-study__next-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.case-study__back {
+  align-self: flex-start;
+}
+
+.case-study__back img,
+.case-study__next-title img {
+  transition: transform 200ms ease;
+}
+
+.case-study__back:hover span,
+.case-study__next:hover .case-study__next-title span {
   text-decoration: underline;
+}
+
+.case-study__back:hover img {
+  transform: translateX(-3px);
+}
+
+.case-study__next:hover .case-study__next-title img {
+  transform: translateX(3px);
 }
 
 .case-study__summary {
