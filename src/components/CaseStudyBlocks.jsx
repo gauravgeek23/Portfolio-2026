@@ -46,18 +46,34 @@ function ResponsiveMedia({ block }) {
   );
 }
 
-function Paragraphs({ body }) {
-  return body.map((p, i) =>
-    typeof p === 'string' ? (
-      <p key={i} className="text-small text-muted">
-        {p}
-      </p>
+// A paragraph is a string, { text, strong }, or an array of strings and { text, href } links.
+function Inline({ parts }) {
+  return parts.map((part, i) =>
+    typeof part === 'string' ? (
+      part
     ) : (
+      <a key={i} className="cs-inline-link" href={part.href} target="_blank" rel="noreferrer">
+        {part.text}
+      </a>
+    ),
+  );
+}
+
+function Paragraphs({ body }) {
+  return body.map((p, i) => {
+    if (typeof p === 'string' || Array.isArray(p)) {
+      return (
+        <p key={i} className="text-small text-muted">
+          {Array.isArray(p) ? <Inline parts={p} /> : p}
+        </p>
+      );
+    }
+    return (
       <p key={i} className="text-small cs-strong">
         {p.text}
       </p>
-    ),
-  );
+    );
+  });
 }
 
 // Renders a case study's content blocks (see data/case-studies/*.js).

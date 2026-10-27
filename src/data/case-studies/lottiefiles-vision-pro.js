@@ -12,6 +12,10 @@ import maldives from '../../assets/case-studies/lottiefiles-vision-pro/maldives@
 import maldives2x from '../../assets/case-studies/lottiefiles-vision-pro/maldives@2x.webp';
 
 // LottieFiles for Vision Pro case study (Figma: Desktop - 9).
+const evandro = { text: 'Evandro Hoffmann', href: 'https://www.linkedin.com/in/evandro-harrison-hoffmann/' };
+const kelly = { text: 'Kelly Loh', href: 'https://www.linkedin.com/in/kellylohhh/' };
+const sanjib = { text: 'Sanjib Paul', href: 'https://www.linkedin.com/in/sanjib-paul/' };
+
 export const lottieVisionProCaseStudy = {
   heading: 'LottieFiles for Vision Pro | LottieFiles | Jan - Mar 2024',
   blocks: [
@@ -79,7 +83,7 @@ export const lottieVisionProCaseStudy = {
       title: 'Product Video',
       body: [
         'To bring the story to life, we crafted a short promo video showcasing the refined interactions and seamless motion integration within the spatial design. Taking the UI I designed and reimagining it in the real world, the video captures how naturally LottieFiles fits into the Vision Pro environment making the experience feel both intuitive and inspiring.',
-        'Creative direction by Kelly Loh. Animation by Sanjib Paul',
+        ['Creative direction by ', kelly, '. Animation by ', sanjib],
       ],
     },
     { type: 'youtube', id: 'jg2b2mtd1xY', title: 'LottieFiles for Apple Vision Pro — product video' },
@@ -121,7 +125,7 @@ export const lottieVisionProCaseStudy = {
       type: 'text',
       body: [
         'Special mention to the contributors in LottieFiles for Vision Pro',
-        'Evandro Hoffmann (iOS Developer) | Kelly Loh (Creative direction) | Sanjib Paul (Animator)',
+        [evandro, ' (iOS Developer) | ', kelly, ' (Creative direction) | ', sanjib, ' (Animator)'],
       ],
     },
   ],

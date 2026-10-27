@@ -27,6 +27,15 @@
   margin: 0;
 }
 
+.cs-inline-link {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.cs-inline-link:hover {
+  text-decoration: underline;
+}
+
 .cs-strong {
   color: var(--color-black);
 }
