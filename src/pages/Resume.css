@@ -1,0 +1,34 @@
+.resume-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 230px details column, 20px gutter, bullets fill the rest (Figma). */
+.resume-row {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 20px;
+}
+
+.resume-row__points {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.resume-row__points li::marker {
+  font-size: 12px;
+}
+
+.resume-row__dated span:last-child {
+  float: right;
+  margin-left: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .resume-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

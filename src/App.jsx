@@ -6,7 +6,7 @@ import CaseStudy from './pages/CaseStudy';
 import Play from './pages/Play';
 import About from './pages/About';
 import Notes from './pages/Notes';
-import ComingSoon from './pages/ComingSoon';
+import Resume from './pages/Resume';
 
 export default function App() {
   return (
@@ -18,7 +18,7 @@ export default function App() {
         <Route path="play" element={<Play />} />
         <Route path="notes" element={<Notes />} />
         <Route path="about" element={<About />} />
-        <Route path="resume" element={<ComingSoon title="Resume" subtitle="Resume — coming soon." />} />
+        <Route path="resume" element={<Resume />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

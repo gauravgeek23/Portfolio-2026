@@ -62,6 +62,7 @@ export const projects = [
   },
 ];
 
+// Side projects also get a case-study page at /work/<slug> (linked from the play tab).
 export const sideProjects = [
   {
     slug: 'camera-app-wear-os',
@@ -71,6 +72,7 @@ export const sideProjects = [
       'Effortless capture and seamless control—tap to shoot, swipe to switch, all on your wrist. A fast, simple camera experience designed for Wear OS.',
     cover: { src: camera370, src2x: camera740 },
     coverAlt: 'Three Wear OS watch faces showing the camera app controls',
+    sections: outline,
   },
   {
     slug: 'iphone-kit',
@@ -80,5 +82,6 @@ export const sideProjects = [
       'Solving iPhone asset needs for 100K+ designers & developers including status bar mockups wallpapers, Dynamic Island, and shutter capture.',
     cover: { src: iphone370, src2x: iphone740 },
     coverAlt: 'iPhone 17 Pro design asset kit cover in orange',
+    sections: outline,
   },
 ];

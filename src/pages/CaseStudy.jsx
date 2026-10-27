@@ -1,14 +1,17 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { projects } from '../data/projects';
+import { projects, sideProjects } from '../data/projects';
 import './CaseStudy.css';
 
 export default function CaseStudy() {
   const { slug } = useParams();
-  const index = projects.findIndex((p) => p.slug === slug);
+  // "Next project" cycles within the list the project belongs to (selected work or side projects).
+  const list = projects.some((p) => p.slug === slug) ? projects : sideProjects;
+  const index = list.findIndex((p) => p.slug === slug);
   if (index === -1) return <Navigate to="/" replace />;
 
-  const project = projects[index];
-  const next = projects[(index + 1) % projects.length];
+  const project = list[index];
+  const next = list[(index + 1) % list.length];
+  const coverWidth = list === projects ? 800 : 370;
 
   return (
     <main className="container page case-study">
@@ -25,7 +28,7 @@ export default function CaseStudy() {
       <img
         className="case-study__cover"
         src={project.cover.src}
-        srcSet={`${project.cover.src} 800w, ${project.cover.src2x} 1600w`}
+        srcSet={`${project.cover.src} ${coverWidth}w, ${project.cover.src2x} ${coverWidth * 2}w`}
         sizes="(max-width: 832px) calc(100vw - 32px), 800px"
         alt={project.coverAlt}
         width="800"
