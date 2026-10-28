@@ -33,7 +33,8 @@ export default function Intro() {
     <section className="intro">
       {/* Profile photo on a little passport-style book (after Airbnb's host profile) that opens a
           little on hover; clicking it opens the full book in a popup. */}
-      <div className="intro__avatar">
+      {/* The glow behind the book lights up once the book is in place (after the loader). */}
+      <div className={`intro__avatar${loading ? '' : ' is-lit'}`}>
         <button
           type="button"
           ref={bookRef}

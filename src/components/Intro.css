@@ -196,13 +196,36 @@
     #ff8a9e
   );
   filter: blur(26px);
-  /* Only shown in light mode (below); hidden in dark and the colour themes. */
-  display: none;
-  opacity: 0.62;
+  /* Dark until the book is in place (after the landing loader), then it lights up. */
+  opacity: 0;
   transition: opacity 500ms ease;
   animation:
     intro-glow-spin 9s linear infinite,
     intro-glow-breathe 4.5s ease-in-out infinite alternate;
+}
+
+/* Lit: the glow blooms up brighter for a moment, then settles. In every theme. */
+.intro__avatar.is-lit::before {
+  opacity: var(--glow, 0.62);
+  animation:
+    intro-glow-spin 9s linear infinite,
+    intro-glow-breathe 4.5s ease-in-out infinite alternate,
+    intro-glow-light 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* On the dark background the pastels need more strength to glow rather than look muddy. */
+:root[data-theme='dark'] .intro__avatar {
+  --glow: 0.8;
+}
+
+@keyframes intro-glow-light {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  40% {
+    opacity: 1;
+  }
 }
 
 @keyframes intro-glow-spin {
@@ -220,13 +243,9 @@
   }
 }
 
-/* Light mode only: the glow is always on and a touch brighter on hover. */
-:root[data-theme='light'] .intro__avatar::before {
-  display: block;
-}
-
-:root[data-theme='light'] .intro__avatar:hover::before {
-  opacity: 0.75;
+/* A touch brighter on hover. */
+.intro__avatar.is-lit:hover::before {
+  opacity: calc(var(--glow, 0.62) + 0.13);
 }
 
 @media (prefers-reduced-motion: reduce) {
