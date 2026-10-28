@@ -29,22 +29,12 @@
   color: var(--color-black);
 }
 
-/* The dot of "gk.": a yellow circle twice a full stop's size, the same in every theme,
-   sitting on the baseline like the full stop it replaces. */
+/* The dot of "gk.": a real full stop at twice the size, so it sits on the baseline like one,
+   yellow in every theme. line-height 0 keeps the larger glyph from changing the nav's height. */
 .nav__dot {
-  display: inline-block;
-  width: 0.28em;
-  height: 0.28em;
-  margin-left: 0.06em;
-  border-radius: 50%;
-  background: #f6c333;
-  color: transparent;
-  font-size: inherit;
+  font-size: 2em;
   line-height: 0;
-  overflow: hidden;
-  vertical-align: baseline;
-  position: relative;
-  top: 0.04em;
+  color: #f6c333;
 }
 
 .nav__list {

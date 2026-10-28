@@ -108,8 +108,7 @@ export default function Nav() {
 
   // Already on home: glide there instead of re-navigating. The URL is updated with
   // `inPage` so Layout doesn't jump to the target instantly.
-  const behavior = () =>
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  const behavior = () => (window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth');
   const goToTop = (e) => {
     if (!onHome) return;
     e.preventDefault();
@@ -140,7 +139,9 @@ export default function Nav() {
           aria-current={active === 'home' ? 'page' : undefined}
           className={`nav__link nav__logo${active === 'home' ? ' nav__link--active' : ''}`}
         >
-          gk<span className="nav__dot">.</span>
+          <span>
+            gk<span className="nav__dot">.</span>
+          </span>
         </Link>
         <ul className="nav__list">
           {navItems.map((item) => (
