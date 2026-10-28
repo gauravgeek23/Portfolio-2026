@@ -167,6 +167,42 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
     [turned, close, LAST],
   );
 
+  // Clicking a note, photo, ticket, stamp or badge pops it up big and straight in the middle of
+  // its page for a moment, then it floats back; the click doesn't turn the page.
+  const popTimer = useRef(null);
+  const popped = useRef(null);
+  const unpop = useCallback(() => {
+    clearTimeout(popTimer.current);
+    const el = popped.current;
+    if (!el) return;
+    el.classList.remove('is-popped');
+    el.closest('.sb-page')?.classList.remove('has-pop');
+    popped.current = null;
+  }, []);
+  const pop = useCallback(
+    (e) => {
+      const el = e.target.closest('.sb-snap, .sb-note, .sb-ticket, .sb-badge, .sb-stamp');
+      if (!el) return false;
+      const wasPopped = el === popped.current;
+      unpop();
+      if (wasPopped) return true;
+      const page = el.closest('.sb-page');
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      const s = Math.min(2, (page.offsetWidth - 60) / w, (page.offsetHeight - 80) / h);
+      el.style.setProperty('--pop-x', `${page.offsetWidth / 2 - (el.offsetLeft + w / 2)}px`);
+      el.style.setProperty('--pop-y', `${page.offsetHeight / 2 - (el.offsetTop + h / 2)}px`);
+      el.style.setProperty('--pop-s', Math.max(1.15, s));
+      el.classList.add('is-popped');
+      page.classList.add('has-pop');
+      popped.current = el;
+      popTimer.current = setTimeout(unpop, 1700);
+      return true;
+    },
+    [unpop],
+  );
+  useEffect(() => unpop, [turned, unpop]);
+
   // Jump straight to a view (a spread on desktop); the leaves in between turn together.
   const goTo = useCallback(
     (next) => {
@@ -253,13 +289,13 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
                   {/* `is-shown` marks the two pages on view, so their items can animate in. */}
                   <div
                     className={`pbook__face pbook__face--front${i === turned && i > 0 ? ' is-shown' : ''}`}
-                    onClick={i > 0 ? () => go(1) : undefined}
+                    onClick={i > 0 ? (e) => pop(e) || go(1) : undefined}
                   >
                     {leaf.front}
                   </div>
                   <div
                     className={`pbook__face pbook__face--back${!single && i === turned - 1 ? ' is-shown' : ''}`}
-                    onClick={() => go(-1)}
+                    onClick={(e) => pop(e) || go(-1)}
                   >
                     {leaf.back}
                   </div>

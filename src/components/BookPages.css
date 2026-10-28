@@ -450,6 +450,65 @@
   font-size: 17px;
 }
 
+/* ---------- Pop: click an item to see it big ---------- */
+.sb-snap,
+.sb-note,
+.sb-ticket,
+.sb-badge,
+.sb-stamp {
+  cursor: zoom-in;
+}
+
+.sb-note,
+.sb-ticket,
+.sb-stamp {
+  transition:
+    rotate 550ms var(--spring),
+    scale 550ms var(--spring),
+    translate 550ms var(--spring),
+    box-shadow 300ms ease;
+}
+
+.sb-badge {
+  transition:
+    rotate 700ms var(--spring),
+    scale 550ms var(--spring),
+    translate 550ms var(--spring);
+}
+
+/* The item springs to the middle of its page, straightens with a playful tilt and lifts off. */
+.sb-page .is-popped {
+  z-index: 40 !important;
+  rotate: -2deg;
+  translate: var(--pop-x) var(--pop-y);
+  scale: var(--pop-s);
+  animation: none;
+  cursor: zoom-out;
+  box-shadow:
+    0 4px 8px rgba(40, 30, 10, 0.12),
+    0 30px 60px rgba(40, 30, 10, 0.3);
+}
+
+.sb-page .sb-badge.is-popped {
+  rotate: calc(var(--r) + 360deg);
+}
+
+/* Everything else on the page fades back a little. */
+.sb-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 35;
+  background: rgba(251, 247, 239, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 350ms ease;
+}
+
+.sb-page.has-pop::after {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .is-shown .sb-in,
   .is-shown .sb-draw path,
