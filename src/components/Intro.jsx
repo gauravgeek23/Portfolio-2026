@@ -8,28 +8,25 @@ import HomeLoader from './HomeLoader';
 import { site } from '../data/site';
 import './Intro.css';
 
+// Whether this page load started on the home page (the preview bundle always starts there), and
+// whether the loader has already played since. Both reset on every full page load.
+const landedOnHome = import.meta.env.VITE_PREVIEW_BUNDLE || window.location.pathname === import.meta.env.BASE_URL;
+let loaderPlayed = false;
+
 export default function Intro() {
   const [bookOpen, setBookOpen] = useState(false);
   // Where the small book sits, so the big one can grow out of it; while the big one is up the
   // small one is hidden (it "is" the big one).
   const [origin, setOrigin] = useState(null);
-  // The landing loader plays once per visit, unless the visitor prefers reduced motion.
-  const [loading, setLoading] = useState(() => {
-    try {
-      if (sessionStorage.getItem('home-loader')) return false;
-    } catch {
-      // Storage unavailable: play it.
-    }
-    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  });
+  // The landing loader plays on every fresh load of the home page (refreshes included), but not
+  // when arriving from another page of the site, nor for visitors who prefer reduced motion.
+  const [loading, setLoading] = useState(
+    () => !loaderPlayed && landedOnHome && !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
   const bookRef = useRef(null);
   const target = useCallback(() => bookRef.current, []);
   const loaded = useCallback(() => {
-    try {
-      sessionStorage.setItem('home-loader', '1');
-    } catch {
-      // Storage unavailable: it plays again next time.
-    }
+    loaderPlayed = true;
     setLoading(false);
   }, []);
   return (
@@ -81,8 +78,8 @@ export default function Intro() {
       </div>
       <div className="text-small">
         <p className="text-muted">
-          Business-driven Product Designer with 5 years of E2E ownership, translating complex business challenges
-          into impactful experiences that drive measurable growth.
+          Business-driven Product Designer with 5 years of E2E ownership, translating complex business challenges into
+          impactful experiences that drive measurable growth.
         </p>
         <p>
           In 2026, led design for growth initiatives at a $45M+ business reshaping India’s engineering education

@@ -76,62 +76,87 @@ export default function HomeLoader({ target, onDone }) {
       await Promise.race([Promise.all(PHOTOS.map(load)), wait(2500)]);
       if (cancelled) return;
 
-      // 1. The photos ride the wind: each blows in from the left, drifting across the screen on a
-      //    wavy path, tumbling and flipping like paper, and comes to rest somewhere on screen.
-      const n = PHOTOS.length;
-      const DRIFT = 2400;
-      const rest = photos.current.map((el, i) => {
-        // Rest somewhere on screen, but clear of the book in the middle.
-        let x = (rnd(i, 1) - 0.5) * vw * 0.84;
-        const clear = 120 * BIG * 0.6;
-        if (Math.abs(x) < clear) x = (x < 0 ? -1 : 1) * (clear + rnd(i, 8) * 60);
-        // ...and fully on screen.
-        const edge = vw / 2 - Math.min(120, Math.max(64, vw * 0.09)) / 2 - 8;
-        x = Math.max(-edge, Math.min(edge, x));
-        const y = (rnd(i, 2) - 0.5) * vh * 0.75;
-        const r = (rnd(i, 3) - 0.5) * 50;
-        const startY = (rnd(i, 4) - 0.5) * vh * 0.9;
-        const startX = -vw / 2 - 140;
-        const lift = (rnd(i, 5) - 0.5) * vh * 0.35;
-        const frames = [0, 0.25, 0.5, 0.75, 1].map((t) => {
-          const wave = Math.sin(t * Math.PI * 2.5 + i) * (1 - t) * 70;
-          return {
-            offset: t,
-            translate: `${startX + (x - startX) * (1 - (1 - t) ** 2)}px ${startY + (y - startY) * t + lift * Math.sin(t * Math.PI) + wave}px`,
-            rotate: `${r + (1 - t) * (rnd(i, 6) > 0.5 ? 1 : -1) * 540}deg`,
-            transform: `rotateX(${(1 - t) * 70 * Math.sin(t * 9 + i)}deg) rotateY(${(1 - t) * 60 * Math.cos(t * 7 + i)}deg)`,
-            opacity: t === 0 ? 0 : 1,
-          };
-        });
-        play(el, frames, { duration: DRIFT, delay: rnd(i, 7) * 700, easing: 'cubic-bezier(0.25, 0.6, 0.3, 1)' });
-        return { x, y, r };
-      });
-      await wait(DRIFT + 450);
-      if (cancelled) return;
-
-      // 2. The cover opens a little and the photos dive into the book, one after another.
+      // 1-2. One continuous flight per photo: each drifts in from a different side of the screen
+      //      at its own moment, floats on a soft curve with a gentle tilt and flutter, and glides
+      //      straight into the book. The cover opens before the first arrives and closes after
+      //      the last.
       breathe.cancel();
       book.current.style.scale = String(BIG);
-      play(cover.current, [{ transform: 'rotateY(-8deg)' }, { transform: 'rotateY(-38deg)' }], {
-        duration: 350,
+      const FLIGHT = 2300;
+      const SPREAD = 1900; // first to last departure
+      const n = PHOTOS.length;
+      const flights = photos.current.map((el, i) => {
+        const side = i % 4; // top, right, bottom, left, in turn
+        const along = rnd(i, 1) - 0.5;
+        const pad = 140;
+        const [sx, sy] = [
+          [along * vw, -vh / 2 - pad],
+          [vw / 2 + pad, along * vh],
+          [along * vw, vh / 2 + pad],
+          [-vw / 2 - pad, along * vh],
+        ][side];
+        // A sideways bow in the path, like the wind carrying it.
+        const len = Math.hypot(sx, sy);
+        const bow = (rnd(i, 2) > 0.5 ? 1 : -1) * (0.18 + rnd(i, 3) * 0.16) * len;
+        const px = -sy / len;
+        const py = sx / len;
+        const at = (t, b) => [sx * (1 - t) + px * b, sy * (1 - t) + py * b];
+        const [mx, my] = at(0.45, bow);
+        const [nx, ny] = at(0.8, bow * 0.35);
+        const r = (rnd(i, 4) - 0.5) * 40;
+        const flip = (rnd(i, 5) - 0.5) * 50;
+        const delay = (i / (n - 1)) * SPREAD + (rnd(i, 6) - 0.5) * 220;
+        const flight = play(
+          el,
+          [
+            {
+              offset: 0,
+              translate: `${sx}px ${sy}px`,
+              rotate: `${r}deg`,
+              transform: 'rotateX(0deg) rotateY(0deg)',
+              scale: 0.85,
+              opacity: 0,
+            },
+            { offset: 0.1, opacity: 1 },
+            {
+              offset: 0.45,
+              translate: `${mx}px ${my}px`,
+              rotate: `${-r * 0.5}deg`,
+              transform: `rotateX(${flip}deg) rotateY(${-flip * 0.6}deg)`,
+              scale: 1,
+            },
+            {
+              offset: 0.8,
+              translate: `${nx}px ${ny}px`,
+              rotate: `${r * 0.3}deg`,
+              transform: `rotateX(${-flip * 0.4}deg) rotateY(${flip * 0.3}deg)`,
+              scale: 0.75,
+              opacity: 1,
+            },
+            {
+              offset: 1,
+              translate: '18px 0px',
+              rotate: '0deg',
+              transform: 'rotateX(0deg) rotateY(0deg)',
+              scale: 0.15,
+              opacity: 0,
+            },
+          ],
+          { duration: FLIGHT, delay, easing: 'cubic-bezier(0.37, 0, 0.63, 1)' },
+        );
+        return { delay, flight };
+      });
+      const first = Math.min(...flights.map((f) => f.delay));
+      const last = Math.max(...flights.map((f) => f.delay));
+      play(cover.current, [{ transform: 'rotateY(-8deg)' }, { transform: 'rotateY(-36deg)' }], {
+        duration: 500,
+        delay: first + FLIGHT * 0.6,
         easing: EASE,
       });
-      await Promise.all(
-        photos.current.map((el, i) =>
-          play(
-            el,
-            [
-              { translate: `${rest[i].x}px ${rest[i].y}px`, rotate: `${rest[i].r}deg`, scale: 1, opacity: 1 },
-              { opacity: 1, offset: 0.75 },
-              { translate: '18px 0px', rotate: `${rest[i].r + 200}deg`, scale: 0.15, opacity: 0 },
-            ],
-            { duration: 650, delay: 120 + i * 55, easing: 'cubic-bezier(0.55, 0, 0.75, 0.3)' },
-          ),
-        ),
-      );
+      await Promise.all(flights.map((f) => f.flight));
       if (cancelled) return;
-      await play(cover.current, [{ transform: 'rotateY(-38deg)' }, { transform: 'rotateY(-8deg)' }], {
-        duration: 380,
+      await play(cover.current, [{ transform: 'rotateY(-36deg)' }, { transform: 'rotateY(-8deg)' }], {
+        duration: 420,
         easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
       });
       if (cancelled) return;

@@ -11,13 +11,12 @@
     <meta property="og:title" content="Gaurav Kumar | Senior Product Designer" />
     <meta property="og:type" content="website" />
     <script>
-      // Every visit opens in light mode. A dark or colour choice from the toggle lasts for the
-      // current visit (reloads included) and is applied before first paint.
+      // New visitors start in light mode. A theme picked with the toggle is remembered (reloads
+      // and later visits) and applied before first paint.
       (function () {
         var theme;
         try {
-          localStorage.removeItem('theme'); // drop choices saved by older versions
-          theme = sessionStorage.getItem('theme');
+          theme = localStorage.getItem('theme');
         } catch (e) {}
         document.documentElement.dataset.theme =
           ['dark', 'red', 'blue', 'green', 'yellow'].indexOf(theme) > -1 ? theme : 'light';

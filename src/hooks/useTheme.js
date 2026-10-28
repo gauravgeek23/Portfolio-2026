@@ -14,7 +14,7 @@ export const COLOUR_SWATCH = { red: '#e5383b', blue: '#4c7dff', green: '#2fbf71'
 
 function readColourIndex() {
   try {
-    const i = Number(sessionStorage.getItem(COLOUR_KEY));
+    const i = Number(localStorage.getItem(COLOUR_KEY));
     return Number.isInteger(i) && i >= 0 && i < COLOURS.length ? i : 0;
   } catch {
     return 0;
@@ -27,9 +27,9 @@ const DURATION = 1400;
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Light / dark / colour theme on <html data-theme>. Every visit opens light; the choice is
-// kept for the current visit only (sessionStorage), restored before first paint by
-// index.html. This keeps React in sync.
+// Light / dark / colour theme on <html data-theme>. New visitors start in light; once someone
+// picks a theme it is remembered (localStorage), through reloads and later visits, and restored
+// before first paint by index.html. This keeps React in sync.
 //
 // Switching animates as a circle from the toggle: into dark or a colour, the new page grows
 // out of the icon to fill the screen; back to light, the coloured page shrinks into it.
@@ -62,8 +62,8 @@ export function useTheme() {
         });
       };
       try {
-        sessionStorage.setItem(STORAGE_KEY, next);
-        sessionStorage.setItem(COLOUR_KEY, String(nextColourIndex));
+        localStorage.setItem(STORAGE_KEY, next);
+        localStorage.setItem(COLOUR_KEY, String(nextColourIndex));
       } catch {
         // Storage unavailable: the choice lasts until the page is reloaded.
       }
