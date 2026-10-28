@@ -149,7 +149,7 @@
   animation: none;
 }
 
-/* The cover lifts a hair while each snapshot is out and settles as it slips back: one 2.5s beat
+/* The cover lifts a little while each snapshot is out and settles as it slips back: one 2.5s beat
    per snapshot, timed to the 7.5s peek cycle above. */
 .book__cover {
   animation: book-flap 2.5s ease-in-out infinite;
@@ -163,7 +163,7 @@
   }
   21%,
   72% {
-    transform: rotateY(-15deg);
+    transform: rotateY(-22deg);
   }
 }
 
