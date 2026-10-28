@@ -50,6 +50,5 @@ export const playItems = [
   {
     title: 'Movie ticket booking journey',
     media: { video: movieVideo, poster: movie1x, poster2x: movie2x, ratio: 1, alt: 'Avengers-themed movie booking app listing Black Panther, Captain Marvel and popular films' },
-    divider: true,
   },
 ];
