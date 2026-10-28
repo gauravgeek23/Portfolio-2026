@@ -1,0 +1,45 @@
+/* Home page loader: everything is centred on the screen and moved with the Web Animations API
+   (see HomeLoader.jsx). The book reuses the hero book's parts (book__page / book__cover). */
+.home-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--color-white);
+}
+
+.home-loader > * {
+  grid-area: 1 / 1;
+}
+
+/* The book sits above the photos, so they vanish into it as they arrive. */
+.home-loader__book {
+  position: relative;
+  z-index: 2;
+  width: 68px;
+  height: 97px;
+  perspective: 600px;
+}
+
+.home-loader__book .book__cover {
+  animation: none;
+}
+
+.home-loader__photo {
+  z-index: 1;
+  width: clamp(56px, 7vw, 88px);
+  padding: 4px 4px 10px;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 8px 18px rgba(0, 0, 0, 0.14);
+  opacity: 0;
+}
+
+.home-loader__photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}

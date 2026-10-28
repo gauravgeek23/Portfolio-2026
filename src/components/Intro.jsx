@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import avatar from '../assets/avatar-156.webp';
 import peekChangLa from '../assets/book/chang-la-peek.webp';
 import peekHampta from '../assets/book/hampta-pass-peek.webp';
 import peekBali from '../assets/book/bali-kecak-peek.webp';
 import ProfileBook from './ProfileBook';
+import HomeLoader from './HomeLoader';
 import { site } from '../data/site';
 import './Intro.css';
 
@@ -12,6 +13,25 @@ export default function Intro() {
   // Where the small book sits, so the big one can grow out of it; while the big one is up the
   // small one is hidden (it "is" the big one).
   const [origin, setOrigin] = useState(null);
+  // The landing loader plays once per visit, unless the visitor prefers reduced motion.
+  const [loading, setLoading] = useState(() => {
+    try {
+      if (sessionStorage.getItem('home-loader')) return false;
+    } catch {
+      // Storage unavailable: play it.
+    }
+    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
+  const bookRef = useRef(null);
+  const target = useCallback(() => bookRef.current, []);
+  const loaded = useCallback(() => {
+    try {
+      sessionStorage.setItem('home-loader', '1');
+    } catch {
+      // Storage unavailable: it plays again next time.
+    }
+    setLoading(false);
+  }, []);
   return (
     <section className="intro">
       {/* Profile photo on a little passport-style book (after Airbnb's host profile) that opens a
@@ -19,8 +39,9 @@ export default function Intro() {
       <div className="intro__avatar">
         <button
           type="button"
+          ref={bookRef}
           className="intro__book"
-          style={{ visibility: origin ? 'hidden' : undefined }}
+          style={{ visibility: origin || loading ? 'hidden' : undefined }}
           onClick={(e) => {
             setOrigin(e.currentTarget.getBoundingClientRect());
             setBookOpen(true);
@@ -47,6 +68,7 @@ export default function Intro() {
           </span>
         </button>
       </div>
+      {loading && <HomeLoader target={target} onDone={loaded} />}
       <ProfileBook
         open={bookOpen}
         origin={origin}
