@@ -1,7 +1,7 @@
 import { images } from '../data/about-images';
 import avatar from '../assets/avatar-156.webp';
 import examInterface from '../assets/resume/exam-interface.webp';
-import academicCalendar from '../assets/case-studies/academic-calendar/workspace@1x.webp';
+import academicCalendar from '../assets/work/academic-calendar-800.webp';
 import maldives from '../assets/case-studies/lottiefiles-vision-pro/maldives@1x.webp';
 import iconscout from '../assets/case-studies/iconscout-plugin/hero@1x.webp';
 import changLa from '../assets/book/chang-la.webp';
@@ -277,8 +277,8 @@ export function Y2025Left() {
       </Text>
       <Snap
         src={academicCalendar}
-        alt="Academic calendar workspace with classes, assignments and notes"
-        h={180}
+        alt="Newton School of Technology academic calendar showing a weekly schedule of lectures and labs"
+        h={150}
         x={34}
         y={160}
         w={310}
