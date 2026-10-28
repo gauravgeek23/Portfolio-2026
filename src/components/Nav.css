@@ -29,12 +29,12 @@
   color: var(--color-black);
 }
 
-/* The dot of "gk.": a yellow circle three times a full stop's size, the same in every theme,
+/* The dot of "gk.": a yellow circle twice a full stop's size, the same in every theme,
    sitting on the baseline like the full stop it replaces. */
 .nav__dot {
   display: inline-block;
-  width: 0.42em;
-  height: 0.42em;
+  width: 0.28em;
+  height: 0.28em;
   margin-left: 0.06em;
   border-radius: 50%;
   background: #f6c333;
@@ -44,7 +44,7 @@
   overflow: hidden;
   vertical-align: baseline;
   position: relative;
-  top: 0.11em;
+  top: 0.04em;
 }
 
 .nav__list {
