@@ -182,13 +182,13 @@ a.cs-link:hover > .icon {
   background: #111;
 }
 
-/* Tile behind cut-out graphics: light grey in light mode; in dark and the colour themes it
+/* Tile behind cut-out graphics: light grey in the light and colour themes; in dark mode it
    matches the near-black phone-recording tiles (#111) so a grid reads as one set. */
 :root {
   --cs-tile: #fafafa;
 }
 
-:root:not([data-theme='light']) {
+:root[data-theme='dark'] {
   --cs-tile: #111;
 }
 

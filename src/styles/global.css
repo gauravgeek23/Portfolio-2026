@@ -30,9 +30,9 @@
   color-scheme: light;
 }
 
-/* Dark theme: the same tokens, re-pointed. The site always opens light; <html
-   data-theme="dark"> is set by the toggle in the nav for the current visit (and
-   restored on reload before first paint by index.html). */
+/* Dark theme: the same tokens, re-pointed. New visitors start light; <html
+   data-theme="dark"> is set by the toggle in the nav, remembered, and restored before
+   first paint by index.html. */
 :root[data-theme='dark'] {
   --color-white: #0b0b0b;
   --color-black: #ececec;
@@ -49,76 +49,71 @@
 }
 
 /* Colour themes (red, blue, green, yellow): the toggle's third step, rotating each
-   time round. Same tokens, re-pointed. */
+   time round. Built like Material 3 tonal palettes: a light tinted background (tone ~95),
+   containers and cards a step deeper (90-93), near-black tinted text (10) and the
+   colour itself (40) for accents and links. Same tokens, re-pointed. */
 
-/* Red theme: deep crimson with warm off-white type (7:1), a pale pink for secondary
-   text (5.1:1), darker red cards, and a cream accent so the gk. dot doesn't clash. */
 :root[data-theme='red'] {
-  --color-white: #a8111a;
-  --color-black: #fff4ef;
-  --color-grey-1: #f6c9c3;
-  --color-grey-2: #cf4a4f;
-  --color-grey-3: #8c0d14;
-  --color-surface: #9a0f17;
-  --color-accent: #ffd08a;
-  --color-link: #ffe2a8;
-  --color-tick: #c2333a;
-  --color-wordmark: #bf2a31;
-  --color-media: #8c0d14;
-  --shadow-lift: 0 16px 40px rgba(40, 0, 0, 0.45);
-  color-scheme: dark;
+  --color-white: #ffedea;
+  --color-black: #2c1512;
+  --color-grey-1: #73514d;
+  --color-grey-2: #e9bab3;
+  --color-grey-3: #ffd9d3;
+  --color-surface: #ffe3de;
+  --color-accent: #b3261e;
+  --color-link: #b3261e;
+  --color-tick: #f5d2cc;
+  --color-wordmark: #fbdcd7;
+  --color-media: #ffe0db;
+  --shadow-lift: 0 16px 40px rgba(110, 20, 15, 0.14);
+  color-scheme: light;
 }
 
-/* Blue theme: deep cobalt with cool off-white type (9:1); the orange accent stays, as
-   its complement. */
 :root[data-theme='blue'] {
-  --color-white: #1739a6;
-  --color-black: #f4f6ff;
-  --color-grey-1: #c3cef7;
-  --color-grey-2: #4a66c4;
-  --color-grey-3: #102b85;
-  --color-surface: #13329a;
-  --color-accent: #ff9a3d;
-  --color-link: #ffe2a8;
-  --color-tick: #3553b8;
-  --color-wordmark: #2e4cb3;
-  --color-media: #102b85;
-  --shadow-lift: 0 16px 40px rgba(0, 8, 40, 0.45);
-  color-scheme: dark;
+  --color-white: #eef2ff;
+  --color-black: #161b2c;
+  --color-grey-1: #4a5470;
+  --color-grey-2: #bfc8e4;
+  --color-grey-3: #d9e2ff;
+  --color-surface: #e3e9ff;
+  --color-accent: #005ac1;
+  --color-link: #005ac1;
+  --color-tick: #d5ddf5;
+  --color-wordmark: #dbe3fb;
+  --color-media: #dde5ff;
+  --shadow-lift: 0 16px 40px rgba(0, 35, 100, 0.14);
+  color-scheme: light;
 }
 
-/* Green theme: deep forest green with soft white type (7.7:1) and a cream accent. */
 :root[data-theme='green'] {
-  --color-white: #0f5b3d;
-  --color-black: #f2faf5;
-  --color-grey-1: #b9e2cc;
-  --color-grey-2: #3f8264;
-  --color-grey-3: #0a4630;
-  --color-surface: #0d5236;
-  --color-accent: #ffd08a;
-  --color-link: #ffe2a8;
-  --color-tick: #2b7253;
-  --color-wordmark: #236b4c;
-  --color-media: #0a4630;
-  --shadow-lift: 0 16px 40px rgba(0, 25, 15, 0.45);
-  color-scheme: dark;
+  --color-white: #eaf6ec;
+  --color-black: #112019;
+  --color-grey-1: #45594d;
+  --color-grey-2: #b5cfbe;
+  --color-grey-3: #cfe8d6;
+  --color-surface: #dcefe1;
+  --color-accent: #006d43;
+  --color-link: #006d43;
+  --color-tick: #cde3d4;
+  --color-wordmark: #d6eadc;
+  --color-media: #d6ecdc;
+  --shadow-lift: 0 16px 40px rgba(0, 60, 35, 0.13);
+  color-scheme: light;
 }
 
-/* Yellow theme: warm sunflower with near-black type (10.5:1); light background, so
-   dark text and a burnt-orange accent instead of the white-on-colour of the others. */
 :root[data-theme='yellow'] {
-  --color-white: #f6c333;
-  --color-black: #1e1a10;
-  --color-grey-1: #5c4714;
-  --color-grey-2: #c99a1c;
-  --color-grey-3: #e9b11e;
-  --color-surface: #f2bb26;
-  --color-accent: #b3380a;
-  --color-link: #8f2d06;
-  --color-tick: #dcaa22;
-  --color-wordmark: #ebb620;
-  --color-media: #e9b11e;
-  --shadow-lift: 0 16px 40px rgba(80, 55, 0, 0.25);
+  --color-white: #fff5d6;
+  --color-black: #221d08;
+  --color-grey-1: #5e5420;
+  --color-grey-2: #ddcd8c;
+  --color-grey-3: #f7e6a8;
+  --color-surface: #fbedbb;
+  --color-accent: #9a5b00;
+  --color-link: #7a5f00;
+  --color-tick: #ecdfa8;
+  --color-wordmark: #f3e6b4;
+  --color-media: #faecb8;
+  --shadow-lift: 0 16px 40px rgba(90, 70, 0, 0.14);
   color-scheme: light;
 }
 
