@@ -26,6 +26,11 @@ export const topprAnswrCaseStudy = {
   blocks: [
     { type: 'hero' },
     {
+      type: 'callout',
+      title: 'Team',
+      body: '1 Product Design Intern (me), working alongside the Toppr design team.',
+    },
+    {
       type: 'text',
       title: 'Introduction and Objective',
       body: [

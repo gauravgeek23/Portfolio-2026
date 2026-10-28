@@ -15,6 +15,11 @@ export const iconscoutPluginCaseStudy = {
   blocks: [
     { type: 'hero' },
     {
+      type: 'callout',
+      title: 'Team',
+      body: '1 Designer (me), 1 Frontend Developer, 1 Backend Developer, and 1 Animator.',
+    },
+    {
       type: 'text',
       title: 'Ranked #14 among the most-used Figma plugins, IconScout is trusted by 1M+ designers worldwide.',
       body: [
