@@ -176,10 +176,15 @@
 .pbook__face {
   position: absolute;
   inset: 0;
-  overflow: hidden;
   backface-visibility: hidden;
   background: #fbf7ef;
   cursor: pointer;
+}
+
+/* The leaf under the pointer comes to the front, so an item growing on hover can spill over
+   the facing page. */
+.pbook__leaf:has(.sb-page > :hover) {
+  z-index: 60 !important;
 }
 
 /* Hovering a right-hand page curls its bottom corner, hinting that it turns. */

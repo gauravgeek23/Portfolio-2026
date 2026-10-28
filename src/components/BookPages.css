@@ -28,7 +28,7 @@
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   height: 100%;
-  overflow: hidden;
+  border-radius: inherit;
   color: var(--ink);
   font-family: var(--note);
   line-height: 1.3;
@@ -139,16 +139,6 @@
   padding: 5px;
 }
 
-/* Hover: the photo straightens, lifts towards you and comes to the front. */
-.sb-snap:hover {
-  z-index: 20 !important;
-  rotate: 0deg;
-  scale: 1.06;
-  translate: 0 -4px;
-  box-shadow:
-    0 2px 4px rgba(40, 30, 10, 0.12),
-    0 18px 36px rgba(40, 30, 10, 0.22);
-}
 
 /* Washi tape */
 .sb-tape {
@@ -208,18 +198,6 @@
   line-height: 1;
 }
 
-@keyframes sb-wiggle {
-  25% {
-    rotate: calc(var(--r) + 3deg);
-  }
-  75% {
-    rotate: calc(var(--r) - 3deg);
-  }
-}
-
-.sb-note:hover {
-  animation: sb-wiggle 420ms ease-in-out;
-}
 
 .sb-note__title {
   margin: 0 0 6px;
@@ -357,9 +335,6 @@
   transition: rotate 450ms var(--spring);
 }
 
-.sb-stamp:hover {
-  rotate: -4deg;
-}
 
 /* ---------- Ticket, list and badge ---------- */
 .sb-ticket {
@@ -382,9 +357,6 @@
   letter-spacing: 0;
 }
 
-.sb-ticket:hover {
-  translate: 0 -4px;
-}
 
 .sb-list {
   padding: 0;
@@ -434,9 +406,6 @@
   transition: rotate 700ms var(--spring);
 }
 
-.sb-badge:hover {
-  rotate: calc(var(--r) + 180deg);
-}
 
 .sb-badge span {
   font-family: var(--hand);
@@ -450,70 +419,44 @@
   font-size: 17px;
 }
 
-/* ---------- Pop: click an item to see it big ---------- */
-.sb-snap,
+/* ---------- Hover: items grow right where they are ----------
+   Photos, notes and keepsakes straighten, lift and scale by --hs (set per item from its width);
+   they may spill past the page and the book. */
 .sb-note,
 .sb-ticket,
 .sb-badge,
 .sb-stamp {
-  cursor: zoom-in;
-}
-
-.sb-note,
-.sb-ticket,
-.sb-stamp {
   transition:
-    rotate 550ms var(--spring),
-    scale 550ms var(--spring),
-    translate 550ms var(--spring),
+    rotate 450ms var(--spring),
+    scale 450ms var(--spring),
+    translate 450ms var(--spring),
     box-shadow 300ms ease;
 }
 
-.sb-badge {
-  transition:
-    rotate 700ms var(--spring),
-    scale 550ms var(--spring),
-    translate 550ms var(--spring);
-}
-
-/* The item springs to the middle of its page, straightens with a playful tilt and lifts off. */
-.sb-page .is-popped {
+.sb-page > .sb-snap:hover,
+.sb-page > .sb-note:hover,
+.sb-page > .sb-ticket:hover,
+.sb-page > .sb-stamp:hover {
   z-index: 40 !important;
-  rotate: -2deg;
-  translate: var(--pop-x) var(--pop-y);
-  scale: var(--pop-s);
+  rotate: calc(var(--r) * 0.25);
+  scale: var(--hs);
+  translate: 0 -4px;
   animation: none;
-  cursor: zoom-out;
   box-shadow:
     0 4px 8px rgba(40, 30, 10, 0.12),
-    0 30px 60px rgba(40, 30, 10, 0.3);
+    0 24px 48px rgba(40, 30, 10, 0.26);
 }
 
-.sb-page .sb-badge.is-popped {
+.sb-page > .sb-badge:hover {
+  z-index: 40 !important;
   rotate: calc(var(--r) + 360deg);
-}
-
-/* Everything else on the page fades back a little. */
-.sb-page::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 35;
-  background: rgba(251, 247, 239, 0.7);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 350ms ease;
-}
-
-.sb-page.has-pop::after {
-  opacity: 1;
+  scale: var(--hs);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .is-shown .sb-in,
   .is-shown .sb-draw path,
-  .sb-doodle--sun,
-  .sb-note:hover {
+  .sb-doodle--sun {
     animation: none;
   }
 }

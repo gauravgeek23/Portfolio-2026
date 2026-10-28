@@ -19,9 +19,19 @@ import './BookPages.css';
 // The pages of the profile book: a scrapbook of the last few years, one spread per year, opened
 // by a hello and a letter. Each page is 460 x 654 and laid out freely (x / y in px), like things
 // stuck into a notebook. Items drop in one after another (`d` = order) when their spread opens;
-// photos straighten and lift on hover, notes wiggle, doodles draw themselves.
+// photos, notes and keepsakes grow in place on hover, and doodles draw themselves.
 
-const at = ({ x, y, w, r = 0, d = 0, z }) => ({ left: x, top: y, width: w, '--r': `${r}deg`, '--d': d, zIndex: z });
+// --hs: how much an item grows on hover, so small ones grow more and big ones stay sensible
+// (about 330px wide at most, never less than 1.2x).
+const at = ({ x, y, w, r = 0, d = 0, z }) => ({
+  left: x,
+  top: y,
+  width: w,
+  zIndex: z,
+  '--r': `${r}deg`,
+  '--d': d,
+  '--hs': w ? Math.max(1.2, Math.min(1.8, 330 / w)) : 1.3,
+});
 
 // A taped photo: a polaroid with a handwritten caption, or `plain` with a thin white border.
 function Snap({ src, alt, h, caption, tape = 'yellow', plain, ...pos }) {
