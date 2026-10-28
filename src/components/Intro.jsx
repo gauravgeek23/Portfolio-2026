@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import avatar from '../assets/avatar-156.webp';
+import peekChangLa from '../assets/book/chang-la-peek.webp';
+import peekHampta from '../assets/book/hampta-pass-peek.webp';
+import peekBali from '../assets/book/bali-kecak-peek.webp';
 import ProfileBook from './ProfileBook';
 import { site } from '../data/site';
 import './Intro.css';
@@ -28,6 +31,17 @@ export default function Intro() {
           <span className="book__page" style={{ '--i': 3 }} />
           <span className="book__page" style={{ '--i': 2 }} />
           <span className="book__page" style={{ '--i': 1 }} />
+          {/* A few snapshots tucked inside, peeking out of the edges at rest to invite a click;
+              they slip back in when the book starts to open. */}
+          <span className="book__peek book__peek--top" style={{ '--d': '0s' }}>
+            <img src={peekChangLa} alt="" />
+          </span>
+          <span className="book__peek book__peek--right" style={{ '--d': '0.9s' }}>
+            <img src={peekHampta} alt="" />
+          </span>
+          <span className="book__peek book__peek--low" style={{ '--d': '1.8s' }}>
+            <img src={peekBali} alt="" />
+          </span>
           <span className="book__cover">
             <img src={avatar} alt={`Portrait of ${site.name}`} width="34" height="38" />
           </span>

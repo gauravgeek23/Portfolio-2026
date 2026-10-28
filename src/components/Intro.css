@@ -90,6 +90,76 @@
   height: 97px;
 }
 
+/* Snapshots peeking out of the closed book: each bobs gently (staggered by --d) and tucks back
+   inside on hover, when the cover starts to open. */
+.book__peek {
+  position: absolute;
+  width: 26px;
+  padding: 2px 2px 5px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  rotate: var(--r);
+  transition:
+    translate 450ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 300ms ease;
+  animation: book-peek 3.6s ease-in-out var(--d) infinite;
+}
+
+.book__peek img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.book__peek--top {
+  --r: -9deg;
+  --out: 0 -4px;
+  top: -14px;
+  left: 30px;
+}
+
+.book__peek--right {
+  --r: 11deg;
+  --out: 4px 0;
+  top: 14px;
+  right: -17px;
+}
+
+.book__peek--low {
+  --r: -6deg;
+  --out: 4px 0;
+  bottom: 14px;
+  right: -15px;
+  width: 22px;
+}
+
+@keyframes book-peek {
+  0%,
+  70%,
+  100% {
+    translate: 0 0;
+  }
+  80% {
+    translate: var(--out);
+  }
+  90% {
+    translate: 0 0;
+  }
+}
+
+.intro__avatar:hover .book__peek {
+  translate: -10px 10px;
+  opacity: 0;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book__peek {
+    animation: none;
+  }
+}
+
 /* Prism glow: a soft spectrum behind the photo that slowly turns and breathes. */
 .intro__avatar::before {
   content: '';
