@@ -28,7 +28,7 @@ export const topprAnswrCaseStudy = {
     {
       type: 'callout',
       title: 'Team',
-      body: '1 Product Design Intern (me), working alongside the Toppr design team.',
+      body: '3 Product Designers (including me), 4 Developers, and 2 Product Managers.',
     },
     {
       type: 'text',

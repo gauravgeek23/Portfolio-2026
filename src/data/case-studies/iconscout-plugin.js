@@ -17,7 +17,7 @@ export const iconscoutPluginCaseStudy = {
     {
       type: 'callout',
       title: 'Team',
-      body: '1 Designer (me), 1 Frontend Developer, 1 Backend Developer, and 1 Animator.',
+      body: '1 Designer (me), 1 Frontend Developer, 1 Backend Developer, 1 Animator, and 1 Product Manager.',
     },
     {
       type: 'text',
