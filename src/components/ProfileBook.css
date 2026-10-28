@@ -24,13 +24,14 @@
   border-radius: 12px;
 }
 
-/* The white panel is its own layer so it can fade in after the book has opened. */
+/* The panel (white in light mode, the theme's surface in dark and colour modes) is its own
+   layer so it can fade in after the book has opened. */
 .pbook-modal__panel::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: #fafafa;
+  background: var(--color-surface);
   opacity: 0;
   transform: scale(0.985);
   transition:
@@ -55,8 +56,8 @@
   height: 40px;
   border: 0;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.06);
-  color: #2d2d2d;
+  background: color-mix(in srgb, var(--color-black) 8%, transparent);
+  color: var(--color-black);
   font-size: 26px;
   line-height: 1;
   cursor: pointer;
@@ -68,7 +69,7 @@
 }
 
 .pbook-modal__close:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: color-mix(in srgb, var(--color-black) 14%, transparent);
 }
 
 /* The stage keeps the 920 x 654 book at its design size and scales it to fit. */
@@ -303,13 +304,13 @@
   height: 36px;
   border: 0;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.06);
-  color: #2d2d2d;
+  background: color-mix(in srgb, var(--color-black) 8%, transparent);
+  color: var(--color-black);
   cursor: pointer;
 }
 
 .pbook-nav > button:hover:not(:disabled) {
-  background: rgba(0, 0, 0, 0.1);
+  background: color-mix(in srgb, var(--color-black) 14%, transparent);
 }
 
 .pbook-nav > button:disabled {
@@ -324,7 +325,7 @@
   padding: 0;
   list-style: none;
   font-size: 12px;
-  color: #9a9a96;
+  color: var(--color-grey-1);
 }
 
 .pbook-nav li button {
@@ -339,7 +340,7 @@
 
 .pbook-nav li button:hover,
 .pbook-nav li button[aria-current='page'] {
-  color: #1f1f1f;
+  color: var(--color-black);
 }
 
 /* ---------- Phones: one tall page at a time ----------
@@ -402,14 +403,14 @@
   min-width: 96px;
   font-size: 13px;
   text-align: center;
-  color: #9a9a96;
+  color: var(--color-grey-1);
   font-variant-numeric: tabular-nums;
 }
 
 .pbook-nav__count b {
   margin-right: 6px;
   font-weight: 500;
-  color: #1f1f1f;
+  color: var(--color-black);
 }
 
 /* Phones: a narrower margin around the panel. */
