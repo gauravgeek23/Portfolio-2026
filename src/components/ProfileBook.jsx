@@ -17,9 +17,11 @@ import {
 } from './BookPages';
 import './ProfileBook.css';
 
-// The open book is 920 x 654 (two 460 x 654 pages); it scales down to fit smaller screens.
-const BOOK_W = 920;
+// The open book is 920 x 654 (two 460 x 654 pages); it scales down to fit smaller screens. On
+// phones it is a single 460 x 654 page instead, turned one page at a time, so it can be larger.
+const PAGE_W = 460;
 const BOOK_H = 654;
+const SINGLE_QUERY = '(max-width: 640px)';
 // Closing: the panel fades, then the book closes back into the small one.
 const CLOSE_MS = 1400;
 const FLIP_MS = 900;
@@ -45,7 +47,33 @@ const LEAVES = [
   { front: <Y2023Right />, back: <Endpaper /> },
 ];
 const SPREADS = ['Preface', '2026', '2025', '2024', '2023'];
-const LAST = SPREADS.length; // spreads are 1..LAST (turned leaves); 0 is closed
+
+// Phones: one page per leaf, in reading order. Each leaf shows its page on the front; its back
+// is plain paper, and a turned leaf folds away to the left and fades.
+const PAGES = [
+  ['Hello', <Preface key="p" />],
+  ['Hello', <Letter key="l" />],
+  ['2026', <Y2026Left key="26l" />],
+  ['2026', <Y2026Right key="26r" />],
+  ['2025', <Y2025Left key="25l" />],
+  ['2025', <Y2025Right key="25r" />],
+  ['2024', <Y2024Left key="24l" />],
+  ['2024', <Y2024Right key="24r" />],
+  ['2023', <Y2023Left key="23l" />],
+  ['2023', <Y2023Right key="23r" />],
+];
+const SINGLE_LEAVES = [{ front: <Cover />, back: <Endpaper /> }, ...PAGES.map(([, page]) => ({ front: page, back: <Endpaper /> }))];
+
+function useSinglePage() {
+  const [single, setSingle] = useState(() => window.matchMedia(SINGLE_QUERY).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(SINGLE_QUERY);
+    const onChange = () => setSingle(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return single;
+}
 
 // A popup with a scrapbook about Gaurav, one spread per year. It grows out of the small book on
 // the home page (`origin`, that book's bounding box), its cover swinging open as it enlarges; then
@@ -58,6 +86,12 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
   const [scale, setScale] = useState(1);
   const [from, setFrom] = useState({ x: 0, y: 0, s: 0.2 });
   const closeButton = useRef(null);
+  const touchX = useRef(null);
+  const single = useSinglePage();
+  const leaves = single ? SINGLE_LEAVES : LEAVES;
+  // Views are 1..LAST (the number of turned leaves); 0 is closed.
+  const LAST = leaves.length - 1;
+  const bookW = single ? PAGE_W : PAGE_W * 2;
   const onClosedRef = useRef(onClosed);
   onClosedRef.current = onClosed;
   const isOpen = turned > 0;
@@ -80,7 +114,9 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
   useLayoutEffect(() => {
     if (!mounted) return undefined;
     const fit = () => {
-      const s = Math.min(1, (window.innerWidth - 48) / BOOK_W, (window.innerHeight - 200) / BOOK_H);
+      const s = single
+        ? Math.min(1, (window.innerWidth - 32) / PAGE_W, (window.innerHeight - 150) / BOOK_H)
+        : Math.min(1, (window.innerWidth - 48) / (PAGE_W * 2), (window.innerHeight - 200) / BOOK_H);
       setScale(s);
       // Where the closed book starts: over the small book, at its size. The closed book (one
       // page wide) sits at the centre of the screen once enlarged.
@@ -88,14 +124,24 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
         setFrom({
           x: origin.left + origin.width / 2 - window.innerWidth / 2,
           y: origin.top + origin.height / 2 - window.innerHeight / 2,
-          s: origin.width / ((BOOK_W / 2) * s),
+          s: origin.width / (PAGE_W * s),
         });
       }
     };
     fit();
     window.addEventListener('resize', fit);
     return () => window.removeEventListener('resize', fit);
-  }, [mounted, origin]);
+  }, [mounted, origin, single]);
+
+  // Switching between one and two pages (e.g. rotating a tablet) starts again from the first view.
+  const firstRender = useRef(true);
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    setTurned((t) => (t > 0 ? 1 : t));
+  }, [single]);
 
   const close = useCallback(() => onClose(), [onClose]);
 
@@ -111,7 +157,7 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
       setFlipping(by > 0 ? turned : next);
       setTurned(next);
     },
-    [turned, close],
+    [turned, close, LAST],
   );
 
   useEffect(() => {
@@ -144,7 +190,7 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
 
   return createPortal(
     <div
-      className={`pbook-modal${isOpen ? ' is-open' : ''}`}
+      className={`pbook-modal${isOpen ? ' is-open' : ''}${single ? ' is-single' : ''}`}
       role="dialog"
       aria-modal="true"
       aria-label={`${site.name}: a scrapbook of the last few years`}
@@ -156,21 +202,36 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
         </button>
         <div
           className="pbook-stage"
-          style={{ '--scale': scale, '--from-x': `${from.x}px`, '--from-y': `${from.y}px`, '--from-s': from.s }}
+          style={{
+            '--scale': scale,
+            '--book-w': `${bookW}px`,
+            '--from-x': `${from.x}px`,
+            '--from-y': `${from.y}px`,
+            '--from-s': from.s,
+          }}
+          // Phones: swipe left for the next page, right for the previous one.
+          onTouchStart={(e) => {
+            touchX.current = e.touches[0].clientX;
+          }}
+          onTouchEnd={(e) => {
+            const dx = e.changedTouches[0].clientX - (touchX.current ?? 0);
+            if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+            touchX.current = null;
+          }}
         >
           <div className="pbook">
             {/* The page blocks under each side: their edges and the book's shadow. */}
             <div className="pbook__block pbook__block--left" />
             <div className="pbook__block pbook__block--right" />
-            {LEAVES.map((leaf, i) => {
+            {leaves.map((leaf, i) => {
               const isTurned = i < turned;
-              const z = flipping === i ? 50 : isTurned ? i + 1 : LEAVES.length - i;
+              const z = flipping === i ? 50 : isTurned ? i + 1 : leaves.length - i;
               return (
                 <div
                   key={i}
                   className={`pbook__leaf${i === 0 ? ' pbook__leaf--cover' : ''}${isTurned ? ' is-turned' : ''}`}
                   style={{ zIndex: z }}
-                  aria-hidden={!(i === turned || i === turned - 1)}
+                  aria-hidden={!(i === turned || (!single && i === turned - 1))}
                 >
                   {/* `is-shown` marks the two pages on view, so their items can animate in. */}
                   <div
@@ -180,7 +241,7 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
                     {leaf.front}
                   </div>
                   <div
-                    className={`pbook__face pbook__face--back${i === turned - 1 ? ' is-shown' : ''}`}
+                    className={`pbook__face pbook__face--back${!single && i === turned - 1 ? ' is-shown' : ''}`}
                     onClick={() => go(-1)}
                   >
                     {leaf.back}
@@ -191,16 +252,22 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
           </div>
         </div>
         <nav className="pbook-nav" aria-label="Pages">
-          <button type="button" onClick={() => go(-1)} disabled={turned <= 1} aria-label="Previous pages">
+          <button type="button" onClick={() => go(-1)} disabled={turned <= 1} aria-label="Previous page">
             ←
           </button>
-          <ol>
-            {SPREADS.map((label, i) => (
-              <li key={label} aria-current={turned === i + 1 ? 'page' : undefined}>
-                {label}
-              </li>
-            ))}
-          </ol>
+          {single ? (
+            <p className="pbook-nav__count">
+              <b>{PAGES[Math.max(0, turned - 1)][0]}</b> {Math.max(1, turned)} / {PAGES.length}
+            </p>
+          ) : (
+            <ol>
+              {SPREADS.map((label, i) => (
+                <li key={label} aria-current={turned === i + 1 ? 'page' : undefined}>
+                  {label}
+                </li>
+              ))}
+            </ol>
+          )}
           <button type="button" onClick={() => go(1)} aria-label={turned >= LAST ? 'Close the book' : 'Next pages'}>
             →
           </button>

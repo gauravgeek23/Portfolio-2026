@@ -73,7 +73,7 @@
 
 /* The stage keeps the 920 x 654 book at its design size and scales it to fit. */
 .pbook-stage {
-  width: calc(920px * var(--scale));
+  width: calc(var(--book-w) * var(--scale));
   height: calc(654px * var(--scale));
   perspective: 2200px;
   /* Starts over the small book on the home page, at its size. */
@@ -88,7 +88,7 @@
 
 .pbook {
   position: relative;
-  width: 920px;
+  width: var(--book-w);
   height: 654px;
   transform-style: preserve-3d;
   transform-origin: 0 0;
@@ -330,15 +330,75 @@
   color: #1f1f1f;
 }
 
+/* ---------- Phones: one tall page at a time ----------
+   The book is a single page; the cover and each turned page fold away to the left around the
+   spine and fade as they go, revealing the next page underneath. */
+.is-single .pbook,
+.is-single.is-open .pbook {
+  transform: scale(var(--scale));
+}
+
+.is-single .pbook__leaf,
+.is-single .pbook__block--right {
+  left: 0;
+}
+
+.is-single .pbook__block--left {
+  display: none;
+}
+
+.is-single .pbook__leaf {
+  opacity: 1;
+  transition:
+    transform 800ms cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 150ms ease;
+}
+
+.is-single .pbook__leaf.is-turned {
+  opacity: 0;
+  transition:
+    transform 800ms cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 350ms ease 380ms;
+}
+
+/* The cover keeps its slower swing as the book opens. */
+.is-single .pbook__leaf--cover {
+  transition-duration: 1000ms, 150ms;
+}
+
+.is-single .pbook__leaf--cover.is-turned {
+  transition:
+    transform 1000ms cubic-bezier(0.65, 0, 0.35, 1) 150ms,
+    opacity 400ms ease 650ms;
+}
+
+/* A single page has a soft spine edge on the left too. */
+.is-single .pbook__face--front,
+.is-single .pbook__block--right {
+  border-radius: 8px 28px 28px 8px;
+}
+
+.pbook-nav__count {
+  margin: 0;
+  min-width: 96px;
+  font-size: 13px;
+  text-align: center;
+  color: #9a9a96;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbook-nav__count b {
+  margin-right: 6px;
+  font-weight: 500;
+  color: #1f1f1f;
+}
+
 /* Phones: a narrower margin around the panel. */
 @media (max-width: 640px) {
   .pbook-modal {
     padding: 12px;
   }
 
-  .pbook-nav ol {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
