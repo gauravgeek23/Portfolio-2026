@@ -1,30 +1,31 @@
 import { useEffect, useRef } from 'react';
 import avatar from '../assets/avatar-156.webp';
 import { images } from '../data/about-images';
-import academicCalendar from '../assets/work/academic-calendar-800.webp';
-import lottie from '../assets/work/lottiefiles-vision-pro-800.webp';
-import toppr from '../assets/work/toppr-answr-800.webp';
-import iconscout from '../assets/work/iconscout-plugin-800.webp';
-import changLa from '../assets/book/chang-la-peek.webp';
-import hampta from '../assets/book/hampta-pass-peek.webp';
-import bali from '../assets/book/bali-kecak-peek.webp';
 import './HomeLoader.css';
 
-// Snapshots that fly into the book: travel photos and the work they sit beside on the site.
+// Travel photos that blow around on the wind before settling into the book.
 const PHOTOS = [
   images.altitude1.src,
-  academicCalendar,
-  images.kang1.src,
-  lottie,
-  changLa,
+  images.kang2.src,
+  images.photo3.src,
   images.ebc1.src,
-  toppr,
-  hampta,
   images.nomad1.src,
-  iconscout,
-  bali,
   images.photo10.src,
+  images.altitude2.src,
+  images.kang3.src,
+  images.photo1.src,
+  images.ebc2.src,
+  images.nomad2.src,
+  images.photo8.src,
+  images.altitude3.src,
+  images.photo5.src,
 ];
+
+// A repeatable pseudo-random number in [0, 1) for photo i, so every run looks the same.
+const rnd = (i, k) => {
+  const v = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453;
+  return v - Math.floor(v);
+};
 
 // The book's size in the middle of the screen, relative to the hero's book (smaller on phones).
 const bigScale = () => (window.innerWidth < 640 ? 2 : 2.6);
@@ -39,8 +40,8 @@ const load = (src) =>
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// First visit to the home page: the site's photos load, swirl around the screen and fly into
-// a big copy of the hero's book, which then shrinks into its place at the top left. `target`
+// First visit to the home page: travel photos load, blow around the screen on the wind and fly
+// into a big copy of the hero's book, which then shrinks into its place at the top left. `target`
 // returns the hero book's element; `onDone` reveals the real one.
 export default function HomeLoader({ target, onDone }) {
   const root = useRef(null);
@@ -64,9 +65,6 @@ export default function HomeLoader({ target, onDone }) {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       const BIG = bigScale();
-      // An oval ring around the book that fits the screen.
-      const rx = Math.min(vw * 0.4, vh * 0.5);
-      const ry = Math.min(vh * 0.34, vw * 0.45);
 
       // The book waits in the middle, breathing, while the photos load (at most ~2.5s).
       const breathe = book.current.animate([{ scale: BIG }, { scale: BIG * 1.04 }, { scale: BIG }], {
@@ -78,32 +76,37 @@ export default function HomeLoader({ target, onDone }) {
       await Promise.race([Promise.all(PHOTOS.map(load)), wait(2500)]);
       if (cancelled) return;
 
-      // 1. Photos swirl in from beyond the edges to a ring around the book, spinning as they go.
+      // 1. The photos ride the wind: each blows in from the left, drifting across the screen on a
+      //    wavy path, tumbling and flipping like paper, and comes to rest somewhere on screen.
       const n = PHOTOS.length;
-      const ring = photos.current.map((el, i) => {
-        const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-        const x = Math.cos(a) * rx * (0.85 + (i % 3) * 0.12);
-        const y = Math.sin(a) * ry * (0.85 + ((i + 1) % 3) * 0.12);
-        const r = ((i * 47) % 50) - 25;
-        const fromA = a + 0.9;
-        const far = Math.hypot(vw, vh) * 0.65;
-        play(
-          el,
-          [
-            {
-              translate: `${Math.cos(fromA) * far}px ${Math.sin(fromA) * far}px`,
-              rotate: `${r - 220}deg`,
-              scale: 0.6,
-              opacity: 0,
-            },
-            { opacity: 1, offset: 0.25 },
-            { translate: `${x}px ${y}px`, rotate: `${r}deg`, scale: 1, opacity: 1 },
-          ],
-          { duration: 1100, delay: i * 45, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)' },
-        );
+      const DRIFT = 2400;
+      const rest = photos.current.map((el, i) => {
+        // Rest somewhere on screen, but clear of the book in the middle.
+        let x = (rnd(i, 1) - 0.5) * vw * 0.84;
+        const clear = 120 * BIG * 0.6;
+        if (Math.abs(x) < clear) x = (x < 0 ? -1 : 1) * (clear + rnd(i, 8) * 60);
+        // ...and fully on screen.
+        const edge = vw / 2 - Math.min(120, Math.max(64, vw * 0.09)) / 2 - 8;
+        x = Math.max(-edge, Math.min(edge, x));
+        const y = (rnd(i, 2) - 0.5) * vh * 0.75;
+        const r = (rnd(i, 3) - 0.5) * 50;
+        const startY = (rnd(i, 4) - 0.5) * vh * 0.9;
+        const startX = -vw / 2 - 140;
+        const lift = (rnd(i, 5) - 0.5) * vh * 0.35;
+        const frames = [0, 0.25, 0.5, 0.75, 1].map((t) => {
+          const wave = Math.sin(t * Math.PI * 2.5 + i) * (1 - t) * 70;
+          return {
+            offset: t,
+            translate: `${startX + (x - startX) * (1 - (1 - t) ** 2)}px ${startY + (y - startY) * t + lift * Math.sin(t * Math.PI) + wave}px`,
+            rotate: `${r + (1 - t) * (rnd(i, 6) > 0.5 ? 1 : -1) * 540}deg`,
+            transform: `rotateX(${(1 - t) * 70 * Math.sin(t * 9 + i)}deg) rotateY(${(1 - t) * 60 * Math.cos(t * 7 + i)}deg)`,
+            opacity: t === 0 ? 0 : 1,
+          };
+        });
+        play(el, frames, { duration: DRIFT, delay: rnd(i, 7) * 700, easing: 'cubic-bezier(0.25, 0.6, 0.3, 1)' });
         return { x, y, r };
       });
-      await wait(1100 + n * 45 + 150);
+      await wait(DRIFT + 450);
       if (cancelled) return;
 
       // 2. The cover opens a little and the photos dive into the book, one after another.
@@ -118,11 +121,11 @@ export default function HomeLoader({ target, onDone }) {
           play(
             el,
             [
-              { translate: `${ring[i].x}px ${ring[i].y}px`, rotate: `${ring[i].r}deg`, scale: 1, opacity: 1 },
+              { translate: `${rest[i].x}px ${rest[i].y}px`, rotate: `${rest[i].r}deg`, scale: 1, opacity: 1 },
               { opacity: 1, offset: 0.75 },
-              { translate: '18px 0px', rotate: `${ring[i].r + 160}deg`, scale: 0.15, opacity: 0 },
+              { translate: '18px 0px', rotate: `${rest[i].r + 200}deg`, scale: 0.15, opacity: 0 },
             ],
-            { duration: 620, delay: 120 + i * 70, easing: 'cubic-bezier(0.55, 0, 0.75, 0.3)' },
+            { duration: 650, delay: 120 + i * 55, easing: 'cubic-bezier(0.55, 0, 0.75, 0.3)' },
           ),
         ),
       );

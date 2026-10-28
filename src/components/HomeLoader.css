@@ -13,6 +13,10 @@
   grid-area: 1 / 1;
 }
 
+.home-loader {
+  perspective: 1200px;
+}
+
 /* The book sits above the photos, so they vanish into it as they arrive. */
 .home-loader__book {
   position: relative;
@@ -28,18 +32,29 @@
 
 .home-loader__photo {
   z-index: 1;
-  width: clamp(56px, 7vw, 88px);
-  padding: 4px 4px 10px;
-  background: #ffffff;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.12),
-    0 8px 18px rgba(0, 0, 0, 0.14);
+  width: clamp(64px, 9vw, 120px);
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   opacity: 0;
+}
+
+/* Mixed shapes, like loose prints. */
+.home-loader__photo:nth-child(3n + 1) {
+  aspect-ratio: 4 / 3;
+}
+
+.home-loader__photo:nth-child(3n + 2) {
+  aspect-ratio: 3 / 4;
+}
+
+.home-loader__photo:nth-child(3n) {
+  aspect-ratio: 1;
 }
 
 .home-loader__photo img {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
   object-fit: cover;
 }
