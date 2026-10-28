@@ -39,7 +39,6 @@ export const iphoneKitCaseStudy = {
       title: 'Status Bar',
       body: [
         'The status bar, a core element since inception, evolves with nested components, enabling seamless state transitions and countless customisations, all in dark mode.',
-        'Dynamic Island, inspired by Apple, brings a fresh way to display states like compact, minimal, expanded, and incoming calls, now embraced by businesses.',
         'Optimised for iPhone 14, 15 & 16 with multiple variants for flexible, user-specific adaptation.',
       ],
     },
@@ -60,7 +59,6 @@ export const iphoneKitCaseStudy = {
       type: 'text',
       title: 'Camera Control for iPhone 16',
       body: [
-        'The status bar, a core element since inception, evolves with nested components, enabling seamless state transitions and countless customisations, all in dark mode.',
         'Dynamic Island, inspired by Apple, brings a fresh way to display states like compact, minimal, expanded, and incoming calls, now embraced by businesses.',
         'Optimised for iPhone 14, 15 & 16 with multiple variants for flexible, user-specific adaptation.',
       ],
