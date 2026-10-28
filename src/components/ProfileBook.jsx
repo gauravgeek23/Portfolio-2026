@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import avatar from '../assets/avatar-1200.webp';
+import arrowLeft from '../assets/icons/arrow-left.svg';
+import arrowRight from '../assets/icons/arrow-right.svg';
+import Icon from './Icon';
 import { site } from '../data/site';
 import {
   Endpaper,
@@ -62,7 +65,10 @@ const PAGES = [
   ['2023', <Y2023Left key="23l" />],
   ['2023', <Y2023Right key="23r" />],
 ];
-const SINGLE_LEAVES = [{ front: <Cover />, back: <Endpaper /> }, ...PAGES.map(([, page]) => ({ front: page, back: <Endpaper /> }))];
+const SINGLE_LEAVES = [
+  { front: <Cover />, back: <Endpaper /> },
+  ...PAGES.map(([, page]) => ({ front: page, back: <Endpaper /> })),
+];
 
 function useSinglePage() {
   const [single, setSingle] = useState(() => window.matchMedia(SINGLE_QUERY).matches);
@@ -161,6 +167,16 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
     [turned, close, LAST],
   );
 
+  // Jump straight to a view (a spread on desktop); the leaves in between turn together.
+  const goTo = useCallback(
+    (next) => {
+      if (next === turned) return;
+      setFlipping(next > turned ? turned : next);
+      setTurned(next);
+    },
+    [turned],
+  );
+
   useEffect(() => {
     if (flipping === null) return undefined;
     const t = setTimeout(() => setFlipping(null), FLIP_MS);
@@ -254,7 +270,7 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
         </div>
         <nav className="pbook-nav" aria-label="Pages">
           <button type="button" onClick={() => go(-1)} disabled={turned <= 1} aria-label="Previous page">
-            ←
+            <Icon src={arrowLeft} />
           </button>
           {single ? (
             <p className="pbook-nav__count">
@@ -263,14 +279,20 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
           ) : (
             <ol>
               {SPREADS.map((label, i) => (
-                <li key={label} aria-current={turned === i + 1 ? 'page' : undefined}>
-                  {label}
+                <li key={label}>
+                  <button
+                    type="button"
+                    onClick={() => goTo(i + 1)}
+                    aria-current={turned === i + 1 ? 'page' : undefined}
+                  >
+                    {label}
+                  </button>
                 </li>
               ))}
             </ol>
           )}
           <button type="button" onClick={() => go(1)} aria-label={turned >= LAST ? 'Close the book' : 'Next pages'}>
-            →
+            <Icon src={arrowRight} />
           </button>
         </nav>
       </div>

@@ -296,22 +296,23 @@
   transition-delay: 950ms;
 }
 
-.pbook-nav button {
+.pbook-nav > button {
+  display: grid;
+  place-items: center;
   width: 36px;
   height: 36px;
   border: 0;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.06);
   color: #2d2d2d;
-  font-size: 16px;
   cursor: pointer;
 }
 
-.pbook-nav button:hover:not(:disabled) {
+.pbook-nav > button:hover:not(:disabled) {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.pbook-nav button:disabled {
+.pbook-nav > button:disabled {
   opacity: 0.35;
   cursor: default;
 }
@@ -326,7 +327,18 @@
   color: #9a9a96;
 }
 
-.pbook-nav li[aria-current='page'] {
+.pbook-nav li button {
+  padding: 4px 2px;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.pbook-nav li button:hover,
+.pbook-nav li button[aria-current='page'] {
   color: #1f1f1f;
 }
 
