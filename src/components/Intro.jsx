@@ -31,15 +31,15 @@ export default function Intro() {
           <span className="book__page" style={{ '--i': 3 }} />
           <span className="book__page" style={{ '--i': 2 }} />
           <span className="book__page" style={{ '--i': 1 }} />
-          {/* A few snapshots tucked inside, peeking out of the edges at rest to invite a click;
-              they slip back in when the book starts to open. */}
+          {/* A few snapshots tucked inside; at rest they peek out of the edges one at a time to
+              invite a click. */}
           <span className="book__peek book__peek--top" style={{ '--d': '0s' }}>
             <img src={peekChangLa} alt="" />
           </span>
-          <span className="book__peek book__peek--right" style={{ '--d': '0.9s' }}>
+          <span className="book__peek book__peek--right" style={{ '--d': '2.5s' }}>
             <img src={peekHampta} alt="" />
           </span>
-          <span className="book__peek book__peek--low" style={{ '--d': '1.8s' }}>
+          <span className="book__peek book__peek--low" style={{ '--d': '5s' }}>
             <img src={peekBali} alt="" />
           </span>
           <span className="book__cover">

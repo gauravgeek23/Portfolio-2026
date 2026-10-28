@@ -115,7 +115,8 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
     if (!mounted) return undefined;
     const fit = () => {
       const s = single
-        ? Math.min(1, (window.innerWidth - 32) / PAGE_W, (window.innerHeight - 150) / BOOK_H)
+        ? // Inside the 12px-inset panel with at least 16px of white on every side.
+          Math.min(1, (window.innerWidth - 24 - 32) / PAGE_W, (window.innerHeight - 24 - 120) / BOOK_H)
         : Math.min(1, (window.innerWidth - 48) / (PAGE_W * 2), (window.innerHeight - 200) / BOOK_H);
       setScale(s);
       // Where the closed book starts: over the small book, at its size. The closed book (one

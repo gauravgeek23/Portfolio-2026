@@ -338,6 +338,11 @@
   transform: scale(var(--scale));
 }
 
+/* A flatter perspective, so a page lifting off doesn't swell past the panel. */
+.is-single .pbook-stage {
+  perspective: 3600px;
+}
+
 .is-single .pbook__leaf,
 .is-single .pbook__block--right {
   left: 0;
@@ -355,10 +360,12 @@
 }
 
 .is-single .pbook__leaf.is-turned {
+  /* Folds only just past edge-on, fading as it goes, so it never sweeps out of the panel. */
+  transform: rotateY(-100deg);
   opacity: 0;
   transition:
-    transform 800ms cubic-bezier(0.645, 0.045, 0.355, 1),
-    opacity 350ms ease 380ms;
+    transform 700ms cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 300ms ease 330ms;
 }
 
 /* The cover keeps its slower swing as the book opens. */
@@ -369,7 +376,7 @@
 .is-single .pbook__leaf--cover.is-turned {
   transition:
     transform 1000ms cubic-bezier(0.65, 0, 0.35, 1) 150ms,
-    opacity 400ms ease 650ms;
+    opacity 350ms ease 550ms;
 }
 
 /* A single page has a soft spine edge on the left too. */
