@@ -149,8 +149,31 @@
   animation: none;
 }
 
+/* The cover lifts a hair while each snapshot is out and settles as it slips back: one 2.5s beat
+   per snapshot, timed to the 7.5s peek cycle above. */
+.book__cover {
+  animation: book-flap 2.5s ease-in-out infinite;
+}
+
+@keyframes book-flap {
+  0%,
+  99%,
+  100% {
+    transform: rotateY(-8deg);
+  }
+  21%,
+  72% {
+    transform: rotateY(-15deg);
+  }
+}
+
+.intro__avatar:hover .book__cover {
+  animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .book__peek {
+  .book__peek,
+  .book__cover {
     animation: none;
   }
 }
