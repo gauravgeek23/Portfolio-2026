@@ -419,7 +419,7 @@
   font-size: 17px;
 }
 
-/* ---------- Hover: items grow right where they are ----------
+/* ---------- Hover (or a tap on phones, .is-grown): items grow right where they are ----------
    Photos, notes and keepsakes straighten, lift and scale by --hs (set per item from its width);
    they may spill past the page and the book. */
 .sb-note,
@@ -436,7 +436,8 @@
 .sb-page > .sb-snap:hover,
 .sb-page > .sb-note:hover,
 .sb-page > .sb-ticket:hover,
-.sb-page > .sb-stamp:hover {
+.sb-page > .sb-stamp:hover,
+.sb-page > .is-grown:not(.sb-badge) {
   z-index: 40 !important;
   rotate: calc(var(--r) * 0.25);
   scale: var(--hs);
@@ -446,7 +447,8 @@
     0 24px 48px rgba(40, 30, 10, 0.26);
 }
 
-.sb-page > .sb-badge:hover {
+.sb-page > .sb-badge:hover,
+.sb-page > .sb-badge.is-grown {
   z-index: 40 !important;
   rotate: calc(var(--r) + 360deg);
   scale: var(--hs);

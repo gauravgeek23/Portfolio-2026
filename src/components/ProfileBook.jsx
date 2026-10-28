@@ -167,6 +167,31 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
     [turned, close, LAST],
   );
 
+  // Phones (no hover): tapping a photo, note or keepsake grows it in place, as hovering does on
+  // desktop, and tapping it again shrinks it; a tap anywhere else on the page turns it.
+  const grown = useRef(null);
+  const shrink = useCallback(() => {
+    grown.current?.classList.remove('is-grown');
+    grown.current = null;
+  }, []);
+  const tap = useCallback(
+    (e, by) => {
+      const item = single && e.target.closest('.sb-snap, .sb-note, .sb-ticket, .sb-stamp, .sb-badge');
+      const was = grown.current;
+      shrink();
+      if (item) {
+        if (item !== was) {
+          item.classList.add('is-grown');
+          grown.current = item;
+        }
+        return;
+      }
+      go(by);
+    },
+    [single, shrink, go],
+  );
+  useEffect(shrink, [turned, shrink]);
+
   // Jump straight to a view (a spread on desktop); the leaves in between turn together.
   const goTo = useCallback(
     (next) => {
@@ -253,13 +278,13 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
                   {/* `is-shown` marks the two pages on view, so their items can animate in. */}
                   <div
                     className={`pbook__face pbook__face--front${i === turned && i > 0 ? ' is-shown' : ''}`}
-                    onClick={i > 0 ? () => go(1) : undefined}
+                    onClick={i > 0 ? (e) => tap(e, 1) : undefined}
                   >
                     {leaf.front}
                   </div>
                   <div
                     className={`pbook__face pbook__face--back${!single && i === turned - 1 ? ' is-shown' : ''}`}
-                    onClick={() => go(-1)}
+                    onClick={(e) => tap(e, -1)}
                   >
                     {leaf.back}
                   </div>
