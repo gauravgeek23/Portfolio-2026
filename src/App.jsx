@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Work from './pages/Work';
@@ -7,6 +7,7 @@ import Play from './pages/Play';
 import About from './pages/About';
 import Notes from './pages/Notes';
 import Resume from './pages/Resume';
+import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
@@ -19,7 +20,7 @@ export default function App() {
         <Route path="notes" element={<Notes />} />
         <Route path="about" element={<About />} />
         <Route path="resume" element={<Resume />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

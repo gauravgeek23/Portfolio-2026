@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Zoomable } from '../components/Lightbox';
 import { InViewVideo } from '../components/PlayMedia';
 import CaseStudyBlocks from '../components/CaseStudyBlocks';
@@ -6,13 +6,14 @@ import arrowLeft from '../assets/icons/arrow-left.svg';
 import arrowRight from '../assets/icons/arrow-right.svg';
 import Icon from '../components/Icon';
 import { projects, sideProjects } from '../data/projects';
+import NotFound from './NotFound';
 import './CaseStudy.css';
 
 export default function CaseStudy() {
   const { slug } = useParams();
   const list = projects.some((p) => p.slug === slug) ? projects : sideProjects;
   const index = list.findIndex((p) => p.slug === slug);
-  if (index === -1) return <Navigate to="/" replace />;
+  if (index === -1) return <NotFound />;
 
   const project = list[index];
   // "Next project" runs through selected work, then the side projects, then back to the start.
