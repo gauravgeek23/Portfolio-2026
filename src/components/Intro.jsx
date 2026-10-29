@@ -102,17 +102,22 @@ export default function Intro() {
           landscape.
         </p>
       </div>
-      <ul className="intro__logos" aria-label="Companies I have worked with">
-        {logos.map(({ name, svg }) => (
-          <li
-            key={name}
-            className="intro__logo"
-            role="img"
-            aria-label={name}
-            dangerouslySetInnerHTML={{ __html: svg }}
-          />
-        ))}
-      </ul>
+      <div className="intro__previously">
+        <p id="intro-previously" className="text-small text-muted">
+          Previously at
+        </p>
+        <ul className="intro__logos" aria-labelledby="intro-previously">
+          {logos.map(({ name, svg }) => (
+            <li
+              key={name}
+              className="intro__logo"
+              role="img"
+              aria-label={name}
+              dangerouslySetInnerHTML={{ __html: svg }}
+            />
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

@@ -263,6 +263,13 @@
   }
 }
 
+/* "Previously at" label over the logos row, 8px apart as in the design. */
+.intro__previously {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 /* Logos row. Wordmarks follow the theme's text colour; the white counters inside the RedCarpet
    letters follow the page so they read as holes in every theme. */
 .intro__logos {
@@ -272,7 +279,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 16px 24px;
-  margin: 4px 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
