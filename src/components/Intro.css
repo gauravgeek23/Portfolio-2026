@@ -113,23 +113,23 @@
 
 .book__peek--top {
   --r: -9deg;
-  --in: 0 16px;
-  top: -14px;
+  --in: 0 10px;
+  top: -7px;
   left: 30px;
 }
 
 .book__peek--right {
   --r: 11deg;
-  --in: -20px 0;
+  --in: -12px 0;
   top: 14px;
-  right: -17px;
+  right: -8px;
 }
 
 .book__peek--low {
   --r: -6deg;
-  --in: -20px 0;
+  --in: -12px 0;
   bottom: 14px;
-  right: -15px;
+  right: -7px;
   width: 22px;
 }
 
