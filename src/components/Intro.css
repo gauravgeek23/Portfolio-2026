@@ -262,3 +262,43 @@
     animation: none;
   }
 }
+
+/* Logos row. Wordmarks follow the theme's text colour; the white counters inside the RedCarpet
+   letters follow the page so they read as holes in every theme. */
+.intro__logos {
+  --logo-ink: var(--color-black);
+  --logo-paper: var(--color-white);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Dark: Newton's navy wordmark would vanish, so it takes the text colour like the others. */
+:root[data-theme='dark'] .intro__logos {
+  --logo-nst: var(--color-black);
+}
+
+.intro__logo {
+  display: flex;
+  height: 24px;
+}
+
+.intro__logo svg {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+@media (max-width: 480px) {
+  .intro__logos {
+    gap: 14px 20px;
+  }
+
+  .intro__logo {
+    height: 20px;
+  }
+}

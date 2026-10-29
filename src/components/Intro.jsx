@@ -6,7 +6,22 @@ import peekBali from '../assets/book/bali-kecak-peek.webp';
 import ProfileBook from './ProfileBook';
 import HomeLoader from './HomeLoader';
 import { site } from '../data/site';
+import nstLogo from '../assets/logos/nst.svg?raw';
+import lottieFilesLogo from '../assets/logos/lottiefiles.svg?raw';
+import iconScoutLogo from '../assets/logos/iconscout.svg?raw';
+import topprLogo from '../assets/logos/toppr.svg?raw';
+import redCarpetLogo from '../assets/logos/redcarpet.svg?raw';
 import './Intro.css';
+
+// Companies worked with, newest first. The SVGs are inlined (not <img>) so their wordmarks can
+// pick up the theme's text colour while the brand marks keep their own colours.
+const logos = [
+  { name: 'Newton School of Technology', svg: nstLogo },
+  { name: 'LottieFiles', svg: lottieFilesLogo },
+  { name: 'IconScout', svg: iconScoutLogo },
+  { name: 'Toppr', svg: topprLogo },
+  { name: 'RedCarpet', svg: redCarpetLogo },
+];
 
 // Whether this page load started on the home page (the preview bundle always starts there), and
 // whether the loader has already played since. Both reset on every full page load.
@@ -87,6 +102,17 @@ export default function Intro() {
           landscape.
         </p>
       </div>
+      <ul className="intro__logos" aria-label="Companies I have worked with">
+        {logos.map(({ name, svg }) => (
+          <li
+            key={name}
+            className="intro__logo"
+            role="img"
+            aria-label={name}
+            dangerouslySetInnerHTML={{ __html: svg }}
+          />
+        ))}
+      </ul>
     </section>
   );
 }
