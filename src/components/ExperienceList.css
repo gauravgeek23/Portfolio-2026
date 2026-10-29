@@ -20,7 +20,9 @@
   place-items: center;
   width: 56px;
   height: 56px;
-  border-radius: var(--radius-sm);
+  /* Same curve as the LottieFiles mark inside (a quarter of its width), so the rounded mark
+     sits snugly and the round logos get a softer tile without it looking rounder than them. */
+  border-radius: 14px;
   background: var(--color-grey-3);
 }
 
