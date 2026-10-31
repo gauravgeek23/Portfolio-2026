@@ -145,6 +145,8 @@ html {
   scroll-behavior: smooth;
   /* Keep anchored sections clear of the fixed 60px nav. */
   scroll-padding-top: 80px;
+  /* Reserve the scrollbar's space so locking scroll (the book popup) doesn't shift the page. */
+  scrollbar-gutter: stable;
 }
 
 @media (prefers-reduced-motion: reduce) {

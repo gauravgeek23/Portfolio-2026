@@ -28,11 +28,23 @@ const logos = [
 const landedOnHome = import.meta.env.VITE_PREVIEW_BUNDLE || window.location.pathname === import.meta.env.BASE_URL;
 let loaderPlayed = false;
 
+// The small book's cover never lies flat: it rests a little open (Intro.css, .book__cover) and
+// opens further while a snapshot peeks or on hover. The big book starts from the cover's angle
+// at the click and closes to the resting one, so neither hand-over snaps.
+const COVER_REST_DEG = -8;
+function coverAngle(cover) {
+  const t = getComputedStyle(cover).transform;
+  if (!t || t === 'none') return 0;
+  const m = new DOMMatrix(t);
+  return (Math.atan2(-m.m13, m.m11) * 180) / Math.PI;
+}
+
 export default function Intro() {
   const [bookOpen, setBookOpen] = useState(false);
   // Where the small book sits, so the big one can grow out of it; while the big one is up the
   // small one is hidden (it "is" the big one).
   const [origin, setOrigin] = useState(null);
+  const [coverFrom, setCoverFrom] = useState(COVER_REST_DEG);
   // The landing loader plays on every fresh load of the home page (refreshes included), but not
   // when arriving from another page of the site, nor for visitors who prefer reduced motion.
   const [loading, setLoading] = useState(
@@ -50,13 +62,16 @@ export default function Intro() {
           little on hover; clicking it opens the full book in a popup. */}
       {/* The glow behind the book lights up once the book is in place (after the loader). */}
       <div className={`intro__avatar${loading ? '' : ' is-lit'}`}>
+        {/* `is-away` while the big book is up: the small one's flap and peeks stop, so they start
+            again from rest when it reappears, matching the closed big book. */}
         <button
           type="button"
           ref={bookRef}
-          className="intro__book"
+          className={`intro__book${origin ? ' is-away' : ''}`}
           style={{ visibility: origin || loading ? 'hidden' : undefined }}
           onClick={(e) => {
             setOrigin(e.currentTarget.getBoundingClientRect());
+            setCoverFrom(coverAngle(e.currentTarget.querySelector('.book__cover')));
             setBookOpen(true);
           }}
           aria-label={`Open ${site.name}'s book`}
@@ -85,6 +100,7 @@ export default function Intro() {
       <ProfileBook
         open={bookOpen}
         origin={origin}
+        coverFrom={bookOpen ? coverFrom : COVER_REST_DEG}
         onClose={() => setBookOpen(false)}
         onClosed={() => setOrigin(null)}
       />

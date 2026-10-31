@@ -85,7 +85,7 @@ function useSinglePage() {
 // the home page (`origin`, that book's bounding box), its cover swinging open as it enlarges; then
 // the white panel fades in. Pages turn with the buttons, the arrow keys or a click on a page;
 // "next" on the last spread closes the book back into the small one.
-export default function ProfileBook({ open, onClose, origin, onClosed }) {
+export default function ProfileBook({ open, onClose, origin, coverFrom = 0, onClosed }) {
   const [mounted, setMounted] = useState(open);
   const [turned, setTurned] = useState(0);
   const [flipping, setFlipping] = useState(null);
@@ -250,6 +250,7 @@ export default function ProfileBook({ open, onClose, origin, onClosed }) {
             '--from-x': `${from.x}px`,
             '--from-y': `${from.y}px`,
             '--from-s': from.s,
+            '--cover-from': `${coverFrom}deg`,
           }}
           // Phones: swipe left for the next page, right for the previous one.
           onTouchStart={(e) => {

@@ -164,8 +164,10 @@
   transform: rotateY(-180deg);
 }
 
-/* The cover opens with the book as it grows. */
+/* The cover opens with the book as it grows. Closed, it sits at the small book's cover angle
+   (--cover-from) so the hand-over between the two books doesn't snap. */
 .pbook__leaf--cover {
+  transform: rotateY(var(--cover-from, 0deg));
   transition-duration: 1000ms;
 }
 

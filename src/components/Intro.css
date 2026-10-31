@@ -101,7 +101,9 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
   rotate: var(--r);
   translate: var(--in);
-  animation: book-peek 7.5s cubic-bezier(0.34, 1.4, 0.64, 1) var(--d) infinite backwards;
+  /* Offset by 1s so the book settles before the first snapshot peeks (after landing, and when it
+     comes back from the big book). */
+  animation: book-peek 7.5s cubic-bezier(0.34, 1.4, 0.64, 1) calc(var(--d) + 1s) infinite backwards;
 }
 
 .book__peek img {
@@ -152,7 +154,7 @@
 /* The cover lifts a little while each snapshot is out and settles as it slips back: one 2.5s beat
    per snapshot, timed to the 7.5s peek cycle above. */
 .book__cover {
-  animation: book-flap 2.5s ease-in-out infinite;
+  animation: book-flap 2.5s ease-in-out 1s infinite;
 }
 
 @keyframes book-flap {
@@ -168,6 +170,13 @@
 }
 
 .intro__avatar:hover .book__cover {
+  animation: none;
+}
+
+/* While the big book is up (the small one hidden), stop the flap and peeks so they restart from
+   rest when it comes back. */
+.intro__book.is-away .book__peek,
+.intro__book.is-away .book__cover {
   animation: none;
 }
 
