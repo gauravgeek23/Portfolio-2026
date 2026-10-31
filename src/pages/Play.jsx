@@ -5,6 +5,7 @@ import arrowUpRight from '../assets/icons/arrow-up-right.svg';
 import Icon from '../components/Icon';
 import { playItems } from '../data/play';
 import './Play.css';
+import usePageMeta from '../hooks/usePageMeta';
 
 function PlayLink({ link }) {
   const content = (
@@ -25,6 +26,10 @@ function PlayLink({ link }) {
 }
 
 export default function Play() {
+  usePageMeta({
+    title: 'Play',
+    description: 'Interaction explorations, motion studies and side projects by Gaurav Kumar.',
+  });
   return (
     <main className="container page" data-gallery>
       <header>

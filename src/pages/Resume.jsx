@@ -5,6 +5,7 @@ import arrowUpRight from '../assets/icons/arrow-up-right.svg';
 import { experience, education, features } from '../data/resume';
 import { site } from '../data/site';
 import './Resume.css';
+import usePageMeta from '../hooks/usePageMeta';
 
 // Keeps the arrow on the same line as the label's last word when it wraps.
 function LinkLabel({ text }) {
@@ -77,6 +78,10 @@ function Section({ id, title, entries }) {
 }
 
 export default function Resume() {
+  usePageMeta({
+    title: 'Resume',
+    description: 'Experience, skills and education of Gaurav Kumar, Senior Product Designer.',
+  });
   return (
     <main className="container page">
       <header className="resume-header">

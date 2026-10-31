@@ -7,12 +7,17 @@ import arrowRight from '../assets/icons/arrow-right.svg';
 import Icon from '../components/Icon';
 import { projects, sideProjects } from '../data/projects';
 import NotFound from './NotFound';
+import usePageMeta from '../hooks/usePageMeta';
 import './CaseStudy.css';
 
 export default function CaseStudy() {
   const { slug } = useParams();
   const list = projects.some((p) => p.slug === slug) ? projects : sideProjects;
   const index = list.findIndex((p) => p.slug === slug);
+  // Unknown slugs render NotFound, which sets its own (noindex) head.
+  usePageMeta(
+    index === -1 ? null : { title: list[index].title, description: list[index].summary.replace(/\s+/g, ' ') },
+  );
   if (index === -1) return <NotFound />;
 
   const project = list[index];

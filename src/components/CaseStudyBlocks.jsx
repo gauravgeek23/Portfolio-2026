@@ -1,4 +1,5 @@
 import { Zoomable } from './Lightbox';
+import { InViewVideo } from './PlayMedia';
 import arrowUpRight from '../assets/icons/arrow-up-right.svg';
 import Icon from './Icon';
 import './Photo.css';
@@ -34,9 +35,14 @@ function Media({ block }) {
       style={style}
     >
       {block.video ? (
-        <video src={block.video} poster={block.poster} autoPlay muted loop playsInline aria-label={block.alt} />
+        <InViewVideo media={block} poster={block.poster} />
       ) : (
-        <img src={block.src} srcSet={block.src2x ? `${block.src} 1x, ${block.src2x} 2x` : undefined} alt={block.alt} loading="lazy" />
+        <img
+          src={block.src}
+          srcSet={block.src2x ? `${block.src} 1x, ${block.src2x} 2x` : undefined}
+          alt={block.alt}
+          loading="lazy"
+        />
       )}
       {block.caption && <span className="photo__caption">{block.caption}</span>}
     </Zoomable>

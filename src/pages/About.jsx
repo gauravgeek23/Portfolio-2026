@@ -3,6 +3,7 @@ import LayeredHero from '../components/LayeredHero';
 import { about, stories, photos } from '../data/about';
 import { site } from '../data/site';
 import './About.css';
+import usePageMeta from '../hooks/usePageMeta';
 
 function Story({ story }) {
   const [main, ...side] = story.photos;
@@ -25,6 +26,11 @@ function Story({ story }) {
 }
 
 export default function About() {
+  usePageMeta({
+    title: 'About',
+    description:
+      'Gaurav Kumar beyond the screen: motorcycle expeditions across Ladakh and Himachal, treks, talks and photography.',
+  });
   return (
     <main className="container page about">
       <section className="about__intro">
@@ -36,10 +42,10 @@ export default function About() {
         <h2 className="visually-hidden">Expeditions</h2>
         <p className="text-small text-muted">
           Beyond pixels, I’m an avid traveler and motorcyclist with a curious mind for{' '}
-          <strong className="about__highlight">geopolitics, economics, and human evolution</strong>. Recently, I spent two
-          months in <strong className="about__highlight">Ladakh, covering 6,000 km on my motorcycle</strong>. If there’s
-          one product I can’t stop admiring, it’s <strong className="about__highlight">Google Maps</strong>. Where
-          geography, exploration, and great product thinking meet.
+          <strong className="about__highlight">geopolitics, economics, and human evolution</strong>. Recently, I spent
+          two months in <strong className="about__highlight">Ladakh, covering 6,000 km on my motorcycle</strong>. If
+          there’s one product I can’t stop admiring, it’s <strong className="about__highlight">Google Maps</strong>.
+          Where geography, exploration, and great product thinking meet.
         </p>
       </section>
 
@@ -67,8 +73,8 @@ export default function About() {
 
         <div className="text-small text-muted">
           <p>
-            Since I started traveling, I found a deep love for capturing moments. Each photo tells a story: quiet, honest,
-            and often personal. These are a few shots that made it to my portfolio.
+            Since I started traveling, I found a deep love for capturing moments. Each photo tells a story: quiet,
+            honest, and often personal. These are a few shots that made it to my portfolio.
           </p>
           <p className="about__more">Check more on</p>
           <a className="about__instagram text-medium" href={site.instagram} target="_blank" rel="noopener noreferrer">

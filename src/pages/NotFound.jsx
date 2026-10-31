@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { projects, sideProjects } from '../data/projects';
 import './NotFound.css';
+import usePageMeta from '../hooks/usePageMeta';
 
 // What the "maps" card says while it tries (and fails) to find the page.
 const REROUTES = [
@@ -41,6 +42,7 @@ function Bike({ wheelie, onClick, bikeRef }) {
 // 404: you've ridden off the map. A yellow Border Roads milestone marks "404 Pass", a bike rides
 // a winding road under prayer flags, and a maps card keeps recalculating.
 export default function NotFound() {
+  usePageMeta({ title: 'Page not found', noindex: true });
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [wheelie, setWheelie] = useState(false);

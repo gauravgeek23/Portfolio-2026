@@ -8,8 +8,10 @@ import { projects, sideProjects } from '../data/projects';
 import { experience } from '../data/experience';
 import { testimonials } from '../data/testimonials';
 import './Home.css';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function Home() {
+  usePageMeta({});
   return (
     <main className="container page">
       <Intro />

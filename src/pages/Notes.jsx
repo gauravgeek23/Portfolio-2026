@@ -1,8 +1,10 @@
 import { Fragment } from 'react';
 import { notes } from '../data/notes';
 import './Notes.css';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function Notes() {
+  usePageMeta({ title: 'Notes', description: 'Essays by Gaurav Kumar on travel, time, work and startups.' });
   return (
     <main className="container page">
       <header>

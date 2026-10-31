@@ -1,8 +1,10 @@
 import ProjectCard from '../components/ProjectCard';
 import { projects } from '../data/projects';
 import './Home.css';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function Work() {
+  usePageMeta({ title: 'Selected work' });
   return (
     <main className="container page">
       <h1 className="text-medium">Selected work</h1>
