@@ -199,7 +199,7 @@ export function Y2026Left() {
         d={1}
       />
       <Text x={286} y={126} w={150} d={2}>
-        Two months on the bike across Ladakh: 6,000 km, 20+ high passes, all the way up to Umling La.
+        Two months on the bike across Ladakh: 5,200 km, 20+ high passes, all the way up to Umling La.
       </Text>
       <Doodle kind="arrow" x={300} y={262} w={90} r={150} d={3} color="#3a352d" />
       <Snap

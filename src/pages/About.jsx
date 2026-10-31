@@ -43,7 +43,7 @@ export default function About() {
         <p className="text-small text-muted">
           Beyond pixels, I’m an avid traveler and motorcyclist with a curious mind for{' '}
           <strong className="about__highlight">geopolitics, economics, and human evolution</strong>. Recently, I spent
-          two months in <strong className="about__highlight">Ladakh, covering 6,000 km on my motorcycle</strong>. If
+          two months in <strong className="about__highlight">Ladakh, covering 5,200 km on my motorcycle</strong>. If
           there’s one product I can’t stop admiring, it’s <strong className="about__highlight">Google Maps</strong>.
           Where geography, exploration, and great product thinking meet.
         </p>
