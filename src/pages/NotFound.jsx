@@ -57,10 +57,12 @@ function DotNumber() {
       mask.width = w;
       mask.height = h;
       const m = mask.getContext('2d');
-      m.font = `700 ${h * 1.05}px 'Helvetica Neue', Helvetica, Arial, sans-serif`;
+      // Digits nearly fill the canvas (their cap height is about 0.74 of the font size).
+      const font = h * 1.2;
+      m.font = `700 ${font}px 'Helvetica Neue', Helvetica, Arial, sans-serif`;
       m.textAlign = 'center';
       m.textBaseline = 'middle';
-      m.fillText('404', w / 2, h * 0.57);
+      m.fillText('404', w / 2, h / 2 + font * 0.065);
       const ink = m.getImageData(0, 0, w, h).data;
 
       dots = [];

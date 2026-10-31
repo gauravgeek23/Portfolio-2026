@@ -1,27 +1,31 @@
-/* 404: a big "404" in fine dots, barely off the background, and one thought under it. */
+/* 404: a big "404" in fine dots, barely off the background, and one thought under it. Compact,
+   so on most screens the footer fits below it without scrolling. */
+.not-found.page {
+  gap: 24px;
+  padding-top: 64px;
+  padding-bottom: 24px;
+}
+
 .not-found {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  min-height: calc(100vh - 160px);
   text-align: center;
 }
 
 .not-found__number {
   display: block;
   width: 100%;
-  max-width: 760px;
-  aspect-ratio: 2.4;
+  max-width: 600px;
+  aspect-ratio: 2.6;
   /* The dot colour: a step off the page, so the large number stays quiet. */
   color: color-mix(in srgb, var(--color-black) 14%, var(--color-white));
 }
 
 .not-found__thought {
   max-width: 520px;
-  /* Sit closer to the number than the page's 32px gap. */
-  margin: -28px 0 0;
+  margin: 0;
 }
 
 .not-found__thought blockquote {
@@ -40,8 +44,7 @@
 }
 
 @media (max-width: 640px) {
-  .not-found {
-    gap: 24px;
-    min-height: 65vh;
+  .not-found.page {
+    gap: 20px;
   }
 }
