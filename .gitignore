@@ -3,3 +3,6 @@ dist/
 .env
 .env.*
 .DS_Store
+
+# OG image drafts awaiting review (final picks get moved into public/)
+og-review/
