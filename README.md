@@ -41,3 +41,18 @@ Add a route in `src/App.jsx`, a page in `src/pages/`, and the link in `navItems`
 ## Deploy
 
 Static output — import the repo into Vercel or Netlify (framework preset: Vite). `vercel.json` and `public/_redirects` make deep links such as `/work/toppr-answr` work on refresh.
+
+## Interview deck (`/projectppt`)
+
+A 24-slide presentation built in React, in the site's own visual language: `src/pages/deck/`
+(`slides.js` holds the slide list, timings and speaker notes). It's a full-screen page at
+`/projectppt`, outside the site's nav and footer, and is not indexed.
+
+- **Present:** open `/projectppt`. ← → (or space, swipe, the ruler) to move; **N** speaker
+  notes; **G** all slides; **F** fullscreen. The slide number is kept in the URL (`#15`).
+- **Print / PDF:** `/projectppt?print` lays out every slide at 1920 × 1080, finished and still.
+- **Offline copy:** `npx vite build --config vite.deck.config.js --outDir <dir>` builds a
+  standalone version that runs from a folder (`deck.html`).
+
+Exported files (HTML, PDF, PowerPoint, speaker notes, the metrics checklist and a contact sheet)
+are in `presentation/`.

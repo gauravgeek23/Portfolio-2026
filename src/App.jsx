@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -9,9 +10,20 @@ import Notes from './pages/Notes';
 import Resume from './pages/Resume';
 import NotFound from './pages/NotFound';
 
+// The interview deck is a full-screen page of its own, loaded only when visited.
+const Deck = lazy(() => import('./pages/deck/Deck'));
+
 export default function App() {
   return (
     <Routes>
+      <Route
+        path="projectppt"
+        element={
+          <Suspense fallback={null}>
+            <Deck />
+          </Suspense>
+        }
+      />
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="work" element={<Work />} />
