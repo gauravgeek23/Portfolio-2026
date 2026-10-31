@@ -15,7 +15,7 @@
   max-width: 760px;
   aspect-ratio: 2.4;
   /* The dot colour: a step off the page, so the large number stays quiet. */
-  color: color-mix(in srgb, var(--color-black) 16%, var(--color-white));
+  color: color-mix(in srgb, var(--color-black) 14%, var(--color-white));
 }
 
 .not-found__thought {

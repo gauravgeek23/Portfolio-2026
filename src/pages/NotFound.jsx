@@ -17,23 +17,40 @@ const THOUGHTS = [
   ['Stay hungry. Stay foolish.', 'Steve Jobs'],
 ];
 
-// "404" drawn in fine dots, sampled from the glyphs at random so it reads as grain rather than a
-// grid. The dots are a shade off the background (big type doesn't need contrast) and fade in.
+// "404" drawn in sparse dots, a shade off the background (big type doesn't need contrast). Like
+// the footer's glow, it fades as a gradient: dots thin out and soften towards the top. It sits
+// still; under the pointer the dots scatter away and spring back into place.
+const PUSH_RADIUS = 80;
+
 function DotNumber() {
   const canvas = useRef(null);
 
   useEffect(() => {
     const el = canvas.current;
+    const ctx = el.getContext('2d');
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let frame;
+    let dots = [];
+    let size = { w: 0, h: 0 };
+    let pointer = null;
+    let frame = 0;
 
-    const draw = () => {
-      cancelAnimationFrame(frame);
+    const paint = () => {
+      ctx.clearRect(0, 0, size.w, size.h);
+      for (const d of dots) {
+        ctx.globalAlpha = d.a;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+
+    const build = () => {
       const w = el.clientWidth;
       const h = el.clientHeight;
       const dpr = window.devicePixelRatio || 1;
       el.width = w * dpr;
       el.height = h * dpr;
+      size = { w, h };
 
       // Rasterise the glyphs once to know which pixels are "ink".
       const mask = document.createElement('canvas');
@@ -46,46 +63,74 @@ function DotNumber() {
       m.fillText('404', w / 2, h * 0.54);
       const ink = m.getImageData(0, 0, w, h).data;
 
-      const dots = [];
-      const count = Math.round(w * h * 0.06);
-      for (let i = 0; i < count * 4 && dots.length < count; i += 1) {
+      dots = [];
+      const tries = Math.round(w * h * 0.06);
+      for (let i = 0; i < tries; i += 1) {
         const x = Math.random() * w;
         const y = Math.random() * h;
-        if (ink[(Math.floor(y) * w + Math.floor(x)) * 4 + 3] > 128) {
-          dots.push([x, y, 0.5 + Math.random() * 1.1, Math.random()]);
-        }
+        if (ink[(Math.floor(y) * w + Math.floor(x)) * 4 + 3] < 128) continue;
+        // 0 at the top, 1 at the bottom: fewer, fainter dots higher up.
+        const depth = y / h;
+        if (Math.random() > 0.2 + depth * 0.6) continue;
+        dots.push({ hx: x, hy: y, x, y, vx: 0, vy: 0, r: 0.6 + Math.random() * 0.8, a: 0.35 + depth * 0.65 });
       }
-
-      const colour = getComputedStyle(el).color;
-      const ctx = el.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.fillStyle = colour;
-      const start = performance.now();
-      const paint = (now) => {
-        const t = still ? 1 : Math.min(1, (now - start) / 1400);
-        ctx.clearRect(0, 0, w, h);
-        for (const [x, y, r, at] of dots) {
-          // Each dot fades in at its own moment, so the number gathers out of the grain.
-          const a = Math.max(0, Math.min(1, (t - at * 0.7) / 0.3));
-          if (!a) continue;
-          ctx.globalAlpha = a;
-          ctx.beginPath();
-          ctx.arc(x, y, r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        if (t < 1) frame = requestAnimationFrame(paint);
-      };
-      frame = requestAnimationFrame(paint);
+      ctx.fillStyle = getComputedStyle(el).color;
+      paint();
     };
 
-    draw();
-    // Redraw at the new size, or in the new colour when the theme changes.
-    const resize = new ResizeObserver(draw);
+    // Each dot is pushed away from the pointer and pulled home by a damped spring; the loop runs
+    // only until everything has settled.
+    const step = () => {
+      let moving = false;
+      for (const d of dots) {
+        if (pointer) {
+          const dx = d.x - pointer.x;
+          const dy = d.y - pointer.y;
+          const dist = Math.hypot(dx, dy) || 1;
+          if (dist < PUSH_RADIUS) {
+            const f = ((PUSH_RADIUS - dist) / PUSH_RADIUS) * 2.4;
+            d.vx += (dx / dist) * f;
+            d.vy += (dy / dist) * f;
+          }
+        }
+        d.vx = (d.vx + (d.hx - d.x) * 0.045) * 0.86;
+        d.vy = (d.vy + (d.hy - d.y) * 0.045) * 0.86;
+        d.x += d.vx;
+        d.y += d.vy;
+        if (Math.abs(d.vx) + Math.abs(d.vy) > 0.02 || Math.abs(d.hx - d.x) + Math.abs(d.hy - d.y) > 0.1) moving = true;
+      }
+      paint();
+      frame = moving || pointer ? requestAnimationFrame(step) : 0;
+    };
+    const wake = () => {
+      if (!frame) frame = requestAnimationFrame(step);
+    };
+
+    const onMove = (e) => {
+      const r = el.getBoundingClientRect();
+      pointer = { x: e.clientX - r.left, y: e.clientY - r.top };
+      wake();
+    };
+    const onLeave = () => {
+      pointer = null;
+      wake();
+    };
+
+    build();
+    if (!still) {
+      el.addEventListener('pointermove', onMove);
+      el.addEventListener('pointerleave', onLeave);
+    }
+    // Rebuild at the new size, or in the new colour when the theme changes.
+    const resize = new ResizeObserver(build);
     resize.observe(el);
-    const theme = new MutationObserver(draw);
+    const theme = new MutationObserver(build);
     theme.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     return () => {
       cancelAnimationFrame(frame);
+      el.removeEventListener('pointermove', onMove);
+      el.removeEventListener('pointerleave', onLeave);
       resize.disconnect();
       theme.disconnect();
     };
