@@ -29,12 +29,19 @@
   color: var(--color-black);
 }
 
-/* The dot of "gk.": a real full stop at twice the size, so it sits on the baseline like one,
-   yellow in every theme. line-height 0 keeps the larger glyph from changing the nav's height. */
+/* The dot of "gk.": drawn as a true circle (the full stop of Helvetica is square) sitting on the
+   baseline like a full stop, yellow in every theme. The "." stays in the text, hidden, so it still
+   reads and copies as "gk.". */
 .nav__dot {
-  font-size: 2em;
+  display: inline-block;
+  width: 0.24em;
+  height: 0.24em;
+  margin-left: 0.06em;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #f6c333;
+  color: transparent;
   line-height: 0;
-  color: #f6c333;
 }
 
 .nav__list {
