@@ -18,7 +18,7 @@ const THOUGHTS = [
 ];
 
 // "404" drawn in sparse dots, a shade off the background (big type doesn't need contrast). Like
-// the footer's glow, it fades as a gradient: dots thin out and soften towards the top. It sits
+// the footer's glow, it fades as a gradient: dots thin out and soften towards the bottom. It sits
 // still; under the pointer the dots scatter away and spring back into place.
 const PUSH_RADIUS = 80;
 
@@ -60,19 +60,20 @@ function DotNumber() {
       m.font = `700 ${h * 1.05}px 'Helvetica Neue', Helvetica, Arial, sans-serif`;
       m.textAlign = 'center';
       m.textBaseline = 'middle';
-      m.fillText('404', w / 2, h * 0.54);
+      m.fillText('404', w / 2, h * 0.57);
       const ink = m.getImageData(0, 0, w, h).data;
 
       dots = [];
-      const tries = Math.round(w * h * 0.06);
+      // Small canvases get proportionally more dots so the number still reads on phones.
+      const tries = Math.round(w * h * (w < 500 ? 0.12 : 0.07));
       for (let i = 0; i < tries; i += 1) {
         const x = Math.random() * w;
         const y = Math.random() * h;
         if (ink[(Math.floor(y) * w + Math.floor(x)) * 4 + 3] < 128) continue;
-        // 0 at the top, 1 at the bottom: fewer, fainter dots higher up.
-        const depth = y / h;
-        if (Math.random() > 0.2 + depth * 0.6) continue;
-        dots.push({ hx: x, hy: y, x, y, vx: 0, vy: 0, r: 0.6 + Math.random() * 0.8, a: 0.35 + depth * 0.65 });
+        // 1 at the top, 0 at the bottom: fewer, fainter dots lower down.
+        const depth = 1 - y / h;
+        if (Math.random() > 0.3 + depth * 0.6) continue;
+        dots.push({ hx: x, hy: y, x, y, vx: 0, vy: 0, r: 0.6 + Math.random() * 0.8, a: 0.55 + depth * 0.45 });
       }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.fillStyle = getComputedStyle(el).color;

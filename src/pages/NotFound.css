@@ -20,7 +20,8 @@
 
 .not-found__thought {
   max-width: 520px;
-  margin: 0;
+  /* Sit closer to the number than the page's 32px gap. */
+  margin: -28px 0 0;
 }
 
 .not-found__thought blockquote {
