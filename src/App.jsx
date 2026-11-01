@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Work from './pages/Work';
@@ -32,6 +32,9 @@ export default function App() {
         <Route path="notes" element={<Notes />} />
         <Route path="about" element={<About />} />
         <Route path="resume" element={<Resume />} />
+        {/* Shareable contact links: the resume page, scrolled to the footer's contact details. */}
+        <Route path="contact" element={<Navigate to="/resume#contact" replace />} />
+        <Route path="contacts" element={<Navigate to="/resume#contact" replace />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -5,7 +5,7 @@ import './Footer.css';
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" id="contact">
       <div className="container footer__stack">
         <div>
           <hr className="divider" />
