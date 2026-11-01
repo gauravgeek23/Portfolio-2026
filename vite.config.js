@@ -1,12 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Link previews need absolute URLs. On Vercel the production domain is known at build time;
-// set SITE_URL to override it (e.g. a custom domain). Locally it falls back to relative paths.
-const siteUrl = (
-  process.env.SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '')
-).replace(/\/$/, '');
+// Link previews, the sitemap and canonical links need absolute URLs: the site's domain, unless
+// SITE_URL overrides it (e.g. for a staging build).
+const siteUrl = (process.env.SITE_URL || 'https://peaksandpixels.art').replace(/\/$/, '');
 
 const siteUrlInHtml = {
   name: 'site-url-in-html',
