@@ -32,9 +32,9 @@ export default function App() {
         <Route path="notes" element={<Notes />} />
         <Route path="about" element={<About />} />
         <Route path="resume" element={<Resume />} />
-        {/* Shareable contact links: the resume page, scrolled to the footer's contact details. */}
-        <Route path="contact" element={<Navigate to="/resume#contact" replace />} />
-        <Route path="contacts" element={<Navigate to="/resume#contact" replace />} />
+        {/* Shareable contact links: the resume page opens, then glides down to the footer's contact details. */}
+        <Route path="contact" element={<Navigate to="/resume#contact" replace state={{ glide: true }} />} />
+        <Route path="contacts" element={<Navigate to="/resume#contact" replace state={{ glide: true }} />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
