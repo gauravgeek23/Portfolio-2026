@@ -54,5 +54,8 @@ A 24-slide presentation built in React, in the site's own visual language: `src/
 - **Offline copy:** `npx vite build --config vite.deck.config.js --outDir <dir>` builds a
   standalone version that runs from a folder (`deck.html`).
 
-Exported files (HTML, PDF, PowerPoint, speaker notes, the metrics checklist and a contact sheet)
-are in `presentation/`.
+- **Visuals:** drop images named after a slot into `src/assets/deck/slots/` (e.g. `study-buddy.webp`);
+  `presentation/VISUAL_SLOTS.md` lists every slot.
+
+Exported files (HTML, PDF, PowerPoint, speaker notes, the metrics and visual-slot lists and a contact
+sheet) are in `presentation/`.

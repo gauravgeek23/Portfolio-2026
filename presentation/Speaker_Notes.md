@@ -1,6 +1,6 @@
 # Speaker notes: Newton School of Technology, Growth Season 2025–26
 
-About 45 minutes for 24 slides. Times are guides; the clock shows where you should roughly be at the start of each slide.
+About 45 minutes for 24 slides. Times are guides; the clock shows roughly where you should be at the start of each slide.
 
 Keys while presenting at /projectppt: ← → to move, N for these notes on screen, G for all slides, F for fullscreen.
 
@@ -40,7 +40,7 @@ When I joined, there was no design team. I built and led it.
 
 Design worked across five business verticals, and the job was to be one function serving all of them rather than five separate request queues. In practice that meant working daily with product, engineering, marketing, content and the academic teams.
 
-The diagram is the operating model: design in the middle, the five verticals as the work we served, and the partner teams around it. The point isn't the org chart; it's that the same design decisions — the brand, the components, the patterns — had to hold across all five. (If asked, name the verticals here; I've left them off the slide.)
+The point isn't the org chart; it's that the same design decisions — the brand, the components, the patterns — had to hold across all five verticals. (Name the verticals here if asked.)
 
 ## 05 · One recognisable brand  ·  ~1.5 min  ·  starts at 6:00
 
@@ -48,7 +48,7 @@ The first thing we did, in September 2025, was standardise the brand. Campus tea
 
 We standardised logos, colours, typography, photography and product screenshots, and put everything in one central brand portal so every team pulled from the same source.
 
-To be transparent about the board: the logo, the colours sampled from it, and the product screenshots are real. The typography and photography tiles are illustrative, recreated for this deck. The reason this comes first in the story: none of the growth work that follows works if every touchpoint looks like a different organisation.
+The reason this comes first in the story: none of the growth work that follows works if every touchpoint looks like a different organisation.
 
 ## 06 · Website redesign  ·  ~2 min  ·  starts at 7:30
 
@@ -114,7 +114,7 @@ The core problem: students were learning the interface before they could take th
 
 The interface lacked cohesion. Students could spend roughly five to six minutes just understanding how it worked, and in a timed exam that's time taken directly from answering. Switching between sections meant unnecessary back-and-forth.
 
-I don't have screenshots of the previous interface, so I'm not showing a fake "before". These are the observations as they were reported to me, and the little diagram is an illustration of the back-and-forth, not a recreation of the old UI.
+If I have a screenshot of the previous interface it's on this slide; otherwise I describe it rather than show a recreated "before".
 
 The framing I used with the team: every second a student spends on the interface is a second not spent on the question.
 

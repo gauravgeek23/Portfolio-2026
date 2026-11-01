@@ -196,9 +196,19 @@ function toggleFullscreen() {
   else document.documentElement.requestFullscreen?.();
 }
 
-// One slide with its chrome: section label, the gk. mark and a ruler that doubles as navigation.
+// Acts, as the deck's "nav" tabs: slides 1–11, 12–20 and 21–24.
+const ACTS = [
+  { label: 'growth season', from: 0 },
+  { label: 'the exam', from: 11 },
+  { label: 'lessons', from: 20 },
+];
+const actOf = (i) => (i >= 20 ? 2 : i >= 11 ? 1 : 0);
+
+// One slide with the site's chrome: a nav row (gk., the acts as tabs, the count) over a dashed
+// rule, and the footer ruler at the bottom, which doubles as navigation.
 function Slide({ slide, i, active, go }) {
   const { C } = slide;
+  const act = actOf(i);
   return (
     <section
       className={`slide${slide.dark ? ' slide--dark' : ''}${active ? ' is-active' : ''}`}
@@ -206,30 +216,41 @@ function Slide({ slide, i, active, go }) {
       aria-roledescription="slide"
       aria-label={`${i + 1} of ${total}: ${slide.title}`}
     >
-      <C active={active} />
-      <div className="chrome">
-        {slide.section && <span className="chrome__section">{slide.section}</span>}
-        <span className="chrome__mark mark">
+      <header className="chrome__nav">
+        <span className="mark">
           gk
           <i />
         </span>
-        <div className="chrome__ruler">
-          {SLIDES.map((s, k) => (
-            <button
-              key={k}
-              type="button"
-              tabIndex={active ? 0 : -1}
-              className={`chrome__tick${k === i ? ' is-here' : ''}${k === 11 || k === 20 ? ' is-act' : ''}`}
-              onClick={() => go?.(k)}
-              aria-label={`Go to slide ${k + 1}: ${s.title}`}
-            >
-              <em>{s.title}</em>
-            </button>
-          ))}
-        </div>
-        <span className="chrome__num">
-          {pad(i + 1)} <span>/ {total}</span>
+        {ACTS.map((a, k) => (
+          <button
+            key={a.label}
+            type="button"
+            tabIndex={active ? 0 : -1}
+            className={k === act ? 'is-here' : ''}
+            onClick={() => go?.(a.from)}
+          >
+            {a.label}
+          </button>
+        ))}
+        <span className="chrome__count">
+          {pad(i + 1)} / {total}
         </span>
+      </header>
+      <C active={active} />
+      <div className="chrome__ruler" aria-hidden={!active}>
+        {SLIDES.map((s, k) => (
+          <button
+            key={k}
+            type="button"
+            tabIndex={active ? 0 : -1}
+            className={`chrome__tick${k === i ? ' is-here' : ''}`}
+            onClick={() => go?.(k)}
+            aria-label={`Go to slide ${k + 1}: ${s.title}`}
+          >
+            {k % 4 === 0 && <span>{pad(k + 1)}</span>}
+            <em>{s.title}</em>
+          </button>
+        ))}
       </div>
     </section>
   );

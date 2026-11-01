@@ -19,7 +19,7 @@ Legend: **⚠ Conflict**, the figures disagree with each other. **? Confirm**, t
 | 4 | 03 | Season Sep → Jun; discovery peak Dec → Mar | ? Confirm the months. |
 | 5 | 03 | Campuses: Delhi, Pune, Bengaluru, Hyderabad | ? Confirm the list for 2025–26. |
 | 6 | 04 | No design team when you joined; you built and led it; five business verticals | ? Have the five vertical names ready. The slide shows V1–V5 on purpose. Know the team size you built. |
-| 7 | 05 | Brand standardised in **September 2025**; central brand portal | ? Confirm the month and that the portal existed. Typography and photography tiles are labelled *illustrative*; logo, blues (#004599, #0673F9, sampled from the logo SVG) and product screenshots are real. |
+| 7 | 05 | Brand standardised in **September 2025**; central brand portal | ? Confirm the month and that the portal existed. The slide shows the real NST logo; the other tiles are slots for your own brand assets. |
 | 8 | 06 | **18 pages in 21 days** | ? Confirm. |
 | 9 | 06 | Signup conversion **21.3% → 23.6%**, **+2.3 percentage points**, **98% confidence** | ? Confirm the test design (A/B or before/after), sample sizes, period and how confidence was computed. Don't restate this as "+10.8%" (the relative change) unless that's how it was reported. |
 | 10 | 07 | Head Start: free courses in Python, C++, fundamentals | ? Confirm. |
@@ -38,7 +38,7 @@ Legend: **⚠ Conflict**, the figures disagree with each other. **? Confirm**, t
 |---|---|---|---|
 | 19 | 12–20, cover | The exam screenshot is the **shipped** interface | ? The only image available is the composite from your portfolio (desktop, plus two phones). It has mock-up artefacts: the left phone's background reads "JEE Mains Mock Test Mains", and the right phone shows two status bars (9:41 and 12:30). Confirm it matches what shipped, or say it's the final design. |
 | 20 | 13 | Students could spend **~5–6 minutes** understanding the interface | ? How was this observed or measured? Shown as "Reported". |
-| 21 | 13 | The previous interface lacked cohesion; section switching meant back-and-forth | ? No screenshots of the old interface were available, so none are shown, and the back-and-forth diagram is labelled as an illustration. If you have old screenshots, a real before/after would strengthen slide 13. |
+| 21 | 13 | The previous interface lacked cohesion; section switching meant back-and-forth | ? No screenshots of the old interface were available. Slide 13 has an `old-exam` slot: a real screenshot there would strengthen the problem, otherwise remove the slot. |
 | 22 | 15 | Dark mode to reduce perceived glare | ? Intent, not a measured result. The screenshot shows a theme toggle (sun icon) but only light mode. |
 | 23 | 15 | Right-side question navigation is **collapsible** | ? The screenshot doesn't show the collapsed state; confirm the behaviour. |
 | 24 | 16 | "Marked and Answered (will be considered for evaluation)" | ✓ Visible in the screenshot. |
