@@ -183,26 +183,29 @@ export default function Intro() {
           </span>
         </p>
       </div>
-      {/* Earlier work, as one paragraph: each company shown by its logo instead of its name. */}
-      <p className="text-small intro__claims">
-        Before that,{' '}
-        <span className="intro__claim">
-          I grew the <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" /> marketplace
-          from <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR
-        </span>
-        ,{' '}
-        <span className="intro__claim">
-          took the <Brand svg={iconScoutLogo} name="IconScout" tip="Product Designer · 2021–24" /> Figma plugin to{' '}
-          <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
-          <Metric value="1.2M+" i={4} ready={!loading} /> users
-        </span>
-        , and{' '}
-        <span className="intro__claim">
-          helped take <Brand svg={topprLogo} name="Toppr" tip="Product Design Intern · 2021" /> Answr past{' '}
-          <Metric value="$1.4M" i={5} ready={!loading} /> in revenue
-        </span>
-        .
-      </p>
+      {/* Earlier work: a line per company, each led by its logo. */}
+      <div className="text-small intro__claims">
+        <p>
+          <span className="intro__claim">
+            <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" /> Designed the marketplace
+            as it grew from <Metric value="$200K" i={1} ready={!loading} /> to{' '}
+            <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
+          </span>
+        </p>
+        <p>
+          <span className="intro__claim">
+            <Brand svg={iconScoutLogo} name="IconScout" tip="Product Designer · 2021–24" /> Designed the Figma plugin
+            that reached <Metric value="#14" i={3} ready={!loading} /> most-used worldwide, with{' '}
+            <Metric value="1.2M+" i={4} ready={!loading} /> users.
+          </span>
+        </p>
+        <p>
+          <span className="intro__claim">
+            <Brand svg={topprLogo} name="Toppr" tip="Product Design Intern · 2021" /> Helped design Answr, which crossed{' '}
+            <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
+          </span>
+        </p>
+      </div>
     </section>
   );
 }

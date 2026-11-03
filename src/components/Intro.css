@@ -346,6 +346,11 @@
   color: var(--color-black);
 }
 
+/* A logo that leads its line sits flush with the text above. */
+.intro__claim > .intro__brand:first-child {
+  margin-left: 0;
+}
+
 /* Dark: Newton's navy wordmark would vanish, so it takes the text colour like the others. */
 :root[data-theme='dark'] .intro__brand {
   --logo-nst: var(--color-black);
