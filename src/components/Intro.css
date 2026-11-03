@@ -331,23 +331,19 @@
   visibility: hidden;
 }
 
-/* Statements read in grey (logo wordmarks too) and come up to full ink while hovered. */
+/* Statements read in grey and come up to full ink while hovered. The figures and the logos stay
+   in ink throughout, so they carry the line even at a glance. */
 .intro__claims {
   color: var(--color-grey-1);
 }
 
 .intro__claim {
-  --logo-ink: var(--color-grey-1);
   transition: color 250ms ease;
 }
 
-.intro__claim:hover {
-  --logo-ink: var(--color-black);
+.intro__claim:hover,
+.intro__claims .intro__metric {
   color: var(--color-black);
-}
-
-.intro__claim .intro__brand {
-  --logo-ink: inherit;
 }
 
 /* Dark: Newton's navy wordmark would vanish, so it takes the text colour like the others. */
