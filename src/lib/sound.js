@@ -1,10 +1,10 @@
-// Quiet interface sounds, synthesised with Web Audio (no files to load): a short filtered noise
-// burst gives the "click" of a key or mouse, a tiny pitched tail gives it body. Every sound is
-// a few tens of milliseconds and well below speech level.
+// Quiet, mechanical interface sounds, synthesised with Web Audio (no files to load). There's no
+// pitched tone in them (that reads as a drum): each is a few milliseconds of filtered noise, the
+// way a real switch sounds, and mouse and key clicks come as a press followed by a softer release.
 //
-//   tick   tabs, links, buttons            a light mouse click
-//   tap    opening a project, image, book  a softer, deeper "thock"
-//   toggle the theme or sound switch       two quick ticks
+//   tick   tabs, links, buttons            a mouse click: press, release
+//   tap    opening a project, image, book  a keyboard key: press with a little plastic body, release
+//   toggle the theme or sound switch       a switch: two crisp clicks
 //   page   turning a page in the book      a short paper swish
 //
 // Sound is on by default and remembered per visitor (localStorage "sound": "on" / "off"). It's for
@@ -52,8 +52,27 @@ function audio() {
   return ctx;
 }
 
-// A burst of band-passed noise with a fast attack and an exponential decay.
-function burst(ac, at, { freq, q = 1.2, decay, gain, type = 'bandpass' }) {
+// Every sound goes through one soft clipper, so a burst that happens to catch loud noise is
+// rounded off instead of jumping out above the rest (no gain is added below the ceiling).
+const CEILING = 0.2;
+
+function bus(ac) {
+  if (!ac.clipper) {
+    const curve = new Float32Array(1024);
+    for (let i = 0; i < curve.length; i += 1) {
+      const x = (i / (curve.length - 1)) * 2 - 1;
+      curve[i] = CEILING * Math.tanh(x / CEILING);
+    }
+    ac.clipper = ac.createWaveShaper();
+    ac.clipper.curve = curve;
+    ac.clipper.connect(ac.destination);
+  }
+  return ac.clipper;
+}
+
+// A burst of filtered noise: a near-instant attack and an exponential decay. Short decays
+// (a few ms) are clicks; longer, low-passed ones are swishes.
+function burst(ac, at, { freq, q = 1, decay, gain, type = 'bandpass', attack = 0.0006 }) {
   const src = ac.createBufferSource();
   src.buffer = noise;
   const filter = ac.createBiquadFilter();
@@ -62,43 +81,32 @@ function burst(ac, at, { freq, q = 1.2, decay, gain, type = 'bandpass' }) {
   filter.Q.value = q;
   const env = ac.createGain();
   env.gain.setValueAtTime(0, at);
-  env.gain.linearRampToValueAtTime(gain, at + 0.002);
-  env.gain.exponentialRampToValueAtTime(0.0001, at + decay);
-  src.connect(filter).connect(env).connect(ac.destination);
+  env.gain.linearRampToValueAtTime(gain, at + attack);
+  env.gain.exponentialRampToValueAtTime(0.0001, at + attack + decay);
+  src.connect(filter).connect(env).connect(bus(ac));
   src.start(at, Math.random() * 0.5);
-  src.stop(at + decay + 0.02);
-}
-
-// A short sine tail, optionally gliding down in pitch.
-function tone(ac, at, { from, to = from, decay, gain }) {
-  const osc = ac.createOscillator();
-  osc.type = 'sine';
-  osc.frequency.setValueAtTime(from, at);
-  osc.frequency.exponentialRampToValueAtTime(to, at + decay);
-  const env = ac.createGain();
-  env.gain.setValueAtTime(0, at);
-  env.gain.linearRampToValueAtTime(gain, at + 0.003);
-  env.gain.exponentialRampToValueAtTime(0.0001, at + decay);
-  osc.connect(env).connect(ac.destination);
-  osc.start(at);
-  osc.stop(at + decay + 0.02);
+  src.stop(at + attack + decay + 0.02);
 }
 
 const SOUNDS = {
   tick(ac, t) {
-    burst(ac, t, { freq: 3600, q: 1.6, decay: 0.022, gain: 0.05 });
-    tone(ac, t, { from: 1800, to: 1500, decay: 0.018, gain: 0.012 });
+    // Press: a bright snap with a touch of switch resonance. Release: the same, quieter, higher.
+    burst(ac, t, { freq: 2600, type: 'highpass', q: 0.7, decay: 0.006, gain: 0.16 });
+    burst(ac, t, { freq: 5200, q: 5, decay: 0.012, gain: 0.05 });
+    burst(ac, t + 0.055, { freq: 3400, type: 'highpass', q: 0.7, decay: 0.004, gain: 0.07 });
   },
   tap(ac, t) {
-    burst(ac, t, { freq: 1500, q: 1, decay: 0.04, gain: 0.06 });
-    tone(ac, t, { from: 420, to: 260, decay: 0.07, gain: 0.05 });
+    // A key: snap, a short plastic "thock" under it, then the key coming back up.
+    burst(ac, t, { freq: 2000, type: 'highpass', q: 0.7, decay: 0.006, gain: 0.075 });
+    burst(ac, t, { freq: 1700, q: 2.5, decay: 0.022, gain: 0.025 });
+    burst(ac, t + 0.07, { freq: 2600, type: 'highpass', q: 0.7, decay: 0.005, gain: 0.06 });
   },
   toggle(ac, t) {
-    burst(ac, t, { freq: 3200, q: 1.6, decay: 0.02, gain: 0.045 });
-    burst(ac, t + 0.07, { freq: 2400, q: 1.6, decay: 0.024, gain: 0.04 });
+    burst(ac, t, { freq: 3000, type: 'highpass', q: 0.7, decay: 0.005, gain: 0.14 });
+    burst(ac, t + 0.04, { freq: 2400, type: 'highpass', q: 0.7, decay: 0.006, gain: 0.11 });
   },
   page(ac, t) {
-    burst(ac, t, { freq: 1100, q: 0.6, decay: 0.16, gain: 0.035, type: 'lowpass' });
+    burst(ac, t, { freq: 1100, q: 0.6, decay: 0.16, gain: 0.035, type: 'lowpass', attack: 0.01 });
   },
 };
 
