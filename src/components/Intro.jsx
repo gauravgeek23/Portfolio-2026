@@ -175,7 +175,7 @@ export default function Intro() {
             into measurable growth.
           </span>
         </p>
-        <p>
+        <p className="intro__ink">
           <span className="intro__claim">
             In 2026, led growth design at{' '}
             <Brand svg={nstLogo} name="Newton School of Technology" tip="Senior Product Designer · 2024–26" />, a{' '}
@@ -184,7 +184,7 @@ export default function Intro() {
         </p>
       </div>
       {/* Earlier work: a line per company, each led by its logo. */}
-      <div className="text-small intro__claims">
+      <div className="text-small intro__claims intro__ink">
         <p>
           <span className="intro__claim">
             <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" /> Designed the marketplace

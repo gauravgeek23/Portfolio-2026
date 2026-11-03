@@ -346,6 +346,12 @@
   color: var(--color-black);
 }
 
+/* From the 2026 line down, the statements read in full ink. */
+.intro__claims .intro__ink,
+.intro__claims.intro__ink {
+  color: var(--color-black);
+}
+
 /* A logo that leads its line sits flush with the text above. */
 .intro__claim > .intro__brand:first-child {
   margin-left: 0;
