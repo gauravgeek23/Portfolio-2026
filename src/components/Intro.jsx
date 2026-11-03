@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import avatar from '../assets/avatar-156.webp';
 import peekChangLa from '../assets/book/chang-la-peek.webp';
 import peekHampta from '../assets/book/hampta-pass-peek.webp';
@@ -14,8 +14,77 @@ import './Intro.css';
 
 // A company's logo in place of its name, inside a sentence. The SVGs are inlined (not <img>) so
 // their wordmarks pick up the theme's text colour while the brand marks keep their own colours.
-function Brand({ svg, name }) {
-  return <span className="intro__brand" role="img" aria-label={name} dangerouslySetInnerHTML={{ __html: svg }} />;
+// Hovering shows the role and years there.
+function Brand({ svg, name, tip }) {
+  return (
+    <span
+      className="intro__brand"
+      role="img"
+      aria-label={`${name}, ${tip}`}
+      data-tip={tip}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  );
+}
+
+// A figure in the intro. The first time it's on screen (after the landing loader) it counts up
+// from zero and a highlighter stroke sweeps under it, one figure after another (`i` is its turn),
+// so the eye reads them in order. Reduced motion shows it finished.
+function Metric({ value, i, ready }) {
+  const [, prefix, digits, suffix] = value.match(/^([^\d]*)([\d.]+)(.*)$/);
+  const target = parseFloat(digits);
+  const decimals = (digits.split('.')[1] || '').length;
+  const ref = useRef(null);
+  const [shown, setShown] = useState(false);
+  const [n, setN] = useState(target);
+
+  useEffect(() => {
+    if (!ready) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setShown(true);
+      return undefined;
+    }
+    let frame;
+    let timer;
+    const run = () => {
+      const start = performance.now();
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / 900);
+        setN(target * (1 - (1 - t) ** 3));
+        if (t < 1) frame = requestAnimationFrame(tick);
+      };
+      setN(0);
+      setShown(true);
+      frame = requestAnimationFrame(tick);
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        timer = setTimeout(run, 250 + i * 220);
+      },
+      { threshold: 0.6 },
+    );
+    observer.observe(ref.current);
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+      cancelAnimationFrame(frame);
+    };
+  }, [ready, i, target]);
+
+  // The final value holds the width (and is what screen readers get), so counting never
+  // shifts the line; the counting copy sits over it.
+  return (
+    <span ref={ref} className={`intro__metric${shown ? ' is-on' : ''}`}>
+      <span className="intro__metric-final">{value}</span>
+      <span className="intro__metric-count" aria-hidden="true">
+        {prefix}
+        {n.toFixed(decimals)}
+        {suffix}
+      </span>
+    </span>
+  );
 }
 
 // Whether this page load started on the home page (the preview bundle always starts there), and
@@ -104,20 +173,26 @@ export default function Intro() {
         <p className="text-muted">{site.role}</p>
       </div>
       <div className="text-small">
-        <p className="text-muted">
+        <p>
           Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems into
           measurable growth.
         </p>
         <p>
-          In 2026, led growth design at <Brand svg={nstLogo} name="Newton School of Technology" />, a $45M+ business
-          reshaping India’s engineering education.
+          In 2026, led growth design at{' '}
+          <Brand svg={nstLogo} name="Newton School of Technology" tip="Senior Product Designer · 2024–26" />, a{' '}
+          <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
         </p>
       </div>
       {/* Earlier work, as one paragraph: each company shown by its logo instead of its name. */}
       <p className="text-small">
-        Before that, I grew the <Brand svg={lottieFilesLogo} name="LottieFiles" /> marketplace from $200K to $2.4M ARR,
-        took the <Brand svg={iconScoutLogo} name="IconScout" /> Figma plugin to #14 most-used worldwide with 1.2M+
-        users, and helped take <Brand svg={topprLogo} name="Toppr" /> Answr past $1.4M in revenue.
+        Before that, I grew the <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" />{' '}
+        marketplace from <Metric value="$200K" i={1} ready={!loading} /> to{' '}
+        <Metric value="$2.4M" i={2} ready={!loading} /> ARR, took the{' '}
+        <Brand svg={iconScoutLogo} name="IconScout" tip="Product Designer · 2021–24" /> Figma plugin to{' '}
+        <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
+        <Metric value="1.2M+" i={4} ready={!loading} /> users, and helped take{' '}
+        <Brand svg={topprLogo} name="Toppr" tip="Product Design Intern · 2021" /> Answr past{' '}
+        <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
       </p>
     </section>
   );

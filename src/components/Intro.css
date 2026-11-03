@@ -279,6 +279,75 @@
   height: 100%;
 }
 
+/* Hovering a logo lifts it a little and shows the role and years there. */
+.intro__brand {
+  position: relative;
+  transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.intro__brand::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  z-index: 2;
+  padding: 2px 10px;
+  border-radius: 6px;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  translate: -50% 4px;
+  transition:
+    opacity 150ms ease,
+    translate 150ms ease;
+}
+
+.intro__brand:hover {
+  transform: translateY(-2px);
+}
+
+.intro__brand:hover::after {
+  opacity: 1;
+  translate: -50% 0;
+}
+
+/* The figures: medium weight, with a highlighter stroke (the gk. dot's yellow) that sweeps in
+   under each one in turn. */
+.intro__metric {
+  --mark: color-mix(in srgb, #f6c333 45%, transparent);
+  padding: 0 2px;
+  margin: 0 -2px;
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(transparent 46%, var(--mark) 46%, var(--mark) 80%, transparent 80%) no-repeat left / 0%
+    100%;
+  transition: background-size 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.intro__metric.is-on {
+  background-size: 100% 100%;
+}
+
+.intro__metric {
+  display: inline-grid;
+}
+
+.intro__metric > span {
+  grid-area: 1 / 1;
+}
+
+.intro__metric-final {
+  visibility: hidden;
+}
+
+:root[data-theme='dark'] .intro__metric {
+  --mark: color-mix(in srgb, #f6c333 32%, transparent);
+}
+
 /* Dark: Newton's navy wordmark would vanish, so it takes the text colour like the others. */
 :root[data-theme='dark'] .intro__brand {
   --logo-nst: var(--color-black);
