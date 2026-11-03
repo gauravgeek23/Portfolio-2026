@@ -28,22 +28,18 @@ function Brand({ svg, name, tip }) {
 }
 
 // A figure in the intro. The first time it's on screen (after the landing loader) it counts up
-// from zero and a highlighter stroke sweeps under it, one figure after another (`i` is its turn),
-// so the eye reads them in order. Reduced motion shows it finished.
+// from zero, one figure after another (`i` is its turn), so the eye reads them in order.
+// Reduced motion shows it finished.
 function Metric({ value, i, ready }) {
   const [, prefix, digits, suffix] = value.match(/^([^\d]*)([\d.]+)(.*)$/);
   const target = parseFloat(digits);
   const decimals = (digits.split('.')[1] || '').length;
   const ref = useRef(null);
-  const [shown, setShown] = useState(false);
   const [n, setN] = useState(target);
 
   useEffect(() => {
     if (!ready) return undefined;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setShown(true);
-      return undefined;
-    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
     let frame;
     let timer;
     const run = () => {
@@ -54,7 +50,6 @@ function Metric({ value, i, ready }) {
         if (t < 1) frame = requestAnimationFrame(tick);
       };
       setN(0);
-      setShown(true);
       frame = requestAnimationFrame(tick);
     };
     const observer = new IntersectionObserver(
@@ -76,7 +71,7 @@ function Metric({ value, i, ready }) {
   // The final value holds the width (and is what screen readers get), so counting never
   // shifts the line; the counting copy sits over it.
   return (
-    <span ref={ref} className={`intro__metric${shown ? ' is-on' : ''}`}>
+    <span ref={ref} className="intro__metric">
       <span className="intro__metric-final">{value}</span>
       <span className="intro__metric-count" aria-hidden="true">
         {prefix}
@@ -172,27 +167,41 @@ export default function Intro() {
         <h1 className="text-medium">{site.name}</h1>
         <p className="text-muted">{site.role}</p>
       </div>
-      <div className="text-small">
+      {/* The intro reads in grey; hovering a statement brings just that one up to full ink. */}
+      <div className="text-small intro__claims">
         <p>
-          Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems into
-          measurable growth.
+          <span className="intro__claim">
+            Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems
+            into measurable growth.
+          </span>
         </p>
         <p>
-          In 2026, led growth design at{' '}
-          <Brand svg={nstLogo} name="Newton School of Technology" tip="Senior Product Designer · 2024–26" />, a{' '}
-          <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
+          <span className="intro__claim">
+            In 2026, led growth design at{' '}
+            <Brand svg={nstLogo} name="Newton School of Technology" tip="Senior Product Designer · 2024–26" />, a{' '}
+            <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
+          </span>
         </p>
       </div>
       {/* Earlier work, as one paragraph: each company shown by its logo instead of its name. */}
-      <p className="text-small">
-        Before that, I grew the <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" />{' '}
-        marketplace from <Metric value="$200K" i={1} ready={!loading} /> to{' '}
-        <Metric value="$2.4M" i={2} ready={!loading} /> ARR, took the{' '}
-        <Brand svg={iconScoutLogo} name="IconScout" tip="Product Designer · 2021–24" /> Figma plugin to{' '}
-        <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
-        <Metric value="1.2M+" i={4} ready={!loading} /> users, and helped take{' '}
-        <Brand svg={topprLogo} name="Toppr" tip="Product Design Intern · 2021" /> Answr past{' '}
-        <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
+      <p className="text-small intro__claims">
+        Before that,{' '}
+        <span className="intro__claim">
+          I grew the <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" /> marketplace
+          from <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR
+        </span>
+        ,{' '}
+        <span className="intro__claim">
+          took the <Brand svg={iconScoutLogo} name="IconScout" tip="Product Designer · 2021–24" /> Figma plugin to{' '}
+          <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
+          <Metric value="1.2M+" i={4} ready={!loading} /> users
+        </span>
+        , and{' '}
+        <span className="intro__claim">
+          helped take <Brand svg={topprLogo} name="Toppr" tip="Product Design Intern · 2021" /> Answr past{' '}
+          <Metric value="$1.4M" i={5} ready={!loading} /> in revenue
+        </span>
+        .
       </p>
     </section>
   );
