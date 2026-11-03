@@ -263,13 +263,6 @@
   }
 }
 
-/* The intro's statements, one line of proof per company, each company shown by its logo. */
-.intro__story {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 /* A logo in place of a company's name, a little taller than the text and sitting on its
    baseline. Wordmarks follow the theme's text colour. */
 .intro__brand {
