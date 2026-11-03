@@ -188,20 +188,20 @@ export default function Intro() {
       <div className="text-small intro__claims intro__ink">
         <p>
           <span className="intro__claim">
-            <Brand svg={lottieFilesLogo} name="LottieFiles" href="https://lottiefiles.com/" /> Marketplace, from{' '}
+            <Brand svg={lottieFilesLogo} name="LottieFiles" href="https://lottiefiles.com/" /> marketplace, from{' '}
             <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
           </span>
         </p>
         <p>
           <span className="intro__claim">
-            <Brand svg={iconScoutLogo} name="IconScout" href="https://iconscout.com/" /> Figma plugin,{' '}
+            <Brand svg={iconScoutLogo} name="IconScout" href="https://iconscout.com/" /> figma plugin,{' '}
             <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
             <Metric value="1.2M+" i={4} ready={!loading} /> users.
           </span>
         </p>
         <p>
           <span className="intro__claim">
-            <Brand svg={topprLogo} name="Toppr" href="https://www.toppr.com/" /> Answr, past{' '}
+            <Brand svg={topprLogo} name="Toppr" href="https://www.toppr.com/" /> answr, a doubt-solving app that crossed{' '}
             <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
           </span>
         </p>
