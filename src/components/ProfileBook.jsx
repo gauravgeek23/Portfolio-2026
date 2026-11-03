@@ -4,6 +4,7 @@ import avatar from '../assets/avatar-1200.webp';
 import arrowLeft from '../assets/icons/arrow-left.svg';
 import arrowRight from '../assets/icons/arrow-right.svg';
 import Icon from './Icon';
+import { play } from '../lib/sound';
 import { site } from '../data/site';
 import {
   Endpaper,
@@ -160,6 +161,7 @@ export default function ProfileBook({ open, onClose, origin, coverFrom = 0, onCl
       }
       const next = Math.max(1, Math.min(LAST, turned + by));
       if (next === turned) return;
+      play('page');
       // The leaf being turned stays on top of both stacks while it flips.
       setFlipping(by > 0 ? turned : next);
       setTurned(next);
@@ -196,6 +198,7 @@ export default function ProfileBook({ open, onClose, origin, coverFrom = 0, onCl
   const goTo = useCallback(
     (next) => {
       if (next === turned) return;
+      play('page');
       setFlipping(next > turned ? turned : next);
       setTurned(next);
     },
@@ -294,7 +297,7 @@ export default function ProfileBook({ open, onClose, origin, coverFrom = 0, onCl
             })}
           </div>
         </div>
-        <nav className="pbook-nav" aria-label="Pages">
+        <nav className="pbook-nav" aria-label="Pages" data-sound="none">
           <button type="button" onClick={() => go(-1)} disabled={turned <= 1} aria-label="Previous page">
             <Icon src={arrowLeft} />
           </button>

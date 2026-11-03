@@ -93,6 +93,30 @@
     background-color 200ms ease;
 }
 
+/* The sound switch sits just before the theme toggle, pushed to the right with it. */
+.nav__sound {
+  margin-right: 0;
+}
+
+.nav__sound + .nav__theme {
+  margin-left: -12px;
+}
+
+.nav__sound[aria-pressed='false'] {
+  color: var(--color-grey-2);
+}
+
+/* Touch-only devices have no sounds, so no switch either. */
+@media (hover: none) {
+  .nav__sound {
+    display: none;
+  }
+
+  .nav__sound + .nav__theme {
+    margin-left: auto;
+  }
+}
+
 .nav__theme:hover {
   color: var(--color-black);
   background: var(--color-grey-3);
