@@ -352,6 +352,13 @@
   color: var(--color-black);
 }
 
+/* The company lines, with a little air between them. */
+.intro__claims.intro__ink {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /* A logo that leads its line sits flush with the text above. */
 .intro__claim > .intro__brand:first-child {
   margin-left: 0;

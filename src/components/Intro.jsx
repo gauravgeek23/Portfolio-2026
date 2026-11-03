@@ -183,25 +183,24 @@ export default function Intro() {
           </span>
         </p>
       </div>
-      {/* Earlier work: a line per company, each led by its logo. */}
+      {/* Earlier work: a line per company, each led by its logo, which reads as part of the product's name. */}
       <div className="text-small intro__claims intro__ink">
         <p>
           <span className="intro__claim">
-            <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" /> Designed the marketplace
-            as it grew from <Metric value="$200K" i={1} ready={!loading} /> to{' '}
-            <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
+            <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" /> Marketplace, from{' '}
+            <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
           </span>
         </p>
         <p>
           <span className="intro__claim">
-            <Brand svg={iconScoutLogo} name="IconScout" tip="Product Designer · 2021–24" /> Designed the Figma plugin
-            that reached <Metric value="#14" i={3} ready={!loading} /> most-used worldwide, with{' '}
+            <Brand svg={iconScoutLogo} name="IconScout" tip="Product Designer · 2021–24" /> Figma plugin,{' '}
+            <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
             <Metric value="1.2M+" i={4} ready={!loading} /> users.
           </span>
         </p>
         <p>
           <span className="intro__claim">
-            <Brand svg={topprLogo} name="Toppr" tip="Product Design Intern · 2021" /> Helped design Answr, which crossed{' '}
+            <Brand svg={topprLogo} name="Toppr" tip="Product Design Intern · 2021" /> Answr, past{' '}
             <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
           </span>
         </p>
