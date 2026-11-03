@@ -105,20 +105,19 @@ export default function Intro() {
       </div>
       <div className="text-small">
         <p className="text-muted">
-          Business-driven Product Designer with 5 years of E2E ownership, translating complex business challenges into
-          impactful experiences that drive measurable growth.
+          Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems into
+          measurable growth.
         </p>
         <p>
-          In 2026, at <Brand svg={nstLogo} name="Newton School of Technology" />, led design for growth initiatives at a
-          $45M+ business reshaping India’s engineering education landscape.
+          In 2026, led growth design at <Brand svg={nstLogo} name="Newton School of Technology" />, a $45M+ business
+          reshaping India’s engineering education.
         </p>
       </div>
       {/* Earlier work, as one paragraph: each company shown by its logo instead of its name. */}
       <p className="text-small">
-        Before that, at <Brand svg={lottieFilesLogo} name="LottieFiles" /> I owned the marketplace, scaling its revenue
-        from $200K to $2.4M ARR; at <Brand svg={iconScoutLogo} name="IconScout" /> I built the world’s 14th most-used
-        Figma plugin, with 1.2M+ users; and at <Brand svg={topprLogo} name="Toppr" /> I helped build Toppr Answr, which
-        crossed $1.4M in revenue.
+        Before that, I grew the <Brand svg={lottieFilesLogo} name="LottieFiles" /> marketplace from $200K to $2.4M ARR,
+        took the <Brand svg={iconScoutLogo} name="IconScout" /> Figma plugin to #14 most-used worldwide with 1.2M+
+        users, and helped take <Brand svg={topprLogo} name="Toppr" /> Answr past $1.4M in revenue.
       </p>
     </section>
   );
