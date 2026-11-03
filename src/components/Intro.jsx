@@ -10,18 +10,13 @@ import nstLogo from '../assets/logos/nst.svg?raw';
 import lottieFilesLogo from '../assets/logos/lottiefiles.svg?raw';
 import iconScoutLogo from '../assets/logos/iconscout.svg?raw';
 import topprLogo from '../assets/logos/toppr.svg?raw';
-import redCarpetLogo from '../assets/logos/redcarpet.svg?raw';
 import './Intro.css';
 
-// Companies worked with, newest first. The SVGs are inlined (not <img>) so their wordmarks can
-// pick up the theme's text colour while the brand marks keep their own colours.
-const logos = [
-  { name: 'Newton School of Technology', svg: nstLogo },
-  { name: 'LottieFiles', svg: lottieFilesLogo },
-  { name: 'IconScout', svg: iconScoutLogo },
-  { name: 'Toppr', svg: topprLogo },
-  { name: 'RedCarpet', svg: redCarpetLogo },
-];
+// A company's logo in place of its name, inside a sentence. The SVGs are inlined (not <img>) so
+// their wordmarks pick up the theme's text colour while the brand marks keep their own colours.
+function Brand({ svg, name }) {
+  return <span className="intro__brand" role="img" aria-label={name} dangerouslySetInnerHTML={{ __html: svg }} />;
+}
 
 // Whether this page load started on the home page (the preview bundle always starts there), and
 // whether the loader has already played since. Both reset on every full page load.
@@ -108,31 +103,27 @@ export default function Intro() {
         <h1 className="text-medium">{site.name}</h1>
         <p className="text-muted">{site.role}</p>
       </div>
-      <div className="text-small">
+      <div className="text-small intro__story">
         <p className="text-muted">
           Business-driven Product Designer with 5 years of E2E ownership, translating complex business challenges into
           impactful experiences that drive measurable growth.
         </p>
         <p>
-          In 2026, led design for growth initiatives at a $45M+ business reshaping India’s engineering education
-          landscape.
+          In 2026, at <Brand svg={nstLogo} name="Newton School of Technology" />, led design for growth initiatives at a
+          $45M+ business reshaping India’s engineering education landscape.
         </p>
-      </div>
-      <div className="intro__previously">
-        <p id="intro-previously" className="text-small text-muted">
-          Previously at
+        <p>
+          At <Brand svg={lottieFilesLogo} name="LottieFiles" />, owned the marketplace, scaling its revenue from $16K to
+          $220K MRR.
         </p>
-        <ul className="intro__logos" aria-labelledby="intro-previously">
-          {logos.map(({ name, svg }) => (
-            <li
-              key={name}
-              className="intro__logo"
-              role="img"
-              aria-label={name}
-              dangerouslySetInnerHTML={{ __html: svg }}
-            />
-          ))}
-        </ul>
+        <p>
+          At <Brand svg={iconScoutLogo} name="IconScout" />, built the world’s 14th most-used Figma plugin, with 1.2M+
+          users.
+        </p>
+        <p>
+          At <Brand svg={topprLogo} name="Toppr" />, helped build Toppr Answr, which crossed 1.4M in revenue within
+          three months.
+        </p>
       </div>
     </section>
   );

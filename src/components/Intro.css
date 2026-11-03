@@ -194,16 +194,7 @@
   inset: -30px;
   z-index: -1;
   border-radius: 50%;
-  background: conic-gradient(
-    from 200deg,
-    #ff8a9e,
-    #ff9cf5,
-    #6fb2ff,
-    #74f4ff,
-    #a8ff9c,
-    #fff58f,
-    #ff8a9e
-  );
+  background: conic-gradient(from 200deg, #ff8a9e, #ff9cf5, #6fb2ff, #74f4ff, #a8ff9c, #fff58f, #ff8a9e);
   filter: blur(26px);
   /* Dark until the book is in place (after the landing loader), then it lights up. */
   opacity: 0;
@@ -272,49 +263,30 @@
   }
 }
 
-/* "Previously at" label over the logos row, 8px apart as in the design. */
-.intro__previously {
+/* The intro's statements, one line of proof per company, each company shown by its logo. */
+.intro__story {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* Logos row. Wordmarks follow the theme's text colour; the white counters inside the RedCarpet
-   letters follow the page so they read as holes in every theme. */
-.intro__logos {
+/* A logo in place of a company's name, a little taller than the text and sitting on its
+   baseline. Wordmarks follow the theme's text colour. */
+.intro__brand {
   --logo-ink: var(--color-black);
-  --logo-paper: var(--color-white);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  display: inline-block;
+  height: 1.3em;
+  margin: 0 0.04em 0 0.1em;
+  vertical-align: -0.34em;
 }
 
-/* Dark: Newton's navy wordmark would vanish, so it takes the text colour like the others. */
-:root[data-theme='dark'] .intro__logos {
-  --logo-nst: var(--color-black);
-}
-
-.intro__logo {
-  display: flex;
-  height: 24px;
-}
-
-.intro__logo svg {
+.intro__brand svg {
   display: block;
   width: auto;
   height: 100%;
 }
 
-@media (max-width: 480px) {
-  .intro__logos {
-    gap: 14px 20px;
-  }
-
-  .intro__logo {
-    height: 20px;
-  }
+/* Dark: Newton's navy wordmark would vanish, so it takes the text colour like the others. */
+:root[data-theme='dark'] .intro__brand {
+  --logo-nst: var(--color-black);
 }
