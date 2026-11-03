@@ -204,7 +204,7 @@ export default function Intro() {
         </p>
         <p>
           <span className="intro__claim">
-            <Brand svg={topprLogo} name="Toppr" /> answr, a doubt-solving app our three-person design team took past{' '}
+            <Brand svg={topprLogo} name="Toppr" /> answr, we built it from zero to{' '}
             <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
           </span>
         </p>
