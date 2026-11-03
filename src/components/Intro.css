@@ -279,42 +279,6 @@
   height: 100%;
 }
 
-/* Hovering a logo lifts it a little and shows the role and years there. */
-.intro__brand {
-  position: relative;
-  transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.intro__brand::after {
-  content: attr(data-tip);
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 8px);
-  z-index: 2;
-  padding: 2px 10px;
-  border-radius: 6px;
-  background: var(--color-black);
-  color: var(--color-white);
-  font-size: 12px;
-  line-height: 20px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  translate: -50% 4px;
-  transition:
-    opacity 150ms ease,
-    translate 150ms ease;
-}
-
-.intro__brand:hover {
-  transform: translateY(-2px);
-}
-
-.intro__brand:hover::after {
-  opacity: 1;
-  translate: -50% 0;
-}
-
 /* The figures: medium weight, counting up the first time they're seen. The final value holds
    the width, so counting never shifts the line. */
 .intro__metric {

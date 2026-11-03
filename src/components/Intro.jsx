@@ -12,16 +12,17 @@ import iconScoutLogo from '../assets/logos/iconscout.svg?raw';
 import topprLogo from '../assets/logos/toppr.svg?raw';
 import './Intro.css';
 
-// A company's logo in place of its name, inside a sentence. The SVGs are inlined (not <img>) so
-// their wordmarks pick up the theme's text colour while the brand marks keep their own colours.
-// Hovering shows the role and years there.
-function Brand({ svg, name, tip }) {
+// A company's logo in place of its name, inside a sentence, linking to the company's site in a
+// new tab. The SVGs are inlined (not <img>) so their wordmarks pick up the theme's text colour
+// while the brand marks keep their own colours.
+function Brand({ svg, name, href }) {
   return (
-    <span
+    <a
       className="intro__brand"
-      role="img"
-      aria-label={`${name}, ${tip}`}
-      data-tip={tip}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${name} (opens in a new tab)`}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
@@ -178,7 +179,7 @@ export default function Intro() {
         <p className="intro__ink">
           <span className="intro__claim">
             In 2026, led growth design at{' '}
-            <Brand svg={nstLogo} name="Newton School of Technology" tip="Senior Product Designer · 2024–26" />, a{' '}
+            <Brand svg={nstLogo} name="Newton School of Technology" href="https://www.newtonschool.co/" />, a{' '}
             <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
           </span>
         </p>
@@ -187,20 +188,20 @@ export default function Intro() {
       <div className="text-small intro__claims intro__ink">
         <p>
           <span className="intro__claim">
-            <Brand svg={lottieFilesLogo} name="LottieFiles" tip="Product Designer · 2021–24" /> Marketplace, from{' '}
+            <Brand svg={lottieFilesLogo} name="LottieFiles" href="https://lottiefiles.com/" /> Marketplace, from{' '}
             <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
           </span>
         </p>
         <p>
           <span className="intro__claim">
-            <Brand svg={iconScoutLogo} name="IconScout" tip="Product Designer · 2021–24" /> Figma plugin,{' '}
+            <Brand svg={iconScoutLogo} name="IconScout" href="https://iconscout.com/" /> Figma plugin,{' '}
             <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
             <Metric value="1.2M+" i={4} ready={!loading} /> users.
           </span>
         </p>
         <p>
           <span className="intro__claim">
-            <Brand svg={topprLogo} name="Toppr" tip="Product Design Intern · 2021" /> Answr, past{' '}
+            <Brand svg={topprLogo} name="Toppr" href="https://www.toppr.com/" /> Answr, past{' '}
             <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
           </span>
         </p>
