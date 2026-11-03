@@ -116,7 +116,7 @@ export default function Intro() {
       {/* Earlier work, as one paragraph: each company shown by its logo instead of its name. */}
       <p className="text-small">
         Before that, at <Brand svg={lottieFilesLogo} name="LottieFiles" /> I owned the marketplace, scaling its revenue
-        from $16K to $220K MRR; at <Brand svg={iconScoutLogo} name="IconScout" /> I built the world’s 14th most-used
+        from $192K to $2.4M ARR; at <Brand svg={iconScoutLogo} name="IconScout" /> I built the world’s 14th most-used
         Figma plugin, with 1.2M+ users; and at <Brand svg={topprLogo} name="Toppr" /> I helped build Toppr Answr, which
         crossed 1.4M in revenue within three months.
       </p>
