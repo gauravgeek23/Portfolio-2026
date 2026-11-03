@@ -7,36 +7,11 @@
 //   toggle the theme or sound switch       a switch: two crisp clicks
 //   page   turning a page in the book      a short paper swish
 //
-// Sound is on by default and remembered per visitor (localStorage "sound": "on" / "off"). It's for
-// mouse and trackpad use only: touch-only devices (no hover) stay silent, and the switch is hidden.
+// For mouse and trackpad use only: touch-only devices (no hover) stay silent.
 
-const KEY = 'sound';
-let enabled = read();
 let ctx = null;
 let noise = null;
 let last = 0;
-
-function read() {
-  try {
-    return localStorage.getItem(KEY) !== 'off';
-  } catch {
-    return true;
-  }
-}
-
-export function isSoundOn() {
-  return enabled;
-}
-
-export function setSoundOn(on) {
-  enabled = on;
-  try {
-    localStorage.setItem(KEY, on ? 'on' : 'off');
-  } catch {
-    // Private mode: the choice lasts for this visit only.
-  }
-  window.dispatchEvent(new CustomEvent('soundchange', { detail: on }));
-}
 
 function audio() {
   if (!ctx) {
@@ -113,7 +88,7 @@ const SOUNDS = {
 const touchOnly = () => window.matchMedia('(hover: none)').matches;
 
 export function play(kind = 'tick') {
-  if (!enabled || !SOUNDS[kind] || touchOnly()) return;
+  if (!SOUNDS[kind] || touchOnly()) return;
   // Rapid repeats (double clicks, key repeat) play once.
   const now = performance.now();
   if (now - last < 40) return;

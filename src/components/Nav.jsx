@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { navItems } from '../data/site';
 import { COLOUR_SWATCH, useTheme } from '../hooks/useTheme';
-import { isSoundOn, play, setSoundOn } from '../lib/sound';
 import './Nav.css';
 
 // On the home page the underline sits on "gk." until the Selected work heading
@@ -95,50 +94,6 @@ function ThemeToggle() {
   );
 }
 
-// Sound on / off. Turning it on plays the toggle sound, as a sample of what's on.
-function SoundToggle() {
-  const [on, setOn] = useState(isSoundOn);
-  useEffect(() => {
-    const sync = (e) => setOn(e.detail);
-    window.addEventListener('soundchange', sync);
-    return () => window.removeEventListener('soundchange', sync);
-  }, []);
-  const label = on ? 'Turn sounds off' : 'Turn sounds on';
-  return (
-    <button
-      type="button"
-      className="nav__theme nav__sound"
-      data-sound="none"
-      onClick={() => {
-        setSoundOn(!on);
-        if (!on) play('toggle');
-      }}
-      aria-label={label}
-      aria-pressed={on}
-      title={label}
-    >
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-        <path
-          d="M3.75 7.75h2.5L10 4.75v10.5l-3.75-3H3.75Z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-        {on ? (
-          <path
-            d="M13 7.5a3.5 3.5 0 0 1 0 5M15.25 5.5a6.5 6.5 0 0 1 0 9"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        ) : (
-          <path d="m13 8 4 4m0-4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        )}
-      </svg>
-    </button>
-  );
-}
-
 export default function Nav() {
   const { pathname, hash } = useLocation();
   const navigate = useNavigate();
@@ -201,7 +156,6 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-        <SoundToggle />
         <ThemeToggle />
       </nav>
     </header>
