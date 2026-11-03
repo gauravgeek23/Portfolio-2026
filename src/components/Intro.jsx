@@ -13,9 +13,12 @@ import topprLogo from '../assets/logos/toppr.svg?raw';
 import './Intro.css';
 
 // A company's logo in place of its name, inside a sentence, linking to the company's site in a
-// new tab. The SVGs are inlined (not <img>) so their wordmarks pick up the theme's text colour
+// new tab when it has one (`href`). The SVGs are inlined (not <img>) so their wordmarks pick up the theme's text colour
 // while the brand marks keep their own colours.
 function Brand({ svg, name, href }) {
+  if (!href) {
+    return <span className="intro__brand" role="img" aria-label={name} dangerouslySetInnerHTML={{ __html: svg }} />;
+  }
   return (
     <a
       className="intro__brand"
@@ -201,7 +204,7 @@ export default function Intro() {
         </p>
         <p>
           <span className="intro__claim">
-            <Brand svg={topprLogo} name="Toppr" href="https://www.toppr.com/" /> answr, a doubt-solving app that crossed{' '}
+            <Brand svg={topprLogo} name="Toppr" /> answr, a doubt-solving app that crossed{' '}
             <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
           </span>
         </p>
