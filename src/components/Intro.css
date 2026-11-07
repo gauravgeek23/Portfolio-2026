@@ -1,10 +1,3 @@
-.intro {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
 /* The book: a cover hinged on its spine over one page. On hover the cover swings open a
    little and the page slides out from behind it. */
 .intro__book {
@@ -190,6 +183,7 @@
 /* Prism glow: a soft spectrum behind the photo that slowly turns and breathes. */
 .intro__avatar::before {
   content: '';
+  pointer-events: none;
   position: absolute;
   inset: -30px;
   z-index: -1;
@@ -317,30 +311,197 @@ a.intro__brand:hover {
   visibility: hidden;
 }
 
-/* Statements read in grey and come up to full ink while hovered. The figures and the logos stay
-   in ink throughout, so they carry the line even at a glance. */
-.intro__claims {
+/* ---------- The hero layout ---------- */
+
+/* Story and proof on the left, the diary on the right; on phones the diary comes first. */
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 48px;
+}
+
+.intro__story {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.intro__kicker {
+  margin: 0;
+}
+
+.intro__title {
+  margin: 0;
+  font-size: clamp(26px, 3.4vw, 34px);
+  font-weight: var(--weight-medium);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-black);
+  text-wrap: balance;
+}
+
+.intro__title-muted {
   color: var(--color-grey-1);
 }
 
-.intro__claim {
-  transition: color 250ms ease;
+/* The proof: two by two, a big figure over a line on where it happened. */
+.intro__proof {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.intro__claim:hover,
-.intro__claims .intro__metric {
-  color: var(--color-black);
-}
-
-/* From the 2026 line down, the statements read in full ink. */
-.intro__claims .intro__ink,
-.intro__claims.intro__ink {
-  color: var(--color-black);
-}
-
-/* The company lines, with a little air between them. */
-.intro__claims.intro__ink {
+.intro__proof li {
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-grey-2);
+}
+
+.intro__figure {
+  font-size: 22px;
+  font-weight: var(--weight-medium);
+  line-height: 1.3;
+  color: var(--color-black);
+  font-variant-numeric: tabular-nums;
+}
+
+.intro__figure .intro__metric {
+  font-weight: inherit;
+}
+
+.intro__what {
+  font-size: var(--text-small);
+  line-height: 1.5;
+  color: var(--color-grey-1);
+}
+
+.intro__what .intro__brand {
+  color: var(--color-black);
+}
+
+.intro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.intro__cta {
+  height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-black);
+  color: var(--color-white);
+  font: inherit;
+  font-size: var(--text-small);
+  cursor: pointer;
+  transition: transform 200ms ease;
+}
+
+.intro__cta:hover {
+  transform: translateY(-1px);
+}
+
+.intro__link {
+  font-size: var(--text-small);
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.intro__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* The diary: the small book enlarged (zoom keeps its inner motion in proportion), year tabs on its
+   edge like bookmarks, and a handwritten note. */
+.intro__diary {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 8px 0 24px;
+}
+
+.intro__shelf {
+  display: flex;
+  align-items: center;
   gap: 10px;
+}
+
+.intro__diary .intro__avatar {
+  zoom: 2.2;
+}
+
+.intro__years {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.intro__years button {
+  padding: 4px 10px 4px 8px;
+  border: 0;
+  border-radius: 0 8px 8px 0;
+  background: var(--color-grey-3);
+  color: var(--color-grey-1);
+  font: inherit;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    translate 200ms ease;
+}
+
+.intro__years button:hover,
+.intro__years button:focus-visible {
+  background: var(--color-black);
+  color: var(--color-white);
+  translate: 3px 0;
+}
+
+.intro__note {
+  margin: 18px 0 0;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  color: var(--color-grey-1);
+  rotate: -3deg;
+}
+
+@media (max-width: 720px) {
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .intro__diary {
+    order: -1;
+    padding: 12px 0 0 12px;
+  }
+
+  .intro__diary .intro__avatar {
+    zoom: 1.6;
+  }
+
+  .intro__proof {
+    gap: 16px 20px;
+  }
+
+  .intro__figure {
+    font-size: 19px;
+  }
 }

@@ -29,6 +29,8 @@ const SINGLE_QUERY = '(max-width: 640px)';
 // Closing: the panel fades, then the book closes back into the small one.
 const CLOSE_MS = 1400;
 const FLIP_MS = 900;
+// How long the book takes to grow and open before it can turn to a chosen year (`startAt`).
+const OPEN_MS = 1100;
 
 function Cover() {
   return (
@@ -86,7 +88,8 @@ function useSinglePage() {
 // the home page (`origin`, that book's bounding box), its cover swinging open as it enlarges; then
 // the white panel fades in. Pages turn with the buttons, the arrow keys or a click on a page;
 // "next" on the last spread closes the book back into the small one.
-export default function ProfileBook({ open, onClose, origin, coverFrom = 0, onClosed }) {
+// `startAt`: a year ('2026', ...) to turn to once the book has opened.
+export default function ProfileBook({ open, onClose, origin, coverFrom = 0, onClosed, startAt = null }) {
   const [mounted, setMounted] = useState(open);
   const [turned, setTurned] = useState(0);
   const [flipping, setFlipping] = useState(null);
@@ -102,13 +105,31 @@ export default function ProfileBook({ open, onClose, origin, coverFrom = 0, onCl
   const onClosedRef = useRef(onClosed);
   onClosedRef.current = onClosed;
   const isOpen = turned > 0;
+  const singleRef = useRef(single);
+  singleRef.current = single;
 
   // Mount, then open on the next frame so the cover animates from closed.
   useEffect(() => {
     if (open) {
       setMounted(true);
       const id = requestAnimationFrame(() => requestAnimationFrame(() => setTurned(1)));
-      return () => cancelAnimationFrame(id);
+      // A chosen year: once open, the leaves before it turn together to land on its first page.
+      const target = startAt
+        ? singleRef.current
+          ? PAGES.findIndex(([label]) => label === startAt) + 1
+          : SPREADS.indexOf(startAt) + 1
+        : 0;
+      const t =
+        target > 1 &&
+        setTimeout(() => {
+          play('page');
+          setFlipping(1);
+          setTurned(target);
+        }, OPEN_MS);
+      return () => {
+        cancelAnimationFrame(id);
+        clearTimeout(t);
+      };
     }
     setTurned(0);
     const t = setTimeout(() => {
@@ -116,7 +137,7 @@ export default function ProfileBook({ open, onClose, origin, coverFrom = 0, onCl
       onClosedRef.current?.();
     }, CLOSE_MS);
     return () => clearTimeout(t);
-  }, [open]);
+  }, [open, startAt]);
 
   useLayoutEffect(() => {
     if (!mounted) return undefined;
