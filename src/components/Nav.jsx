@@ -1,39 +1,8 @@
-import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { navItems } from '../data/site';
 import { COLOUR_SWATCH, useTheme } from '../hooks/useTheme';
+import useHomeSection from '../hooks/useHomeSection';
 import './Nav.css';
-
-// On the home page the underline sits on "gk." until the Selected work heading
-// scrolls up into the top part of the screen, then it moves to "work".
-function useHomeSection(enabled) {
-  const [section, setSection] = useState('home');
-
-  useEffect(() => {
-    if (!enabled) return undefined;
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const heading = document.getElementById('work');
-      if (!heading) return;
-      const threshold = Math.min(window.innerHeight / 2, 360);
-      setSection(heading.getBoundingClientRect().top <= threshold ? 'work' : 'home');
-    };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
-  }, [enabled]);
-
-  return section;
-}
 
 const SUN = (
   <>
@@ -102,7 +71,7 @@ export default function Nav() {
 
   // Which item is underlined: "home" (the gk. logo) or a tab's label.
   let active;
-  if (onHome) active = homeSection === 'work' ? 'work' : 'home';
+  if (onHome) active = homeSection;
   else if (pathname.startsWith('/work')) active = 'work';
   else active = navItems.find((item) => item.to !== '/' && pathname.startsWith(item.to))?.label;
 

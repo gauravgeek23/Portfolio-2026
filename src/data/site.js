@@ -23,7 +23,7 @@ export const site = {
 // "work" is the Selected work section of the home page (#work).
 export const navItems = [
   { label: 'work', to: '/', section: 'work' },
-  { label: 'play', to: '/play' },
+  { label: 'play', to: '/', section: 'play' },
   { label: 'notes', to: '/notes' },
   { label: 'about', to: '/about' },
   { label: 'resume', to: '/resume' },

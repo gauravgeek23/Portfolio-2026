@@ -13,7 +13,6 @@ const siteUrlInHtml = {
 // Pages listed in sitemap.xml (case studies by slug, matching src/data/projects.js).
 const pages = [
   '/',
-  '/play',
   '/notes',
   '/about',
   '/resume',

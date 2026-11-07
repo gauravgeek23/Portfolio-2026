@@ -4,7 +4,6 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Work from './pages/Work';
 import CaseStudy from './pages/CaseStudy';
-import Play from './pages/Play';
 import About from './pages/About';
 import Notes from './pages/Notes';
 import Resume from './pages/Resume';
@@ -28,7 +27,8 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="work" element={<Work />} />
         <Route path="work/:slug" element={<CaseStudy />} />
-        <Route path="play" element={<Play />} />
+        {/* Play is a section of the home page now; old links glide down to it. */}
+        <Route path="play" element={<Navigate to="/#play" replace state={{ glide: true }} />} />
         <Route path="notes" element={<Notes />} />
         <Route path="about" element={<About />} />
         <Route path="resume" element={<Resume />} />

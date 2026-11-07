@@ -3,6 +3,8 @@ import JournalSection from '../components/JournalSection';
 import ProjectCard from '../components/ProjectCard';
 import SideProjectCard from '../components/SideProjectCard';
 import ExperienceList from '../components/ExperienceList';
+import PlayBento from '../components/PlayBento';
+import { playItems } from '../data/play';
 import TestimonialCard from '../components/TestimonialCard';
 import { projects, sideProjects } from '../data/projects';
 import { experience } from '../data/experience';
@@ -11,7 +13,7 @@ import './Home.css';
 import usePageMeta from '../hooks/usePageMeta';
 import useWide from '../hooks/useWide';
 
-// The work tab (home page): selected work, side projects, experience and testimonials.
+// The work tab (home page): selected work, side projects, play, experience and testimonials.
 export default function Home() {
   usePageMeta({});
   const wide = useWide();
@@ -41,6 +43,13 @@ export default function Home() {
             <SideProjectCard key={project.slug} project={project} />
           ))}
         </div>
+      </JournalSection>
+
+      <hr className="divider" />
+
+      {/* Play: interaction and motion pieces, at most 8, in a bento. The "play" tab lands here. */}
+      <JournalSection id="play" title="Play" note="A playground of small wins and features">
+        <PlayBento items={playItems} />
       </JournalSection>
 
       <hr className="divider" />
