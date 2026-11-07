@@ -263,20 +263,38 @@
   }
 }
 
-/* A logo in place of a company's name, a little taller than the text and sitting on its
-   baseline. Wordmarks follow the theme's text colour. */
+/* A company in a sentence: a small icon tile (like the work experience tiles, scaled down) and
+   its name as text. The tile sits centred on the line without stretching it. */
 .intro__brand {
-  --logo-ink: var(--color-black);
-  display: inline-block;
-  height: 1.3em;
-  margin: 0 0.04em 0 0.1em;
-  vertical-align: -0.34em;
+  color: inherit;
+  text-decoration: none;
 }
 
-.intro__brand svg {
-  display: block;
-  width: auto;
-  height: 100%;
+.intro__nowrap {
+  white-space: nowrap;
+}
+
+a.intro__brand:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 3px;
+}
+
+.intro__tile {
+  display: inline-grid;
+  place-items: center;
+  width: 1.45em;
+  height: 1.45em;
+  margin-right: 0.35em;
+  border-radius: 0.36em;
+  background: var(--color-grey-3);
+  vertical-align: -0.32em;
+}
+
+.intro__tile img {
+  width: 1.05em;
+  height: 1.05em;
+  object-fit: contain;
 }
 
 /* The figures: medium weight, counting up the first time they're seen. The final value holds
@@ -321,14 +339,4 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-/* A logo that leads its line sits flush with the text above. */
-.intro__claim > .intro__brand:first-child {
-  margin-left: 0;
-}
-
-/* Dark: Newton's navy wordmark would vanish, so it takes the text colour like the others. */
-:root[data-theme='dark'] .intro__brand {
-  --logo-nst: var(--color-black);
 }
