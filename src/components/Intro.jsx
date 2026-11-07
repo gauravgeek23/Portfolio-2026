@@ -13,9 +13,11 @@ import './Intro.css';
 // list), then its name as plain text, linking to its site in a new tab when it has one (`href`).
 const logoOf = (name) => experience.find((e) => e.company === name)?.logo;
 
-function Brand({ name, href }) {
+// `label` is the text shown when it isn't just the company name (e.g. a product, "Toppr Answr");
+// `strong` sets it in the heavier weight.
+function Brand({ name, href, label = name, strong = false }) {
   // The tile stays on the line with the name's first word; the rest of a long name can wrap.
-  const [first, ...rest] = name.split(' ');
+  const [first, ...rest] = label.split(' ');
   const inner = (
     <>
       <span className="intro__nowrap">
@@ -27,9 +29,10 @@ function Brand({ name, href }) {
       {rest.length > 0 && ` ${rest.join(' ')}`}
     </>
   );
-  if (!href) return <span className="intro__brand">{inner}</span>;
+  const className = `intro__brand${strong ? ' intro__brand--strong' : ''}`;
+  if (!href) return <span className={className}>{inner}</span>;
   return (
-    <a className="intro__brand" href={href} target="_blank" rel="noopener noreferrer">
+    <a className={className} href={href} target="_blank" rel="noopener noreferrer">
       {inner}
     </a>
   );
@@ -195,21 +198,21 @@ export default function Intro() {
       <div className="text-small intro__claims intro__ink">
         <p>
           <span className="intro__claim">
-            <Brand name="LottieFiles" href="https://lottiefiles.com/" /> marketplace, from{' '}
+            <Brand name="LottieFiles" href="https://lottiefiles.com/" strong /> marketplace, from{' '}
             <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
           </span>
         </p>
         <p>
           <span className="intro__claim">
-            <Brand name="IconScout" href="https://iconscout.com/" /> figma plugin,{' '}
+            <Brand name="IconScout" href="https://iconscout.com/" strong /> Figma plugin,{' '}
             <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
             <Metric value="1.2M+" i={4} ready={!loading} /> users.
           </span>
         </p>
         <p>
           <span className="intro__claim">
-            <Brand name="Toppr" /> answr, we built it from zero to <Metric value="$1.4M" i={5} ready={!loading} /> in
-            revenue.
+            <Brand name="Toppr" label="Toppr Answr" strong />, we built it from zero to{' '}
+            <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
           </span>
         </p>
       </div>

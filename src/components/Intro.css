@@ -270,6 +270,10 @@
   text-decoration: none;
 }
 
+.intro__brand--strong {
+  font-weight: var(--weight-medium);
+}
+
 .intro__nowrap {
   white-space: nowrap;
 }
