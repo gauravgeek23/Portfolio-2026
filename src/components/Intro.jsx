@@ -77,7 +77,7 @@ function SideStory() {
           with 1.2M+ users.
         </li>
         <li>
-          <Company name="Toppr" />, taking Answr from zero to $1.4M in revenue.
+          <Company name="Toppr" />, where I interned on the Answr team as it grew from zero to $1.4M in revenue.
         </li>
       </ul>
     </div>
@@ -266,7 +266,7 @@ export default function Intro({ side = false }) {
             </p>
             <p>
               <span className="intro__claim">
-                <Brand svg={topprLogo} name="Toppr" /> answr, we built it from zero to{' '}
+                <Brand svg={topprLogo} name="Toppr" /> answr, I interned on the team as it grew from zero to{' '}
                 <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
               </span>
             </p>
