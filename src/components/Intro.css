@@ -43,50 +43,24 @@
   color: var(--color-grey-1);
 }
 
-.intro__companies {
+/* Four statements in grey; each company name, led by its icon inline, in ink. */
+.intro__statements {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-/* Like the experience list (56px tiles), scaled down for the panel: a 40px tile beside the name
-   and its line. */
-.intro__companies li {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  align-items: center;
-  gap: 14px;
-}
-
-.intro__tile {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--color-grey-3);
-}
-
-.intro__tile img {
-  width: auto;
-  max-width: 31px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.intro__company-text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  line-height: 1.4;
+  color: var(--color-grey-1);
 }
 
 .intro__company {
   color: var(--color-black);
   text-decoration: none;
+}
+
+.intro__nowrap {
+  white-space: nowrap;
 }
 
 a.intro__company:hover {
@@ -95,8 +69,15 @@ a.intro__company:hover {
   text-underline-offset: 3px;
 }
 
-.intro__line {
-  color: var(--color-grey-1);
+/* The icon sits on the text like a letter: cap height-ish, on the baseline. */
+.intro__icon {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.3em;
+  border-radius: 0.25em;
+  object-fit: contain;
+  vertical-align: -0.2em;
 }
 
 /* Wide screens: a journal spread. The book, name and role sit in the margin column; the

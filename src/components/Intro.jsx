@@ -32,27 +32,30 @@ function Brand({ svg, name, href }) {
   );
 }
 
-// The left panel's list of companies, laid out like the experience list (a logo tile, the name and
-// one quiet line about the work), at a smaller size. The logos come from the experience data.
+// The left panel's four statements, one per company. Each reads as a sentence with the company's
+// icon set inline before its name (the icons come from the experience data).
 const logoOf = (name) => experience.find((e) => e.company === name)?.logo;
-const COMPANIES = [
-  {
-    name: 'Newton School of Technology',
-    href: 'https://www.newtonschool.co/',
-    line: 'Growth design, a $45M+ business',
-  },
-  {
-    name: 'LottieFiles',
-    href: 'https://lottiefiles.com/',
-    line: 'Marketplace, $200K → $2.4M ARR',
-  },
-  {
-    name: 'IconScout',
-    href: 'https://iconscout.com/',
-    line: '#14 Figma plugin, 1.2M+ users',
-  },
-  { name: 'Toppr', line: 'Answr, from zero to $1.4M revenue' },
-];
+
+function Company({ name, href }) {
+  // The icon stays on the same line as the name's first word; the rest of the name can wrap.
+  const [first, ...rest] = name.split(' ');
+  const label = (
+    <>
+      <span className="intro__nowrap">
+        <img className="intro__icon" src={logoOf(name)} alt="" />
+        {first}
+      </span>
+      {rest.length > 0 && ` ${rest.join(' ')}`}
+    </>
+  );
+  return href ? (
+    <a className="intro__company" href={href} target="_blank" rel="noopener noreferrer">
+      {label}
+    </a>
+  ) : (
+    <span className="intro__company">{label}</span>
+  );
+}
 
 function SideStory() {
   return (
@@ -60,27 +63,21 @@ function SideStory() {
       <p className="intro__lede">
         Business-driven product designer. Five years turning complex business problems into measurable growth.
       </p>
-      <ul className="intro__companies">
-        {COMPANIES.map((c) => {
-          const name = c.href ? (
-            <a className="intro__company" href={c.href} target="_blank" rel="noopener noreferrer">
-              {c.name}
-            </a>
-          ) : (
-            <span className="intro__company">{c.name}</span>
-          );
-          return (
-            <li key={c.name}>
-              <span className="intro__tile" aria-hidden="true">
-                <img src={logoOf(c.name)} alt="" />
-              </span>
-              <span className="intro__company-text">
-                {name}
-                <span className="intro__line">{c.line}</span>
-              </span>
-            </li>
-          );
-        })}
+      <ul className="intro__statements">
+        <li>
+          Led growth design at <Company name="Newton School of Technology" href="https://www.newtonschool.co/" />, a
+          $45M+ business.
+        </li>
+        <li>
+          Grew the <Company name="LottieFiles" href="https://lottiefiles.com/" /> marketplace from $200K to $2.4M ARR.
+        </li>
+        <li>
+          Built the <Company name="IconScout" href="https://iconscout.com/" /> Figma plugin, #14 worldwide with 1.2M+
+          users.
+        </li>
+        <li>
+          Took <Company name="Toppr" /> Answr from zero to $1.4M in revenue.
+        </li>
       </ul>
     </div>
   );
