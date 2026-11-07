@@ -1,4 +1,4 @@
-/* The journal's margin column and the page column, shared with the hero (Intro.css). */
+/* The margin column and the page column, shared with the hero (Intro.css). */
 .journal {
   display: grid;
   grid-template-columns: var(--margin-col) 9fr;
@@ -14,31 +14,6 @@
   gap: 4px;
 }
 
-/* The section number, like a page number written in the corner of a notebook. */
-.journal__index {
-  font-size: var(--text-small);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-grey-1);
-}
-
-.journal__index::after {
-  content: '';
-  display: block;
-  width: 24px;
-  margin: 10px 0 12px;
-  border-top: 1px solid var(--color-grey-2);
-}
-
-/* The section's tagline, in the scrapbook hand from the opening book. */
-.journal__note {
-  font-family: 'Caveat', cursive;
-  font-size: 22px;
-  line-height: 1.2;
-  color: var(--color-grey-1);
-  rotate: -1.5deg;
-  transform-origin: left;
-}
-
 @media (max-width: 900px) {
   .journal {
     grid-template-columns: 1fr;
@@ -47,9 +22,5 @@
 
   .journal__margin {
     position: static;
-  }
-
-  .journal__index::after {
-    margin: 8px 0;
   }
 }

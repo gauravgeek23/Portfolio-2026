@@ -1,8 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import Icon from './Icon';
 import arrowLeft from '../assets/icons/arrow-left.svg';
 import arrowRight from '../assets/icons/arrow-right.svg';
+import arrowUpRight from '../assets/icons/arrow-up-right.svg';
 import './Lightbox.css';
 
 const LightboxContext = createContext(() => {});
@@ -88,10 +90,20 @@ export function LightboxProvider({ children }) {
             </button>
             {many && (
               <>
-                <button className="lightbox__step lightbox__step--prev" type="button" onClick={() => step(-1)} aria-label="Previous">
+                <button
+                  className="lightbox__step lightbox__step--prev"
+                  type="button"
+                  onClick={() => step(-1)}
+                  aria-label="Previous"
+                >
                   <Icon src={arrowLeft} />
                 </button>
-                <button className="lightbox__step lightbox__step--next" type="button" onClick={() => step(1)} aria-label="Next">
+                <button
+                  className="lightbox__step lightbox__step--next"
+                  type="button"
+                  onClick={() => step(1)}
+                  aria-label="Next"
+                >
                   <Icon src={arrowRight} />
                 </button>
               </>
@@ -114,15 +126,40 @@ export function LightboxProvider({ children }) {
               ) : (
                 <img src={media.src2x || media.src} alt={media.alt} />
               )}
-              {(media.caption || media.alt || many) && (
-                <figcaption>
-                  {media.caption || media.alt}
-                  {many && (
-                    <span className="lightbox__count">
-                      {view.index + 1} / {view.items.length}
+              {media.details ? (
+                // A play piece: its title, what it is, and its links.
+                <figcaption className="lightbox__details">
+                  <b>{media.details.title}</b>
+                  {media.details.description && <span>{media.details.description}</span>}
+                  {media.details.links && (
+                    <span className="lightbox__links">
+                      {media.details.links.map((link) =>
+                        link.to ? (
+                          <Link key={link.label} to={link.to} onClick={close}>
+                            {link.label}
+                            <Icon src={arrowUpRight} />
+                          </Link>
+                        ) : (
+                          <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">
+                            {link.label}
+                            <Icon src={arrowUpRight} />
+                          </a>
+                        ),
+                      )}
                     </span>
                   )}
                 </figcaption>
+              ) : (
+                (media.caption || media.alt || many) && (
+                  <figcaption>
+                    {media.caption || media.alt}
+                    {many && (
+                      <span className="lightbox__count">
+                        {view.index + 1} / {view.items.length}
+                      </span>
+                    )}
+                  </figcaption>
+                )
               )}
             </figure>
           </div>,

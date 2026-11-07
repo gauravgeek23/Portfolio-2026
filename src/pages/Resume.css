@@ -94,6 +94,25 @@
   transform: scale(1.03);
 }
 
+/* Wide screens: a third column. A role's thumbnails sit to the right of its points instead of
+   under them; rows without thumbnails keep the full width. */
+@media (min-width: 1000px) {
+  .resume-row__content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px 48px;
+    align-items: start;
+  }
+
+  .resume-row__content > :only-child {
+    grid-column: 1 / -1;
+  }
+
+  .resume-row__gallery {
+    margin-top: 0;
+  }
+}
+
 @media (max-width: 640px) {
   .resume-row__gallery {
     display: grid;

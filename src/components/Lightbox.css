@@ -81,6 +81,36 @@
   cursor: default;
 }
 
+/* A play piece's details under it. */
+.lightbox__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.6;
+}
+
+.lightbox__details b {
+  font-weight: var(--weight-medium);
+  color: #ffffff;
+}
+
+.lightbox__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 20px;
+  margin-top: 4px;
+}
+
+.lightbox__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  text-underline-offset: 3px;
+}
+
 .lightbox__close {
   position: absolute;
   top: 12px;

@@ -10,8 +10,7 @@ import { testimonials } from '../data/testimonials';
 import './Home.css';
 import usePageMeta from '../hooks/usePageMeta';
 
-// The home page as a field journal: the hero, then numbered sections, each with its title and a
-// handwritten note in the margin (JournalSection).
+// The home page: the hero, then sections with their title and note in a margin (JournalSection).
 export default function Home() {
   usePageMeta({});
   return (
@@ -20,7 +19,7 @@ export default function Home() {
 
       <hr className="divider" />
 
-      <JournalSection index={1} id="work" title="Selected work" note="Reach out for more details">
+      <JournalSection id="work" title="Selected work" note="Reach out for more details">
         <div className="work-grid">
           {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
@@ -30,7 +29,7 @@ export default function Home() {
 
       <hr className="divider" />
 
-      <JournalSection index={2} id="side-projects" title="Side projects" note="Some actions in pursuit of passion">
+      <JournalSection id="side-projects" title="Side projects" note="Some actions in pursuit of passion">
         <div className="side-grid">
           {sideProjects.map((project) => (
             <SideProjectCard key={project.slug} project={project} />
@@ -40,13 +39,13 @@ export default function Home() {
 
       <hr className="divider" />
 
-      <JournalSection index={3} id="experience" title="Work Experience" note="Chapters of my journey">
+      <JournalSection id="experience" title="Work Experience" note="Chapters of My Journey">
         <ExperienceList items={experience} />
       </JournalSection>
 
       <hr className="divider" />
 
-      <JournalSection index={4} id="testimonials" title="Testimonials" note="Covers the boss and the crew">
+      <JournalSection id="testimonials" title="Testimonials" note="Covers the boss and the crew">
         <div className="testimonial-grid">
           {testimonials.map((t) => (
             <TestimonialCard key={t.name} testimonial={t} />

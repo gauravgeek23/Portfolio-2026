@@ -36,10 +36,11 @@ export function InViewVideo({ media, poster = media.poster2x }) {
   );
 }
 
-// Poster image or video for a play item; clicking opens it enlarged.
-export default function PlayMedia({ media }) {
+// Poster image or video for a play item; clicking opens it enlarged. `details` (title, description,
+// links) show in the enlarged view; on the card, only a small title tag appears on hover.
+export default function PlayMedia({ media, details }) {
   const style = { aspectRatio: media.ratio };
-  const zoomMedia = { src: media.poster, src2x: media.poster2x, video: media.video, alt: media.alt };
+  const zoomMedia = { src: media.poster, src2x: media.poster2x, video: media.video, alt: media.alt, details };
 
   return (
     <Zoomable media={zoomMedia} className="play-item__media" style={style}>
@@ -54,6 +55,7 @@ export default function PlayMedia({ media }) {
           decoding="async"
         />
       )}
+      {details && <span className="photo__caption play-item__tag">{details.title}</span>}
     </Zoomable>
   );
 }
