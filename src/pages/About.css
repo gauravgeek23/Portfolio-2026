@@ -39,20 +39,44 @@
   min-height: 0;
 }
 
-.about__photos {
+/* Photos as a bento: every tile sits in a named area, so the grid is always filled edge to edge
+   whatever the width. Square cells (the grid keeps the columns-to-rows ratio); wide photos take
+   two cells across, portrait ones two cells down, and one leads at double size. */
+.about__bento {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-areas:
+    'nubra nubra'
+    'yak yak'
+    'yak yak'
+    'chemrey milky'
+    'chemrey milky'
+    'kang heron'
+    'kang pondy'
+    'malacca mysuru'
+    'malacca mysuru'
+    'ooty langkawi';
+  gap: 8px;
+  aspect-ratio: 2 / 10;
 }
 
-.about__photos .photo {
-  aspect-ratio: 394 / 400;
+.about__bento .photo img {
+  object-position: var(--pos, center);
 }
 
-/* Full width: photos four to a row, paragraphs at a readable measure. */
-@media (min-width: 900px) {
-  .about__photos {
+@media (min-width: 641px) {
+  .about__bento {
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+      'nubra nubra chemrey milky'
+      'yak yak chemrey milky'
+      'yak yak kang heron'
+      'pondy malacca kang mysuru'
+      'ooty malacca langkawi mysuru';
+    gap: 12px;
+    aspect-ratio: 4 / 5;
   }
 }
 
@@ -90,8 +114,5 @@
   }
   .story__side .photo {
     aspect-ratio: 1 / 1;
-  }
-  .about__photos {
-    gap: 8px;
   }
 }

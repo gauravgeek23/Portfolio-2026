@@ -65,9 +65,9 @@ export default function About() {
           <p className="text-small text-muted">Visual notes from places and pauses</p>
         </header>
 
-        <div className="about__photos" data-gallery>
+        <div className="about__bento" data-gallery>
           {photos.map((photo) => (
-            <Photo key={photo.alt} photo={photo} />
+            <Photo key={photo.alt} photo={photo} style={{ gridArea: photo.area, '--pos': photo.pos }} />
           ))}
         </div>
 
