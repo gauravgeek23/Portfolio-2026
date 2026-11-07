@@ -12,7 +12,7 @@ export default function ProjectCard({ project }) {
           <img
             src={cover.src}
             srcSet={`${cover.src} 800w, ${cover.src2x} 1600w`}
-            sizes="(max-width: 832px) calc(100vw - 32px), 800px"
+            sizes="(max-width: 640px) calc(100vw - 32px), 600px"
             alt={coverAlt}
             width="800"
             height="400"

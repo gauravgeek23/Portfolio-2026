@@ -49,6 +49,18 @@
   aspect-ratio: 394 / 400;
 }
 
+/* Full width: photos four to a row, paragraphs at a readable measure. */
+@media (min-width: 900px) {
+  .about__photos {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.about p,
+.story p {
+  max-width: var(--measure);
+}
+
 .about__more {
   margin-top: var(--leading);
 }

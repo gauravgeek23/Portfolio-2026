@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PlayMedia from '../components/PlayMedia';
 import arrowUpRight from '../assets/icons/arrow-up-right.svg';
@@ -37,27 +36,26 @@ export default function Play() {
         <p className="text-small text-muted">A playground of small wins and features.</p>
       </header>
 
-      {playItems.map((item) => (
-        <Fragment key={item.title}>
-          <article className="play-item">
+      {/* A masonry wall of the pieces. The title, a line about it and its links rise over the piece
+          on hover; touch screens show them under it. */}
+      <div className="play-wall">
+        {playItems.map((item) => (
+          <article className="play-item" key={item.title}>
             <PlayMedia media={item.media} />
-            <div>
-              <div className="play-item__heading">
-                <h2 className="text-medium">{item.title}</h2>
-                {item.links && (
-                  <div className="play-item__links">
-                    {item.links.map((link) => (
-                      <PlayLink key={link.label} link={link} />
-                    ))}
-                  </div>
-                )}
-              </div>
-              {item.description && <p className="text-small text-muted">{item.description}</p>}
+            <div className="play-item__info">
+              <h2 className="text-medium">{item.title}</h2>
+              {item.description && <p className="text-small play-item__desc">{item.description}</p>}
+              {item.links && (
+                <div className="play-item__links">
+                  {item.links.map((link) => (
+                    <PlayLink key={link.label} link={link} />
+                  ))}
+                </div>
+              )}
             </div>
           </article>
-          {item.divider && <hr className="divider" />}
-        </Fragment>
-      ))}
+        ))}
+      </div>
     </main>
   );
 }

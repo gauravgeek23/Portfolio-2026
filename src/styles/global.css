@@ -24,8 +24,13 @@
   --radius-sm: 4px;
   --radius-md: 12px;
 
-  --content-width: 800px;
-  --gutter: 16px;
+  /* The page fills the screen up to a wide column; text keeps a readable measure inside it. */
+  --content-width: 1240px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --measure: 720px;
+  /* The journal's margin column (section titles, the hero's book) and its gap to the page. */
+  --margin-col: minmax(200px, 3fr);
+  --margin-gap: clamp(24px, 4vw, 64px);
   --section-gap: 60px;
   color-scheme: light;
 }

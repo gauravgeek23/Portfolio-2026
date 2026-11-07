@@ -5,6 +5,35 @@
   gap: 20px;
 }
 
+.intro__id,
+.intro__story {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Wide screens: a journal spread. The book, name and role sit in the margin column; the
+   statements fill the page beside them at a larger size, kept to a readable measure. */
+@media (min-width: 901px) {
+  .intro {
+    display: grid;
+    grid-template-columns: var(--margin-col) 9fr;
+    gap: var(--margin-gap);
+    align-items: end;
+  }
+
+  .intro__story {
+    max-width: 820px;
+    gap: 28px;
+    font-size: 19px;
+    line-height: 1.65;
+  }
+
+  .intro__story .text-small {
+    font-size: inherit;
+  }
+}
+
 /* The book: a cover hinged on its spine over one page. On hover the cover swings open a
    little and the page slides out from behind it. */
 .intro__book {

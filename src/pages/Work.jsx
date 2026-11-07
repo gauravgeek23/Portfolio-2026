@@ -8,7 +8,7 @@ export default function Work() {
   return (
     <main className="container page">
       <h1 className="text-medium">Selected work</h1>
-      <div className="stack home__work-list">
+      <div className="work-grid">
         {projects.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}

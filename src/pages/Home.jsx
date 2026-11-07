@@ -1,15 +1,17 @@
 import Intro from '../components/Intro';
-import SectionHeader from '../components/SectionHeader';
+import JournalSection from '../components/JournalSection';
 import ProjectCard from '../components/ProjectCard';
 import SideProjectCard from '../components/SideProjectCard';
 import ExperienceList from '../components/ExperienceList';
-import TestimonialCarousel from '../components/TestimonialCarousel';
+import TestimonialCard from '../components/TestimonialCard';
 import { projects, sideProjects } from '../data/projects';
 import { experience } from '../data/experience';
 import { testimonials } from '../data/testimonials';
 import './Home.css';
 import usePageMeta from '../hooks/usePageMeta';
 
+// The home page as a field journal: the hero, then numbered sections, each with its title and a
+// handwritten note in the margin (JournalSection).
 export default function Home() {
   usePageMeta({});
   return (
@@ -18,39 +20,39 @@ export default function Home() {
 
       <hr className="divider" />
 
-      <section className="stack" aria-labelledby="work">
-        <SectionHeader id="work" title="Selected work" subtitle="Reach out for more details" />
-        <div className="stack home__work-list">
+      <JournalSection index={1} id="work" title="Selected work" note="Reach out for more details">
+        <div className="work-grid">
           {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
-      </section>
+      </JournalSection>
 
       <hr className="divider" />
 
-      <section className="stack" aria-labelledby="side-projects">
-        <SectionHeader id="side-projects" title="Side projects" subtitle="Some actions in pursuit of passion" />
+      <JournalSection index={2} id="side-projects" title="Side projects" note="Some actions in pursuit of passion">
         <div className="side-grid">
           {sideProjects.map((project) => (
             <SideProjectCard key={project.slug} project={project} />
           ))}
         </div>
-      </section>
+      </JournalSection>
 
       <hr className="divider" />
 
-      <section className="stack" aria-labelledby="experience">
-        <SectionHeader id="experience" title="Work Experience" subtitle="Chapters of My Journey" />
+      <JournalSection index={3} id="experience" title="Work Experience" note="Chapters of my journey">
         <ExperienceList items={experience} />
-      </section>
+      </JournalSection>
 
       <hr className="divider" />
 
-      <section className="stack" aria-labelledby="testimonials">
-        <SectionHeader id="testimonials" title="Testimonials" subtitle="Covers the boss and the crew" />
-        <TestimonialCarousel testimonials={testimonials} />
-      </section>
+      <JournalSection index={4} id="testimonials" title="Testimonials" note="Covers the boss and the crew">
+        <div className="testimonial-grid">
+          {testimonials.map((t) => (
+            <TestimonialCard key={t.name} testimonial={t} />
+          ))}
+        </div>
+      </JournalSection>
     </main>
   );
 }

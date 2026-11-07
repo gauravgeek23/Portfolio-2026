@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import './Ruler.css';
 
-// Decorative ruler (0–800) hanging from the footer rule, echoing the 800px content grid.
-const majors = Array.from({ length: 9 }, (_, i) => i * 100);
+// Decorative ruler (0–1200) hanging from the footer rule, echoing the page's wide grid.
+const majors = Array.from({ length: 13 }, (_, i) => i * 100);
 const MINORS_PER_SEGMENT = 6;
 
 export default function Ruler() {

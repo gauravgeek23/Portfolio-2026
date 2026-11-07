@@ -1,7 +1,15 @@
+/* Play: a masonry wall (Pinterest-like) of the pieces, two columns on wide screens. */
+.play-wall {
+  columns: 2;
+  column-gap: 24px;
+}
+
 .play-item {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 24px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
 }
 
 .play-item__media {
@@ -18,25 +26,63 @@
   object-fit: cover;
 }
 
-.play-item__heading {
+/* Videos overscan their rounded frame by 1px per side so sub-pixel rounding
+   never lets the frame's background show as a hairline along an edge. */
+.play-item__media video {
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  margin: -1px;
+  max-width: none;
+}
+
+/* The text rises over the bottom of the piece on hover, on a soft dark fade. It lets clicks
+   through to the piece (which opens it larger), except on its links. */
+.play-item__info {
+  position: absolute;
+  inset: auto 0 0;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px 24px;
+  flex-direction: column;
+  gap: 6px;
+  padding: 56px 20px 18px;
+  background: linear-gradient(transparent, rgba(8, 8, 8, 0.82));
+  color: #fefffc;
+  opacity: 0;
+  translate: 0 12px;
+  pointer-events: none;
+  transition:
+    opacity 250ms ease,
+    translate 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.play-item:hover .play-item__info,
+.play-item:focus-within .play-item__info {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.play-item__desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: rgba(254, 255, 252, 0.75);
 }
 
 .play-item__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 4px 16px;
+  margin-top: 4px;
 }
 
 .play-item__link {
   display: inline-flex;
-  text-decoration: none;
   align-items: center;
   gap: 4px;
+  color: inherit;
+  text-decoration: none;
   white-space: nowrap;
+  pointer-events: auto;
 }
 
 .play-item__link span {
@@ -53,17 +99,28 @@
   transform: translate(2px, -2px);
 }
 
-/* Videos overscan their rounded frame by 1px per side so sub-pixel rounding
-   never lets the frame's background show as a hairline along an edge. */
-.play-item__media video {
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  margin: -1px;
-  max-width: none;
+/* Touch screens have no hover: the title and links sit under the piece, in the page's colours. */
+@media (hover: none) {
+  .play-item {
+    overflow: visible;
+  }
+
+  .play-item__info {
+    position: static;
+    padding: 12px 0 0;
+    background: none;
+    color: inherit;
+    opacity: 1;
+    translate: none;
+  }
+
+  .play-item__desc {
+    color: var(--color-grey-1);
+  }
 }
 
 @media (max-width: 640px) {
-  .play-item__heading {
-    flex-direction: column;
+  .play-wall {
+    columns: 1;
   }
 }

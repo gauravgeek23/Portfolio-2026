@@ -1,19 +1,42 @@
-.home__work-list {
-  gap: 80px;
+/* Selected work: covers two to a row in the page column. */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 56px 32px;
+}
+
+/* Side by side, a card's title and summary stack instead of sitting in two columns. */
+.work-grid .project-card__meta {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.work-grid .project-card__heading {
+  flex-basis: auto;
 }
 
 .side-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 60px;
+  gap: 56px 32px;
+}
+
+/* Testimonials sit still, two to a row. */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 @media (max-width: 640px) {
-  .home__work-list {
-    gap: 56px;
-  }
-  .side-grid {
+  .work-grid,
+  .side-grid,
+  .testimonial-grid {
     grid-template-columns: 1fr;
+  }
+
+  .work-grid,
+  .side-grid {
     gap: 40px;
   }
 }

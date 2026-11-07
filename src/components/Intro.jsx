@@ -124,90 +124,96 @@ export default function Intro() {
       {/* Profile photo on a little passport-style book (after Airbnb's host profile) that opens a
           little on hover; clicking it opens the full book in a popup. */}
       {/* The glow behind the book lights up once the book is in place (after the loader). */}
-      <div className={`intro__avatar${loading ? '' : ' is-lit'}`}>
-        {/* `is-away` while the big book is up: the small one's flap and peeks stop, so they start
+      {/* In the journal's margin: the book, then the name and role. */}
+      <div className="intro__id">
+        <div className={`intro__avatar${loading ? '' : ' is-lit'}`}>
+          {/* `is-away` while the big book is up: the small one's flap and peeks stop, so they start
             again from rest when it reappears, matching the closed big book. */}
-        <button
-          type="button"
-          ref={bookRef}
-          className={`intro__book${origin ? ' is-away' : ''}`}
-          style={{ visibility: origin || loading ? 'hidden' : undefined }}
-          onClick={(e) => {
-            setOrigin(e.currentTarget.getBoundingClientRect());
-            setCoverFrom(coverAngle(e.currentTarget.querySelector('.book__cover')));
-            setBookOpen(true);
-          }}
-          aria-label={`Open ${site.name}'s book`}
-        >
-          {/* Three pages under the cover; they fan out as it opens. */}
-          <span className="book__page" style={{ '--i': 3 }} />
-          <span className="book__page" style={{ '--i': 2 }} />
-          <span className="book__page" style={{ '--i': 1 }} />
-          {/* A few snapshots tucked inside; at rest they peek out of the edges one at a time to
+          <button
+            type="button"
+            ref={bookRef}
+            className={`intro__book${origin ? ' is-away' : ''}`}
+            style={{ visibility: origin || loading ? 'hidden' : undefined }}
+            onClick={(e) => {
+              setOrigin(e.currentTarget.getBoundingClientRect());
+              setCoverFrom(coverAngle(e.currentTarget.querySelector('.book__cover')));
+              setBookOpen(true);
+            }}
+            aria-label={`Open ${site.name}'s book`}
+          >
+            {/* Three pages under the cover; they fan out as it opens. */}
+            <span className="book__page" style={{ '--i': 3 }} />
+            <span className="book__page" style={{ '--i': 2 }} />
+            <span className="book__page" style={{ '--i': 1 }} />
+            {/* A few snapshots tucked inside; at rest they peek out of the edges one at a time to
               invite a click. */}
-          <span className="book__peek book__peek--top" style={{ '--d': '0s' }}>
-            <img src={peekChangLa} alt="" />
-          </span>
-          <span className="book__peek book__peek--right" style={{ '--d': '2.5s' }}>
-            <img src={peekHampta} alt="" />
-          </span>
-          <span className="book__peek book__peek--low" style={{ '--d': '5s' }}>
-            <img src={peekBali} alt="" />
-          </span>
-          <span className="book__cover">
-            <img src={avatar} alt={`Portrait of ${site.name}`} width="34" height="38" />
-          </span>
-        </button>
+            <span className="book__peek book__peek--top" style={{ '--d': '0s' }}>
+              <img src={peekChangLa} alt="" />
+            </span>
+            <span className="book__peek book__peek--right" style={{ '--d': '2.5s' }}>
+              <img src={peekHampta} alt="" />
+            </span>
+            <span className="book__peek book__peek--low" style={{ '--d': '5s' }}>
+              <img src={peekBali} alt="" />
+            </span>
+            <span className="book__cover">
+              <img src={avatar} alt={`Portrait of ${site.name}`} width="34" height="38" />
+            </span>
+          </button>
+        </div>
+        {loading && <HomeLoader target={target} onDone={loaded} />}
+        <ProfileBook
+          open={bookOpen}
+          origin={origin}
+          coverFrom={bookOpen ? coverFrom : COVER_REST_DEG}
+          onClose={() => setBookOpen(false)}
+          onClosed={() => setOrigin(null)}
+        />
+        <div>
+          <h1 className="text-medium">{site.name}</h1>
+          <p className="text-muted">{site.role}</p>
+        </div>
       </div>
-      {loading && <HomeLoader target={target} onDone={loaded} />}
-      <ProfileBook
-        open={bookOpen}
-        origin={origin}
-        coverFrom={bookOpen ? coverFrom : COVER_REST_DEG}
-        onClose={() => setBookOpen(false)}
-        onClosed={() => setOrigin(null)}
-      />
-      <div>
-        <h1 className="text-medium">{site.name}</h1>
-        <p className="text-muted">{site.role}</p>
-      </div>
-      {/* The intro reads in grey; hovering a statement brings just that one up to full ink. */}
-      <div className="text-small intro__claims">
-        <p>
-          <span className="intro__claim">
-            Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems
-            into measurable growth.
-          </span>
-        </p>
-        <p className="intro__ink">
-          <span className="intro__claim">
-            In 2026, led growth design at{' '}
-            <Brand svg={nstLogo} name="Newton School of Technology" href="https://www.newtonschool.co/" />, a{' '}
-            <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
-          </span>
-        </p>
-      </div>
-      {/* Earlier work: a line per company, each led by its logo, which reads as part of the product's name. */}
-      <div className="text-small intro__claims intro__ink">
-        <p>
-          <span className="intro__claim">
-            <Brand svg={lottieFilesLogo} name="LottieFiles" href="https://lottiefiles.com/" /> marketplace, from{' '}
-            <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
-          </span>
-        </p>
-        <p>
-          <span className="intro__claim">
-            <Brand svg={iconScoutLogo} name="IconScout" href="https://iconscout.com/" /> figma plugin,{' '}
-            <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
-            <Metric value="1.2M+" i={4} ready={!loading} /> users.
-          </span>
-        </p>
-        <p>
-          <span className="intro__claim">
-            <Brand svg={topprLogo} name="Toppr" /> answr, we built it from zero to{' '}
-            <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
-          </span>
-        </p>
+      {/* On the page: the statements. */}
+      <div className="intro__story">
+        {/* The intro reads in grey; hovering a statement brings just that one up to full ink. */}
+        <div className="text-small intro__claims">
+          <p>
+            <span className="intro__claim">
+              Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems
+              into measurable growth.
+            </span>
+          </p>
+          <p className="intro__ink">
+            <span className="intro__claim">
+              In 2026, led growth design at{' '}
+              <Brand svg={nstLogo} name="Newton School of Technology" href="https://www.newtonschool.co/" />, a{' '}
+              <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
+            </span>
+          </p>
+        </div>
+        {/* Earlier work: a line per company, each led by its logo, which reads as part of the product's name. */}
+        <div className="text-small intro__claims intro__ink">
+          <p>
+            <span className="intro__claim">
+              <Brand svg={lottieFilesLogo} name="LottieFiles" href="https://lottiefiles.com/" /> marketplace, from{' '}
+              <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
+            </span>
+          </p>
+          <p>
+            <span className="intro__claim">
+              <Brand svg={iconScoutLogo} name="IconScout" href="https://iconscout.com/" /> figma plugin,{' '}
+              <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
+              <Metric value="1.2M+" i={4} ready={!loading} /> users.
+            </span>
+          </p>
+          <p>
+            <span className="intro__claim">
+              <Brand svg={topprLogo} name="Toppr" /> answr, we built it from zero to{' '}
+              <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
+            </span>
+          </p>
+        </div>
       </div>
     </section>
   );
