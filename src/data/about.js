@@ -149,11 +149,10 @@ export const photos = [
     caption: 'Drang Drung Glacier',
   },
   {
-    ...shot('gonbo-rangjon'),
-    area: 'gonbo',
-    alt: 'Motorcycle parked below the sheer rock peak of Gonbo Rangjon',
-    caption: 'Gonbo Rangjon',
-    pos: '50% 80%',
+    ...shot('phugtal'),
+    area: 'phugtal',
+    alt: 'Phugtal Monastery built into a cliff face beneath a large cave in Zanskar',
+    caption: 'Phugtal Monastery',
   },
   {
     ...shot('milky-way'),
