@@ -56,9 +56,8 @@
 .sidebar__link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  line-height: 36px;
+  font-size: var(--text-body);
+  line-height: 32px;
   color: var(--color-grey-1);
   text-decoration: none;
   transition: color 150ms ease;
@@ -68,7 +67,9 @@
   content: '';
   width: 0;
   border-top: 1.5px solid currentColor;
-  transition: width 250ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition:
+    width 250ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    margin 250ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .sidebar__link:hover {
@@ -80,7 +81,8 @@
 }
 
 .sidebar__link.is-active::before {
-  width: 20px;
+  width: 14px;
+  margin-right: 10px;
 }
 
 .sidebar__nav .nav__theme {

@@ -31,6 +31,71 @@ function Brand({ svg, name, href }) {
   );
 }
 
+// Just a company's mark (the logo without its wordmark): the inlined SVG with its viewBox cropped to
+// the square on the left. Used in the left panel, where full wordmarks read as too much.
+function Mark({ svg, box = '0 0 24 24' }) {
+  const html = svg
+    .replace(/viewBox="[^"]*"/, `viewBox="${box}"`)
+    .replace(/width="[\d.]+" height="[\d.]+"/, 'width="16" height="16"');
+  return <span className="intro__mark" aria-hidden="true" dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
+// The left panel's list of companies: a mark, the name, and one quiet line about the work.
+const COMPANIES = [
+  {
+    name: 'Newton School of Technology',
+    svg: nstLogo,
+    box: '0 0 22 25',
+    href: 'https://www.newtonschool.co/',
+    line: 'Led growth design, a $45M+ business',
+  },
+  {
+    name: 'LottieFiles',
+    svg: lottieFilesLogo,
+    href: 'https://lottiefiles.com/',
+    line: 'Marketplace, from $200K to $2.4M ARR',
+  },
+  {
+    name: 'IconScout',
+    svg: iconScoutLogo,
+    href: 'https://iconscout.com/',
+    line: '#14 Figma plugin, 1.2M+ users',
+  },
+  { name: 'Toppr', svg: topprLogo, line: 'Answr, from zero to $1.4M revenue' },
+];
+
+function SideStory() {
+  return (
+    <div className="intro__story">
+      <p className="intro__lede">
+        Business-driven product designer. Five years turning complex business problems into measurable growth.
+      </p>
+      <ul className="intro__companies">
+        {COMPANIES.map((c) => {
+          const name = (
+            <>
+              <Mark svg={c.svg} box={c.box} />
+              {c.name}
+            </>
+          );
+          return (
+            <li key={c.name}>
+              {c.href ? (
+                <a className="intro__company" href={c.href} target="_blank" rel="noopener noreferrer">
+                  {name}
+                </a>
+              ) : (
+                <span className="intro__company">{name}</span>
+              )}
+              <span className="intro__line">{c.line}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 // A figure in the intro. The first time it's on screen (after the landing loader) it counts up
 // from zero, one figure after another (`i` is its turn), so the eye reads them in order.
 // Reduced motion shows it finished.
@@ -175,47 +240,51 @@ export default function Intro({ side = false }) {
           <p className="text-muted">{site.role}</p>
         </div>
       </div>
-      {/* On the page: the statements. */}
-      <div className="intro__story">
-        {/* The intro reads in grey; hovering a statement brings just that one up to full ink. */}
-        <div className="text-small intro__claims">
-          <p>
-            <span className="intro__claim">
-              Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems
-              into measurable growth.
-            </span>
-          </p>
-          <p className="intro__ink">
-            <span className="intro__claim">
-              In 2026, led growth design at{' '}
-              <Brand svg={nstLogo} name="Newton School of Technology" href="https://www.newtonschool.co/" />, a{' '}
-              <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
-            </span>
-          </p>
+      {/* On the page: the statements. In the left panel, a quieter list instead. */}
+      {side ? (
+        <SideStory />
+      ) : (
+        <div className="intro__story">
+          {/* The intro reads in grey; hovering a statement brings just that one up to full ink. */}
+          <div className="text-small intro__claims">
+            <p>
+              <span className="intro__claim">
+                Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems
+                into measurable growth.
+              </span>
+            </p>
+            <p className="intro__ink">
+              <span className="intro__claim">
+                In 2026, led growth design at{' '}
+                <Brand svg={nstLogo} name="Newton School of Technology" href="https://www.newtonschool.co/" />, a{' '}
+                <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
+              </span>
+            </p>
+          </div>
+          {/* Earlier work: a line per company, each led by its logo, which reads as part of the product's name. */}
+          <div className="text-small intro__claims intro__ink">
+            <p>
+              <span className="intro__claim">
+                <Brand svg={lottieFilesLogo} name="LottieFiles" href="https://lottiefiles.com/" /> marketplace, from{' '}
+                <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
+              </span>
+            </p>
+            <p>
+              <span className="intro__claim">
+                <Brand svg={iconScoutLogo} name="IconScout" href="https://iconscout.com/" /> figma plugin,{' '}
+                <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
+                <Metric value="1.2M+" i={4} ready={!loading} /> users.
+              </span>
+            </p>
+            <p>
+              <span className="intro__claim">
+                <Brand svg={topprLogo} name="Toppr" /> answr, we built it from zero to{' '}
+                <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
+              </span>
+            </p>
+          </div>
         </div>
-        {/* Earlier work: a line per company, each led by its logo, which reads as part of the product's name. */}
-        <div className="text-small intro__claims intro__ink">
-          <p>
-            <span className="intro__claim">
-              <Brand svg={lottieFilesLogo} name="LottieFiles" href="https://lottiefiles.com/" /> marketplace, from{' '}
-              <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
-            </span>
-          </p>
-          <p>
-            <span className="intro__claim">
-              <Brand svg={iconScoutLogo} name="IconScout" href="https://iconscout.com/" /> figma plugin,{' '}
-              <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
-              <Metric value="1.2M+" i={4} ready={!loading} /> users.
-            </span>
-          </p>
-          <p>
-            <span className="intro__claim">
-              <Brand svg={topprLogo} name="Toppr" /> answr, we built it from zero to{' '}
-              <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
-            </span>
-          </p>
-        </div>
-      </div>
+      )}
     </section>
   );
 }

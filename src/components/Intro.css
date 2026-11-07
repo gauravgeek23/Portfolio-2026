@@ -12,22 +12,81 @@
   gap: 20px;
 }
 
-/* In the left panel: stacked and compact, whatever the screen width. */
+/* In the left panel: stacked and quiet. One size (15px), regular weight throughout, ink for names
+   and grey for everything else; logos shrink to their marks. */
 .intro.intro--side {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 28px;
+  font-size: var(--text-small);
+  line-height: 1.55;
+}
+
+.intro--side .intro__id {
+  gap: 16px;
+}
+
+.intro--side .intro__id h1 {
+  font-weight: var(--weight-regular);
+}
+
+.intro--side .intro__id p {
+  font-size: var(--text-small);
 }
 
 .intro--side .intro__story {
-  max-width: none;
-  gap: 16px;
-  font-size: var(--text-small);
-  line-height: 1.6;
+  gap: 24px;
 }
 
-.intro--side .intro__claims.intro__ink {
-  gap: 6px;
+.intro__lede {
+  margin: 0;
+  color: var(--color-grey-1);
+}
+
+.intro__companies {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.intro__companies li {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro__company {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+a.intro__company:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 3px;
+}
+
+/* The line under a company starts under its name, not under the mark. */
+.intro__line {
+  padding-left: 24px;
+  color: var(--color-grey-1);
+}
+
+.intro__mark {
+  display: inline-flex;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.intro__mark svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* Wide screens: a journal spread. The book, name and role sit in the margin column; the
