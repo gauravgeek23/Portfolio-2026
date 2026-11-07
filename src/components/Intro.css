@@ -46,21 +46,45 @@
 .intro__companies {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Like the experience list (56px tiles), scaled down for the panel: a 40px tile beside the name
+   and its line. */
 .intro__companies li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: center;
+  gap: 14px;
+}
+
+.intro__tile {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-grey-3);
+}
+
+.intro__tile img {
+  width: auto;
+  max-width: 31px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.intro__company-text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  line-height: 1.4;
 }
 
 .intro__company {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   color: var(--color-black);
   text-decoration: none;
 }
@@ -71,22 +95,8 @@ a.intro__company:hover {
   text-underline-offset: 3px;
 }
 
-/* The line under a company starts under its name, not under the mark. */
 .intro__line {
-  padding-left: 24px;
   color: var(--color-grey-1);
-}
-
-.intro__mark {
-  display: inline-flex;
-  flex: none;
-  width: 16px;
-  height: 16px;
-}
-
-.intro__mark svg {
-  width: 100%;
-  height: 100%;
 }
 
 /* Wide screens: a journal spread. The book, name and role sit in the margin column; the

@@ -10,6 +10,7 @@ import nstLogo from '../assets/logos/nst.svg?raw';
 import lottieFilesLogo from '../assets/logos/lottiefiles.svg?raw';
 import iconScoutLogo from '../assets/logos/iconscout.svg?raw';
 import topprLogo from '../assets/logos/toppr.svg?raw';
+import { experience } from '../data/experience';
 import './Intro.css';
 
 // A company's logo in place of its name, inside a sentence, linking to the company's site in a
@@ -31,37 +32,26 @@ function Brand({ svg, name, href }) {
   );
 }
 
-// Just a company's mark (the logo without its wordmark): the inlined SVG with its viewBox cropped to
-// the square on the left. Used in the left panel, where full wordmarks read as too much.
-function Mark({ svg, box = '0 0 24 24' }) {
-  const html = svg
-    .replace(/viewBox="[^"]*"/, `viewBox="${box}"`)
-    .replace(/width="[\d.]+" height="[\d.]+"/, 'width="16" height="16"');
-  return <span className="intro__mark" aria-hidden="true" dangerouslySetInnerHTML={{ __html: html }} />;
-}
-
-// The left panel's list of companies: a mark, the name, and one quiet line about the work.
+// The left panel's list of companies, laid out like the experience list (a logo tile, the name and
+// one quiet line about the work), at a smaller size. The logos come from the experience data.
+const logoOf = (name) => experience.find((e) => e.company === name)?.logo;
 const COMPANIES = [
   {
     name: 'Newton School of Technology',
-    svg: nstLogo,
-    box: '0 0 22 25',
     href: 'https://www.newtonschool.co/',
-    line: 'Led growth design, a $45M+ business',
+    line: 'Growth design, a $45M+ business',
   },
   {
     name: 'LottieFiles',
-    svg: lottieFilesLogo,
     href: 'https://lottiefiles.com/',
-    line: 'Marketplace, from $200K to $2.4M ARR',
+    line: 'Marketplace, $200K → $2.4M ARR',
   },
   {
     name: 'IconScout',
-    svg: iconScoutLogo,
     href: 'https://iconscout.com/',
     line: '#14 Figma plugin, 1.2M+ users',
   },
-  { name: 'Toppr', svg: topprLogo, line: 'Answr, from zero to $1.4M revenue' },
+  { name: 'Toppr', line: 'Answr, from zero to $1.4M revenue' },
 ];
 
 function SideStory() {
@@ -72,22 +62,22 @@ function SideStory() {
       </p>
       <ul className="intro__companies">
         {COMPANIES.map((c) => {
-          const name = (
-            <>
-              <Mark svg={c.svg} box={c.box} />
+          const name = c.href ? (
+            <a className="intro__company" href={c.href} target="_blank" rel="noopener noreferrer">
               {c.name}
-            </>
+            </a>
+          ) : (
+            <span className="intro__company">{c.name}</span>
           );
           return (
             <li key={c.name}>
-              {c.href ? (
-                <a className="intro__company" href={c.href} target="_blank" rel="noopener noreferrer">
-                  {name}
-                </a>
-              ) : (
-                <span className="intro__company">{name}</span>
-              )}
-              <span className="intro__line">{c.line}</span>
+              <span className="intro__tile" aria-hidden="true">
+                <img src={logoOf(c.name)} alt="" />
+              </span>
+              <span className="intro__company-text">
+                {name}
+                <span className="intro__line">{c.line}</span>
+              </span>
             </li>
           );
         })}
