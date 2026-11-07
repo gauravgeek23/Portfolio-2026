@@ -71,7 +71,7 @@ const drop = (fill) => (
 
 // The toggle cycles light → dark → colour (red, blue, green, yellow in turn) → light;
 // its icon shows the mode you'll go to next.
-function ThemeToggle() {
+export function ThemeToggle() {
   const [theme, toggle, nextColour] = useTheme();
   let label = 'Switch to light mode';
   let title = 'Light mode';

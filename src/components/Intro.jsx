@@ -102,7 +102,8 @@ function coverAngle(cover) {
   return (Math.atan2(-m.m13, m.m11) * 180) / Math.PI;
 }
 
-export default function Intro() {
+// `side`: shown in the left panel of the wide layout (stacked, smaller), rather than on the home page.
+export default function Intro({ side = false }) {
   const [bookOpen, setBookOpen] = useState(false);
   // Where the small book sits, so the big one can grow out of it; while the big one is up the
   // small one is hidden (it "is" the big one).
@@ -120,7 +121,7 @@ export default function Intro() {
     setLoading(false);
   }, []);
   return (
-    <section className="intro">
+    <section className={`intro${side ? ' intro--side' : ''}`}>
       {/* Profile photo on a little passport-style book (after Airbnb's host profile) that opens a
           little on hover; clicking it opens the full book in a popup. */}
       {/* The glow behind the book lights up once the book is in place (after the loader). */}

@@ -1,8 +1,6 @@
 import './JournalSection.css';
 
-// A home page section with its title and a short note in a margin on the left (sticky while you
-// scroll through the section) and the content filling the page to its right. On phones the
-// margin sits on top.
+// A home page section: its title and a short note, then its content.
 export default function JournalSection({ id, title, note, children }) {
   return (
     <section className="journal" aria-labelledby={id}>

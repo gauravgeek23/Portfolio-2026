@@ -9,15 +9,21 @@ import { experience } from '../data/experience';
 import { testimonials } from '../data/testimonials';
 import './Home.css';
 import usePageMeta from '../hooks/usePageMeta';
+import useWide from '../hooks/useWide';
 
-// The home page: the hero, then sections with their title and note in a margin (JournalSection).
+// The work tab (home page): selected work, side projects, experience and testimonials.
 export default function Home() {
   usePageMeta({});
+  const wide = useWide();
   return (
     <main className="container page">
-      <Intro />
-
-      <hr className="divider" />
+      {/* On wide screens the intro lives in the left panel (Sidebar). */}
+      {!wide && (
+        <>
+          <Intro />
+          <hr className="divider" />
+        </>
+      )}
 
       <JournalSection id="work" title="Selected work" note="Reach out for more details">
         <div className="work-grid">

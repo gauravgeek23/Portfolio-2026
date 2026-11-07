@@ -2,6 +2,8 @@ import { useLayoutEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
+import Sidebar from './Sidebar';
+import useWide from '../hooks/useWide';
 import { LightboxProvider } from './Lightbox';
 
 // A full page load (first visit or refresh) always starts at the top, even from /#work.
@@ -11,6 +13,7 @@ let firstLoad = true;
 export default function Layout() {
   const { pathname, hash, state } = useLocation();
   const navigate = useNavigate();
+  const wide = useWide();
   const inPage = Boolean(state?.inPage);
   const glide = Boolean(state?.glide);
 
@@ -61,6 +64,21 @@ export default function Layout() {
     return () => timers.forEach(clearTimeout);
   }, [pathname, hash, inPage, glide, navigate]);
 
+  // Wide screens: the fixed left panel (intro and navigation) beside the content. Narrower screens:
+  // the top nav, with the intro on the home page.
+  if (wide) {
+    return (
+      <LightboxProvider>
+        <div className="shell">
+          <Sidebar />
+          <div className="shell__main">
+            <Outlet />
+            <Footer />
+          </div>
+        </div>
+      </LightboxProvider>
+    );
+  }
   return (
     <LightboxProvider>
       <Nav />
