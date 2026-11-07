@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import avatar from '../assets/avatar-156.webp';
 import peekChangLa from '../assets/book/chang-la-peek.webp';
 import peekHampta from '../assets/book/hampta-pass-peek.webp';
@@ -6,16 +6,137 @@ import peekBali from '../assets/book/bali-kecak-peek.webp';
 import ProfileBook from './ProfileBook';
 import HomeLoader from './HomeLoader';
 import { site } from '../data/site';
+import nstLogo from '../assets/logos/nst.svg?raw';
+import lottieFilesLogo from '../assets/logos/lottiefiles.svg?raw';
+import iconScoutLogo from '../assets/logos/iconscout.svg?raw';
+import topprLogo from '../assets/logos/toppr.svg?raw';
+import { experience } from '../data/experience';
 import './Intro.css';
 
-// Under the name and role: one line on what I do.
+// A company's logo in place of its name, inside a sentence, linking to the company's site in a
+// new tab when it has one (`href`). The SVGs are inlined (not <img>) so their wordmarks pick up the theme's text colour
+// while the brand marks keep their own colours.
+function Brand({ svg, name, href }) {
+  if (!href) {
+    return <span className="intro__brand" role="img" aria-label={name} dangerouslySetInnerHTML={{ __html: svg }} />;
+  }
+  return (
+    <a
+      className="intro__brand"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${name} (opens in a new tab)`}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  );
+}
+
+// The left panel's four statements, one per company. Two lines each: the company's icon and
+// name, then what I did there (the icons come from the experience data).
+const logoOf = (name) => experience.find((e) => e.company === name)?.logo;
+
+function Company({ name, href }) {
+  // The icon stays on the same line as the name's first word; the rest of the name can wrap.
+  const [first, ...rest] = name.split(' ');
+  const label = (
+    <>
+      <span className="intro__nowrap">
+        <img className="intro__icon" src={logoOf(name)} alt="" />
+        {first}
+      </span>
+      {rest.length > 0 && ` ${rest.join(' ')}`}
+    </>
+  );
+  return href ? (
+    <a className="intro__company" href={href} target="_blank" rel="noopener noreferrer">
+      {label}
+    </a>
+  ) : (
+    <span className="intro__company">{label}</span>
+  );
+}
+
 function SideStory() {
   return (
     <div className="intro__story">
       <p className="intro__lede">
         Business-driven product designer. Five years turning complex business problems into measurable growth.
       </p>
+      <ul className="intro__statements">
+        <li>
+          <Company name="Newton School of Technology" href="https://www.newtonschool.co/" />
+          <span>Led growth design, a $45M+ business.</span>
+        </li>
+        <li>
+          <Company name="LottieFiles" href="https://lottiefiles.com/" />
+          <span>Marketplace, from $200K to $2.4M ARR.</span>
+        </li>
+        <li>
+          <Company name="IconScout" href="https://iconscout.com/" />
+          <span>#14 Figma plugin, with 1.2M+ users.</span>
+        </li>
+        <li>
+          <Company name="Toppr" />
+          <span>Interned on Answr as it grew to $1.4M.</span>
+        </li>
+      </ul>
     </div>
+  );
+}
+
+// A figure in the intro. The first time it's on screen (after the landing loader) it counts up
+// from zero, one figure after another (`i` is its turn), so the eye reads them in order.
+// Reduced motion shows it finished.
+function Metric({ value, i, ready }) {
+  const [, prefix, digits, suffix] = value.match(/^([^\d]*)([\d.]+)(.*)$/);
+  const target = parseFloat(digits);
+  const decimals = (digits.split('.')[1] || '').length;
+  const ref = useRef(null);
+  const [n, setN] = useState(target);
+
+  useEffect(() => {
+    if (!ready) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    let frame;
+    let timer;
+    const run = () => {
+      const start = performance.now();
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / 900);
+        setN(target * (1 - (1 - t) ** 3));
+        if (t < 1) frame = requestAnimationFrame(tick);
+      };
+      setN(0);
+      frame = requestAnimationFrame(tick);
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        timer = setTimeout(run, 250 + i * 220);
+      },
+      { threshold: 0.6 },
+    );
+    observer.observe(ref.current);
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+      cancelAnimationFrame(frame);
+    };
+  }, [ready, i, target]);
+
+  // The final value holds the width (and is what screen readers get), so counting never
+  // shifts the line; the counting copy sits over it.
+  return (
+    <span ref={ref} className="intro__metric">
+      <span className="intro__metric-final">{value}</span>
+      <span className="intro__metric-count" aria-hidden="true">
+        {prefix}
+        {n.toFixed(decimals)}
+        {suffix}
+      </span>
+    </span>
   );
 }
 
@@ -35,7 +156,7 @@ function coverAngle(cover) {
   return (Math.atan2(-m.m13, m.m11) * 180) / Math.PI;
 }
 
-// `side`: the compact intro (book, name, role and one line), as used in the left panel and on phones.
+// `side`: shown in the left panel of the wide layout (stacked, smaller), rather than on the home page.
 export default function Intro({ side = false }) {
   const [bookOpen, setBookOpen] = useState(false);
   // Where the small book sits, so the big one can grow out of it; while the big one is up the
@@ -108,7 +229,51 @@ export default function Intro({ side = false }) {
           <p className="text-muted">{site.role}</p>
         </div>
       </div>
-      <SideStory />
+      {/* On the page: the statements. In the left panel, a quieter list instead. */}
+      {side ? (
+        <SideStory />
+      ) : (
+        <div className="intro__story">
+          {/* The intro reads in grey; hovering a statement brings just that one up to full ink. */}
+          <div className="text-small intro__claims">
+            <p>
+              <span className="intro__claim">
+                Business-driven Product Designer with 5 years of end-to-end ownership, turning complex business problems
+                into measurable growth.
+              </span>
+            </p>
+            <p className="intro__ink">
+              <span className="intro__claim">
+                In 2026, led growth design at{' '}
+                <Brand svg={nstLogo} name="Newton School of Technology" href="https://www.newtonschool.co/" />, a{' '}
+                <Metric value="$45M+" i={0} ready={!loading} /> business reshaping India’s engineering education.
+              </span>
+            </p>
+          </div>
+          {/* Earlier work: a line per company, each led by its logo, which reads as part of the product's name. */}
+          <div className="text-small intro__claims intro__ink">
+            <p>
+              <span className="intro__claim">
+                <Brand svg={lottieFilesLogo} name="LottieFiles" href="https://lottiefiles.com/" /> marketplace, from{' '}
+                <Metric value="$200K" i={1} ready={!loading} /> to <Metric value="$2.4M" i={2} ready={!loading} /> ARR.
+              </span>
+            </p>
+            <p>
+              <span className="intro__claim">
+                <Brand svg={iconScoutLogo} name="IconScout" href="https://iconscout.com/" /> figma plugin,{' '}
+                <Metric value="#14" i={3} ready={!loading} /> most-used worldwide with{' '}
+                <Metric value="1.2M+" i={4} ready={!loading} /> users.
+              </span>
+            </p>
+            <p>
+              <span className="intro__claim">
+                <Brand svg={topprLogo} name="Toppr" /> answr, I interned on the team as it grew from zero to{' '}
+                <Metric value="$1.4M" i={5} ready={!loading} /> in revenue.
+              </span>
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

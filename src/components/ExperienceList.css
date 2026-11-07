@@ -11,14 +11,8 @@
 .experience__item {
   display: grid;
   grid-template-columns: 56px 1fr auto;
-  align-items: start;
+  align-items: center;
   gap: 24px;
-}
-
-/* What I did there: a line in ink under the role. */
-.experience__highlight {
-  margin-top: 6px;
-  color: var(--color-black);
 }
 
 .experience__logo {

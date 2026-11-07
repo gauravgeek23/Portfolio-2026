@@ -13,7 +13,7 @@ import './Home.css';
 import usePageMeta from '../hooks/usePageMeta';
 import useWide from '../hooks/useWide';
 
-// The work tab (home page): selected work, experience, play, side projects and testimonials.
+// The work tab (home page): selected work, side projects, play, experience and testimonials.
 export default function Home() {
   usePageMeta({});
   const wide = useWide();
@@ -22,7 +22,7 @@ export default function Home() {
       {/* On wide screens the intro lives in the left panel (Sidebar). */}
       {!wide && (
         <>
-          <Intro side />
+          <Intro />
           <hr className="divider" />
         </>
       )}
@@ -34,17 +34,7 @@ export default function Home() {
           ))}
         </div>
       </JournalSection>
-      <hr className="divider" />
 
-      <JournalSection id="experience" title="Work Experience" note="Chapters of My Journey">
-        <ExperienceList items={experience} />
-      </JournalSection>
-      <hr className="divider" />
-
-      {/* Play: interaction and motion pieces, at most 8, in a bento. The "play" tab lands here. */}
-      <JournalSection id="play" title="Play" note="A playground of small wins and features">
-        <PlayBento items={playItems} />
-      </JournalSection>
       <hr className="divider" />
 
       <JournalSection id="side-projects" title="Side projects" note="Some actions in pursuit of passion">
@@ -54,6 +44,20 @@ export default function Home() {
           ))}
         </div>
       </JournalSection>
+
+      <hr className="divider" />
+
+      {/* Play: interaction and motion pieces, at most 8, in a bento. The "play" tab lands here. */}
+      <JournalSection id="play" title="Play" note="A playground of small wins and features">
+        <PlayBento items={playItems} />
+      </JournalSection>
+
+      <hr className="divider" />
+
+      <JournalSection id="experience" title="Work Experience" note="Chapters of My Journey">
+        <ExperienceList items={experience} />
+      </JournalSection>
+
       <hr className="divider" />
 
       <JournalSection id="testimonials" title="Testimonials" note="Covers the boss and the crew">

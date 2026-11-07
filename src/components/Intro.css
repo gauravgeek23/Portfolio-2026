@@ -12,8 +12,8 @@
   gap: 20px;
 }
 
-/* The intro, in the left panel (and at the top of the home page on phones): the book, name, role
-   and one line, stacked and quiet. One size (15px), regular weight, the name in ink. */
+/* In the left panel: stacked and quiet. One size (15px), regular weight throughout, ink for names
+   and grey for everything else; logos shrink to their marks. */
 .intro.intro--side {
   display: flex;
   flex-direction: column;
@@ -41,6 +41,72 @@
 .intro__lede {
   margin: 0;
   color: var(--color-grey-1);
+}
+
+/* Four companies: the name, led by its icon, in ink; what I did there in grey beneath. */
+.intro__statements {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-grey-1);
+}
+
+/* Line one: icon and company. Line two: what I did. */
+.intro__statements li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.intro__company {
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.intro__nowrap {
+  white-space: nowrap;
+}
+
+a.intro__company:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 3px;
+}
+
+/* The icon sits on the text like a letter: cap height-ish, on the baseline. */
+.intro__icon {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.3em;
+  border-radius: 0.25em;
+  object-fit: contain;
+  vertical-align: -0.2em;
+}
+
+/* Wide screens: a journal spread. The book, name and role sit in the margin column; the
+   statements fill the page beside them at a larger size, kept to a readable measure. */
+@media (min-width: 901px) {
+  .intro:not(.intro--side) {
+    display: grid;
+    grid-template-columns: var(--margin-col) 9fr;
+    gap: var(--margin-gap);
+    align-items: end;
+  }
+
+  .intro:not(.intro--side) .intro__story {
+    max-width: 820px;
+    gap: 28px;
+    font-size: 19px;
+    line-height: 1.65;
+  }
+
+  .intro:not(.intro--side) .intro__story .text-small {
+    font-size: inherit;
+  }
 }
 
 /* The book: a cover hinged on its spine over one page. On hover the cover swings open a
@@ -299,4 +365,74 @@
   .intro__avatar::before {
     animation: none;
   }
+}
+
+/* A logo in place of a company's name, a little taller than the text and sitting on its
+   baseline. Wordmarks follow the theme's text colour. */
+.intro__brand {
+  --logo-ink: var(--color-black);
+  display: inline-block;
+  height: 1.3em;
+  margin: 0 0.04em 0 0.1em;
+  vertical-align: -0.34em;
+}
+
+.intro__brand svg {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+/* The figures: medium weight, counting up the first time they're seen. The final value holds
+   the width, so counting never shifts the line. */
+.intro__metric {
+  display: inline-grid;
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.intro__metric > span {
+  grid-area: 1 / 1;
+}
+
+.intro__metric-final {
+  visibility: hidden;
+}
+
+/* Statements read in grey and come up to full ink while hovered. The figures and the logos stay
+   in ink throughout, so they carry the line even at a glance. */
+.intro__claims {
+  color: var(--color-grey-1);
+}
+
+.intro__claim {
+  transition: color 250ms ease;
+}
+
+.intro__claim:hover,
+.intro__claims .intro__metric {
+  color: var(--color-black);
+}
+
+/* From the 2026 line down, the statements read in full ink. */
+.intro__claims .intro__ink,
+.intro__claims.intro__ink {
+  color: var(--color-black);
+}
+
+/* The company lines, with a little air between them. */
+.intro__claims.intro__ink {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* A logo that leads its line sits flush with the text above. */
+.intro__claim > .intro__brand:first-child {
+  margin-left: 0;
+}
+
+/* Dark: Newton's navy wordmark would vanish, so it takes the text colour like the others. */
+:root[data-theme='dark'] .intro__brand {
+  --logo-nst: var(--color-black);
 }
