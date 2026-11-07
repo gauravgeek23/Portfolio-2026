@@ -32,8 +32,8 @@ function Brand({ svg, name, href }) {
   );
 }
 
-// The left panel's four statements, one per company. Each leads with the company's icon and name,
-// then says what I did there (the icons come from the experience data).
+// The left panel's four statements, one per company. Two lines each: the company's icon and
+// name, then what I did there (the icons come from the experience data).
 const logoOf = (name) => experience.find((e) => e.company === name)?.logo;
 
 function Company({ name, href }) {
@@ -65,19 +65,20 @@ function SideStory() {
       </p>
       <ul className="intro__statements">
         <li>
-          <Company name="Newton School of Technology" href="https://www.newtonschool.co/" />, where I led growth design
-          for a $45M+ business.
+          <Company name="Newton School of Technology" href="https://www.newtonschool.co/" />
+          <span>Led growth design, a $45M+ business.</span>
         </li>
         <li>
-          <Company name="LottieFiles" href="https://lottiefiles.com/" />, growing the marketplace from $200K to $2.4M
-          ARR.
+          <Company name="LottieFiles" href="https://lottiefiles.com/" />
+          <span>Marketplace, from $200K to $2.4M ARR.</span>
         </li>
         <li>
-          <Company name="IconScout" href="https://iconscout.com/" />, building a Figma plugin that reached #14 worldwide
-          with 1.2M+ users.
+          <Company name="IconScout" href="https://iconscout.com/" />
+          <span>#14 Figma plugin, with 1.2M+ users.</span>
         </li>
         <li>
-          <Company name="Toppr" />, where I interned on the Answr team as it grew from zero to $1.4M in revenue.
+          <Company name="Toppr" />
+          <span>Interned on Answr as it grew to $1.4M.</span>
         </li>
       </ul>
     </div>
