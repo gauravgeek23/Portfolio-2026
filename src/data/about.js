@@ -115,7 +115,7 @@ export const stories = [
 ];
 
 // The photo bento (About, "Photos and captures"): full-size originals, each placed in a named
-// grid area (About.css, .about__bento). Ladakh leads; `pos` nudges the crop where a tile cuts in.
+// grid area (About.css, .about__bento). Ladakh leads; `pos` moves the crop where a tile would cut something off.
 const bento = import.meta.glob('../assets/about/bento/*.webp', { eager: true, import: 'default' });
 const shot = (name) => ({
   src: bento[`../assets/about/bento/${name}@1x.webp`],
@@ -130,28 +130,10 @@ export const photos = [
     caption: 'Nubra Valley',
   },
   {
-    ...shot('yak'),
-    area: 'yak',
-    alt: 'Yak grazing in front of snow-capped mountains in Markha Valley',
-    caption: 'Markha Valley',
-  },
-  {
     ...shot('chemrey'),
     area: 'chemrey',
     alt: 'Chemrey Monastery rising over a hillside in Ladakh',
     caption: 'Chemrey Monastery',
-  },
-  {
-    ...shot('milky-way'),
-    area: 'milky',
-    alt: 'The Milky Way over a dark ridge above Turtuk',
-    caption: 'Milky Way over Turtuk',
-  },
-  {
-    ...shot('kang-yatse'),
-    area: 'kang',
-    alt: 'Snow-streaked peaks above red tents at the Kang Yatse base camp',
-    caption: 'Kang Yatse base camp',
   },
   { ...shot('heron'), area: 'heron', alt: 'Heron walking along a wooden jetty', caption: 'Langkawi' },
   {
@@ -161,22 +143,66 @@ export const photos = [
     caption: 'Puducherry',
   },
   {
-    ...shot('malacca'),
-    area: 'malacca',
-    alt: 'Bay with islands seen over a tropical forest',
-    caption: 'Strait of Malacca',
+    ...shot('drang-drung'),
+    area: 'drang',
+    alt: 'The Drang Drung glacier winding down between mountains',
+    caption: 'Drang Drung Glacier',
   },
   {
-    ...shot('mysuru'),
-    area: 'mysuru',
-    alt: 'Palm trees in a green paddy field under storm clouds',
-    caption: 'Mysuru',
+    ...shot('gonbo-rangjon'),
+    area: 'gonbo',
+    alt: 'Motorcycle parked below the sheer rock peak of Gonbo Rangjon',
+    caption: 'Gonbo Rangjon',
+    pos: '50% 80%',
   },
-  { ...shot('ooty'), area: 'ooty', alt: 'Small tiled hut on a green hillside', caption: 'Ooty' },
+  {
+    ...shot('milky-way'),
+    area: 'milky',
+    alt: 'The Milky Way over a dark ridge above Turtuk',
+    caption: 'Milky Way over Turtuk',
+  },
+  {
+    ...shot('zanskar-range'),
+    area: 'zanskar',
+    alt: 'Snow-capped peaks of the Zanskar range under clouds',
+    caption: 'Zanskar Range',
+  },
+  {
+    ...shot('kang-yatse'),
+    area: 'kang',
+    alt: 'Snow-streaked peaks above red tents at the Kang Yatse base camp',
+    caption: 'Kang Yatse base camp',
+    pos: '50% 100%',
+  },
+  {
+    ...shot('penzi-la'),
+    area: 'penzi',
+    alt: 'A still lake below snow-capped mountains near Penzi La',
+    caption: 'Penzi La',
+  },
+  {
+    ...shot('hunderman'),
+    area: 'hunder',
+    alt: 'Stone houses of Hunderman village stacked on a mountainside',
+    caption: 'Hunderman Village',
+  },
+  {
+    ...shot('thiksey'),
+    area: 'thiksey',
+    alt: 'Thiksey Monastery climbing a hill under a blue sky',
+    caption: 'Thiksey Monastery',
+  },
+  {
+    ...shot('yak'),
+    area: 'yak',
+    alt: 'Yak grazing in front of snow-capped mountains in Markha Valley',
+    caption: 'Markha Valley',
+  },
   {
     ...shot('langkawi'),
     area: 'langkawi',
     alt: 'Boat passing Kilim Geoforest Park on turquoise water',
     caption: 'Kilim, Langkawi',
   },
+  { ...shot('ooty'), area: 'ooty', alt: 'Small tiled hut on a green hillside', caption: 'Ooty' },
 ];

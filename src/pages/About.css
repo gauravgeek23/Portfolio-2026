@@ -40,43 +40,61 @@
 }
 
 /* Photos as a bento: every tile sits in a named area, so the grid is always filled edge to edge
-   whatever the width. Square cells (the grid keeps the columns-to-rows ratio); wide photos take
-   two cells across, portrait ones two cells down, and one leads at double size. */
+   whatever the width. Cells are a little wider than tall (rows are 0.7 of a column), so a tile
+   two cells across and down is a landscape frame, a tile two cells down a gentle portrait
+   (about 2:3), and a single cell a small landscape. */
 .about__bento {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-rows: repeat(16, minmax(0, 1fr));
   grid-template-areas:
     'nubra nubra'
-    'yak yak'
-    'yak yak'
-    'chemrey milky'
-    'chemrey milky'
-    'kang heron'
-    'kang pondy'
-    'malacca mysuru'
-    'malacca mysuru'
-    'ooty langkawi';
+    'nubra nubra'
+    'chemrey heron'
+    'chemrey pondy'
+    'drang milky'
+    'drang milky'
+    'gonbo gonbo'
+    'gonbo gonbo'
+    'zanskar kang'
+    'hunder kang'
+    'penzi penzi'
+    'penzi penzi'
+    'yak langkawi'
+    'yak ooty'
+    'thiksey thiksey'
+    'thiksey thiksey';
   gap: 8px;
-  aspect-ratio: 2 / 10;
+  aspect-ratio: 2 / 11.2;
 }
 
+.about__bento .photo {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Taken out of flow so a photo's own size never stretches its cell. */
 .about__bento .photo img {
+  position: absolute;
+  inset: 0;
   object-position: var(--pos, center);
 }
 
 @media (min-width: 641px) {
   .about__bento {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(8, minmax(0, 1fr));
     grid-template-areas:
-      'nubra nubra chemrey milky'
-      'yak yak chemrey milky'
-      'yak yak kang heron'
-      'pondy malacca kang mysuru'
-      'ooty malacca langkawi mysuru';
+      'nubra nubra chemrey heron'
+      'nubra nubra chemrey pondy'
+      'drang gonbo gonbo milky'
+      'drang gonbo gonbo milky'
+      'zanskar kang penzi penzi'
+      'hunder kang penzi penzi'
+      'thiksey thiksey yak langkawi'
+      'thiksey thiksey yak ooty';
     gap: 12px;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 5.6;
   }
 }
 
