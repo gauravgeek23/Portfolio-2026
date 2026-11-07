@@ -165,14 +165,12 @@ export const photos = [
     area: 'malacca',
     alt: 'Bay with islands seen over a tropical forest',
     caption: 'Strait of Malacca',
-    pos: '50% 70%',
   },
   {
     ...shot('mysuru'),
     area: 'mysuru',
     alt: 'Palm trees in a green paddy field under storm clouds',
     caption: 'Mysuru',
-    pos: '50% 75%',
   },
   { ...shot('ooty'), area: 'ooty', alt: 'Small tiled hut on a green hillside', caption: 'Ooty' },
   {
