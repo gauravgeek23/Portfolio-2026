@@ -1,6 +1,6 @@
 import './ExperienceList.css';
 
-// Company logo, name and role on the left; dates and location on the right.
+// Company logo, name, role and a line on what I did there on the left; dates and location on the right.
 export default function ExperienceList({ items }) {
   return (
     <ul className="experience">
@@ -12,6 +12,7 @@ export default function ExperienceList({ items }) {
           <div className="experience__role">
             <h3 className="text-medium">{job.company}</h3>
             <p className="text-small text-muted">{job.role}</p>
+            {job.highlight && <p className="text-small experience__highlight">{job.highlight}</p>}
           </div>
           <p className="experience__meta text-small text-muted">
             <span>{job.period}</span>
