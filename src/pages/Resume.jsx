@@ -83,7 +83,7 @@ export default function Resume() {
     description: 'Experience, skills and education of Gaurav Kumar, Senior Product Designer.',
   });
   return (
-    <main className="container page">
+    <main className="container page resume">
       <header className="resume-header">
         <div>
           <h1 className="text-medium">Resume</h1>

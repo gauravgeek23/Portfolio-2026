@@ -1,26 +1,6 @@
-/* The margin column and the page column, shared with the hero (Intro.css). */
+/* A section: its title and note, then its content. */
 .journal {
-  display: grid;
-  grid-template-columns: var(--margin-col) 9fr;
-  gap: var(--margin-gap);
-  align-items: start;
-}
-
-.journal__margin {
-  position: sticky;
-  top: 96px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-@media (max-width: 900px) {
-  .journal {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .journal__margin {
-    position: static;
-  }
+  gap: 24px;
 }

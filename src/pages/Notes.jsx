@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { notes } from '../data/notes';
+import Decode from '../components/Decode';
 import './Notes.css';
 import usePageMeta from '../hooks/usePageMeta';
 
@@ -19,10 +20,12 @@ export default function Notes() {
             <li className="notes__item">
               {note.href ? (
                 <a className="notes__title text-medium" href={note.href} target="_blank" rel="noopener noreferrer">
-                  {note.title}
+                  <Decode text={note.title} delay={i * 160} />
                 </a>
               ) : (
-                <span className="notes__title text-medium">{note.title}</span>
+                <span className="notes__title text-medium">
+                  <Decode text={note.title} delay={i * 160} />
+                </span>
               )}
               <span className="notes__meta text-small text-muted">
                 {note.category} / {note.date}

@@ -12,24 +12,42 @@
   gap: 20px;
 }
 
+/* In the left panel: stacked and compact, whatever the screen width. */
+.intro.intro--side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.intro--side .intro__story {
+  max-width: none;
+  gap: 16px;
+  font-size: var(--text-small);
+  line-height: 1.6;
+}
+
+.intro--side .intro__claims.intro__ink {
+  gap: 6px;
+}
+
 /* Wide screens: a journal spread. The book, name and role sit in the margin column; the
    statements fill the page beside them at a larger size, kept to a readable measure. */
 @media (min-width: 901px) {
-  .intro {
+  .intro:not(.intro--side) {
     display: grid;
     grid-template-columns: var(--margin-col) 9fr;
     gap: var(--margin-gap);
     align-items: end;
   }
 
-  .intro__story {
+  .intro:not(.intro--side) .intro__story {
     max-width: 820px;
     gap: 28px;
     font-size: 19px;
     line-height: 1.65;
   }
 
-  .intro__story .text-small {
+  .intro:not(.intro--side) .intro__story .text-small {
     font-size: inherit;
   }
 }
